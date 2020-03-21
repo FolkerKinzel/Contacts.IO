@@ -16,14 +16,16 @@
     <Version>1.0.0-alpha</Version>
 
     <PackageTags>vcf csv vcard contactdata</PackageTags>
-    <Description>Classes to read and persist contact data of
-    organizations and natural persons as vCard (.vcf-File) or CSV.</Description>
+    <Description>.NET-API to read and persist contact data of organizations and natural persons from and to vCards (vcf-files) and CSV.</Description>
 
     <Authors>Folker Kinzel</Authors>
     <Copyright>Copyright © 2020 Folker Kinzel</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageIcon>Logo.png</PackageIcon>
+    <RepositoryUrl>https://github.com/FolkerKinzel/Contacts.IO.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/FolkerKinzel/Contacts.IO</PackageProjectUrl>
   </PropertyGroup>
 
   <!-- 👇 disable the nullable warnings when compiling for .NET Standard 2.0 -->
@@ -49,6 +51,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\FolkerKinzel.Contacts\FolkerKinzel.Contacts\FolkerKinzel.Contacts.csproj" />
     <ProjectReference Include="..\..\FolkerKinzel.CsvTools\FolkerKinzel.CsvTools\FolkerKinzel.CsvTools.csproj" />
+    <ProjectReference Include="..\..\FolkerKinzel.VCards\FolkerKinzel.VCards\FolkerKinzel.VCards.csproj" />
   </ItemGroup>
 
   <ItemGroup>
