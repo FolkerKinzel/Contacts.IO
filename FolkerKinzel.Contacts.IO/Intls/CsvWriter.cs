@@ -1,4 +1,4 @@
-﻿using FolkerKinzel.CsvTools;
+﻿using Csv = FolkerKinzel.CsvTools;
 using FolkerKinzel.CsvTools.Helpers;
 using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
@@ -8,9 +8,9 @@ using System.Text;
 using System.Diagnostics;
 using System.IO;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls
 {
-    public static partial class ContactPersistence
+    internal static class CsvWriter
     {
         private const int TWO_CELL_PROPERTIES = 0;
         private const int TWO_PHONE_PROPERTIES = 1;
@@ -30,7 +30,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <para>- oder -</para>
         /// <para>ein Spaltenname (<see cref="Tuple{T1, T2}.Item1"/>) in <paramref name="mapping"/> kommt doppelt vor. Der Vergleich ignoriert die Groß- und Kleinschreibung!</para></exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvMappingCollection mapping, CsvTarget platform = CsvTarget.NotSpecified)
+        public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvMappingCollection mapping, CsvTarget platform)
         {
             if (data is null)
             {
@@ -46,7 +46,7 @@ namespace FolkerKinzel.Contacts.IO
             // Spaltennamen NULL sind oder nur aus Leerraum bestehen:
             Debug.Assert(mapping.All(x => x != null && !string.IsNullOrWhiteSpace(x.Item1)));
 
-            using var writer = new CsvWriter(fileName, mapping.Select(x => x.Item1).ToArray());
+            using var writer = new Csv::CsvWriter(fileName, mapping.Select(x => x.Item1).ToArray());
 
             bool[] propInfo = new bool[2];
 
@@ -76,7 +76,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="platform"></param>
         /// <param name="propInfo">Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.</param>
         /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
-        private static CsvRecordWrapper InitCsvRecordMapper(IEnumerable<Tuple<string, ContactProperty>> mapping, CsvWriter writer, CsvTarget platform, bool[] propInfo)
+        private static CsvRecordWrapper InitCsvRecordMapper(IEnumerable<Tuple<string, ContactProperty>> mapping, Csv::CsvWriter writer, CsvTarget platform, bool[] propInfo)
         {
             var mapper = new CsvRecordWrapper(writer.Record);
 

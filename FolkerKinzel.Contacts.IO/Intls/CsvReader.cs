@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls
 {
-    public static partial class ContactPersistence
+    internal static class CsvReader
     {
     }
 }

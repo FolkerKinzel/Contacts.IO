@@ -6,11 +6,9 @@ using System.IO;
 using System.Linq;
 using VC = FolkerKinzel.VCards.Models;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls
 {
-    /// <summary>
-    /// Statische Klasse zum Importieren und Exportieren von Kontaktdaten.</summary>
-    public static partial class ContactPersistence
+    internal static class VCardReader
     {
         /// <summary>
         /// Liest eine vCard-Datei und gibt ihre Daten als <see cref="Contact"/>-Array zurück. (Eine vCard-Datei kann

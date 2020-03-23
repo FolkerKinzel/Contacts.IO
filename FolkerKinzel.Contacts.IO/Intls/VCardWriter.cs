@@ -7,9 +7,9 @@ using FolkerKinzel.VCards;
 using FolkerKinzel.VCards.Models.Helpers;
 using VC = FolkerKinzel.VCards.Models;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls
 {
-    public static partial class ContactPersistence
+    internal static class VCardWriter
     {
         /// <summary>
         /// Schreibt den Inhalt eines <see cref="Contact"/>-Objekts in eine vCard-Datei.
@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        public static void WriteVcard(Contact? contact, string fileName, VCardVersion version = VCardVersion.V3_0)
+        public static void WriteVcard(Contact? contact, string fileName, VCardVersion version)
         {
             ToVCard(contact)?.Save(fileName, (VC::Enums.VCdVersion)version);
         }
@@ -42,7 +42,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
-        public static void WriteVcard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version = VCardVersion.V3_0)
+        public static void WriteVcard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
         {
             if (contacts is null) throw new ArgumentNullException(nameof(contacts));
 

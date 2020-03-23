@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls
 {
     internal class SexConverter : ICsvTypeConverter
     {
