@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnNameNotNull" xml:space="preserve">
-    <value>The CSV column name (Tuple&lt;T1, T2&gt;.Item1) must not be null, Empty or Whitespace!</value>
+  <data name="UndefinedEnumValue" xml:space="preserve">
+    <value>Undefined enum value.</value>
   </data>
 </root>

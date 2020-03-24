@@ -13,26 +13,29 @@ namespace FolkerKinzel.Contacts.IO
     /// </summary>
     public static class ContactPersistence
     {
-        
+
+        public static List<Contact> ReadCsv(string fileName, CsvTarget platform = CsvTarget.Unspecified)
+        {
+            return CsvReader.Read(fileName, platform);
+        }
+
 
         /// <summary>
         /// Schreibt den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine CSV-Datei.
         /// </summary>
         /// <param name="fileName">Dateipfad der zu schreibenden CSV-Datei.</param>
         /// <param name="data">Die zu persistierenden <see cref="Contact"/>-Objekte.</param>
-        /// <param name="mapping">Eine Liste, die mit den in ihr enthaltenen <see cref="Tuple{T1, T2}"/>-Objekten die Reihenfolge der Spaltennamen der CSV-Datei (<see cref="Tuple{T1, T2}.Item1"/>)
-        /// und die Zuordnung dieser Spaltenamen zu Eigenschaften der <see cref="Contact"/>-Klasse (<see cref="Tuple{T1, T2}.Item2"/>) beschreibt. In <paramref name="mapping"/> darf kein 
-        /// Spaltenname doppelt vorkommen!</param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-        /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="data"/> oder <paramref name="mapping"/> ist<c>null</c>.</exception>
+        /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="data"/> ist<c>null</c>.</exception>
         /// <exception cref="ArgumentException">
         /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
         /// <para>- oder -</para>
-        /// <para>ein Spaltenname (<see cref="Tuple{T1, T2}.Item1"/>) in <paramref name="mapping"/> kommt doppelt vor. Der Vergleich ignoriert die Groß- und Kleinschreibung!</para></exception>
+        /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
+        /// </exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvMappingCollection mapping, CsvTarget platform = CsvTarget.NotSpecified)
+        public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvTarget platform = CsvTarget.Unspecified)
         {
-            CsvWriter.WriteCsv(fileName, data, mapping, platform);
+            CsvWriter.Write(fileName, data, platform);
         }
 
         /// <summary>
@@ -44,9 +47,9 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist null.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
-        public static Contact[] ReadVcard(string fileName)
+        public static Contact[] ReadVCard(string fileName)
         {
-            return VCardReader.ReadVcard(fileName);
+            return VCardReader.Read(fileName);
         }
 
 
@@ -61,9 +64,9 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        public static void WriteVcard(Contact? contact, string fileName, VCardVersion version = VCardVersion.V3_0)
+        public static void WriteVCard(Contact? contact, string fileName, VCardVersion version = VCardVersion.V3_0)
         {
-            VCardWriter.WriteVcard(contact, fileName, version);
+            VCardWriter.Write(contact, fileName, version);
         }
 
 
@@ -81,10 +84,11 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
-        public static void WriteVcard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version = VCardVersion.V3_0)
+        public static void WriteVCard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version = VCardVersion.V3_0)
         {
-            VCardWriter.WriteVcard(contacts, fileName, version);
+            VCardWriter.Write(contacts, fileName, version);
         }
+
 
     }
 }

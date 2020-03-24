@@ -41,7 +41,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             var mapping = new CsvMappingCollection
             {
-                new Tuple<string, ContactProperty>("Display Name", ContactProperty.DisplayName)
+                new Tuple<string, ContactProp>("Display Name", ContactProp.DisplayName)
             };
 
             var cont = new Contact()

@@ -19,7 +19,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist null.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
-        public static Contact[] ReadVcard(string fileName)
+        internal static Contact[] Read(string fileName)
         {
             List<VCard> vcards = VCard.Load(fileName);
            

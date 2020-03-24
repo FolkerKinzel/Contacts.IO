@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        public static void WriteVcard(Contact? contact, string fileName, VCardVersion version)
+        internal static void Write(Contact? contact, string fileName, VCardVersion version)
         {
             ToVCard(contact)?.Save(fileName, (VC::Enums.VCdVersion)version);
         }
@@ -42,7 +42,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
-        public static void WriteVcard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
+        public static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
         {
             if (contacts is null) throw new ArgumentNullException(nameof(contacts));
 
@@ -247,7 +247,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
                 }
 
                 var gender = person.Gender;
-                if(gender != Sex.NotSpecified)
+                if(gender != Sex.Unspecified)
                 {
                     var genders = new List<VC::GenderProperty>();
                     vcard.GenderViews = genders;

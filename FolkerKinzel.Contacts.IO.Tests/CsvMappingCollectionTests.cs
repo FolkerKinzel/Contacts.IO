@@ -25,7 +25,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         {
             var coll = new CsvMappingCollection
             {
-                new Tuple<string, ContactProperty>(null!, ContactProperty.AddressHomeCity)
+                new Tuple<string, ContactProp>(null!, ContactProp.AddressHomeCity)
             };
         }
 
@@ -36,7 +36,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         {
             var coll = new CsvMappingCollection
             {
-                new Tuple<string, ContactProperty>("   ", ContactProperty.AddressHomeCity)
+                new Tuple<string, ContactProp>("   ", ContactProp.AddressHomeCity)
             };
         }
 
@@ -45,7 +45,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         {
             var coll = new CsvMappingCollection
             {
-                new Tuple<string, ContactProperty>("Spalte", ContactProperty.AddressHomeCity)
+                new Tuple<string, ContactProp>("Spalte", ContactProp.AddressHomeCity)
             };
         }
 
@@ -55,8 +55,8 @@ namespace FolkerKinzel.Contacts.IO.Tests
         {
             var coll = new CsvMappingCollection();
 
-            coll.Add(new Tuple<string, ContactProperty>("Spalte1", ContactProperty.AddressHomeCity));
-            coll.Add(new Tuple<string, ContactProperty>("Spalte2", ContactProperty.AddressHomeCity));
+            coll.Add(new Tuple<string, ContactProp>("Spalte1", ContactProp.AddressHomeCity));
+            coll.Add(new Tuple<string, ContactProp>("Spalte2", ContactProp.AddressHomeCity));
         }
     }
 }

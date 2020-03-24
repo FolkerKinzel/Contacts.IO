@@ -7,7 +7,7 @@ namespace FolkerKinzel.Contacts.IO
     /// <summary>
     /// Benannte Konstanten, um Eigenschaften der <see cref="Contact"/>-Klasse zu referenzieren.
     /// </summary>
-    public enum ContactProperty
+    public enum ContactProp
     {
         /// <summary>
         /// Anzeigename im Adressbuch

@@ -8,7 +8,7 @@
         /// <summary>
         /// Keine Angabe.
         /// </summary>
-        NotSpecified,
+        Unspecified,
 
         /// <summary>
         /// Microsoft Outlook

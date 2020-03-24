@@ -5,6 +5,9 @@ using FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls
 {
+    /// <summary>
+    /// Can convert <see cref="Sex"/> to something better ;) !
+    /// </summary>
     internal class SexConverter : ICsvTypeConverter
     {
         internal SexConverter(CsvTarget target)
@@ -12,7 +15,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
             this.Target = target;
         }
 
-        public object? FallbackValue => Sex.NotSpecified;
+        public object? FallbackValue => Sex.Unspecified;
 
         public Type Type => typeof(Sex);
 
@@ -25,7 +28,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
             null => null,
             Sex.Female => Target == CsvTarget.Outlook ? "1" : "female",
             Sex.Male => Target == CsvTarget.Outlook ? "2" : "male",
-            Sex.NotSpecified => null,
+            Sex.Unspecified => null,
             _ => throw new InvalidCastException()
             };
         

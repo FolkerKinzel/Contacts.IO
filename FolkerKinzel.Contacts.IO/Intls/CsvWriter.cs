@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls
 {
@@ -14,46 +15,45 @@ namespace FolkerKinzel.Contacts.IO.Intls
     {
         private const int TWO_CELL_PROPERTIES = 0;
         private const int TWO_PHONE_PROPERTIES = 1;
+        private const int PROPINFO_LENGTH = 2;
 
-        /// <summary>
-        /// Schreibt den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine CSV-Datei.
-        /// </summary>
-        /// <param name="fileName">Dateipfad der zu schreibenden CSV-Datei.</param>
-        /// <param name="data">Die zu persistierenden <see cref="Contact"/>-Objekte.</param>
-        /// <param name="mapping">Eine Liste, die mit den in ihr enthaltenen <see cref="Tuple{T1, T2}"/>-Objekten die Reihenfolge der Spaltennamen der CSV-Datei (<see cref="Tuple{T1, T2}.Item1"/>)
-        /// und die Zuordnung dieser Spaltenamen zu Eigenschaften der <see cref="Contact"/>-Klasse (<see cref="Tuple{T1, T2}.Item2"/>) beschreibt. In <paramref name="mapping"/> darf kein 
-        /// Spaltenname doppelt vorkommen!</param>
-        /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-        /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="data"/> oder <paramref name="mapping"/> ist<c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
-        /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-        /// <para>- oder -</para>
-        /// <para>ein Spaltenname (<see cref="Tuple{T1, T2}.Item1"/>) in <paramref name="mapping"/> kommt doppelt vor. Der Vergleich ignoriert die Groß- und Kleinschreibung!</para></exception>
-        /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvMappingCollection mapping, CsvTarget platform)
+
+        internal static void Write(string fileName, IEnumerable<Contact> data, CsvTarget platform)
         {
             if (data is null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (mapping is null)
+            var mapping = new List<Tuple<string, ContactProp?>>();
+
+            switch (platform)
             {
-                throw new ArgumentNullException(nameof(mapping));
+                case CsvTarget.Unspecified:
+                    InitUnspecified(mapping);
+                    break;
+                case CsvTarget.Outlook:
+                    InitOutlook(mapping);
+                    break;
+                case CsvTarget.Google:
+                    InitGoogle(mapping);
+                    break;
+                case CsvTarget.Thunderbird:
+                    InitThunderbird(mapping);
+                    break;
+                default:
+                    throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform));
+
             }
 
-            // CsvMappingCollection verhindert, dass die Collection NULL-Werte enthalten kann und dass
-            // Spaltennamen NULL sind oder nur aus Leerraum bestehen:
-            Debug.Assert(mapping.All(x => x != null && !string.IsNullOrWhiteSpace(x.Item1)));
 
             using var writer = new Csv::CsvWriter(fileName, mapping.Select(x => x.Item1).ToArray());
 
-            bool[] propInfo = new bool[2];
+            bool[] propInfo = new bool[PROPINFO_LENGTH];
 
-            var mapper = InitCsvRecordMapper(mapping, writer, platform, propInfo);
+            var mapper = InitCsvRecordWrapper(mapping, writer.Record, platform, propInfo);
 
-
-            var keys = mapping.Select(x => x.Item2).ToArray();
+            var props = mapping.Where(x => x.Item2.HasValue).Select(x => x.Item2!.Value).ToArray();
 
             foreach (var contact in data)
             {
@@ -62,23 +62,49 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
                 if (contact.IsEmpty) continue;
 
-                FillCsvRecord(contact, keys,  mapper, propInfo);
+                FillCsvRecord(contact, props, mapper, propInfo);
                 writer.WriteRecord();
             }
+
         }
+
+        private static void InitUnspecified(List<Tuple<string, ContactProp?>> mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void InitOutlook(List<Tuple<string, ContactProp?>> mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        private static void InitGoogle(List<Tuple<string, ContactProp?>> mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        private static void InitThunderbird(List<Tuple<string, ContactProp?>> mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+
+       
 
         
         /// <summary>
         /// Initialisiert ein <see cref="CsvRecordWrapper"/>-Objekt.
         /// </summary>
         /// <param name="mapping"></param>
-        /// <param name="writer"></param>
+        /// <param name="record"></param>
         /// <param name="platform"></param>
         /// <param name="propInfo">Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.</param>
         /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
-        private static CsvRecordWrapper InitCsvRecordMapper(IEnumerable<Tuple<string, ContactProperty>> mapping, Csv::CsvWriter writer, CsvTarget platform, bool[] propInfo)
+        private static CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?>> mapping, Csv::CsvRecord record, CsvTarget platform, bool[] propInfo)
         {
-            var mapper = new CsvRecordWrapper(writer.Record);
+            var wrapper = new CsvRecordWrapper(record);
 
             var stringConverter = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
 
@@ -89,86 +115,86 @@ namespace FolkerKinzel.Contacts.IO.Intls
             {
                 switch (tpl.Item2)
                 {
-                    case ContactProperty.AddressHomeStreet:
-                    case ContactProperty.AddressHomePostalCode:
-                    case ContactProperty.AddressHomeCity:
-                    case ContactProperty.AddressHomeState:
-                    case ContactProperty.AddressHomeCountry:
-                    case ContactProperty.Email1:
-                    case ContactProperty.Email2:
-                    case ContactProperty.Email3:
-                    case ContactProperty.Email4:
-                    case ContactProperty.Email5:
-                    case ContactProperty.Email6:
-                    case ContactProperty.InstantMessenger1:
-                    case ContactProperty.InstantMessenger2:
-                    case ContactProperty.InstantMessenger3:
-                    case ContactProperty.InstantMessenger4:
-                    case ContactProperty.InstantMessenger5:
-                    case ContactProperty.InstantMessenger6:
-                    case ContactProperty.HomePagePersonal:
-                    case ContactProperty.HomePageWork:
-                    case ContactProperty.WorkCompany:
-                    case ContactProperty.WorkDepartment:
-                    case ContactProperty.WorkOffice:
-                    case ContactProperty.WorkPosition:
-                    case ContactProperty.AddressWorkStreet:
-                    case ContactProperty.AddressWorkPostalCode:
-                    case ContactProperty.AddressWorkCity:
-                    case ContactProperty.AddressWorkState:
-                    case ContactProperty.AddressWorkCountry:
-                    case ContactProperty.Comment:
-                    case ContactProperty.Spouse:
-                    case ContactProperty.DisplayName:
-                    case ContactProperty.FirstName:
-                    case ContactProperty.MiddleName:
-                    case ContactProperty.LastName:
-                    case ContactProperty.NamePrefix:
-                    case ContactProperty.NameSuffix:
-                    case ContactProperty.NickName:
-                    case ContactProperty.PhoneWork:
-                    case ContactProperty.FaxHome:
-                    case ContactProperty.FaxWork:
-                        mapper.AddProperty(
+                    case ContactProp.AddressHomeStreet:
+                    case ContactProp.AddressHomePostalCode:
+                    case ContactProp.AddressHomeCity:
+                    case ContactProp.AddressHomeState:
+                    case ContactProp.AddressHomeCountry:
+                    case ContactProp.Email1:
+                    case ContactProp.Email2:
+                    case ContactProp.Email3:
+                    case ContactProp.Email4:
+                    case ContactProp.Email5:
+                    case ContactProp.Email6:
+                    case ContactProp.InstantMessenger1:
+                    case ContactProp.InstantMessenger2:
+                    case ContactProp.InstantMessenger3:
+                    case ContactProp.InstantMessenger4:
+                    case ContactProp.InstantMessenger5:
+                    case ContactProp.InstantMessenger6:
+                    case ContactProp.HomePagePersonal:
+                    case ContactProp.HomePageWork:
+                    case ContactProp.WorkCompany:
+                    case ContactProp.WorkDepartment:
+                    case ContactProp.WorkOffice:
+                    case ContactProp.WorkPosition:
+                    case ContactProp.AddressWorkStreet:
+                    case ContactProp.AddressWorkPostalCode:
+                    case ContactProp.AddressWorkCity:
+                    case ContactProp.AddressWorkState:
+                    case ContactProp.AddressWorkCountry:
+                    case ContactProp.Comment:
+                    case ContactProp.Spouse:
+                    case ContactProp.DisplayName:
+                    case ContactProp.FirstName:
+                    case ContactProp.MiddleName:
+                    case ContactProp.LastName:
+                    case ContactProp.NamePrefix:
+                    case ContactProp.NameSuffix:
+                    case ContactProp.NickName:
+                    case ContactProp.PhoneWork:
+                    case ContactProp.FaxHome:
+                    case ContactProp.FaxWork:
+                        wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item2.ToString(),
                                 new string[] { tpl.Item1 },
                                 stringConverter));
                         break;
-                    case ContactProperty.Cell:
-                    case ContactProperty.CellWork:
-                        mapper.AddProperty(
+                    case ContactProp.Cell:
+                    case ContactProp.CellWork:
+                        wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item2.ToString(),
                                 new string[] { tpl.Item1 },
                                 stringConverter));
                         cellProperties++;
                         break;
-                    case ContactProperty.PhoneHome:
-                    case ContactProperty.PhoneOther1:
-                    case ContactProperty.PhoneOther2:
-                    case ContactProperty.PhoneOther3:
-                    case ContactProperty.PhoneOther4:
-                    case ContactProperty.PhoneOther5:
-                    case ContactProperty.PhoneOther6:
-                        mapper.AddProperty(
+                    case ContactProp.PhoneHome:
+                    case ContactProp.PhoneOther1:
+                    case ContactProp.PhoneOther2:
+                    case ContactProp.PhoneOther3:
+                    case ContactProp.PhoneOther4:
+                    case ContactProp.PhoneOther5:
+                    case ContactProp.PhoneOther6:
+                        wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item2.ToString(),
                                 new string[] { tpl.Item1 },
                                 stringConverter));
                         phoneProperties++;
                         break;
-                    case ContactProperty.Gender:
-                        mapper.AddProperty(
+                    case ContactProp.Gender:
+                        wrapper.AddProperty(
                                 new CsvProperty(
                                     tpl.Item2.ToString(),
                                     new string[] { tpl.Item1 },
                                     new SexConverter(platform)));
                         break;
-                    case ContactProperty.BirthDay:
-                    case ContactProperty.Anniversary:
-                    case ContactProperty.TimeStamp:
-                        mapper.AddProperty(
+                    case ContactProp.BirthDay:
+                    case ContactProp.Anniversary:
+                    case ContactProp.TimeStamp:
+                        wrapper.AddProperty(
                                 new CsvProperty(
                                     tpl.Item2.ToString(),
                                     new string[] { tpl.Item1 },
@@ -182,11 +208,11 @@ namespace FolkerKinzel.Contacts.IO.Intls
             propInfo[TWO_CELL_PROPERTIES] = (cellProperties >= 2);
             propInfo[TWO_PHONE_PROPERTIES] = (cellProperties >= 2);
 
-            return mapper;
+            return wrapper;
         }
 
 
-        private static void FillCsvRecord(Contact contact, ContactProperty[] props, CsvRecordWrapper mapper, bool[] propInfo)
+        private static void FillCsvRecord(Contact contact, ContactProp[] props, CsvRecordWrapper wrapper, bool[] propInfo)
         {
             var person = contact.Person;
             var name = person?.Name;
@@ -201,186 +227,186 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
             for (int i = 0; i < props.Length; i++)
             {
-                ContactProperty prop = props[i];
+                ContactProp prop = props[i];
 
                 switch (prop)
                 {
-                    case ContactProperty.DisplayName:
-                        mapper[i] = contact.DisplayName;
+                    case ContactProp.DisplayName:
+                        wrapper[i] = contact.DisplayName;
                         break;
-                    case ContactProperty.FirstName:
-                        mapper[i] = name?.FirstName;
+                    case ContactProp.FirstName:
+                        wrapper[i] = name?.FirstName;
                         break;
-                    case ContactProperty.MiddleName:
-                        mapper[i] = name?.MiddleName;
+                    case ContactProp.MiddleName:
+                        wrapper[i] = name?.MiddleName;
                         break;
-                    case ContactProperty.LastName:
-                        mapper[i] = name?.LastName;
+                    case ContactProp.LastName:
+                        wrapper[i] = name?.LastName;
                         break;
-                    case ContactProperty.NamePrefix:
-                        mapper[i] = name?.Prefix;
+                    case ContactProp.NamePrefix:
+                        wrapper[i] = name?.Prefix;
                         break;
-                    case ContactProperty.NameSuffix:
-                        mapper[i] = name?.Suffix;
+                    case ContactProp.NameSuffix:
+                        wrapper[i] = name?.Suffix;
                         break;
-                    case ContactProperty.NickName:
-                        mapper[i] = person?.NickName;
+                    case ContactProp.NickName:
+                        wrapper[i] = person?.NickName;
                         break;
-                    case ContactProperty.Gender:
-                        mapper[i] = person?.Gender;
+                    case ContactProp.Gender:
+                        wrapper[i] = person?.Gender;
                         break;
-                    case ContactProperty.BirthDay:
-                        mapper[i] = person?.BirthDay;
+                    case ContactProp.BirthDay:
+                        wrapper[i] = person?.BirthDay;
                         break;
-                    case ContactProperty.Spouse:
-                        mapper[i] = person?.Spouse;
+                    case ContactProp.Spouse:
+                        wrapper[i] = person?.Spouse;
                         break;
-                    case ContactProperty.Anniversary:
-                        mapper[i] = person?.Anniversary;
+                    case ContactProp.Anniversary:
+                        wrapper[i] = person?.Anniversary;
                         break;
-                    case ContactProperty.AddressHomeStreet:
-                        mapper[i] = homeAddress?.Street;
+                    case ContactProp.AddressHomeStreet:
+                        wrapper[i] = homeAddress?.Street;
                         break;
-                    case ContactProperty.AddressHomePostalCode:
-                        mapper[i] = homeAddress?.PostalCode;
+                    case ContactProp.AddressHomePostalCode:
+                        wrapper[i] = homeAddress?.PostalCode;
                         break;
-                    case ContactProperty.AddressHomeCity:
-                        mapper[i] = homeAddress?.City;
+                    case ContactProp.AddressHomeCity:
+                        wrapper[i] = homeAddress?.City;
                         break;
-                    case ContactProperty.AddressHomeState:
-                        mapper[i] = homeAddress?.State;
+                    case ContactProp.AddressHomeState:
+                        wrapper[i] = homeAddress?.State;
                         break;
-                    case ContactProperty.AddressHomeCountry:
-                        mapper[i] = homeAddress?.Country;
+                    case ContactProp.AddressHomeCountry:
+                        wrapper[i] = homeAddress?.Country;
                         break;
-                    case ContactProperty.Email1:
-                        mapper[i] = emails?.FirstOrDefault();
+                    case ContactProp.Email1:
+                        wrapper[i] = emails?.FirstOrDefault();
                         break;
-                    case ContactProperty.Email2:
-                        mapper[i] = emails?.ElementAtOrDefault(1);
+                    case ContactProp.Email2:
+                        wrapper[i] = emails?.ElementAtOrDefault(1);
                         break;
-                    case ContactProperty.Email3:
-                        mapper[i] = emails?.ElementAtOrDefault(2);
+                    case ContactProp.Email3:
+                        wrapper[i] = emails?.ElementAtOrDefault(2);
                         break;
-                    case ContactProperty.Email4:
-                        mapper[i] = emails?.ElementAtOrDefault(3);
+                    case ContactProp.Email4:
+                        wrapper[i] = emails?.ElementAtOrDefault(3);
                         break;
-                    case ContactProperty.Email5:
-                        mapper[i] = emails?.ElementAtOrDefault(4);
+                    case ContactProp.Email5:
+                        wrapper[i] = emails?.ElementAtOrDefault(4);
                         break;
-                    case ContactProperty.Email6:
-                        mapper[i] = emails?.ElementAtOrDefault(5);
+                    case ContactProp.Email6:
+                        wrapper[i] = emails?.ElementAtOrDefault(5);
                         break;
                     
 #nullable disable
-                    case ContactProperty.PhoneWork:
-                        mapper[i] = phones?.FirstOrDefault(x => x.IsWork);
+                    case ContactProp.PhoneWork:
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsWork);
                         break;
-                    case ContactProperty.FaxHome:
-                        mapper[i] = phones?.FirstOrDefault(x => x.IsFax && !x.IsWork);
+                    case ContactProp.FaxHome:
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && !x.IsWork);
                         break;
-                    case ContactProperty.FaxWork:
-                        mapper[i] = phones?.FirstOrDefault(x => x.IsFax && x.IsWork);
+                    case ContactProp.FaxWork:
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && x.IsWork);
                         break;
-                    case ContactProperty.Cell:
+                    case ContactProp.Cell:
                         if (propInfo[TWO_CELL_PROPERTIES])
                         {
-                            mapper[i] = phones?.FirstOrDefault(x => x.IsCell && !x.IsWork);
+                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && !x.IsWork);
                         }
                         else
                         {
-                            mapper[i] = phones?.FirstOrDefault(x => x.IsCell);
+                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell);
                         }
                         break;
-                    case ContactProperty.CellWork:
-                        mapper[i] = phones?.FirstOrDefault(x => x.IsCell && x.IsWork);
+                    case ContactProp.CellWork:
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && x.IsWork);
                         break;
 #nullable enable
-                    case ContactProperty.PhoneHome:
-                        mapper[i] = otherPhones?.FirstOrDefault();
+                    case ContactProp.PhoneHome:
+                        wrapper[i] = otherPhones?.FirstOrDefault();
                         break;
-                    case ContactProperty.PhoneOther1:
+                    case ContactProp.PhoneOther1:
                         if (propInfo[TWO_PHONE_PROPERTIES])
                         {
-                            mapper[i] = otherPhones?.ElementAtOrDefault(1);
+                            wrapper[i] = otherPhones?.ElementAtOrDefault(1);
                         }
                         else
                         {
-                            mapper[i] = otherPhones?.FirstOrDefault();
+                            wrapper[i] = otherPhones?.FirstOrDefault();
                         }
                         break;
-                    case ContactProperty.PhoneOther2:
-                        mapper[i] = otherPhones?.ElementAtOrDefault(2);
+                    case ContactProp.PhoneOther2:
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(2);
                         break;
-                    case ContactProperty.PhoneOther3:
-                        mapper[i] = otherPhones?.ElementAtOrDefault(3);
+                    case ContactProp.PhoneOther3:
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(3);
                         break;
-                    case ContactProperty.PhoneOther4:
-                        mapper[i] = otherPhones?.ElementAtOrDefault(4);
+                    case ContactProp.PhoneOther4:
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(4);
                         break;
-                    case ContactProperty.PhoneOther5:
-                        mapper[i] = otherPhones?.ElementAtOrDefault(5);
+                    case ContactProp.PhoneOther5:
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(5);
                         break;
-                    case ContactProperty.PhoneOther6:
-                        mapper[i] = otherPhones?.ElementAtOrDefault(6);
+                    case ContactProp.PhoneOther6:
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(6);
                         break;
-                    case ContactProperty.InstantMessenger1:
-                        mapper[i] = ims?.FirstOrDefault();
+                    case ContactProp.InstantMessenger1:
+                        wrapper[i] = ims?.FirstOrDefault();
                         break;
-                    case ContactProperty.InstantMessenger2:
-                        mapper[i] = ims?.ElementAtOrDefault(1);
+                    case ContactProp.InstantMessenger2:
+                        wrapper[i] = ims?.ElementAtOrDefault(1);
                         break;
-                    case ContactProperty.InstantMessenger3:
-                        mapper[i] = ims?.ElementAtOrDefault(2);
+                    case ContactProp.InstantMessenger3:
+                        wrapper[i] = ims?.ElementAtOrDefault(2);
                         break;
-                    case ContactProperty.InstantMessenger4:
-                        mapper[i] = ims?.ElementAtOrDefault(3);
+                    case ContactProp.InstantMessenger4:
+                        wrapper[i] = ims?.ElementAtOrDefault(3);
                         break;
-                    case ContactProperty.InstantMessenger5:
-                        mapper[i] = ims?.ElementAtOrDefault(4);
+                    case ContactProp.InstantMessenger5:
+                        wrapper[i] = ims?.ElementAtOrDefault(4);
                         break;
-                    case ContactProperty.InstantMessenger6:
-                        mapper[i] = ims?.ElementAtOrDefault(5);
+                    case ContactProp.InstantMessenger6:
+                        wrapper[i] = ims?.ElementAtOrDefault(5);
                         break;
-                    case ContactProperty.HomePagePersonal:
-                        mapper[i] = contact.HomePagePersonal;
+                    case ContactProp.HomePagePersonal:
+                        wrapper[i] = contact.HomePagePersonal;
                         break;
-                    case ContactProperty.HomePageWork:
-                        mapper[i] = contact.HomePageWork;
+                    case ContactProp.HomePageWork:
+                        wrapper[i] = contact.HomePageWork;
                         break;
-                    case ContactProperty.WorkCompany:
-                        mapper[i] = work?.Company;
+                    case ContactProp.WorkCompany:
+                        wrapper[i] = work?.Company;
                         break;
-                    case ContactProperty.WorkDepartment:
-                        mapper[i] = work?.Department;
+                    case ContactProp.WorkDepartment:
+                        wrapper[i] = work?.Department;
                         break;
-                    case ContactProperty.WorkOffice:
-                        mapper[i] = work?.Office;
+                    case ContactProp.WorkOffice:
+                        wrapper[i] = work?.Office;
                         break;
-                    case ContactProperty.WorkPosition:
-                        mapper[i] = work?.Position;
+                    case ContactProp.WorkPosition:
+                        wrapper[i] = work?.Position;
                         break;
-                    case ContactProperty.AddressWorkStreet:
-                        mapper[i] = workAddress?.Street;
+                    case ContactProp.AddressWorkStreet:
+                        wrapper[i] = workAddress?.Street;
                         break;
-                    case ContactProperty.AddressWorkPostalCode:
-                        mapper[i] = workAddress?.PostalCode;
+                    case ContactProp.AddressWorkPostalCode:
+                        wrapper[i] = workAddress?.PostalCode;
                         break;
-                    case ContactProperty.AddressWorkCity:
-                        mapper[i] = workAddress?.City;
+                    case ContactProp.AddressWorkCity:
+                        wrapper[i] = workAddress?.City;
                         break;
-                    case ContactProperty.AddressWorkState:
-                        mapper[i] = workAddress?.State;
+                    case ContactProp.AddressWorkState:
+                        wrapper[i] = workAddress?.State;
                         break;
-                    case ContactProperty.AddressWorkCountry:
-                        mapper[i] = workAddress?.Country;
+                    case ContactProp.AddressWorkCountry:
+                        wrapper[i] = workAddress?.Country;
                         break;
-                    case ContactProperty.Comment:
-                        mapper[i] = contact.Comment;
+                    case ContactProp.Comment:
+                        wrapper[i] = contact.Comment;
                         break;
-                    case ContactProperty.TimeStamp:
+                    case ContactProp.TimeStamp:
                         DateTime? timeStamp = contact.TimeStamp;
-                        mapper[i] = timeStamp == default(DateTime) ? null : timeStamp;
+                        wrapper[i] = timeStamp == default(DateTime) ? null : timeStamp;
                         break;
                     default:
                         break;

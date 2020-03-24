@@ -61,11 +61,11 @@ namespace FolkerKinzel.Contacts.IO.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The CSV column name (Tuple&lt;T1, T2&gt;.Item1) must not be null, Empty or Whitespace! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Undefined enum value. ähnelt.
         /// </summary>
-        internal static string ColumnNameNotNull {
+        internal static string UndefinedEnumValue {
             get {
-                return ResourceManager.GetString("ColumnNameNotNull", resourceCulture);
+                return ResourceManager.GetString("UndefinedEnumValue", resourceCulture);
             }
         }
     }
