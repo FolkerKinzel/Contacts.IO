@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
             var analyzer = new CsvAnalyzer();
             analyzer.Analyze(fileName);
            
-            return analyzer.HasHeader ? new Csv::CsvReader(fileName, analyzer.FieldSeparatorChar, true, analyzer.Options, null, true) : null;
+            return analyzer.HasHeader ? new Csv::CsvReader(fileName, hasHeaderRow: true, options: analyzer.Options | CsvOptions.DisableCaching, enc:  null, fieldSeparator: analyzer.FieldSeparatorChar) : null;
         }
     }
 }

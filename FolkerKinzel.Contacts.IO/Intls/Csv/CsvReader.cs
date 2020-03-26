@@ -30,8 +30,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
                 foreach (var record in reader.Read())
                 {
-                    wrapper.SetRecord(record);
-                    list.Add(InitContact(wrapper, properties));
+                    wrapper.Record = record;
+
+                    Contact contact = InitContact(wrapper, properties);
+                    contact.Clean();
+
+                    list.Add(contact);
                 }
 
                 return list;
@@ -46,7 +50,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp> properties);
 
-        protected virtual Csv::CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, disableCaching: true);
+        protected virtual Csv::CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, options: CsvOptions.Default | CsvOptions.DisableCaching);
 
 
 
@@ -62,7 +66,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
 
 
-        protected Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp> properties)
+        private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp> properties)
         {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;
@@ -327,7 +331,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 }
             }
 
-            contact.Clean();
+           
             return contact;
 
             //////////////////////////
