@@ -9,17 +9,203 @@ using System.Diagnostics;
 using System.IO;
 using FolkerKinzel.Contacts.IO.Resources;
 
-namespace FolkerKinzel.Contacts.IO.Intls
+namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
-    internal static class CsvWriter
+    internal abstract class CsvWriter
     {
         private const int TWO_CELL_PROPERTIES = 0;
         private const int TWO_PHONE_PROPERTIES = 1;
         private const int PROPINFO_LENGTH = 2;
 
 
-        internal static void Write(string fileName, IEnumerable<Contact> data, CsvTarget platform)
+        internal void Write(string fileName, IEnumerable<Contact> data)
         {
+            //string[] google = new string[] {
+            //    "Name",
+            //    "Given Name",
+            //    "Additional Name",
+            //    "Family Name",
+            //    "Yomi Name",
+            //    "Given Name Yomi",
+            //    "Additional Name Yomi",
+            //    "Family Name Yomi",
+            //    "Name Prefix",
+            //    "Name Suffix",
+            //    "Initials",
+            //    "Nickname",
+            //    "Short Name",
+            //    "Maiden Name",
+            //    "Birthday",
+            //    "Gender",
+            //    "Location",
+            //    "Billing Information",
+            //    "Directory Server",
+            //    "Mileage",
+            //    "Occupation",
+            //    "Hobby",
+            //    "Sensitivity",
+            //    "Priority",
+            //    "Subject",
+            //    "Notes",
+            //    "Language",
+            //    "Photo",
+            //    "Group Membership",
+            //    "E-mail 1 - Type",
+            //    "E-mail 1 - Value",
+            //    "E-mail 2 - Type",
+            //    "E-mail 2 - Value",
+            //    "IM 1 - Type",
+            //    "IM 1 - Service",
+            //    "IM 1 - Value",
+            //    "Phone 1 - Type",
+            //    "Phone 1 - Value",
+            //    "Phone 2 - Type",
+            //    "Phone 2 - Value",
+            //    "Phone 3 - Type",
+            //    "Phone 3 - Value",
+            //    "Phone 4 - Type",
+            //    "Phone 4 - Value",
+            //    "Phone 5 - Type",
+            //    "Phone 5 - Value",
+            //    "Phone 6 - Type",
+            //    "Phone 6 - Value",
+            //    "Phone 7 - Type",
+            //    "Phone 7 - Value",
+            //    "Address 1 - Type",
+            //    "Address 1 - Formatted",
+            //    "Address 1 - Street",
+            //    "Address 1 - City",
+            //    "Address 1 - PO Box",
+            //    "Address 1 - Region",
+            //    "Address 1 - Postal Code",
+            //    "Address 1 - Country",
+            //    "Address 1 - Extended Address",
+            //    "Address 2 - Type",
+            //    "Address 2 - Formatted",
+            //    "Address 2 - Street",
+            //    "Address 2 - City",
+            //    "Address 2 - PO Box",
+            //    "Address 2 - Region",
+            //    "Address 2 - Postal Code",
+            //    "Address 2 - Country",
+            //    "Address 2 - Extended Address",
+            //    "Address 3 - Type",
+            //    "Address 3 - Formatted",
+            //    "Address 3 - Street",
+            //    "Address 3 - City",
+            //    "Address 3 - PO Box",
+            //    "Address 3 - Region",
+            //    "Address 3 - Postal Code",
+            //    "Address 3 - Country",
+            //    "Address 3 - Extended Address",
+            //    "Organization 1 - Type",
+            //    "Organization 1 - Name",
+            //    "Organization 1 - Yomi Name",
+            //    "Organization 1 - Title",
+            //    "Organization 1 - Department",
+            //    "Organization 1 - Symbol",
+            //    "Organization 1 - Location",
+            //    "Organization 1 - Job Description",
+            //    "Relation 1 - Type",
+            //    "Relation 1 - Value",
+            //    "Website 1 - Type",
+            //    "Website 1 - Value",
+            //    "Website 2 - Type",
+            //    "Website 2 - Value" };
+
+
+            //string[] outlook = new string[] {
+            //    "First Name",
+            //    "Middle Name",
+            //    "Last Name",
+            //    "Title",
+            //    "Suffix",
+            //    "Initials",
+            //    "Web Page",
+            //    "Gender",
+            //    "Birthday",
+            //    "Anniversary",
+            //    "Location",
+            //    "Language",
+            //    "Internet Free Busy",
+            //    "Notes",
+            //    "E-mail Address",
+            //    "E-mail 2 Address",
+            //    "E-mail 3 Address",
+            //    "Primary Phone",
+            //    "Home Phone","Home Phone 2",
+            //    "Mobile Phone",
+            //    "Pager",
+            //    "Home Fax",
+            //    "Home Address",
+            //    "Home Street",
+            //    "Home Street 2",
+            //    "Home Street 3",
+            //    "Home Address PO Box",
+            //    "Home City",
+            //    "Home State",
+            //    "Home Postal Code",
+            //    "Home Country",
+            //    "Spouse",
+            //    "Children",
+            //    "Manager's Name",
+            //    "Assistant's Name",
+            //    "Referred By",
+            //    "Company Main Phone",
+            //    "Business Phone",
+            //    "Business Phone 2",
+            //    "Business Fax",
+            //    "Assistant's Phone",
+            //    "Company",
+            //    "Job Title",
+            //    "Department",
+            //    "Office Location",
+            //    "Organizational ID Number",
+            //    "Profession",
+            //    "Account",
+            //    "Business Address",
+            //    "Business Street",
+            //    "Business Street 2",
+            //    "Business Street 3",
+            //    "Business Address PO Box",
+            //    "Business City",
+            //    "Business State",
+            //    "Business Postal Code",
+            //    "Business Country",
+            //    "Other Phone",
+            //    "Other Fax",
+            //    "Other Address",
+            //    "Other Street",
+            //    "Other Street 2",
+            //    "Other Street 3",
+            //    "Other Address PO Box",
+            //    "Other City",
+            //    "Other State",
+            //    "Other Postal Code",
+            //    "Other Country",
+            //    "Callback",
+            //    "Car Phone",
+            //    "ISDN",
+            //    "Radio Phone",
+            //    "TTY/TDD Phone",
+            //    "Telex",
+            //    "User 1",
+            //    "User 2",
+            //    "User 3",
+            //    "User 4",
+            //    "Keywords",
+            //    "Mileage",
+            //    "Hobby",
+            //    "Billing Information",
+            //    "Directory Server",
+            //    "Sensitivity",
+            //    "Priority",
+            //    "Private",
+            //    "Categories"
+
+
+            //    };
+
             if (data is null)
             {
                 throw new ArgumentNullException(nameof(data));
@@ -27,31 +213,16 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
             var mapping = new List<Tuple<string, ContactProp?>>();
 
-            switch (platform)
-            {
-                case CsvTarget.Unspecified:
-                    InitUnspecified(mapping);
-                    break;
-                case CsvTarget.Outlook:
-                    InitOutlook(mapping);
-                    break;
-                case CsvTarget.Google:
-                    InitGoogle(mapping);
-                    break;
-                case CsvTarget.Thunderbird:
-                    InitThunderbird(mapping);
-                    break;
-                default:
-                    throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform));
+            InitMapping(mapping);
 
-            }
+            
 
 
             using var writer = new Csv::CsvWriter(fileName, mapping.Select(x => x.Item1).ToArray());
 
             bool[] propInfo = new bool[PROPINFO_LENGTH];
 
-            var mapper = InitCsvRecordWrapper(mapping, writer.Record, platform, propInfo);
+            var mapper = InitCsvRecordWrapper(mapping, writer.Record, propInfo);
 
             var props = mapping.Where(x => x.Item2.HasValue).Select(x => x.Item2!.Value).ToArray();
 
@@ -68,41 +239,34 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
         }
 
-        private static void InitUnspecified(List<Tuple<string, ContactProp?>> mapping)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void InitOutlook(List<Tuple<string, ContactProp?>> mapping)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void InitMapping(List<Tuple<string, ContactProp?>> mapping);
 
 
-        private static void InitGoogle(List<Tuple<string, ContactProp?>> mapping)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        private static void InitThunderbird(List<Tuple<string, ContactProp?>> mapping)
-        {
-            throw new NotImplementedException();
-        }
-
-
-       
-
+        protected virtual SexConverter InitSexConverter() => new SexConverter();
         
+
+
+
+        public static CsvWriter GetInstance(CsvTarget platform) => platform switch
+        {
+            CsvTarget.Unspecified => new Universal.UniversalCsvWriter(),
+            CsvTarget.Outlook => new Outlook.OutlookCsvWriter(),
+            CsvTarget.Google => new Google.GoogleCsvWriter(),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvWriter(),
+            _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
+        };
+
+
+
+
         /// <summary>
         /// Initialisiert ein <see cref="CsvRecordWrapper"/>-Objekt.
         /// </summary>
         /// <param name="mapping"></param>
         /// <param name="record"></param>
-        /// <param name="platform"></param>
         /// <param name="propInfo">Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.</param>
         /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
-        private static CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?>> mapping, Csv::CsvRecord record, CsvTarget platform, bool[] propInfo)
+        protected CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?>> mapping, Csv::CsvRecord record, bool[] propInfo)
         {
             var wrapper = new CsvRecordWrapper(record);
 
@@ -189,7 +353,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
                                 new CsvProperty(
                                     tpl.Item2.ToString(),
                                     new string[] { tpl.Item1 },
-                                    new SexConverter(platform)));
+                                    InitSexConverter()));
                         break;
                     case ContactProp.BirthDay:
                     case ContactProp.Anniversary:
@@ -212,7 +376,7 @@ namespace FolkerKinzel.Contacts.IO.Intls
         }
 
 
-        private static void FillCsvRecord(Contact contact, ContactProp[] props, CsvRecordWrapper wrapper, bool[] propInfo)
+        protected void FillCsvRecord(Contact contact, ContactProp[] props, CsvRecordWrapper wrapper, bool[] propInfo)
         {
             var person = contact.Person;
             var name = person?.Name;

@@ -1,10 +1,8 @@
-﻿using System;
+﻿using FolkerKinzel.Contacts.IO.Intls.Csv;
+using FolkerKinzel.Contacts.IO.Intls.Vcf;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using System.IO;
-using FolkerKinzel.Contacts.IO.Intls;
 
 namespace FolkerKinzel.Contacts.IO
 {
@@ -16,7 +14,7 @@ namespace FolkerKinzel.Contacts.IO
 
         public static List<Contact> ReadCsv(string fileName, CsvTarget platform = CsvTarget.Unspecified)
         {
-            return CsvReader.Read(fileName, platform);
+            return CsvReader.GetInstance(platform).Read(fileName);
         }
 
 
@@ -35,7 +33,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="IOException">E/A-Fehler.</exception>
         public static void WriteCsv(string fileName, IEnumerable<Contact> data, CsvTarget platform = CsvTarget.Unspecified)
         {
-            CsvWriter.Write(fileName, data, platform);
+            CsvWriter.GetInstance(platform).Write(fileName, data);
         }
 
         /// <summary>
@@ -49,7 +47,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
         public static Contact[] ReadVCard(string fileName)
         {
-            return VCardReader.Read(fileName);
+            return VcfReader.Read(fileName);
         }
 
 
@@ -66,7 +64,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         public static void WriteVCard(Contact? contact, string fileName, VCardVersion version = VCardVersion.V3_0)
         {
-            VCardWriter.Write(contact, fileName, version);
+            VcfWriter.Write(contact, fileName, version);
         }
 
 
@@ -86,7 +84,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
         public static void WriteVCard(IEnumerable<Contact?> contacts, string fileName, VCardVersion version = VCardVersion.V3_0)
         {
-            VCardWriter.Write(contacts, fileName, version);
+            VcfWriter.Write(contacts, fileName, version);
         }
 
 

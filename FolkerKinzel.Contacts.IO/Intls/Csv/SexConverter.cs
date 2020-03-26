@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 
-namespace FolkerKinzel.Contacts.IO.Intls
+namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     /// <summary>
     /// Can convert <see cref="Sex"/> to something better ;) !
     /// </summary>
     internal class SexConverter : ICsvTypeConverter
     {
-        internal SexConverter(CsvTarget target)
-        {
-            this.Target = target;
-        }
+        
 
         public object? FallbackValue => Sex.Unspecified;
 
@@ -21,13 +18,13 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
         public bool ThrowsOnParseErrors => false;
 
-        public CsvTarget Target { get; }
+       
 
-        public string? ConvertToString(object? value) => value switch
+        public virtual string? ConvertToString(object? value) => value switch
             {
             null => null,
-            Sex.Female => Target == CsvTarget.Outlook ? "1" : "female",
-            Sex.Male => Target == CsvTarget.Outlook ? "2" : "male",
+            Sex.Female => "female",
+            Sex.Male => "male",
             Sex.Unspecified => null,
             _ => throw new InvalidCastException()
             };

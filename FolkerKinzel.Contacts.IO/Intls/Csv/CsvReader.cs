@@ -8,11 +8,11 @@ using System.Linq;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
 
-namespace FolkerKinzel.Contacts.IO.Intls
+namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
-    internal static class CsvReader
+    internal abstract class CsvReader
     {
-        public static List<Contact> Read(string fileName, CsvTarget platform)
+        public List<Contact> Read(string fileName)
         {
             var wrapper = new CsvRecordWrapper();
             List<ContactProp> properties = new List<ContactProp>();
@@ -22,34 +22,11 @@ namespace FolkerKinzel.Contacts.IO.Intls
 
             try
             {
-                switch (platform)
-                {
-                    case CsvTarget.Unspecified:
-                        var analyzer = new CsvAnalyzer();
-                        analyzer.Analyze(fileName);
-                        if(!analyzer.HasHeader)
-                        {
-                            return list;
-                        }
-                        reader = new Csv::CsvReader(fileName, analyzer.FieldSeparatorChar, true, analyzer.Options, null, true);
-                        InitUnspecified(wrapper, properties);
-                        break;
-                    case CsvTarget.Outlook:
-                        reader = new Csv::CsvReader(fileName, disableCaching: true);
-                        InitOutlook(wrapper, properties);
-                        break;
-                    case CsvTarget.Google:
-                        reader = new Csv::CsvReader(fileName, disableCaching: true);
-                        InitGoogle(wrapper, properties);
-                        break;
-                    case CsvTarget.Thunderbird:
-                        reader = new Csv::CsvReader(fileName, disableCaching: true);
-                        InitThunderbird(wrapper, properties);
-                        break;
-                    default:
-                        throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform));
+                reader = InitReader(fileName);
 
-                }
+                if (reader is null) return list;
+
+                InitWrapperAndProperties(wrapper, properties);
 
                 foreach (var record in reader.Read())
                 {
@@ -65,31 +42,27 @@ namespace FolkerKinzel.Contacts.IO.Intls
             }
         }
 
-        private static void InitUnspecified(CsvRecordWrapper wrapper, List<ContactProp> properties)
+
+
+        protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp> properties);
+
+        protected virtual Csv::CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, disableCaching: true);
+
+
+
+
+        internal static CsvReader GetInstance(CsvTarget platform) => platform switch
         {
-            throw new NotImplementedException();
-        }
-
-        private static void InitOutlook(CsvRecordWrapper wrapper, List<ContactProp> properties)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        private static void InitGoogle(CsvRecordWrapper wrapper, List<ContactProp> properties)
-        {
-            throw new NotImplementedException();
-        }
+            CsvTarget.Unspecified => new Universal.UniversalCsvReader(),
+            CsvTarget.Outlook => new Outlook.OutlookCsvReader(),
+            CsvTarget.Google => new Google.GoogleCsvReader(),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(),
+            _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
+        };
 
 
-        private static void InitThunderbird(CsvRecordWrapper wrapper, List<ContactProp> properties)
-        {
-            throw new NotImplementedException();
-        }
 
-       
-
-        private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp> properties)
+        protected Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp> properties)
         {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;

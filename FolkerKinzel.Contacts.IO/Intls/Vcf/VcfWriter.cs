@@ -7,9 +7,9 @@ using FolkerKinzel.VCards;
 using FolkerKinzel.VCards.Models.Helpers;
 using VC = FolkerKinzel.VCards.Models;
 
-namespace FolkerKinzel.Contacts.IO.Intls
+namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 {
-    internal static class VCardWriter
+    internal static class VcfWriter
     {
         /// <summary>
         /// Schreibt den Inhalt eines <see cref="Contact"/>-Objekts in eine vCard-Datei.

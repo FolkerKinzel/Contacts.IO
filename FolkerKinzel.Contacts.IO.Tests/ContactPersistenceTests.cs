@@ -39,17 +39,12 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 
-            var mapping = new CsvMappingCollection
-            {
-                new Tuple<string, ContactProp>("Display Name", ContactProp.DisplayName)
-            };
-
             var cont = new Contact()
             {
                 DisplayName = "Folkers Contact"
             };
 
-            ContactPersistence.WriteCsv(fileName, new Contact[] { cont }, mapping);
+            ContactPersistence.WriteCsv(fileName, new Contact[] { cont });
         }
     }
 }

@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using VC = FolkerKinzel.VCards.Models;
 
-namespace FolkerKinzel.Contacts.IO.Intls
+namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 {
-    internal static class VCardReader
+    internal static class VcfReader
     {
         /// <summary>
         /// Liest eine vCard-Datei und gibt ihre Daten als <see cref="Contact"/>-Array zurück. (Eine vCard-Datei kann

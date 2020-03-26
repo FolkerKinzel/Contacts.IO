@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FolkerKinzel.Contacts.IO
+namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     /// <summary>
     /// Benannte Konstanten, um Eigenschaften der <see cref="Contact"/>-Klasse zu referenzieren.
     /// </summary>
-    public enum ContactProp
+    internal enum ContactProp
     {
         /// <summary>
         /// Anzeigename im Adressbuch
