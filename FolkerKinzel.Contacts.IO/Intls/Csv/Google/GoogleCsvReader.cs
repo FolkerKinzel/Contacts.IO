@@ -12,7 +12,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
     internal class GoogleCsvReader : CsvReader
     {
-        protected override void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties)
+        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override CsvRecordWrapper InitWrapperAndProperties(List<ContactProp?> properties)
         {
             throw new NotImplementedException();
         }

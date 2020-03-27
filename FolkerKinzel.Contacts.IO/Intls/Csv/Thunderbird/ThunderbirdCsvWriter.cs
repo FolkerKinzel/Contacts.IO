@@ -20,11 +20,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
 
-        protected override IEnumerable<Tuple<string, ContactProp, string>> CreateMapping() => HeaderRow.GetMappingEN();
+        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping() => HeaderRow.GetMappingEN();
 
 
-        protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp, string> tpl, CsvRecordWrapper wrapper)
+        protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper)
         {
+            Debug.Assert(tpl.Item2.HasValue);
+
             //case (ContactProp)AdditionalProps.BirthYear:
             //case (ContactProp)AdditionalProps.BirthMonth:
             //case (ContactProp)AdditionalProps.BirthDay:
@@ -34,7 +36,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             wrapper.AddProperty(
                         new CsvProperty(
                             tpl.Item1,
-                            new string[] { tpl.Item3 },
+                            tpl.Item3,
                             _intConverter));
         }
 

@@ -16,7 +16,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
     {
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
-        protected override IEnumerable<Tuple<string, ContactProp, string>> CreateMapping()
+        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
         {
             throw new NotImplementedException();
         }

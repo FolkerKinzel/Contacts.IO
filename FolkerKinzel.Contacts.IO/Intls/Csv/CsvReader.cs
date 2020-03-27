@@ -10,7 +10,7 @@ using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
-    internal abstract class CsvReader
+    internal abstract class CsvReader : CsvIOBase
     {
 
         internal static CsvReader GetInstance(CsvTarget platform) => platform switch
@@ -39,46 +39,38 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         {
             var list = new List<Contact>();
 
-            if (Analyze(fileName))
+            if (!Analyze(fileName))
             {
                 return list;
             }
 
-            Csv::CsvReader? reader = null;
+            
 
-            try
+            using Csv::CsvReader reader = InitReader(fileName);
+
+            List<ContactProp?> properties = new List<ContactProp?>();
+            var wrapper = InitWrapperAndProperties(properties);
+
+            Debug.Assert(wrapper.Count == properties.Count);
+
+            foreach (var record in reader.Read())
             {
-                var wrapper = new CsvRecordWrapper();
-                List<ContactProp?> properties = new List<ContactProp?>();
+                wrapper.Record = record;
 
-                reader = InitReader(fileName);
+                Contact contact = InitContact(wrapper, properties);
+                contact.Clean();
 
-                if (reader is null) return list;
-
-                InitWrapperAndProperties(wrapper, properties);
-
-                foreach (var record in reader.Read())
-                {
-                    wrapper.Record = record;
-
-                    Contact contact = InitContact(wrapper, properties);
-                    contact.Clean();
-
-                    list.Add(contact);
-                }
-
-                return list;
+                list.Add(contact);
             }
-            finally
-            {
-                reader?.Dispose();
-            }
+
+            return list;
+
         }
 
         protected virtual bool Analyze(string fileName) => true;
-       
 
-        protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties);
+
+        protected abstract CsvRecordWrapper InitWrapperAndProperties(List<ContactProp?> properties);
 
 
 
@@ -90,11 +82,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Es kann nicht auf den Datenträger zugegriffen werden.</exception>
-        protected virtual Csv::CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, options: CsvOptions.Default | CsvOptions.DisableCaching);
-
-
-
-
+        protected virtual Csv::CsvReader InitReader(string fileName) => new Csv::CsvReader(fileName, options: CsvOptions.Default | CsvOptions.DisableCaching);
 
 
 
@@ -108,10 +96,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
         private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp?> properties)
         {
-            Debug.Assert(wrapper != null);
-            Debug.Assert(properties != null);
-            Debug.Assert(wrapper.Count == properties.Count);
-
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;
             const int INST_MESSENGER_3 = 2;
@@ -174,15 +158,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.LastName:
                         InitName();
-                        name.LastName = (string)wrapper[i]; 
+                        name.LastName = (string)wrapper[i];
                         break;
                     case ContactProp.NamePrefix:
                         InitName();
-                        name.Prefix = (string)wrapper[i]; 
+                        name.Prefix = (string)wrapper[i];
                         break;
                     case ContactProp.NameSuffix:
                         InitName();
-                        name.Suffix = (string)wrapper[i]; 
+                        name.Suffix = (string)wrapper[i];
                         break;
                     case ContactProp.NickName:
                         InitPerson();
@@ -190,11 +174,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.Gender:
                         InitPerson();
-                        person.Gender = (Sex)wrapper[i]; 
+                        person.Gender = (Sex)wrapper[i];
                         break;
                     case ContactProp.BirthDay:
                         InitPerson();
-                        person.BirthDay = (DateTime?)wrapper[i]; 
+                        person.BirthDay = (DateTime?)wrapper[i];
                         break;
                     case ContactProp.Spouse:
                         InitPerson();
@@ -202,7 +186,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.Anniversary:
                         InitPerson();
-                        person.Anniversary = (DateTime?)wrapper[i]; 
+                        person.Anniversary = (DateTime?)wrapper[i];
                         break;
                     case ContactProp.AddressHomeStreet:
                         InitAddressHome();
@@ -210,19 +194,19 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.AddressHomePostalCode:
                         InitAddressHome();
-                        addressHome.PostalCode = (string)wrapper[i]; 
+                        addressHome.PostalCode = (string)wrapper[i];
                         break;
                     case ContactProp.AddressHomeCity:
                         InitAddressHome();
-                        addressHome.City = (string)wrapper[i]; 
+                        addressHome.City = (string)wrapper[i];
                         break;
                     case ContactProp.AddressHomeState:
                         InitAddressHome();
-                        addressHome.State = (string)wrapper[i]; 
+                        addressHome.State = (string)wrapper[i];
                         break;
                     case ContactProp.AddressHomeCountry:
                         InitAddressHome();
-                        addressHome.Country = (string)wrapper[i]; 
+                        addressHome.Country = (string)wrapper[i];
                         break;
                     case ContactProp.Email1:
                         InitEmails();
@@ -373,11 +357,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 }
             }
 
-           
+
             return contact;
 
             //////////////////////////
-            
+
 
             void InitPerson()
             {
@@ -436,6 +420,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         }
 
 
-        
+
     }
 }

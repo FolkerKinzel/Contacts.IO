@@ -33,11 +33,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
             return true;
         }
 
+        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
+        {
+            throw new NotImplementedException();
+        }
 
-        protected override CsvTools.CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, hasHeaderRow: true, options: Options, enc: null, FieldSeparator);
+        protected override CsvTools.CsvReader InitReader(string fileName) => new Csv::CsvReader(fileName, hasHeaderRow: true, options: Options, enc: null, FieldSeparator);
 
-
-        protected override void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties)
+        protected override CsvRecordWrapper InitWrapperAndProperties(List<ContactProp?> properties)
         {
             throw new NotImplementedException();
         }
