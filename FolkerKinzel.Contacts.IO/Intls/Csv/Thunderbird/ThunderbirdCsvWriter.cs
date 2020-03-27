@@ -13,12 +13,51 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvWriter : CsvWriter
     {
+        private Conv::ICsvTypeConverter? _intConverter = null;
+        private bool _birthDayInitalized;
+        public DateTime? _birthDay;
+
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
 
-        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping, string[] columnNames)
+        protected override IEnumerable<Tuple<string, ContactProp, string>> CreateMapping() => HeaderRow.GetMappingEN();
+
+
+        protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp, string> tpl, CsvRecordWrapper wrapper)
         {
-            throw new NotImplementedException();
+            //case (ContactProp)AdditionalProps.BirthYear:
+            //case (ContactProp)AdditionalProps.BirthMonth:
+            //case (ContactProp)AdditionalProps.BirthDay:
+
+            
+            _intConverter ??= Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32);
+            wrapper.AddProperty(
+                        new CsvProperty(
+                            tpl.Item1,
+                            new string[] { tpl.Item3 },
+                            _intConverter));
         }
+
+
+        protected override void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
+        {
+            if (!_birthDayInitalized)
+            {
+                this._birthDay = contact.Person?.BirthDay;
+                _birthDayInitalized = true;
+            }
+
+            if (_birthDay.HasValue)
+            {
+                wrapper[index] = prop switch
+                {
+                    (ContactProp)AdditionalProps.BirthYear => _birthDay.Value.Year,
+                    (ContactProp)AdditionalProps.BirthMonth => _birthDay.Value.Month,
+                    (ContactProp)AdditionalProps.BirthDay => _birthDay.Value.Day,
+                    _ => 0
+                };
+            }
+        }
+
     }
 }

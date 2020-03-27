@@ -37,14 +37,20 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// der im Konstruktor angegeben wurde.</exception>
         public List<Contact> Read(string fileName)
         {
-            var wrapper = new CsvRecordWrapper();
-            List<ContactProp?> properties = new List<ContactProp?>();
+            var list = new List<Contact>();
+
+            if (Analyze(fileName))
+            {
+                return list;
+            }
 
             Csv::CsvReader? reader = null;
-            var list = new List<Contact>();
 
             try
             {
+                var wrapper = new CsvRecordWrapper();
+                List<ContactProp?> properties = new List<ContactProp?>();
+
                 reader = InitReader(fileName);
 
                 if (reader is null) return list;
@@ -69,7 +75,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
         }
 
-
+        protected virtual bool Analyze(string fileName) => true;
+       
 
         protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties);
 

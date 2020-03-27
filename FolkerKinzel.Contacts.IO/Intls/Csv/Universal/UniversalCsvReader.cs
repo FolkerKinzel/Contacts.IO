@@ -12,13 +12,30 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
 {
     internal class UniversalCsvReader : CsvReader
     {
-        protected override CsvTools.CsvReader? InitReader(string fileName)
+        public CsvOptions Options { get; private set; }
+
+        public char FieldSeparator { get; private set; }
+
+
+        protected override bool Analyze(string fileName)
         {
             var analyzer = new CsvAnalyzer();
             analyzer.Analyze(fileName);
-           
-            return analyzer.HasHeader ? new Csv::CsvReader(fileName, hasHeaderRow: true, options: analyzer.Options | CsvOptions.DisableCaching, enc:  null, fieldSeparator: analyzer.FieldSeparatorChar) : null;
+
+            if (!analyzer.HasHeader)
+            {
+                return false;
+            }
+
+            this.Options = analyzer.Options | CsvOptions.DisableCaching;
+            this.FieldSeparator = analyzer.FieldSeparatorChar;
+
+            return true;
         }
+
+
+        protected override CsvTools.CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, hasHeaderRow: true, options: Options, enc: null, FieldSeparator);
+
 
         protected override void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties)
         {

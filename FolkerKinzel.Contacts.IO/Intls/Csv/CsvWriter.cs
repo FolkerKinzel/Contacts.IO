@@ -18,123 +18,117 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         private const int PROPINFO_LENGTH = 2;
 
 
+        //string[] outlook = new string[] {
+        //    "First Name",
+        //    "Middle Name",
+        //    "Last Name",
+        //    "Title",
+        //    "Suffix",
+        //    "Initials",
+        //    "Web Page",
+        //    "Gender",
+        //    "Birthday",
+        //    "Anniversary",
+        //    "Location",
+        //    "Language",
+        //    "Internet Free Busy",
+        //    "Notes",
+        //    "E-mail Address",
+        //    "E-mail 2 Address",
+        //    "E-mail 3 Address",
+        //    "Primary Phone",
+        //    "Home Phone","Home Phone 2",
+        //    "Mobile Phone",
+        //    "Pager",
+        //    "Home Fax",
+        //    "Home Address",
+        //    "Home Street",
+        //    "Home Street 2",
+        //    "Home Street 3",
+        //    "Home Address PO Box",
+        //    "Home City",
+        //    "Home State",
+        //    "Home Postal Code",
+        //    "Home Country",
+        //    "Spouse",
+        //    "Children",
+        //    "Manager's Name",
+        //    "Assistant's Name",
+        //    "Referred By",
+        //    "Company Main Phone",
+        //    "Business Phone",
+        //    "Business Phone 2",
+        //    "Business Fax",
+        //    "Assistant's Phone",
+        //    "Company",
+        //    "Job Title",
+        //    "Department",
+        //    "Office Location",
+        //    "Organizational ID Number",
+        //    "Profession",
+        //    "Account",
+        //    "Business Address",
+        //    "Business Street",
+        //    "Business Street 2",
+        //    "Business Street 3",
+        //    "Business Address PO Box",
+        //    "Business City",
+        //    "Business State",
+        //    "Business Postal Code",
+        //    "Business Country",
+        //    "Other Phone",
+        //    "Other Fax",
+        //    "Other Address",
+        //    "Other Street",
+        //    "Other Street 2",
+        //    "Other Street 3",
+        //    "Other Address PO Box",
+        //    "Other City",
+        //    "Other State",
+        //    "Other Postal Code",
+        //    "Other Country",
+        //    "Callback",
+        //    "Car Phone",
+        //    "ISDN",
+        //    "Radio Phone",
+        //    "TTY/TDD Phone",
+        //    "Telex",
+        //    "User 1",
+        //    "User 2",
+        //    "User 3",
+        //    "User 4",
+        //    "Keywords",
+        //    "Mileage",
+        //    "Hobby",
+        //    "Billing Information",
+        //    "Directory Server",
+        //    "Sensitivity",
+        //    "Priority",
+        //    "Private",
+        //    "Categories"
+
+
+        //    };
+
         internal void Write(string fileName, IEnumerable<Contact> data)
         {
             
-
-            //string[] outlook = new string[] {
-            //    "First Name",
-            //    "Middle Name",
-            //    "Last Name",
-            //    "Title",
-            //    "Suffix",
-            //    "Initials",
-            //    "Web Page",
-            //    "Gender",
-            //    "Birthday",
-            //    "Anniversary",
-            //    "Location",
-            //    "Language",
-            //    "Internet Free Busy",
-            //    "Notes",
-            //    "E-mail Address",
-            //    "E-mail 2 Address",
-            //    "E-mail 3 Address",
-            //    "Primary Phone",
-            //    "Home Phone","Home Phone 2",
-            //    "Mobile Phone",
-            //    "Pager",
-            //    "Home Fax",
-            //    "Home Address",
-            //    "Home Street",
-            //    "Home Street 2",
-            //    "Home Street 3",
-            //    "Home Address PO Box",
-            //    "Home City",
-            //    "Home State",
-            //    "Home Postal Code",
-            //    "Home Country",
-            //    "Spouse",
-            //    "Children",
-            //    "Manager's Name",
-            //    "Assistant's Name",
-            //    "Referred By",
-            //    "Company Main Phone",
-            //    "Business Phone",
-            //    "Business Phone 2",
-            //    "Business Fax",
-            //    "Assistant's Phone",
-            //    "Company",
-            //    "Job Title",
-            //    "Department",
-            //    "Office Location",
-            //    "Organizational ID Number",
-            //    "Profession",
-            //    "Account",
-            //    "Business Address",
-            //    "Business Street",
-            //    "Business Street 2",
-            //    "Business Street 3",
-            //    "Business Address PO Box",
-            //    "Business City",
-            //    "Business State",
-            //    "Business Postal Code",
-            //    "Business Country",
-            //    "Other Phone",
-            //    "Other Fax",
-            //    "Other Address",
-            //    "Other Street",
-            //    "Other Street 2",
-            //    "Other Street 3",
-            //    "Other Address PO Box",
-            //    "Other City",
-            //    "Other State",
-            //    "Other Postal Code",
-            //    "Other Country",
-            //    "Callback",
-            //    "Car Phone",
-            //    "ISDN",
-            //    "Radio Phone",
-            //    "TTY/TDD Phone",
-            //    "Telex",
-            //    "User 1",
-            //    "User 2",
-            //    "User 3",
-            //    "User 4",
-            //    "Keywords",
-            //    "Mileage",
-            //    "Hobby",
-            //    "Billing Information",
-            //    "Directory Server",
-            //    "Sensitivity",
-            //    "Priority",
-            //    "Private",
-            //    "Categories"
-
-
-            //    };
-
             if (data is null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            var mapping = new List<Tuple<string, ContactProp?>>();
-
             string[] columnNames = CreateColumnNames();
-
-            InitMapping(mapping, columnNames);
-
-            
-
 
             using var writer = new Csv::CsvWriter(fileName, columnNames);
 
+            var mapping = CreateMapping();
+
             bool[] propInfo = new bool[PROPINFO_LENGTH];
 
-            var mapper = InitCsvRecordWrapper(mapping, writer.Record, propInfo);
+            var wrapper = InitCsvRecordWrapper(mapping, writer.Record, propInfo);
 
-            var props = mapping.Where(x => x.Item2.HasValue).Select(x => x.Item2!.Value).ToArray();
+            var props = mapping.Select(x => x.Item2).ToArray();
 
             foreach (var contact in data)
             {
@@ -143,21 +137,30 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
                 if (contact.IsEmpty) continue;
 
-                FillCsvRecord(contact, props, mapper, propInfo);
+                FillCsvRecord(contact, props, wrapper, propInfo);
                 writer.WriteRecord();
             }
-
         }
 
         protected abstract string[] CreateColumnNames();
 
-        protected abstract void InitMapping(List<Tuple<string, ContactProp?>> mapping, string[] columnNames);
+        /// <summary>
+        /// Erzeugt die Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"/>, Eigenschaft von <see cref="Contact"/> und Spaltenname der CSV-Datei.
+        /// </summary>
+        /// <returns>
+        /// <para>Eine Collection von <see cref="Tuple{T1, T2, T3}"/>.</para>
+        /// <para>Inhalt:</para>
+        /// <list type="bullet">
+        /// <item><see cref="Tuple{T1, T2, T3}.Item1"/>: Eigenschaftsname von <see cref="CsvRecordWrapper"/>.</item>
+        /// <item><see cref="Tuple{T1, T2, T3}.Item2"/>: Eigenschaft von <see cref="Contact"/>.</item>
+        /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei.</item>
+        /// </list>
+        /// </returns>
+        protected abstract IEnumerable<Tuple<string, ContactProp, string>> CreateMapping();
 
 
         protected virtual SexConverter InitSexConverter() => new SexConverter();
         
-
-
 
         public static CsvWriter GetInstance(CsvTarget platform) => platform switch
         {
@@ -174,11 +177,19 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <summary>
         /// Initialisiert ein <see cref="CsvRecordWrapper"/>-Objekt.
         /// </summary>
-        /// <param name="mapping"></param>
+        /// <param name="mapping">
+        /// <para>Eine Collection von <see cref="Tuple{T1, T2, T3}"/>.</para>
+        /// <para>Inhalt:</para>
+        /// <list type="bullet">
+        /// <item><see cref="Tuple{T1, T2, T3}.Item1"/>: Eigenschaftsname von <see cref="CsvRecordWrapper"/>.</item>
+        /// <item><see cref="Tuple{T1, T2, T3}.Item2"/>: Eigenschaft von <see cref="Contact"/>.</item>
+        /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei.</item>
+        /// </list>
+        /// </param>
         /// <param name="record"></param>
         /// <param name="propInfo">Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.</param>
         /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
-        private CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?>> mapping, Csv::CsvRecord record, bool[] propInfo)
+        private CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp, string>> mapping, Csv::CsvRecord record, bool[] propInfo)
         {
             var wrapper = new CsvRecordWrapper(record);
 
@@ -233,16 +244,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.FaxWork:
                         wrapper.AddProperty(
                             new CsvProperty(
-                                tpl.Item2.ToString(),
-                                new string[] { tpl.Item1 },
+                                tpl.Item1,
+                                new string[] { tpl.Item3 },
                                 stringConverter));
                         break;
                     case ContactProp.Cell:
                     case ContactProp.CellWork:
                         wrapper.AddProperty(
                             new CsvProperty(
-                                tpl.Item2.ToString(),
-                                new string[] { tpl.Item1 },
+                                tpl.Item1,
+                                new string[] { tpl.Item3 },
                                 stringConverter));
                         cellProperties++;
                         break;
@@ -255,16 +266,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.PhoneOther6:
                         wrapper.AddProperty(
                             new CsvProperty(
-                                tpl.Item2.ToString(),
-                                new string[] { tpl.Item1 },
+                                tpl.Item1,
+                                new string[] { tpl.Item3 },
                                 stringConverter));
                         phoneProperties++;
                         break;
                     case ContactProp.Gender:
                         wrapper.AddProperty(
                                 new CsvProperty(
-                                    tpl.Item2.ToString(),
-                                    new string[] { tpl.Item1 },
+                                    tpl.Item1,
+                                    new string[] { tpl.Item3 },
                                     InitSexConverter()));
                         break;
                     case ContactProp.BirthDay:
@@ -272,11 +283,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.TimeStamp:
                         wrapper.AddProperty(
                                 new CsvProperty(
-                                    tpl.Item2.ToString(),
-                                    new string[] { tpl.Item1 },
+                                    tpl.Item1,
+                                    new string[] { tpl.Item3 },
                                     Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.DateTime, nullable: true)));
                         break;
                     default:
+                        InitCsvRecordWrapperUndefinedValues(tpl, wrapper);
                         break;
                 }
             }
@@ -286,6 +298,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             return wrapper;
         }
+
+        /// <summary>
+        /// Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen.
+        /// Diese Spalten werden dem <see cref="CsvRecordWrapper"/> hiermit hinzugefügt.
+        /// </summary>
+        /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"/>-Enum.</param>
+        /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"/>-Objekt.</param>
+        protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp, string> tpl, CsvRecordWrapper wrapper)
+        {
+            
+        }
+
 
 
         private void FillCsvRecord(Contact contact, ContactProp[] props, CsvRecordWrapper wrapper, bool[] propInfo)
@@ -485,9 +509,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         wrapper[i] = timeStamp == default(DateTime) ? null : timeStamp;
                         break;
                     default:
+                        FillCsvRecordNonStandardProp(contact, prop, wrapper, i);
                         break;
                 }
             }
         }
+
+
+        protected virtual void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
+        {
+
+        }
+
     }
 }

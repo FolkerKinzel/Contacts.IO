@@ -11,18 +11,12 @@ using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
 {
-    internal static class HeaderRow
-    {
-        internal static string[] GetColumnNamesEn() => throw new NotImplementedException();
-
-    }
 
     internal class UniversalCsvWriter : CsvWriter
     {
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
-        
 
-        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping, string[] columnNames)
+        protected override IEnumerable<Tuple<string, ContactProp, string>> CreateMapping()
         {
             throw new NotImplementedException();
         }
