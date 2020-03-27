@@ -12,10 +12,33 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvReader
     {
+
+        internal static CsvReader GetInstance(CsvTarget platform) => platform switch
+        {
+            CsvTarget.Unspecified => new Universal.UniversalCsvReader(),
+            CsvTarget.Outlook => new Outlook.OutlookCsvReader(),
+            CsvTarget.Google => new Google.GoogleCsvReader(),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(),
+            _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
+        };
+
+
+        /// <summary>
+        /// Liest die mit <paramref name="fileName"/>
+        /// </summary>
+        /// <param name="fileName">Dateipfad der zu lesenden CSV-Datei.</param>
+        /// <returns>Liste von <see cref="Contact"/>-Objekten, die den Inhalt der CSV-Datei darstellen.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        /// <exception cref="IOException">Es kann nicht auf den Datenträger zugegriffen werden.</exception>
+        ///// <exception cref="InvalidOperationException">Die Methode wurde mehr als einmal aufgerufen.</exception>
+        ///// <exception cref="ObjectDisposedException">Der <see cref="Stream"/> war bereits geschlossen.</exception>
+        /// <exception cref="InvalidCsvException">Ungültige CSV-Datei. Die Interpretation ist abhängig vom <see cref="CsvOptions"/>-Wert
+        /// der im Konstruktor angegeben wurde.</exception>
         public List<Contact> Read(string fileName)
         {
             var wrapper = new CsvRecordWrapper();
-            List<ContactProp> properties = new List<ContactProp>();
+            List<ContactProp?> properties = new List<ContactProp?>();
 
             Csv::CsvReader? reader = null;
             var list = new List<Contact>();
@@ -48,26 +71,40 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
 
 
-        protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp> properties);
+        protected abstract void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties);
 
+
+
+        /// <summary>
+        /// Initialisiert den <see cref="Csv::CsvReader"/>.
+        /// </summary>
+        /// <param name="fileName">Dateipfad der zu lesenden CSV-Datei.</param>
+        /// <returns><see cref="Csv::CsvReader"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        /// <exception cref="IOException">Es kann nicht auf den Datenträger zugegriffen werden.</exception>
         protected virtual Csv::CsvReader? InitReader(string fileName) => new Csv::CsvReader(fileName, options: CsvOptions.Default | CsvOptions.DisableCaching);
 
 
 
 
-        internal static CsvReader GetInstance(CsvTarget platform) => platform switch
+
+
+
+        /// <summary>
+        /// Initialisiert aus den Daten eine <see cref="CsvRecordWrapper"/>-Objekts ein <see cref="Contact"/>-Objekt.
+        /// </summary>
+        /// <param name="wrapper"><see cref="CsvRecordWrapper"/></param>
+        /// <param name="properties">Liste der Properties des <see cref="Contact"/>-Objekts, die eine Entsprechung im 
+        /// <see cref="CsvRecordWrapper"/>-Objekt haben. Die Liste darf <c>null</c>-Werte enthalten, muss aber die gleiche Länge
+        /// haben, wie das <see cref="CsvRecordWrapper"/>-Objekt.</param>
+        /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
+        private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp?> properties)
         {
-            CsvTarget.Unspecified => new Universal.UniversalCsvReader(),
-            CsvTarget.Outlook => new Outlook.OutlookCsvReader(),
-            CsvTarget.Google => new Google.GoogleCsvReader(),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(),
-            _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
-        };
+            Debug.Assert(wrapper != null);
+            Debug.Assert(properties != null);
+            Debug.Assert(wrapper.Count == properties.Count);
 
-
-
-        private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp> properties)
-        {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;
             const int INST_MESSENGER_3 = 2;
@@ -113,9 +150,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             for (int i = 0; i < wrapper.Count; i++)
             {
-                ContactProp prop = properties[i];
-
-
+                ContactProp? prop = properties[i];
 #nullable disable
                 switch (prop)
                 {

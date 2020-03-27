@@ -11,9 +11,15 @@ using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {
+
     internal class OutlookCsvWriter : CsvWriter
     {
-        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping)
+
+
+        protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
+
+
+        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping, string[] columnNames)
         {
             throw new NotImplementedException();
         }

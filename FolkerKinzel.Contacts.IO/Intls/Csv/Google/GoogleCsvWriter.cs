@@ -11,9 +11,12 @@ using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
+
     internal class GoogleCsvWriter : CsvWriter
     {
-        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping)
+        protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
+
+        protected override void InitMapping(List<Tuple<string, ContactProp?>> mapping, string[] columnNames)
         {
             throw new NotImplementedException();
         }

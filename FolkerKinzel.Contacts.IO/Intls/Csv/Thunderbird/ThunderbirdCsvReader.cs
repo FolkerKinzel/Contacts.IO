@@ -12,7 +12,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvReader : CsvReader
     {
-        protected override void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp> properties)
+        protected override void InitWrapperAndProperties(CsvRecordWrapper wrapper, List<ContactProp?> properties)
         {
             throw new NotImplementedException();
         }
