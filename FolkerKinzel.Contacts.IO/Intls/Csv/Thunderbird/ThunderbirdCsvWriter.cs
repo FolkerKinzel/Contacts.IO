@@ -14,13 +14,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
     internal class ThunderbirdCsvWriter : CsvWriter
     {
         private Conv::ICsvTypeConverter? _intConverter = null;
-        private bool _birthDayInitalized;
-        public DateTime? _birthDay;
+     
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
 
-        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping() => HeaderRow.GetMappingEN();
+        protected override IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping() => HeaderRow.GetMappingEN();
 
 
         protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper)
@@ -41,24 +40,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         }
 
 
-        protected override void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
+        protected override object? FillCsvRecordNonStandardProp(Contact contact, ContactProp prop)
         {
-            if (!_birthDayInitalized)
-            {
-                this._birthDay = contact.Person?.BirthDay;
-                _birthDayInitalized = true;
-            }
-
-            if (_birthDay.HasValue)
-            {
-                wrapper[index] = prop switch
+            var _birthDay = contact.Person?.BirthDay;
+           
+            return _birthDay.HasValue ? prop switch
                 {
-                    (ContactProp)AdditionalProps.BirthYear => _birthDay.Value.Year,
-                    (ContactProp)AdditionalProps.BirthMonth => _birthDay.Value.Month,
-                    (ContactProp)AdditionalProps.BirthDay => _birthDay.Value.Day,
-                    _ => 0
-                };
-            }
+                    (ContactProp)AdditionalProp.BirthYear => _birthDay.Value.Year,
+                    (ContactProp)AdditionalProp.BirthMonth => _birthDay.Value.Month,
+                    (ContactProp)AdditionalProp.BirthDay => _birthDay.Value.Day,
+                    _ => null
+                } : (object?)null;
+            
         }
 
     }

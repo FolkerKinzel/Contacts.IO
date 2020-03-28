@@ -16,7 +16,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
     {
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
-        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
+        protected override IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
         {
             throw new NotImplementedException();
         }

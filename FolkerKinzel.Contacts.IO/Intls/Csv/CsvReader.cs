@@ -7,11 +7,17 @@ using FolkerKinzel.CsvTools;
 using System.Linq;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
+using System.IO;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvReader : CsvIOBase
     {
+
+        protected CsvReader(Encoding? enc = null)
+        {
+            this.Encoding = enc;
+        }
 
         internal static CsvReader GetInstance(CsvTarget platform) => platform switch
         {
@@ -23,6 +29,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         };
 
 
+        protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
+
+        protected Encoding? Encoding { get; }
+
+
         /// <summary>
         /// Liest die mit <paramref name="fileName"/>
         /// </summary>
@@ -30,59 +41,48 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <returns>Liste von <see cref="Contact"/>-Objekten, die den Inhalt der CSV-Datei darstellen.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-        /// <exception cref="IOException">Es kann nicht auf den Datenträger zugegriffen werden.</exception>
-        ///// <exception cref="InvalidOperationException">Die Methode wurde mehr als einmal aufgerufen.</exception>
-        ///// <exception cref="ObjectDisposedException">Der <see cref="Stream"/> war bereits geschlossen.</exception>
-        /// <exception cref="InvalidCsvException">Ungültige CSV-Datei. Die Interpretation ist abhängig vom <see cref="CsvOptions"/>-Wert
-        /// der im Konstruktor angegeben wurde.</exception>
+        /// <exception cref="IOException">
+        /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
+        /// <para>- oder -</para>
+        /// <para>die Datei enthält ungültiges CSV.</para></exception>
         public List<Contact> Read(string fileName)
         {
             var list = new List<Contact>();
+    
+            Analyzer.Analyze(fileName);
 
-            if (!Analyze(fileName))
+            if (!Analyzer.HasHeader)
             {
                 return list;
             }
 
-            
 
-            using Csv::CsvReader reader = InitReader(fileName);
+            var mapping = CreateMapping();
+            var wrapper = InitCsvRecordWrapper(mapping);
 
-            List<ContactProp?> properties = new List<ContactProp?>();
-            var wrapper = InitWrapperAndProperties(properties);
+            Debug.Assert(wrapper.Count == mapping.Count);
 
-            Debug.Assert(wrapper.Count == properties.Count);
+            using Csv::CsvReader reader =
+               new Csv::CsvReader(fileName, hasHeaderRow: true, options: Analyzer.Options | CsvOptions.DisableCaching, enc: null, fieldSeparator: Analyzer.FieldSeparator);
 
-            foreach (var record in reader.Read())
+            try
             {
-                wrapper.Record = record;
+                foreach (var record in reader.Read())
+                {
+                    wrapper.Record = record;
 
-                Contact contact = InitContact(wrapper, properties);
-                contact.Clean();
+                    Contact contact = InitContact(wrapper, mapping);
 
-                list.Add(contact);
+                    list.Add(contact);
+                }
+            }
+            catch(InvalidCsvException e)
+            {
+                throw new IOException(e.Message, e);
             }
 
             return list;
-
         }
-
-        protected virtual bool Analyze(string fileName) => true;
-
-
-        protected abstract CsvRecordWrapper InitWrapperAndProperties(List<ContactProp?> properties);
-
-
-
-        /// <summary>
-        /// Initialisiert den <see cref="Csv::CsvReader"/>.
-        /// </summary>
-        /// <param name="fileName">Dateipfad der zu lesenden CSV-Datei.</param>
-        /// <returns><see cref="Csv::CsvReader"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-        /// <exception cref="IOException">Es kann nicht auf den Datenträger zugegriffen werden.</exception>
-        protected virtual Csv::CsvReader InitReader(string fileName) => new Csv::CsvReader(fileName, options: CsvOptions.Default | CsvOptions.DisableCaching);
 
 
 
@@ -90,11 +90,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// Initialisiert aus den Daten eine <see cref="CsvRecordWrapper"/>-Objekts ein <see cref="Contact"/>-Objekt.
         /// </summary>
         /// <param name="wrapper"><see cref="CsvRecordWrapper"/></param>
-        /// <param name="properties">Liste der Properties des <see cref="Contact"/>-Objekts, die eine Entsprechung im 
-        /// <see cref="CsvRecordWrapper"/>-Objekt haben. Die Liste darf <c>null</c>-Werte enthalten, muss aber die gleiche Länge
-        /// haben, wie das <see cref="CsvRecordWrapper"/>-Objekt.</param>
+        /// <param name="mapping">Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"/>, Eigenschaft von <see cref="Contact"/> und Spaltenname der CSV-Datei. 
+        /// Für die Methode ist nur <see cref="Tuple{T1, T2, T3}.Item2"/> relevant (Eigenschaft von <see cref="Contact"/>). <paramref name="mapping"/> muss die gleiche Länge
+        /// haben wie <paramref name="wrapper"/>.</param>
         /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
-        private static Contact InitContact(CsvRecordWrapper wrapper, IList<ContactProp?> properties)
+        private Contact InitContact(CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IEnumerable<string>>> mapping)
         {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;
@@ -141,7 +141,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             for (int i = 0; i < wrapper.Count; i++)
             {
-                ContactProp? prop = properties[i];
+                ContactProp? prop = mapping[i].Item2;
 #nullable disable
                 switch (prop)
                 {
@@ -353,10 +353,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         contact.TimeStamp = (DateTime)wrapper[i];
                         break;
                     default:
+                        if(prop.HasValue)
+                        {
+                            InitContactNonStandardProp(contact, prop.Value, wrapper[i]);
+                        }
                         break;
                 }
             }
 
+            contact.Clean();
 
             return contact;
 
@@ -421,5 +426,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
 
 
+
+        protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, object? value) { }
+       
     }
 }

@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// Erzeugt die Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"/>, Eigenschaft von <see cref="Contact"/> und Spaltenname der CSV-Datei.
         /// </summary>
         /// <returns>
-        /// <para>Eine Collection von <see cref="Tuple{T1, T2, T3}"/>.</para>
+        /// <para>Eine Auflistung von <see cref="Tuple{T1, T2, T3}"/>.</para>
         /// <para>Inhalt:</para>
         /// <list type="bullet">
         /// <item><see cref="Tuple{T1, T2, T3}.Item1"/>: Eigenschaftsname von <see cref="CsvRecordWrapper"/>.</item>
@@ -30,7 +30,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
         /// </list>
         /// </returns>
-        protected abstract IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping();
+        protected abstract IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping();
 
 
 
@@ -172,15 +172,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
 
         /// <summary>
-        /// Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen.
+        /// Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen
+        /// oder aus diesen zu lesen.
         /// Diese Spalten werden dem <see cref="CsvRecordWrapper"/> hiermit hinzugefügt.
         /// </summary>
         /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"/>-Enum.</param>
         /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"/>-Objekt.</param>
-        protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper)
-        {
-
-        }
+        protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper) { }
+        
 
 
     }

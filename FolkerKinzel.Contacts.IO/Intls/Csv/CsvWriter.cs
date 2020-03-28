@@ -149,15 +149,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
         }
 
-        protected abstract string[] CreateColumnNames();
-
-
-       
-
-
-
-
-       
+        protected abstract string[] CreateColumnNames(); 
 
         private void FillCsvRecord(Contact contact, ContactProp?[] props, CsvRecordWrapper wrapper, bool[] propInfo)
         {
@@ -358,7 +350,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     default:
                         if (prop.HasValue)
                         {
-                            FillCsvRecordNonStandardProp(contact, prop.Value, wrapper, i);
+                            wrapper[i] = FillCsvRecordNonStandardProp(contact, prop.Value);
                         }
                         break;
                 }
@@ -366,10 +358,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         }
 
 
-        protected virtual void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
-        {
-
-        }
+        protected virtual object? FillCsvRecordNonStandardProp(Contact contact, ContactProp prop) => null;
+        
 
     }
 }

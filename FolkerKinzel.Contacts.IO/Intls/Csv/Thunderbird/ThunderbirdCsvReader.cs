@@ -12,14 +12,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvReader : CsvReader
     {
-        protected override IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
+        
+
+        protected override IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
         {
             throw new NotImplementedException();
         }
 
-        protected override CsvRecordWrapper InitWrapperAndProperties(List<ContactProp?> properties)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
