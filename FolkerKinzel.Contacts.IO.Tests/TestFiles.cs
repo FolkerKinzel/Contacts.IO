@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Tests
 {
+    [TestClass]
     internal static class TestFiles
     {
         private const string TEST_FILE_DIRECTORY_NAME = "TestFiles";
@@ -37,6 +36,14 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
         internal static string ThunderbirdUtf8Csv => Path.Combine(_testFileDirectory, "ThunderbirdUtf8.csv");
 
+        internal static string V2vcf => Path.Combine(_testFileDirectory, "v2_1.vcf");
 
+        internal static string V3vcf => Path.Combine(_testFileDirectory, "v3.vcf");
+
+        internal static string V4vcf => Path.Combine(_testFileDirectory, "v4.vcf");
+
+
+        
+        
     }
 }

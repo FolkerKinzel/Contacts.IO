@@ -1,28 +1,23 @@
-﻿using Csv = FolkerKinzel.CsvTools;
-using FolkerKinzel.CsvTools.Helpers;
-using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
+﻿using FolkerKinzel.CsvTools.Helpers;
+using FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.IO;
-using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvWriter : CsvWriter
     {
-        private Conv::ICsvTypeConverter? _intConverter = null;
+        private ICsvTypeConverter? _intConverter = null;
      
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
 
-        protected override IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping() => HeaderRow.GetMappingEN();
+        protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => HeaderRow.GetMappingEN();
 
 
-        protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper)
+        protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)
         {
             Debug.Assert(tpl.Item2.HasValue);
 
@@ -31,7 +26,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             //case (ContactProp)AdditionalProps.BirthDay:
 
             
-            _intConverter ??= Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32);
+            _intConverter ??= CsvConverterFactory.CreateConverter(CsvTypeCode.Int32, nullable: true);
             wrapper.AddProperty(
                         new CsvProperty(
                             tpl.Item1,

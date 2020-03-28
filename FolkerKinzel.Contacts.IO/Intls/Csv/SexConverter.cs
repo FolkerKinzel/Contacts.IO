@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv

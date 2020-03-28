@@ -1,12 +1,9 @@
 ﻿using Csv = FolkerKinzel.CsvTools;
 using FolkerKinzel.CsvTools.Helpers;
-using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.IO;
 using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
@@ -14,7 +11,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
     internal abstract class CsvWriter : CsvIOBase
     {
-       
         public static CsvWriter GetInstance(CsvTarget platform) => platform switch
         {
             CsvTarget.Unspecified => new Universal.UniversalCsvWriter(),
@@ -133,9 +129,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             var wrapper = InitCsvRecordWrapper(mapping);
             wrapper.Record = writer.Record;
 
-            var props = mapping.Select(x => x.Item2).ToArray();
+            
 
-            Debug.Assert(wrapper.Count == props.Length);
+            Debug.Assert(wrapper.Count == mapping.Count);
 
             foreach (var contact in data)
             {
@@ -144,14 +140,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
                 if (contact.IsEmpty) continue;
 
-                FillCsvRecord(contact, props, wrapper, propInfo);
+                FillCsvRecord(contact, wrapper, mapping);
                 writer.WriteRecord();
             }
         }
 
         protected abstract string[] CreateColumnNames(); 
 
-        private void FillCsvRecord(Contact contact, ContactProp?[] props, CsvRecordWrapper wrapper, bool[] propInfo)
+
+
+        private void FillCsvRecord(Contact contact, CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
         {
             var person = contact.Person;
             var name = person?.Name;
@@ -164,9 +162,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             var phones = contact.PhoneNumbers;
             var otherPhones = phones?.Where(x => !(x is null || x.IsCell || x.IsFax || x.IsWork)).ToArray();
 
-            for (int i = 0; i < props.Length; i++)
+            for (int i = 0; i < mapping.Count; i++)
             {
-                ContactProp? prop = props[i];
+                ContactProp? prop = mapping[i].Item2;
 
                 switch (prop)
                 {
@@ -239,55 +237,55 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     
 #nullable disable
                     case ContactProp.PhoneWork:
-                        wrapper[i] = phones?.FirstOrDefault(x => x.IsWork);
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsWork)?.Value;
                         break;
                     case ContactProp.FaxHome:
-                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && !x.IsWork);
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && !x.IsWork)?.Value;
                         break;
                     case ContactProp.FaxWork:
-                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && x.IsWork);
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsFax && x.IsWork)?.Value;
                         break;
                     case ContactProp.Cell:
-                        if (propInfo[TWO_CELL_PROPERTIES])
+                        if (PropInfo[TWO_CELL_PROPERTIES])
                         {
-                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && !x.IsWork);
+                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && !x.IsWork)?.Value;
                         }
                         else
                         {
-                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell);
+                            wrapper[i] = phones?.FirstOrDefault(x => x.IsCell)?.Value;
                         }
                         break;
                     case ContactProp.CellWork:
-                        wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && x.IsWork);
+                        wrapper[i] = phones?.FirstOrDefault(x => x.IsCell && x.IsWork)?.Value;
                         break;
 #nullable enable
                     case ContactProp.PhoneHome:
-                        wrapper[i] = otherPhones?.FirstOrDefault();
+                        wrapper[i] = otherPhones?.FirstOrDefault()?.Value;
                         break;
                     case ContactProp.PhoneOther1:
-                        if (propInfo[TWO_PHONE_PROPERTIES])
+                        if (PropInfo[TWO_PHONE_PROPERTIES])
                         {
-                            wrapper[i] = otherPhones?.ElementAtOrDefault(1);
+                            wrapper[i] = otherPhones?.ElementAtOrDefault(1)?.Value;
                         }
                         else
                         {
-                            wrapper[i] = otherPhones?.FirstOrDefault();
+                            wrapper[i] = otherPhones?.FirstOrDefault()?.Value;
                         }
                         break;
                     case ContactProp.PhoneOther2:
-                        wrapper[i] = otherPhones?.ElementAtOrDefault(2);
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(2)?.Value;
                         break;
                     case ContactProp.PhoneOther3:
-                        wrapper[i] = otherPhones?.ElementAtOrDefault(3);
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(3)?.Value;
                         break;
                     case ContactProp.PhoneOther4:
-                        wrapper[i] = otherPhones?.ElementAtOrDefault(4);
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(4)?.Value;
                         break;
                     case ContactProp.PhoneOther5:
-                        wrapper[i] = otherPhones?.ElementAtOrDefault(5);
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(5)?.Value;
                         break;
                     case ContactProp.PhoneOther6:
-                        wrapper[i] = otherPhones?.ElementAtOrDefault(6);
+                        wrapper[i] = otherPhones?.ElementAtOrDefault(6)?.Value;
                         break;
                     case ContactProp.InstantMessenger1:
                         wrapper[i] = ims?.FirstOrDefault();

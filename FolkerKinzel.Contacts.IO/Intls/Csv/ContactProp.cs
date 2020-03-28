@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FolkerKinzel.Contacts.IO.Intls.Csv
+﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     /// <summary>
     /// Benannte Konstanten, um Eigenschaften der <see cref="Contact"/>-Klasse zu referenzieren.

@@ -4,7 +4,6 @@ using System.Text;
 using Csv = FolkerKinzel.CsvTools;
 using FolkerKinzel.CsvTools.Helpers;
 using FolkerKinzel.CsvTools;
-using System.Linq;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
 using System.IO;
@@ -70,10 +69,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 foreach (var record in reader.Read())
                 {
                     wrapper.Record = record;
-
-                    Contact contact = InitContact(wrapper, mapping);
-
-                    list.Add(contact);
+                    list.Add(InitContact(wrapper, mapping));
                 }
             }
             catch(InvalidCsvException e)
@@ -94,7 +90,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// Für die Methode ist nur <see cref="Tuple{T1, T2, T3}.Item2"/> relevant (Eigenschaft von <see cref="Contact"/>). <paramref name="mapping"/> muss die gleiche Länge
         /// haben wie <paramref name="wrapper"/>.</param>
         /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
-        private Contact InitContact(CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IEnumerable<string>>> mapping)
+        private Contact InitContact(CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
         {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;

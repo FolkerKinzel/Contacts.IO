@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Csv = FolkerKinzel.CsvTools;
-using FolkerKinzel.CsvTools.Helpers;
-using FolkerKinzel.CsvTools;
-using System.Linq;
-using System.Diagnostics;
-using FolkerKinzel.Contacts.IO.Resources;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {
     internal class OutlookCsvReader : CsvReader
     {
-        protected override IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping()
+        protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {

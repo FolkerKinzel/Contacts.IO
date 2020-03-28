@@ -15,7 +15,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <summary>
         /// Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
         /// </summary>
-        protected readonly bool[] propInfo = new bool[PROPINFO_LENGTH];
+        protected readonly bool[] PropInfo = new bool[PROPINFO_LENGTH];
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
         /// </list>
         /// </returns>
-        protected abstract IList<Tuple<string, ContactProp?, IEnumerable<string>>> CreateMapping();
+        protected abstract IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping();
 
 
 
@@ -47,7 +47,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// </list>
         /// </param>
         /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
-        protected CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?, IEnumerable<string>>> mapping)
+        protected CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?, IList<string>>> mapping)
         {
             var wrapper = new CsvRecordWrapper();
 
@@ -162,8 +162,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 }
             }
 
-            propInfo[TWO_CELL_PROPERTIES] = (cellProperties >= 2);
-            propInfo[TWO_PHONE_PROPERTIES] = (cellProperties >= 2);
+            PropInfo[TWO_CELL_PROPERTIES] = (cellProperties >= 2);
+            PropInfo[TWO_PHONE_PROPERTIES] = (cellProperties >= 2);
 
             return wrapper;
         }
@@ -178,7 +178,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// </summary>
         /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"/>-Enum.</param>
         /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"/>-Objekt.</param>
-        protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IEnumerable<string>> tpl, CsvRecordWrapper wrapper) { }
+        protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper) { }
         
 
 
