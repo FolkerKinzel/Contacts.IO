@@ -12,25 +12,26 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvReader : CsvIOBase
     {
-
-        protected CsvReader(Encoding? enc = null)
+        internal static CsvReader GetInstance(CsvTarget platform, Encoding? textEncoding) => platform switch
         {
-            this.Encoding = enc;
-        }
-
-        internal static CsvReader GetInstance(CsvTarget platform) => platform switch
-        {
-            CsvTarget.Unspecified => new Universal.UniversalCsvReader(),
-            CsvTarget.Outlook => new Outlook.OutlookCsvReader(),
-            CsvTarget.Google => new Google.GoogleCsvReader(),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(),
+            CsvTarget.Unspecified => new Universal.UniversalCsvReader(textEncoding),
+            CsvTarget.Outlook => new Outlook.OutlookCsvReader(textEncoding),
+            CsvTarget.Google => new Google.GoogleCsvReader(textEncoding),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(textEncoding),
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 
+        protected CsvReader(Encoding? textEncoding)
+        {
+            this.TextEncoding = textEncoding;
+        }
+
+
+        protected Encoding? TextEncoding { get; }
 
         protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 
-        protected Encoding? Encoding { get; }
+       
 
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             Debug.Assert(wrapper.Count == mapping.Count);
 
             using Csv::CsvReader reader =
-               new Csv::CsvReader(fileName, hasHeaderRow: true, options: Analyzer.Options | CsvOptions.DisableCaching, enc: null, fieldSeparator: Analyzer.FieldSeparator);
+               new Csv::CsvReader(fileName, hasHeaderRow: true, options: Analyzer.Options | CsvOptions.DisableCaching, textEncoding: TextEncoding, fieldSeparator: Analyzer.FieldSeparator);
 
             try
             {

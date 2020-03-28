@@ -12,6 +12,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         private Conv::ICsvTypeConverter? _intConverter = null;
 
 
+        internal ThunderbirdCsvReader(System.Text.Encoding? textEncoding) : base(textEncoding) { }
+
+
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
             Debug.Assert(Analyzer.HasHeader == true);

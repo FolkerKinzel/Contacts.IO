@@ -3,13 +3,16 @@ using FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvWriter : CsvWriter
     {
         private ICsvTypeConverter? _intConverter = null;
-     
+
+        internal ThunderbirdCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
+
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 

@@ -5,20 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
+using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
 
     internal abstract class CsvWriter : CsvIOBase
     {
-        public static CsvWriter GetInstance(CsvTarget platform) => platform switch
+        public static CsvWriter GetInstance(CsvTarget platform, Encoding? textEncoding) => platform switch
         {
-            CsvTarget.Unspecified => new Universal.UniversalCsvWriter(),
-            CsvTarget.Outlook => new Outlook.OutlookCsvWriter(),
-            CsvTarget.Google => new Google.GoogleCsvWriter(),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvWriter(),
+            CsvTarget.Unspecified => new Universal.UniversalCsvWriter(textEncoding),
+            CsvTarget.Outlook => new Outlook.OutlookCsvWriter(textEncoding),
+            CsvTarget.Google => new Google.GoogleCsvWriter(textEncoding),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvWriter(textEncoding),
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
+
+        protected CsvWriter(Encoding? textEncoding)
+        {
+            this.TextEncoding = textEncoding;
+        }
+
+
+        protected Encoding? TextEncoding { get; }
 
 
         //string[] outlook = new string[] {
@@ -123,7 +132,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             string[] columnNames = CreateColumnNames();
 
-            using var writer = new Csv::CsvWriter(fileName, columnNames);
+            using var writer = new Csv::CsvWriter(fileName, columnNames, textEncoding: TextEncoding);
 
             var mapping = CreateMapping();
             var wrapper = InitCsvRecordWrapper(mapping);
