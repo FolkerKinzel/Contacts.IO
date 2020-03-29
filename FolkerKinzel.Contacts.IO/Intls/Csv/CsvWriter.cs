@@ -160,8 +160,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             {
                 if (cont is null) continue;
 
-                Contact contact = cont;
-                PrepareContact(ref contact);
+                Contact contact = (Contact)cont.Clone();
+                contact.Clean();
 
                 if (contact.IsEmpty) continue;
 
@@ -170,14 +170,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
         }
 
-        private void PrepareContact(ref Contact contact)
-        {
-            contact = (Contact)contact.Clone();
-            contact.Clean();
-        }
 
         protected abstract string[] CreateColumnNames(); 
-
 
 
         private void FillCsvRecord(Contact contact, CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
