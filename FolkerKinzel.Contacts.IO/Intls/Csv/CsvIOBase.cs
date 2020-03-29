@@ -3,6 +3,7 @@ using FolkerKinzel.CsvTools.Helpers;
 using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
+using FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
@@ -11,6 +12,28 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected const int TWO_CELL_PROPERTIES = 0;
         protected const int TWO_PHONE_PROPERTIES = 1;
         private const int PROPINFO_LENGTH = 2;
+
+        private Conv::ICsvTypeConverter? _nullableDateTimeConverter;
+
+
+        protected Conv::ICsvTypeConverter StringConverter { get; } = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
+
+
+        protected Conv::ICsvTypeConverter NullableDateTimeConverter
+        {
+            get
+            {
+                this._nullableDateTimeConverter ??= InitNullableDateTimeConverter();
+
+                return this._nullableDateTimeConverter;
+            }
+        }
+
+        protected virtual ICsvTypeConverter InitNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, true);
+
+
+        protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, false);
+
 
         /// <summary>
         /// Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
@@ -51,7 +74,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         {
             var wrapper = new CsvRecordWrapper();
 
-            var stringConverter = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
 
             int cellProperties = 0;
             int phoneProperties = 0;
@@ -67,16 +89,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.AddressHomeCountry:
                     case ContactProp.Email1:
                     case ContactProp.Email2:
-                    case ContactProp.Email3:
-                    case ContactProp.Email4:
-                    case ContactProp.Email5:
-                    case ContactProp.Email6:
+                    //case ContactProp.Email3:
+                    //case ContactProp.Email4:
+                    //case ContactProp.Email5:
+                    //case ContactProp.Email6:
                     case ContactProp.InstantMessenger1:
                     case ContactProp.InstantMessenger2:
-                    case ContactProp.InstantMessenger3:
-                    case ContactProp.InstantMessenger4:
-                    case ContactProp.InstantMessenger5:
-                    case ContactProp.InstantMessenger6:
+                    //case ContactProp.InstantMessenger3:
+                    //case ContactProp.InstantMessenger4:
+                    //case ContactProp.InstantMessenger5:
+                    //case ContactProp.InstantMessenger6:
                     case ContactProp.HomePagePersonal:
                     case ContactProp.HomePageWork:
                     case ContactProp.WorkCompany:
@@ -104,7 +126,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                             new CsvProperty(
                                 tpl.Item1,
                                 tpl.Item3,
-                                stringConverter));
+                                StringConverter));
                         break;
                     case ContactProp.Cell:
                     case ContactProp.CellWork:
@@ -112,21 +134,21 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                             new CsvProperty(
                                 tpl.Item1,
                                 tpl.Item3,
-                                stringConverter));
+                                StringConverter));
                         cellProperties++;
                         break;
                     case ContactProp.PhoneHome:
                     case ContactProp.PhoneOther1:
                     case ContactProp.PhoneOther2:
                     case ContactProp.PhoneOther3:
-                    case ContactProp.PhoneOther4:
-                    case ContactProp.PhoneOther5:
-                    case ContactProp.PhoneOther6:
+                    //case ContactProp.PhoneOther4:
+                    //case ContactProp.PhoneOther5:
+                    //case ContactProp.PhoneOther6:
                         wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item1,
                                 tpl.Item3,
-                                stringConverter));
+                                StringConverter));
                         phoneProperties++;
                         break;
                     case ContactProp.Gender:
@@ -138,12 +160,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.BirthDay:
                     case ContactProp.Anniversary:
+                        wrapper.AddProperty(
+                                new CsvProperty(
+                                    tpl.Item1,
+                                    tpl.Item3,
+                                    NullableDateTimeConverter));
+                        break;
                     case ContactProp.TimeStamp:
                         wrapper.AddProperty(
                                 new CsvProperty(
                                     tpl.Item1,
                                     tpl.Item3,
-                                    Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.DateTime, nullable: true)));
+                                    InitNonNullableDateTimeConverter()));
                         break;
                     default:
                         if (tpl.Item2.HasValue)
@@ -156,7 +184,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                             new CsvProperty(
                                 tpl.Item1,
                                 tpl.Item3,
-                                stringConverter));
+                                StringConverter));
                         }
                         break;
                 }
@@ -167,6 +195,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             return wrapper;
         }
+
 
         protected virtual SexConverter InitSexConverter() => new SexConverter();
 

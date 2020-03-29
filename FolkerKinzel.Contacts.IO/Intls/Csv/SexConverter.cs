@@ -21,8 +21,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         public virtual string? ConvertToString(object? value) => value switch
             {
             null => null,
-            Sex.Female => "female",
-            Sex.Male => "male",
+            Sex.Female => "Female",
+            Sex.Male => "Male",
             Sex.Unspecified => null,
             _ => throw new InvalidCastException()
             };

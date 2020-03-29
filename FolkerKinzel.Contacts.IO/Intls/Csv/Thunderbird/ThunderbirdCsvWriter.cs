@@ -38,19 +38,21 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         }
 
 
-        protected override object? FillCsvRecordNonStandardProp(Contact contact, ContactProp prop)
+        protected override void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
             var _birthDay = contact.Person?.BirthDay;
-           
-            return _birthDay.HasValue ? prop switch
-                {
-                    (ContactProp)AdditionalProp.BirthYear => _birthDay.Value.Year,
-                    (ContactProp)AdditionalProp.BirthMonth => _birthDay.Value.Month,
-                    (ContactProp)AdditionalProp.BirthDay => _birthDay.Value.Day,
-                    _ => null
-                } : (object?)null;
-            
+
+            wrapper[index] = _birthDay.HasValue ? prop switch
+            {
+                (ContactProp)AdditionalProp.BirthYear => _birthDay.Value.Year,
+                (ContactProp)AdditionalProp.BirthMonth => _birthDay.Value.Month,
+                (ContactProp)AdditionalProp.BirthDay => _birthDay.Value.Day,
+                _ => null
+            } : (int?)null;
+
         }
+
+        
 
     }
 }

@@ -97,25 +97,25 @@
         /// </summary>
         Email2,
 
-        /// <summary>
-        /// E-Mail-Adresse 3
-        /// </summary>
-        Email3,
+        ///// <summary>
+        ///// E-Mail-Adresse 3
+        ///// </summary>
+        //Email3,
 
-        /// <summary>
-        /// E-Mail-Adresse 4
-        /// </summary>
-        Email4,
+        ///// <summary>
+        ///// E-Mail-Adresse 4
+        ///// </summary>
+        //Email4,
 
-        /// <summary>
-        /// E-Mail-Adresse 5
-        /// </summary>
-        Email5,
+        ///// <summary>
+        ///// E-Mail-Adresse 5
+        ///// </summary>
+        //Email5,
 
-        /// <summary>
-        /// E-Mail-Adresse 6
-        /// </summary>
-        Email6,
+        ///// <summary>
+        ///// E-Mail-Adresse 6
+        ///// </summary>
+        //Email6,
 
         /// <summary>
         /// (Festnetz-) Telefon privat
@@ -162,20 +162,20 @@
         /// </summary>
         PhoneOther3,
 
-        /// <summary>
-        /// Andere Telefonnummer 4
-        /// </summary>
-        PhoneOther4,
+        ///// <summary>
+        ///// Andere Telefonnummer 4
+        ///// </summary>
+        //PhoneOther4,
 
-        /// <summary>
-        /// Andere Telefonnummer 5
-        /// </summary>
-        PhoneOther5,
+        ///// <summary>
+        ///// Andere Telefonnummer 5
+        ///// </summary>
+        //PhoneOther5,
 
-        /// <summary>
-        /// Andere Telefonnummer 6
-        /// </summary>
-        PhoneOther6,
+        ///// <summary>
+        ///// Andere Telefonnummer 6
+        ///// </summary>
+        //PhoneOther6,
 
         /// <summary>
         /// Instant-Messenger-Adresse 1
@@ -187,25 +187,25 @@
         /// </summary>
         InstantMessenger2,
 
-        /// <summary>
-        /// Instant-Messenger-Adresse 3
-        /// </summary>
-        InstantMessenger3,
+        ///// <summary>
+        ///// Instant-Messenger-Adresse 3
+        ///// </summary>
+        //InstantMessenger3,
 
-        /// <summary>
-        /// Instant-Messenger-Adresse 4
-        /// </summary>
-        InstantMessenger4,
+        ///// <summary>
+        ///// Instant-Messenger-Adresse 4
+        ///// </summary>
+        //InstantMessenger4,
 
-        /// <summary>
-        /// Instant-Messenger-Adresse 5
-        /// </summary>
-        InstantMessenger5,
+        ///// <summary>
+        ///// Instant-Messenger-Adresse 5
+        ///// </summary>
+        //InstantMessenger5,
 
-        /// <summary>
-        /// Instant-Messenger-Adresse 6
-        /// </summary>
-        InstantMessenger6,
+        ///// <summary>
+        ///// Instant-Messenger-Adresse 6
+        ///// </summary>
+        //InstantMessenger6,
 
 
         /// <summary>

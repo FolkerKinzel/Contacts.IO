@@ -95,19 +95,19 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         {
             const int INST_MESSENGER_1 = 0;
             const int INST_MESSENGER_2 = 1;
-            const int INST_MESSENGER_3 = 2;
-            const int INST_MESSENGER_4 = 3;
-            const int INST_MESSENGER_5 = 4;
-            const int INST_MESSENGER_6 = 5;
-            const int INST_MESSENGERS_LENGTH = 6;
+            //const int INST_MESSENGER_3 = 2;
+            //const int INST_MESSENGER_4 = 3;
+            //const int INST_MESSENGER_5 = 4;
+            //const int INST_MESSENGER_6 = 5;
+            const int INST_MESSENGERS_LENGTH = 2;
 
             const int EMAIL_1 = 0;
             const int EMAIL_2 = 1;
-            const int EMAIL_3 = 2;
-            const int EMAIL_4 = 3;
-            const int EMAIL_5 = 4;
-            const int EMAIL_6 = 5;
-            const int EMAILS_LENGTH = 6;
+            //const int EMAIL_3 = 2;
+            //const int EMAIL_4 = 3;
+            //const int EMAIL_5 = 4;
+            //const int EMAIL_6 = 5;
+            const int EMAILS_LENGTH = 2;
 
             const int PHONE_HOME = 0;
             const int PHONE_WORK = 1;
@@ -118,10 +118,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             const int PHONE_OTHER_1 = 6;
             const int PHONE_OTHER_2 = 7;
             const int PHONE_OTHER_3 = 8;
-            const int PHONE_OTHER_4 = 9;
-            const int PHONE_OTHER_5 = 10;
-            const int PHONE_OTHER_6 = 11;
-            const int PHONES_LENGTH = 12;
+            //const int PHONE_OTHER_4 = 9;
+            //const int PHONE_OTHER_5 = 10;
+            //const int PHONE_OTHER_6 = 11;
+            const int PHONES_LENGTH = 9;
 
             var contact = new Contact();
 
@@ -213,22 +213,22 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         InitEmails();
                         emails[EMAIL_2] = (string)wrapper[i];
                         break;
-                    case ContactProp.Email3:
-                        InitEmails();
-                        emails[EMAIL_3] = (string)wrapper[i];
-                        break;
-                    case ContactProp.Email4:
-                        InitEmails();
-                        emails[EMAIL_4] = (string)wrapper[i];
-                        break;
-                    case ContactProp.Email5:
-                        InitEmails();
-                        emails[EMAIL_5] = (string)wrapper[i];
-                        break;
-                    case ContactProp.Email6:
-                        InitEmails();
-                        emails[EMAIL_6] = (string)wrapper[i];
-                        break;
+                    //case ContactProp.Email3:
+                    //    InitEmails();
+                    //    emails[EMAIL_3] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.Email4:
+                    //    InitEmails();
+                    //    emails[EMAIL_4] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.Email5:
+                    //    InitEmails();
+                    //    emails[EMAIL_5] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.Email6:
+                    //    InitEmails();
+                    //    emails[EMAIL_6] = (string)wrapper[i];
+                    //    break;
                     case ContactProp.PhoneHome:
                         InitPhones();
                         phones[PHONE_HOME] = new PhoneNumber((string)wrapper[i]);
@@ -265,18 +265,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         InitPhones();
                         phones[PHONE_OTHER_3] = new PhoneNumber((string)wrapper[i]);
                         break;
-                    case ContactProp.PhoneOther4:
-                        InitPhones();
-                        phones[PHONE_OTHER_4] = new PhoneNumber((string)wrapper[i]);
-                        break;
-                    case ContactProp.PhoneOther5:
-                        InitPhones();
-                        phones[PHONE_OTHER_5] = new PhoneNumber((string)wrapper[i]);
-                        break;
-                    case ContactProp.PhoneOther6:
-                        InitPhones();
-                        phones[PHONE_OTHER_6] = new PhoneNumber((string)wrapper[i]);
-                        break;
+                    //case ContactProp.PhoneOther4:
+                    //    InitPhones();
+                    //    phones[PHONE_OTHER_4] = new PhoneNumber((string)wrapper[i]);
+                    //    break;
+                    //case ContactProp.PhoneOther5:
+                    //    InitPhones();
+                    //    phones[PHONE_OTHER_5] = new PhoneNumber((string)wrapper[i]);
+                    //    break;
+                    //case ContactProp.PhoneOther6:
+                    //    InitPhones();
+                    //    phones[PHONE_OTHER_6] = new PhoneNumber((string)wrapper[i]);
+                    //    break;
                     case ContactProp.InstantMessenger1:
                         InitInstMessengers();
                         instMessengers[INST_MESSENGER_1] = (string)wrapper[i];
@@ -285,22 +285,22 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         InitInstMessengers();
                         instMessengers[INST_MESSENGER_2] = (string)wrapper[i];
                         break;
-                    case ContactProp.InstantMessenger3:
-                        InitInstMessengers();
-                        instMessengers[INST_MESSENGER_3] = (string)wrapper[i];
-                        break;
-                    case ContactProp.InstantMessenger4:
-                        InitInstMessengers();
-                        instMessengers[INST_MESSENGER_4] = (string)wrapper[i];
-                        break;
-                    case ContactProp.InstantMessenger5:
-                        InitInstMessengers();
-                        instMessengers[INST_MESSENGER_5] = (string)wrapper[i];
-                        break;
-                    case ContactProp.InstantMessenger6:
-                        InitInstMessengers();
-                        instMessengers[INST_MESSENGER_6] = (string)wrapper[i];
-                        break;
+                    //case ContactProp.InstantMessenger3:
+                    //    InitInstMessengers();
+                    //    instMessengers[INST_MESSENGER_3] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.InstantMessenger4:
+                    //    InitInstMessengers();
+                    //    instMessengers[INST_MESSENGER_4] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.InstantMessenger5:
+                    //    InitInstMessengers();
+                    //    instMessengers[INST_MESSENGER_5] = (string)wrapper[i];
+                    //    break;
+                    //case ContactProp.InstantMessenger6:
+                    //    InitInstMessengers();
+                    //    instMessengers[INST_MESSENGER_6] = (string)wrapper[i];
+                    //    break;
                     case ContactProp.HomePagePersonal:
                         contact.HomePagePersonal = (string)wrapper[i];
                         break;

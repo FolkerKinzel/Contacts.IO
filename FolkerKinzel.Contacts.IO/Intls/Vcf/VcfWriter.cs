@@ -54,7 +54,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         private static VCard? ToVCard(Contact? contact)
         {
             if (contact is null) return null;
+
+            contact = (Contact)contact.Clone();
             contact.Clean();
+
             if (contact.IsEmpty) return null;
 
             var vcard = new VCard();
@@ -432,7 +435,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
           
             
-            vcard.LastRevision = new VC::TimestampProperty(contact.TimeStamp);
+            vcard.LastRevision = contact.TimeStamp == default ? null : new VC::TimestampProperty(contact.TimeStamp);
             
 
             return vcard;
