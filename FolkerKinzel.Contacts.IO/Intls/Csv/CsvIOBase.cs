@@ -4,6 +4,7 @@ using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
 using FolkerKinzel.CsvTools.Helpers.Converters;
+using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
@@ -12,6 +13,26 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected const int TWO_CELL_PROPERTIES = 0;
         protected const int TWO_PHONE_PROPERTIES = 1;
         private const int PROPINFO_LENGTH = 2;
+
+
+        protected CsvIOBase(Encoding? textEncoding)
+        {
+            this.TextEncoding = textEncoding;
+
+#if NET40
+            this.EmptyStringArray = new string[0];
+            this.EmptyPhonesArray = new PhoneNumber[0];
+#else
+            this.EmptyStringArray = Array.Empty<string>();
+            this.EmptyPhonesArray = Array.Empty<PhoneNumber>();
+#endif
+        }
+
+        protected string[] EmptyStringArray { get; }
+
+        protected PhoneNumber[] EmptyPhonesArray { get; }
+
+        protected Encoding? TextEncoding { get; }
 
         private Conv::ICsvTypeConverter? _nullableDateTimeConverter;
 

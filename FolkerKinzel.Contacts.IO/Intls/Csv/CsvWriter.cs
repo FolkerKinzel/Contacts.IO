@@ -12,8 +12,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
     internal abstract class CsvWriter : CsvIOBase
     {
-
-
         public static CsvWriter GetInstance(CsvTarget platform, Encoding? textEncoding) => platform switch
         {
             CsvTarget.Unspecified => new Universal.UniversalCsvWriter(textEncoding),
@@ -23,26 +21,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 
-        protected CsvWriter(Encoding? textEncoding)
-        {
-            this.TextEncoding = textEncoding;
-
-#if NET40
-            this.EmptyStringArray = new string[0];
-            this.EmptyPhonesArray = new PhoneNumber[0];
-#else
-            this.EmptyStringArray = Array.Empty<string>();
-            this.EmptyPhonesArray = Array.Empty<PhoneNumber>();
-#endif
-        }
-
-
-        protected Encoding? TextEncoding { get; }
-
-        public string[] EmptyStringArray { get; }
-
-        public PhoneNumber[] EmptyPhonesArray { get; }
-
+        protected CsvWriter(Encoding? textEncoding) : base(textEncoding) { }
+        
 
         //string[] outlook = new string[] {
         //    "First Name",

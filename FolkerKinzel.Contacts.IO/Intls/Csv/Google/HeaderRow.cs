@@ -3,239 +3,106 @@ using System.Collections.Generic;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
-
-    internal static class En
-    {
-        internal const string Name = "Name";
-        internal const string GivenName = "Given Name";
-        internal const string AdditionalName = "Additional Name";
-        internal const string FamilyName = "Family Name";
-        internal const string YomiName = "Yomi Name";
-        internal const string GivenNameYomi = "Given Name Yomi";
-        internal const string AdditionalNameYomi = "Additional Name Yomi";
-        internal const string FamilyNameYomi = "Family Name Yomi";
-        internal const string NamePrefix = "Name Prefix";
-        internal const string NameSuffix = "Name Suffix";
-        internal const string Initials = "Initials";
-        internal const string Nickname = "Nickname";
-        internal const string ShortName = "Short Name";
-        internal const string MaidenName = "Maiden Name";
-
-        internal const string Birthday = "Birthday";
-        internal const string Gender = "Gender";
-
-        internal const string Location = "Location";
-        internal const string BillingInformation = "Billing Information";
-        internal const string DirectoryServer = "Directory Server";
-        internal const string Mileage = "Mileage";
-        internal const string Occupation = "Occupation";
-        internal const string Hobby = "Hobby";
-        internal const string Sensitivity = "Sensitivity";
-        internal const string Priority = "Priority";
-        internal const string Subject = "Subject";
-        internal const string Notes = "Notes";
-        internal const string Language = "Language";
-        internal const string Photo = "Photo";
-        internal const string GroupMembership = "Group Membership";
-
-        // bis hierher alle Spalten verwenden, danach optional
-
-        internal const string Email1Type = "E-mail 1 - Type";
-        internal const string Email1Value = "E-mail 1 - Value";
-
-        internal const string Email2Type = "E-mail 2 - Type";
-        internal const string Email2Value = "E-mail 2 - Value";
-
-        internal const string IM1Type = "IM 1 - Type";
-        internal const string IM1Service = "IM 1 - Service";
-        internal const string IM1Value = "IM 1 - Value";
-
-        internal const string IM2Type = "IM 2 - Type";
-        internal const string IM2Service = "IM 2 - Service";
-        internal const string IM2Value = "IM 2 - Value";
-
-        internal const string Phone1Type = "Phone 1 - Type";
-        internal const string Phone1Value = "Phone 1 - Value";
-
-        internal const string Phone2Type = "Phone 2 - Type";
-        internal const string Phone2Value = "Phone 2 - Value";
-
-        internal const string Phone3Type = "Phone 3 - Type";
-        internal const string Phone3Value = "Phone 3 - Value";
-
-        internal const string Phone4Type = "Phone 4 - Type";
-        internal const string Phone4Value = "Phone 4 - Value";
-
-        internal const string Phone5Type = "Phone 5 - Type";
-        internal const string Phone5Value = "Phone 5 - Value";
-
-        internal const string Phone6Type = "Phone 6 - Type";
-        internal const string Phone6Value = "Phone 6 - Value";
-
-        internal const string Phone7Type = "Phone 7 - Type";
-        internal const string Phone7Value = "Phone 7 - Value";
-
-        internal const string Phone8Type = "Phone 8 - Type";
-        internal const string Phone8Value = "Phone 8 - Value";
-
-        internal const string Phone9Type = "Phone 9 - Type";
-        internal const string Phone9Value = "Phone 9 - Value";
-
-        internal const string AddressHomeType = "Address 1 - Type";
-        internal const string AddressHomeFormatted = "Address 1 - Formatted";
-        internal const string AddressHomeStreet = "Address 1 - Street";
-        internal const string AddressHomeCity = "Address 1 - City";
-        internal const string AddressHomePOBox = "Address 1 - PO Box";
-        internal const string AddressHomeState = "Address 1 - Region";
-        internal const string AddressHomePostalCode = "Address 1 - Postal Code";
-        internal const string AddressHomeCountry = "Address 1 - Country";
-        internal const string AddressHomeExtendedAddress = "Address 1 - Extended Address";
-
-        internal const string AddressWorkType = "Address 2 - Type";
-        internal const string AddressWorkFormatted = "Address 2 - Formatted";
-        internal const string AddressWorkStreet = "Address 2 - Street";
-        internal const string AddressWorkCity = "Address 2 - City";
-        internal const string AddressWorkPOBox = "Address 2 - PO Box";
-        internal const string AddressWorkRegion = "Address 2 - Region";
-        internal const string AddressWorkPostalCode = "Address 2 - Postal Code";
-        internal const string AddressWorkCountry = "Address 2 - Country";
-        internal const string AddressWorkExtendedAddress = "Address 2 - Extended Address";
-
-        //internal const string Address3Type = "Address 3 - Type";
-        //internal const string Address3Formatted = "Address 3 - Formatted";
-        //internal const string Address3Street = "Address 3 - Street";
-        //internal const string Address3City = "Address 3 - City";
-        //internal const string Address3POBox = "Address 3 - PO Box";
-        //internal const string Address3Region = "Address 3 - Region";
-        //internal const string Address3PostalCode = "Address 3 - Postal Code";
-        //internal const string Address3Country = "Address 3 - Country";
-        //internal const string Address3ExtendedAddress = "Address 3 - Extended Address";
-
-        internal const string OrganizationType = "Organization 1 - Type";
-        internal const string OrganizationName = "Organization 1 - Name";
-        internal const string OrganizationYomiName = "Organization 1 - Yomi Name";
-        internal const string OrganizationTitle = "Organization 1 - Title";
-        internal const string OrganizationDepartment = "Organization 1 - Department";
-        internal const string OrganizationSymbol = "Organization 1 - Symbol";
-        internal const string OrganizationLocation = "Organization 1 - Location";
-        internal const string OrganizationJobDescription = "Organization 1 - Job Description";
-
-        internal const string RelationType = "Relation 1 - Type";
-        internal const string RelationValue = "Relation 1 - Value";
-
-        internal const string Website1Type = "Website 1 - Type";
-        internal const string Website1Value = "Website 1 - Value";
-
-        internal const string Website2Type = "Website 2 - Type";
-        internal const string Website2Value = "Website 2 - Value";
-
-        internal const string EventType = "Event 1 - Type";
-        internal const string EventValue = "Event 1 - Value";
-
-        //internal const string CustomField1Type = "Custom Field 1 - Type";
-        //internal const string CustomField1Value = "Custom Field 1 - Value";
-    }
-
-
     internal static class HeaderRow
     {
-
-        
-
         internal static string[] GetColumnNamesEn() => new string[]
         {
-            En.Name,
-            En.GivenName,
-            En.AdditionalName,
-            En.FamilyName,
-            En.YomiName,
-            En.GivenNameYomi,
-            En.AdditionalNameYomi,
-            En.FamilyNameYomi,
-            En.NamePrefix,
-            En.NameSuffix,
-            En.Initials,
-            En.Nickname,
-            En.ShortName,
-            En.MaidenName,
+            ColumnName.Name,
 
-            En.Birthday,
-            En.Gender,
+            ColumnName.GivenName,
+            ColumnName.AdditionalName,
+            ColumnName.FamilyName,
 
-            En.Location,
-            En.BillingInformation,
-            En.DirectoryServer,
-            En.Mileage,
-            En.Occupation,
-            En.Hobby,
-            En.Sensitivity,
-            En.Priority,
-            En.Subject,
-            En.Notes,
-            En.Language,
-            En.Photo,
-            En.GroupMembership,
+            ColumnName.YomiName,
+            ColumnName.GivenNameYomi,
+            ColumnName.AdditionalNameYomi,
+            ColumnName.FamilyNameYomi,
 
-            En.Email1Type,
-            En.Email1Value,
+            ColumnName.NamePrefix,
+            ColumnName.NameSuffix,
 
-            En.Email2Type,
-            En.Email2Value,
+            ColumnName.Initials,
+            ColumnName.Nickname,
+            ColumnName.ShortName,
+            ColumnName.MaidenName,
 
-            En.IM1Type,
-            En.IM1Service,
-            En.IM1Value,
+            ColumnName.Birthday,
+            ColumnName.Gender,
 
-            En.IM2Type,
-            En.IM2Service,
-            En.IM2Value,
+            ColumnName.Location,
+            ColumnName.BillingInformation,
+            ColumnName.DirectoryServer,
+            ColumnName.Mileage,
+            ColumnName.Occupation,
+            ColumnName.Hobby,
+            ColumnName.Sensitivity,
+            ColumnName.Priority,
+            ColumnName.Subject,
+            ColumnName.Notes,
+            ColumnName.Language,
+            ColumnName.Photo,
+            ColumnName.GroupMembership,
 
-            En.Phone1Type,
-            En.Phone1Value,
+            ColumnName.Email1Type,
+            ColumnName.Email1Value,
 
-            En.Phone2Type,
-            En.Phone2Value,
+            ColumnName.Email2Type,
+            ColumnName.Email2Value,
 
-            En.Phone3Type,
-            En.Phone3Value,
+            ColumnName.IM1Type,
+            ColumnName.IM1Service,
+            ColumnName.IM1Value,
 
-            En.Phone4Type,
-            En.Phone4Value,
+            ColumnName.IM2Type,
+            ColumnName.IM2Service,
+            ColumnName.IM2Value,
 
-            En.Phone5Type,
-            En.Phone5Value,
+            ColumnName.Phone1Type,
+            ColumnName.Phone1Value,
 
-            En.Phone6Type,
-            En.Phone6Value,
+            ColumnName.Phone2Type,
+            ColumnName.Phone2Value,
 
-            En.Phone7Type,
-            En.Phone7Value,
+            ColumnName.Phone3Type,
+            ColumnName.Phone3Value,
 
-            En.Phone8Type,
-            En.Phone8Value,
+            ColumnName.Phone4Type,
+            ColumnName.Phone4Value,
 
-            En.Phone9Type,
-            En.Phone9Value,
+            ColumnName.Phone5Type,
+            ColumnName.Phone5Value,
 
-            En.AddressHomeType,
-            En.AddressHomeFormatted,
-            En.AddressHomeStreet,
-            En.AddressHomeCity,
-            En.AddressHomePOBox,
-            En.AddressHomeState,
-            En.AddressHomePostalCode,
-            En.AddressHomeCountry,
-            En.AddressHomeExtendedAddress,
+            ColumnName.Phone6Type,
+            ColumnName.Phone6Value,
 
-            En.AddressWorkType,
-            En.AddressWorkFormatted,
-            En.AddressWorkStreet,
-            En.AddressWorkCity,
-            En.AddressWorkPOBox,
-            En.AddressWorkRegion,
-            En.AddressWorkPostalCode,
-            En.AddressWorkCountry,
-            En.AddressWorkExtendedAddress,
+            ColumnName.Phone7Type,
+            ColumnName.Phone7Value,
+
+            ColumnName.Phone8Type,
+            ColumnName.Phone8Value,
+
+            ColumnName.Phone9Type,
+            ColumnName.Phone9Value,
+
+            ColumnName.AddressHomeType,
+            ColumnName.AddressHomeFormatted,
+            ColumnName.AddressHomeStreet,
+            ColumnName.AddressHomeCity,
+            ColumnName.AddressHomePOBox,
+            ColumnName.AddressHomeState,
+            ColumnName.AddressHomePostalCode,
+            ColumnName.AddressHomeCountry,
+            ColumnName.AddressHomeExtendedAddress,
+
+            ColumnName.AddressWorkType,
+            ColumnName.AddressWorkFormatted,
+            ColumnName.AddressWorkStreet,
+            ColumnName.AddressWorkCity,
+            ColumnName.AddressWorkPOBox,
+            ColumnName.AddressWorkRegion,
+            ColumnName.AddressWorkPostalCode,
+            ColumnName.AddressWorkCountry,
+            ColumnName.AddressWorkExtendedAddress,
 
             //En.Address3Type,
             //En.Address3Formatted,
@@ -247,155 +114,165 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             //En.Address3Country,
             //En.Address3ExtendedAddress,
 
-            En.OrganizationType,
-            En.OrganizationName,
-            En.OrganizationYomiName,
-            En.OrganizationTitle,
-            En.OrganizationDepartment,
-            En.OrganizationSymbol,
-            En.OrganizationLocation,
-            En.OrganizationJobDescription,
+            ColumnName.OrganizationType,
+            ColumnName.OrganizationName,
+            ColumnName.OrganizationYomiName,
+            ColumnName.OrganizationTitle,
+            ColumnName.OrganizationDepartment,
+            ColumnName.OrganizationSymbol,
+            ColumnName.OrganizationLocation,
+            ColumnName.OrganizationJobDescription,
 
-            En.RelationType,
-            En.RelationValue,
+            ColumnName.RelationType,
+            ColumnName.RelationValue,
 
-            En.Website1Type,
-            En.Website1Value,
+            ColumnName.Website1Type,
+            ColumnName.Website1Value,
 
-            En.Website2Type,
-            En.Website2Value,
+            ColumnName.Website2Type,
+            ColumnName.Website2Value,
+
+            ColumnName.EventType,
+            ColumnName.EventValue
         };
 
 
-        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
+        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new List<Tuple<string, ContactProp?, IList<string>>>
         {
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Name),                       ContactProp.DisplayName,                     new string[]{En.Name}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Name),                       ContactProp.DisplayName,                          new string[]{ColumnName.Name}),
+                                                                                                                                                            
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.GivenName),                  ContactProp.FirstName,                            new string[]{ColumnName.GivenName}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AdditionalName),             ContactProp.MiddleName,                           new string[]{ColumnName.AdditionalName}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.FamilyName),                 ContactProp.LastName,                             new string[]{ColumnName.FamilyName}),
+                                                                                                                                                            
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.YomiName),                   null,                                             new string[]{ColumnName.YomiName}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.GivenNameYomi),              null,                                             new string[]{ColumnName.GivenNameYomi}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AdditionalNameYomi),         null,                                             new string[]{ColumnName.AdditionalNameYomi}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.FamilyNameYomi),             null,                                             new string[]{ColumnName.FamilyNameYomi}),
+                                                                                                                                                            
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.NamePrefix),                 ContactProp.NamePrefix,                           new string[]{ColumnName.NamePrefix}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.NameSuffix),                 ContactProp.NameSuffix,                           new string[]{ColumnName.NameSuffix}),
 
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.GivenName),                  ContactProp.FirstName,                       new string[]{En.GivenName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AdditionalName),             ContactProp.MiddleName,                      new string[]{En.AdditionalName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.FamilyName),                 ContactProp.LastName,                        new string[]{En.FamilyName}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Initials),                   null,                                             new string[]{ColumnName.Initials}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Nickname),                   ContactProp.NickName,                             new string[]{ColumnName.Nickname}),
+            // new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.ShortName),                  null,                                             new string[]{ColumnName.ShortName}),
+            // new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.MaidenName),                 null,                                             new string[]{ColumnName.MaidenName}),
+                                                                                                                                                            
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Birthday),                   ContactProp.BirthDay,                             new string[]{ColumnName.Birthday}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Gender),                     ContactProp.Gender,                               new string[]{ColumnName.Gender}),
+                                                                                                                                                            
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Location),                   null,                                             new string[]{ColumnName.Location}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.BillingInformation),         null,                                             new string[]{ColumnName.BillingInformation}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.DirectoryServer),            null,                                             new string[]{ColumnName.DirectoryServer}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Mileage),                    null,                                             new string[]{ColumnName.Mileage}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Occupation),                 null,                                             new string[]{ColumnName.Occupation}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Hobby),                      null,                                             new string[]{ColumnName.Hobby}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Sensitivity),                null,                                             new string[]{ColumnName.Sensitivity}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Priority),                   null,                                             new string[]{ColumnName.Priority}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Subject),                    null,                                             new string[]{ColumnName.Subject}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Notes),                      ContactProp.Comment,                              new string[]{ColumnName.Notes}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Language),                   null,                                             new string[]{ColumnName.Language}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Photo),                      null,                                             new string[]{ColumnName.Photo }),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.GroupMembership),            null,                                             new string[]{ColumnName.GroupMembership }),
+                                                                                                   
+            // ////////////////////////////////////     bis hierher alle Spalten verwenden, danach optional  //////////////////////////////////////////////////////////////////////////////////////////
 
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.YomiName),                   null,                                        new string[]{En.YomiName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.GivenNameYomi),              null,                                        new string[]{En.GivenNameYomi}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AdditionalNameYomi),         null,                                        new string[]{En.AdditionalNameYomi}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.FamilyNameYomi),             null,                                        new string[]{En.FamilyNameYomi}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email1Type),                 null,                                             new string[]{ColumnName.Email1Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email1Value),                ContactProp.Email1,                               new string[]{ColumnName.Email1Value}),
+                                                                                                                                                            
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email2Type),                 null,                                             new string[]{ColumnName.Email2Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email2Value),                ContactProp.Email2,                               new string[]{ColumnName.Email2Value}),
+           
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Type),                    (ContactProp)AdditionalProp.InstantMessenger1Type,    new string[]{ColumnName.IM1Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Service),                 (ContactProp)AdditionalProp.InstantMessenger1Service, new string[]{ColumnName.IM1Service}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Value),                   ContactProp.InstantMessenger1,                        new string[]{ColumnName.IM1Value}),
 
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.NamePrefix),                 ContactProp.NamePrefix,                      new string[]{En.NamePrefix}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.NameSuffix),                 ContactProp.NameSuffix,                      new string[]{En.NameSuffix}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM2Type),                    (ContactProp)AdditionalProp.InstantMessenger2Type,    new string[]{ColumnName.IM2Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM2Service),                 (ContactProp)AdditionalProp.InstantMessenger2Service, new string[]{ColumnName.IM2Service}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM2Value),                   ContactProp.InstantMessenger2,                        new string[]{ColumnName.IM2Value}),
 
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Initials),                   null,                                        new string[]{En.Initials}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Nickname),                   ContactProp.NickName,                        new string[]{En.Nickname}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.ShortName),                  null,                                        new string[]{En.ShortName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.MaidenName),                 null,                                        new string[]{En.MaidenName}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone1Type),                 (ContactProp)AdditionalProp.Phone1Type,            new string[]{ColumnName.Phone1Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone1Value),                (ContactProp)AdditionalProp.Phone1Value,           new string[]{ColumnName.Phone1Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone2Type),                 (ContactProp)AdditionalProp.Phone2Type,            new string[]{ColumnName.Phone2Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone2Value),                (ContactProp)AdditionalProp.Phone2Value,           new string[]{ColumnName.Phone2Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone3Type),                 (ContactProp)AdditionalProp.Phone3Type,            new string[]{ColumnName.Phone3Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone3Value),                (ContactProp)AdditionalProp.Phone3Value,           new string[]{ColumnName.Phone3Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone4Type),                 (ContactProp)AdditionalProp.Phone4Type,            new string[]{ColumnName.Phone4Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone4Value),                (ContactProp)AdditionalProp.Phone4Value,           new string[]{ColumnName.Phone4Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone5Type),                 (ContactProp)AdditionalProp.Phone5Type,            new string[]{ColumnName.Phone5Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone5Value),                (ContactProp)AdditionalProp.Phone5Value,           new string[]{ColumnName.Phone5Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone6Type),                 (ContactProp)AdditionalProp.Phone6Type,            new string[]{ColumnName.Phone6Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone6Value),                (ContactProp)AdditionalProp.Phone6Value,           new string[]{ColumnName.Phone6Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone7Type),                 (ContactProp)AdditionalProp.Phone7Type,            new string[]{ColumnName.Phone7Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone7Value),                (ContactProp)AdditionalProp.Phone7Value,           new string[]{ColumnName.Phone7Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone8Type),                 (ContactProp)AdditionalProp.Phone8Type,            new string[]{ColumnName.Phone8Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone8Value),                (ContactProp)AdditionalProp.Phone8Value,           new string[]{ColumnName.Phone8Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone9Type),                 (ContactProp)AdditionalProp.Phone9Type,            new string[]{ColumnName.Phone9Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone9Value),                (ContactProp)AdditionalProp.Phone9Value,           new string[]{ColumnName.Phone9Value}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeType),            (ContactProp)AdditionalProp.AddressHomeType,       new string[]{ColumnName.AddressHomeType}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeFormatted),       null,                                              new string[]{ColumnName.AddressHomeFormatted}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeStreet),          ContactProp.AddressHomeStreet,                     new string[]{ColumnName.AddressHomeStreet}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeCity),            ContactProp.AddressHomeCity,                       new string[]{ColumnName.AddressHomeCity}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomePOBox),           null,                                              new string[]{ColumnName.AddressHomePOBox}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeState),           ContactProp.AddressHomeState,                      new string[]{ColumnName.AddressHomeState}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomePostalCode),      ContactProp.AddressHomePostalCode,                 new string[]{ColumnName.AddressHomePostalCode}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeCountry),         ContactProp.AddressHomeCountry,                    new string[]{ColumnName.AddressHomeCountry}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeExtendedAddress), null,                                              new string[]{ColumnName.AddressHomeExtendedAddress}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkType),            (ContactProp)AdditionalProp.AddressWorkType,       new string[]{ColumnName.AddressWorkType}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkFormatted),       null,                                              new string[]{ColumnName.AddressWorkFormatted}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkStreet),          (ContactProp)AdditionalProp.AddressWorkStreet,     new string[]{ColumnName.AddressWorkStreet}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCity),            (ContactProp)AdditionalProp.AddressWorkCity,       new string[]{ColumnName.AddressWorkCity }),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkPOBox),           null,                                              new string[]{ColumnName.AddressWorkPOBox}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkRegion),          (ContactProp)AdditionalProp.AddressWorkState,      new string[]{ColumnName.AddressWorkRegion}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkPostalCode),      (ContactProp)AdditionalProp.AddressWorkPostalCode, new string[]{ColumnName.AddressWorkPostalCode}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCountry),         (ContactProp)AdditionalProp.AddressWorkCountry,    new string[]{ColumnName.AddressWorkCountry}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkExtendedAddress), null,                                              new string[]{ColumnName.AddressWorkExtendedAddress}),
                                                                                                                                                
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Birthday),                   ContactProp.BirthDay,                        new string[]{En.Birthday}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Gender),                     ContactProp.Gender,                          new string[]{En.Gender}),
-        
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Location),                   null,                                        new string[]{En.Location}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.BillingInformation),         null,                                        new string[]{En.BillingInformation}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.DirectoryServer),            null,                                        new string[]{En.DirectoryServer}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Mileage),                    null,                                        new string[]{En.Mileage}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Occupation),                 null,                                        new string[]{En.Occupation}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Hobby),                      null,                                        new string[]{En.Hobby}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Sensitivity),                null,                                        new string[]{En.Sensitivity}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Priority),                   null,                                        new string[]{En.Priority}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Subject),                    null,                                        new string[]{En.Subject}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Notes),                      ContactProp.Comment,                         new string[]{En.Notes}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Language),                   null,                                        new string[]{En.Language}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Photo),                      null,                                        new string[]{En.Photo }),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.GroupMembership),            null,                                        new string[]{En.GroupMembership }),
-                                  
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email1Type),                 null,                                        new string[]{En.Email1Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email1Value),                ContactProp.Email1,                          new string[]{En.Email1Value}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Type),                     null,                                              new string[]{En.Address3Type}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Formatted),                null,                                              new string[]{En.Address3Formatted}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Street),                   null,                                              new string[]{En.Address3Street}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3City),                     null,                                              new string[]{En.Address3City}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3POBox),                    null,                                              new string[]{En.Address3POBox}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Region),                   null,                                              new string[]{En.Address3Region}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3PostalCode),               null,                                              new string[]{En.Address3PostalCode}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Country),                  null,                                              new string[]{En.Address3Country}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3ExtendedAddress),          null,                                              new string[]{En.Address3ExtendedAddress}),
+                                                                                                                                                             
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationType),           null,                                              new string[]{ColumnName.OrganizationType}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationName),           ContactProp.WorkCompany,                           new string[]{ColumnName.OrganizationName}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationYomiName),       null,                                              new string[]{ColumnName.OrganizationYomiName}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationTitle),          ContactProp.WorkPosition,                          new string[]{ColumnName.OrganizationTitle}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationDepartment),     ContactProp.WorkDepartment,                        new string[]{ColumnName.OrganizationDepartment}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationSymbol),         null,                                              new string[]{ColumnName.OrganizationSymbol}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationLocation),       null,                                              new string[]{ColumnName.OrganizationLocation}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationJobDescription), null,                                              new string[]{ColumnName.OrganizationJobDescription}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationType),               (ContactProp)AdditionalProp.RelationType,          new string[]{ColumnName.RelationType}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationValue),              ContactProp.Spouse,                                new string[]{ColumnName.RelationValue}),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website1Type),               (ContactProp)AdditionalProp.Website1Type,          new string[]{ColumnName.Website1Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website1Value),              (ContactProp)AdditionalProp.Website1Value,         new string[]{ColumnName.Website1Value }),
+                                                                                                                                                             
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website2Type),               (ContactProp)AdditionalProp.Website2Type,          new string[]{ColumnName.Website2Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website2Value),              (ContactProp)AdditionalProp.Website2Value,         new string[]{ColumnName.Website2Value}),
+
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventType),                  (ContactProp)AdditionalProp.EventType,             new string[]{ColumnName.EventType}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventValue),                 ContactProp.Anniversary,                           new string[]{ColumnName.EventValue}),
+
+
            
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email2Type),                 null,                                        new string[]{En.Email2Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email2Value),                ContactProp.Email2,                          new string[]{En.Email2Value}),
-           
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM1Type),                    (ContactProp)AdditionalProp.InstantMessenger1Type,    new string[]{En.IM1Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM1Service),                 (ContactProp)AdditionalProp.InstantMessenger1Service, new string[]{En.IM1Service}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM1Value),                   ContactProp.InstantMessenger1,                        new string[]{En.IM1Value}),
+            
 
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM2Type),                    (ContactProp)AdditionalProp.InstantMessenger2Type,    new string[]{En.IM2Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM2Service),                 (ContactProp)AdditionalProp.InstantMessenger2Service, new string[]{En.IM2Service}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.IM2Value),                   ContactProp.InstantMessenger2,                        new string[]{En.IM2Value}),
-
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone1Type),                 (ContactProp)AdditionalProp.Phone1Type,      new string[]{En.Phone1Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone1Value),                (ContactProp)AdditionalProp.Phone1Value,     new string[]{En.Phone1Value}),
-           
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone2Type),                 (ContactProp)AdditionalProp.Phone2Type,      new string[]{En.Phone2Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone2Value),                (ContactProp)AdditionalProp.Phone2Value,     new string[]{En.Phone2Value}),
-          
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone3Type),                 (ContactProp)AdditionalProp.Phone3Type,      new string[]{En.Phone3Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone3Value),                (ContactProp)AdditionalProp.Phone3Value,     new string[]{En.Phone3Value}),
-       
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone4Type),                 (ContactProp)AdditionalProp.Phone4Type,      new string[]{En.Phone4Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone4Value),                (ContactProp)AdditionalProp.Phone4Value,     new string[]{En.Phone4Value}),
-         
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone5Type),                 (ContactProp)AdditionalProp.Phone5Type,      new string[]{En.Phone5Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone5Value),                (ContactProp)AdditionalProp.Phone5Value,     new string[]{En.Phone5Value}),
-           
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone6Type),                 (ContactProp)AdditionalProp.Phone6Type,      new string[]{En.Phone6Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone6Value),                (ContactProp)AdditionalProp.Phone6Value,     new string[]{En.Phone6Value}),
-      
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone7Type),                 (ContactProp)AdditionalProp.Phone7Type,      new string[]{En.Phone7Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone7Value),                (ContactProp)AdditionalProp.Phone7Value,     new string[]{En.Phone7Value}),
-
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone8Type),                 (ContactProp)AdditionalProp.Phone8Type,      new string[]{En.Phone8Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone8Value),                (ContactProp)AdditionalProp.Phone8Value,     new string[]{En.Phone8Value}),
-
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone9Type),                 (ContactProp)AdditionalProp.Phone9Type,      new string[]{En.Phone9Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Phone9Value),                (ContactProp)AdditionalProp.Phone9Value,     new string[]{En.Phone9Value}),
-
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeType),               (ContactProp)AdditionalProp.AddressHomeType,    new string[]{En.AddressHomeType}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeFormatted),          null,                                        new string[]{En.AddressHomeFormatted}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeStreet),             ContactProp.AddressHomeStreet,               new string[]{En.AddressHomeStreet}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeCity),               ContactProp.AddressHomeCity,                 new string[]{En.AddressHomeCity}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomePOBox),              null,                                        new string[]{En.AddressHomePOBox}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeState),             ContactProp.AddressHomeState,                new string[]{En.AddressHomeState}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomePostalCode),         ContactProp.AddressHomePostalCode,           new string[]{En.AddressHomePostalCode}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeCountry),            ContactProp.AddressHomeCountry,              new string[]{En.AddressHomeCountry}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressHomeExtendedAddress),    null,                                        new string[]{En.AddressHomeExtendedAddress}),
-        
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkType),               (ContactProp)AdditionalProp.AddressWorkType,       new string[]{En.AddressWorkType}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkFormatted),          null,                                           new string[]{En.AddressWorkFormatted}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkStreet),             (ContactProp)AdditionalProp.AddressWorkStreet,     new string[]{En.AddressWorkStreet}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkCity),               (ContactProp)AdditionalProp.AddressWorkCity,       new string[]{En.AddressWorkCity }),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkPOBox),              null,                                           new string[]{En.AddressWorkPOBox}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkRegion),             (ContactProp)AdditionalProp.AddressWorkState,     new string[]{En.AddressWorkRegion}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkPostalCode),         (ContactProp)AdditionalProp.AddressWorkPostalCode, new string[]{En.AddressWorkPostalCode}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkCountry),            (ContactProp)AdditionalProp.AddressWorkCountry,    new string[]{En.AddressWorkCountry}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.AddressWorkExtendedAddress),    null,                                           new string[]{En.AddressWorkExtendedAddress}),
-                                                                                                                                               
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Type),               null,                                        new string[]{En.Address3Type}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Formatted),          null,                                        new string[]{En.Address3Formatted}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Street),             null,                                        new string[]{En.Address3Street}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3City),               null,                                        new string[]{En.Address3City}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3POBox),              null,                                        new string[]{En.Address3POBox}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Region),             null,                                        new string[]{En.Address3Region}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3PostalCode),         null,                                        new string[]{En.Address3PostalCode}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Country),            null,                                        new string[]{En.Address3Country}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3ExtendedAddress),    null,                                        new string[]{En.Address3ExtendedAddress}),
-                                                                                                                                               
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationType),           null,                                        new string[]{En.OrganizationType}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationName),           ContactProp.WorkCompany,                     new string[]{En.OrganizationName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationYomiName),       null,                                        new string[]{En.OrganizationYomiName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationTitle),          ContactProp.WorkPosition,                    new string[]{En.OrganizationTitle}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationDepartment),     ContactProp.WorkDepartment,                  new string[]{En.OrganizationDepartment}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationSymbol),         null,                                        new string[]{En.OrganizationSymbol}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationLocation),       null,                                        new string[]{En.OrganizationLocation}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.OrganizationJobDescription), null,                                        new string[]{En.OrganizationJobDescription}),
-                          
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.RelationType),               (ContactProp)AdditionalProp.RelationType,    new string[]{En.RelationType}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.RelationValue),              ContactProp.Spouse,                          new string[]{En.RelationValue}),
-                
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Website1Type),               (ContactProp)AdditionalProp.Website1Type,    new string[]{En.Website1Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Website1Value),              (ContactProp)AdditionalProp.Website1Value,   new string[]{En.Website1Value }),
-                                
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Website2Type),               (ContactProp)AdditionalProp.Website2Type,    new string[]{En.Website2Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Website2Value),              (ContactProp)AdditionalProp.Website2Value,   new string[]{En.Website2Value}),
-
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.EventType),                  (ContactProp)AdditionalProp.EventType,         new string[]{En.EventType}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.EventValue),                 ContactProp.Anniversary,                       new string[]{En.EventValue})
         };
 
     }

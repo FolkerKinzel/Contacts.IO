@@ -21,13 +21,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 
-        protected CsvReader(Encoding? textEncoding)
+        protected CsvReader(Encoding? textEncoding) : base(textEncoding)
         {
-            this.TextEncoding = textEncoding;
+            
         }
 
 
-        protected Encoding? TextEncoding { get; }
+        
 
         protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 

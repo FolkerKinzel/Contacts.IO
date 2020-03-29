@@ -13,6 +13,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             throw new NotImplementedException();
         }
 
-        
+
+
+        protected override SexConverter InitSexConverter() => new OutlookSexConverter();
+
     }
 }

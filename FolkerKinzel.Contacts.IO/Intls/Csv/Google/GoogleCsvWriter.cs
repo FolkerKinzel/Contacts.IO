@@ -98,7 +98,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if(adrWork != null)
                         {
-                            index = contact.AddressHome is null ?  wrapper.IndexOf(nameof(En.AddressHomeType)) : index;
+                            index = contact.AddressHome is null ?  wrapper.IndexOf(nameof(ColumnName.AddressHomeType)) : index;
                             wrapper[index] = PropertyClassType.Work;
                         }
                     }
@@ -109,7 +109,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (adrWork != null)
                         {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(En.AddressHomeStreet)) : index;
+                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeStreet)) : index;
                             wrapper[index] = adrWork.Street;
                         }
                     }
@@ -120,7 +120,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (adrWork != null)
                         {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(En.AddressHomePostalCode)) : index;
+                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomePostalCode)) : index;
                             wrapper[index] = adrWork.PostalCode;
                         }
                     }
@@ -131,7 +131,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (adrWork != null)
                         {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(En.AddressHomeCity)) : index;
+                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeCity)) : index;
                             wrapper[index] = adrWork.City;
                         }
                     }
@@ -142,7 +142,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (adrWork != null)
                         {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(En.AddressHomeState)) : index;
+                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeState)) : index;
                             wrapper[index] = adrWork.State;
                         }
                     }
@@ -153,7 +153,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (adrWork != null)
                         {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(En.AddressHomeCountry)) : index;
+                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeCountry)) : index;
                             wrapper[index] = adrWork.Country;
                         }
                     }
@@ -186,7 +186,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         var webWork = contact.HomePageWork;
                         if (webWork is null) return;
 
-                        int webHomeTypeIndex = wrapper.IndexOf(nameof(En.Website1Type));
+                        int webHomeTypeIndex = wrapper.IndexOf(nameof(ColumnName.Website1Type));
 
                         Debug.Assert(webHomeTypeIndex >= 0);
 
@@ -203,7 +203,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         var webWork = contact.HomePageWork;
                         if (webWork is null) return;
 
-                        int webHomeValueIndex = wrapper.IndexOf(nameof(En.Website1Value));
+                        int webHomeValueIndex = wrapper.IndexOf(nameof(ColumnName.Website1Value));
 
                         Debug.Assert(webHomeValueIndex >= 0);
 
