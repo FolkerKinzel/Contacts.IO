@@ -54,7 +54,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
 
 
-            ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Thunderbird);
+            ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Google);
         }
 
 

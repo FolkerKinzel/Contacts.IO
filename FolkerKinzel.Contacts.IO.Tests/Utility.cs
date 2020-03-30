@@ -35,10 +35,10 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             var pers = new Person
             {
-                BirthDay = new DateTime(1985, 6, 5),
+                BirthDay = new DateTime(1985, 6, 28),
                 Name = new Name { FirstName = "Max", LastName = "Mustermann" },
                 Gender = Sex.Male,
-                Anniversary = new DateTime(2001, 4, 3),
+                Anniversary = new DateTime(2001, 4, 22),
                 NickName = "Maxl",
                 Spouse = "Daisy"
             };
