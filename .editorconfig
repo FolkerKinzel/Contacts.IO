@@ -2,3 +2,5 @@
 
 # CA1303: Literale nicht als lokalisierte Parameter übergeben
 dotnet_diagnostic.CA1303.severity = silent
+
+

@@ -94,11 +94,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
 
 
-        protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, object? value)
+        protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
-            if (value is null) return;
+            var value = (int?)wrapper[index];
 
-            int intValue = (int)value;
+            if (!value.HasValue) return;
 
             var person = contact.Person ?? new Person();
             contact.Person = person;
@@ -112,18 +112,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
                 switch (prop)
                 {
                     case (ContactProp)AdditionalProp.BirthYear:
-                        person.BirthDay = new DateTime(intValue, 1, 1);
+                        person.BirthDay = new DateTime(value.Value, 1, 1);
                         break;
                     case (ContactProp)AdditionalProp.BirthMonth:
                         if (birthDay.HasValue)
                         {
-                            person.BirthDay = new DateTime(birthDay.Value.Year, intValue, birthDay.Value.Day);
+                            person.BirthDay = new DateTime(birthDay.Value.Year, value.Value, birthDay.Value.Day);
                         }
                         break;
                     case (ContactProp)AdditionalProp.BirthDay:
                         if (birthDay.HasValue)
                         {
-                            person.BirthDay = new DateTime(birthDay.Value.Year, birthDay.Value.Month, intValue);
+                            person.BirthDay = new DateTime(birthDay.Value.Year, birthDay.Value.Month, value.Value);
                         }
                         break;
                     default:

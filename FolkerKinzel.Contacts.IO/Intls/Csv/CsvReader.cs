@@ -352,7 +352,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     default:
                         if(prop.HasValue)
                         {
-                            InitContactNonStandardProp(contact, prop.Value, wrapper[i]);
+                            InitContactNonStandardProp(contact, prop.Value, wrapper, i);
                         }
                         break;
                 }
@@ -424,7 +424,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
 
 
-        protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, object? value) { }
+        protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
        
     }
 }

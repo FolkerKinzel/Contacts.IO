@@ -10,5 +10,6 @@
         internal const string Home = "Home";
         internal const string Work = "Work";
         internal const string Other = "Other";
+        internal const string GoogleVoice = "googleVoice";
     }
 }
