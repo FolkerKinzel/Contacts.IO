@@ -254,7 +254,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationTitle),          ContactProp.WorkPosition,                          new string[]{ColumnName.OrganizationTitle}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationDepartment),     ContactProp.WorkDepartment,                        new string[]{ColumnName.OrganizationDepartment}),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationSymbol),         null,                                              new string[]{ColumnName.OrganizationSymbol}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationLocation),       null,                                              new string[]{ColumnName.OrganizationLocation}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationLocation),       ContactProp.WorkOffice,                            new string[]{ColumnName.OrganizationLocation}),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationJobDescription), null,                                              new string[]{ColumnName.OrganizationJobDescription}),
                                                                                                                                                              
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationType),               (ContactProp)AdditionalProp.RelationType,          new string[]{ColumnName.RelationType}),

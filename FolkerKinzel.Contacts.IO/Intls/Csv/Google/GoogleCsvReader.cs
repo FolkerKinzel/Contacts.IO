@@ -40,7 +40,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
-            switch ((AdditionalProp)prop)
+            var addProp = (AdditionalProp)prop;
+
+            switch (addProp)
             {
                 case AdditionalProp.Phone1Type:
                     {
@@ -198,7 +200,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 #endif
                         {
                             contact.HomePageWork = homePagePersonal;
-                            contact.HomePageWork = null;
+                            contact.HomePagePersonal = null;
 
 #if NET40
                             if (!((string?)wrapper[nameof(ColumnName.WebWorkType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? true)
@@ -207,7 +209,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             if (!((string?)wrapper[nameof(ColumnName.WebWorkType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? true)
 #endif
                             {
-                                contact.HomePageWork = homePagePersonal;
+                                contact.HomePagePersonal = homePageWork;
                             }
                         }
                     }
@@ -223,10 +225,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         {
             if (value is null) return;
 
+            phone.IsCell = phone.IsFax = phone.IsWork = false;
+
 #if NET40
             value = value.ToUpperInvariant();
 
-            if (value.Contains("CELL"))
+            if (value.Contains("MOBILE"))
             {
                 phone.IsCell = true;
             }
@@ -241,7 +245,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 phone.IsWork = true;
             }
 #else
-            if (value.Contains("CELL", StringComparison.OrdinalIgnoreCase))
+            if (value.Contains("MOBILE", StringComparison.OrdinalIgnoreCase))
             {
                 phone.IsCell = true;
             }

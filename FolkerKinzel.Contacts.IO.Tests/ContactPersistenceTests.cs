@@ -17,7 +17,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
 
         [TestMethod()]
-        public void ReadCsvTest()
+        public void ReadCsvTest_Thunderbird()
         {
             var conts = ContactPersistence.ReadCsv(TestFiles.ThunderbirdUtf8Csv, CsvTarget.Thunderbird);
 
@@ -30,15 +30,33 @@ namespace FolkerKinzel.Contacts.IO.Tests
         public void WriteCsvTest_Thunderbird()
         {
             
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Test.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Thunderbird.csv");
 
 
             ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Thunderbird);
         }
 
-       
 
-        
+        [TestMethod()]
+        public void ReadCsvTest_Google()
+        {
+            var conts = ContactPersistence.ReadCsv(TestFiles.GoogleCsv, CsvTarget.Google);
+
+            Assert.IsNotNull(conts);
+            Assert.AreEqual(1, conts.Count);
+
+        }
+
+        [TestMethod()]
+        public void WriteCsvTest_Google()
+        {
+
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
+
+
+            ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Thunderbird);
+        }
+
 
         [TestMethod()]
         public void ReadVCardTest()
