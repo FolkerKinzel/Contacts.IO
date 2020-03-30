@@ -16,8 +16,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
 
-        protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => HeaderRow.GetMappingEN();
+        protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
+        {
+            var mapping = HeaderRow.GetMapping();
 
+            mapping.Add(
+
+            // Dummy-Property, die am Ende von <see cref="CsvRecordWrapper"/> eingefügt wird, um beim Lesen von CSV am Ende der Initialisierung von <see cref="Contact"/> 
+            // AddressHome und AddressWork sowie HomePagePersonal und HomePageWork ggf. zu vertauschen:
+            new Tuple<string, ContactProp?, IList<string>>(nameof(AdditionalProp.Swap), (ContactProp)AdditionalProp.Swap, EmptyStringArray));
+
+            return mapping;
+        }
 
         protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)
         {
@@ -93,133 +103,25 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                     wrapper[index] = contact.AddressHome is null ? null : PropertyClassType.Home;
                     break;
                 case AdditionalProp.AddressWorkType:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if(adrWork != null)
-                        {
-                            index = contact.AddressHome is null ?  wrapper.IndexOf(nameof(ColumnName.AddressHomeType)) : index;
-                            wrapper[index] = PropertyClassType.Work;
-                        }
-                    }
-                    break;
-                case AdditionalProp.AddressWorkStreet:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if (adrWork != null)
-                        {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeStreet)) : index;
-                            wrapper[index] = adrWork.Street;
-                        }
-                    }
-                    break;
-                case AdditionalProp.AddressWorkPostalCode:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if (adrWork != null)
-                        {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomePostalCode)) : index;
-                            wrapper[index] = adrWork.PostalCode;
-                        }
-                    }
-                    break;
-                case AdditionalProp.AddressWorkCity:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if (adrWork != null)
-                        {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeCity)) : index;
-                            wrapper[index] = adrWork.City;
-                        }
-                    }
-                    break;
-                case AdditionalProp.AddressWorkState:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if (adrWork != null)
-                        {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeState)) : index;
-                            wrapper[index] = adrWork.State;
-                        }
-                    }
-                    break;
-                case AdditionalProp.AddressWorkCountry:
-                    {
-                        var adrWork = contact.Work?.AddressWork;
-
-                        if (adrWork != null)
-                        {
-                            index = contact.AddressHome is null ? wrapper.IndexOf(nameof(ColumnName.AddressHomeCountry)) : index;
-                            wrapper[index] = adrWork.Country;
-                        }
-                    }
+                    wrapper[index] = contact.Work?.AddressWork is null ? null : PropertyClassType.Work;
                     break;
                 case AdditionalProp.RelationType:
-                    var spouse = contact.Person?.Spouse;
-                    if(spouse != null)
+                    if (contact.Person?.Spouse != null)
                     {
-                        wrapper[index] = spouse;
+                        wrapper[index] = RelationType.Spouse;
                     }
                     break;
-                case AdditionalProp.Website1Type:
-                    {
-                        var webHome = contact.HomePagePersonal;
-                        if (webHome is null) return;
-
-                        wrapper[index] = PropertyClassType.Home;
-                    }
+                case AdditionalProp.WebHomeType:
+                    wrapper[index] = PropertyClassType.Home;
                     break;
-                case AdditionalProp.Website1Value:
-                    {
-                        var webHome = contact.HomePagePersonal;
-                        if (webHome is null) return;
-
-                        wrapper[index] = webHome;
-                    }
-                    break;
-                case AdditionalProp.Website2Type:
-                    {
-                        var webWork = contact.HomePageWork;
-                        if (webWork is null) return;
-
-                        int webHomeTypeIndex = wrapper.IndexOf(nameof(ColumnName.Website1Type));
-
-                        Debug.Assert(webHomeTypeIndex >= 0);
-
-                        if(wrapper[webHomeTypeIndex] is null)
-                        {
-                            index = webHomeTypeIndex;
-                        }
-
-                        wrapper[index] = PropertyClassType.Work;
-                    }
-                    break;
-                case AdditionalProp.Website2Value:
-                    {
-                        var webWork = contact.HomePageWork;
-                        if (webWork is null) return;
-
-                        int webHomeValueIndex = wrapper.IndexOf(nameof(ColumnName.Website1Value));
-
-                        Debug.Assert(webHomeValueIndex >= 0);
-
-                        if (wrapper[webHomeValueIndex] is null)
-                        {
-                            index = webHomeValueIndex;
-                        }
-
-                        wrapper[index] = webWork;
-                    }
+                case AdditionalProp.WebWorkType:
+                    wrapper[index] = PropertyClassType.Work;
                     break;
                 case AdditionalProp.EventType:
                     {
                         var anniversary = contact.Person?.Anniversary;
 
-                        if(anniversary.HasValue)
+                        if (anniversary.HasValue)
                         {
                             wrapper[index] = EventType.Anniversary;
                         }
@@ -237,12 +139,55 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.InstantMessenger2Service:
                     wrapper[index] = GetIMService(contact.InstantMessengerHandles?.ElementAtOrDefault(1));
                     break;
+                case AdditionalProp.Swap:
+                    // Dummy-Property ohne eigene Daten. Dient dazu AM ENDE der Initialsierung von CSVRecordWrapper
+                    // AddressWork AddressHome zuzuweisen, wenn AddressHome null war. (Google unterscheidet nur zwischen
+                    // Address 1 und Address 2 und weist diesen den Typ [Home | Work] explizit zu.)
+                    // Das gleiche gilt für HomePagePersonal und HomePageWork 
 
+                    if (contact.AddressHome is null)
+                    {
+                        var adrWorkType = wrapper[nameof(ColumnName.AddressWorkType)];
+
+                        if (adrWorkType != null)
+                        {
+                            wrapper[nameof(ColumnName.AddressHomeType)] = adrWorkType;
+                            wrapper[nameof(ColumnName.AddressWorkType)] = null;
+
+                            wrapper[nameof(ColumnName.AddressHomeStreet)] = wrapper[nameof(ColumnName.AddressWorkStreet)];
+                            wrapper[nameof(ColumnName.AddressWorkStreet)] = null;
+
+                            wrapper[nameof(ColumnName.AddressHomeCity)] = wrapper[nameof(ColumnName.AddressWorkCity)];
+                            wrapper[nameof(ColumnName.AddressWorkCity)] = null;
+
+                            wrapper[nameof(ColumnName.AddressHomePostalCode)] = wrapper[nameof(ColumnName.AddressWorkPostalCode)];
+                            wrapper[nameof(ColumnName.AddressWorkPostalCode)] = null;
+
+                            wrapper[nameof(ColumnName.AddressHomeState)] = wrapper[nameof(ColumnName.AddressWorkState)];
+                            wrapper[nameof(ColumnName.AddressWorkState)] = null;
+
+                            wrapper[nameof(ColumnName.AddressHomeCountry)] = wrapper[nameof(ColumnName.AddressWorkCountry)];
+                            wrapper[nameof(ColumnName.AddressWorkCountry)] = null;
+                        }
+                    }
+
+                    if (contact.HomePagePersonal is null)
+                    {
+                        var webWorkType = wrapper[nameof(ColumnName.WebWorkType)];
+
+                        if(webWorkType != null)
+                        {
+                            wrapper[nameof(ColumnName.WebHomeType)] = webWorkType;
+                            wrapper[nameof(ColumnName.WebWorkType)] = null;
+
+                            wrapper[nameof(ColumnName.WebHomeValue)] = wrapper[nameof(ColumnName.WebWorkValue)];
+                            wrapper[nameof(ColumnName.WebWorkValue)] = null;
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
-
-
         }
 
 
@@ -298,7 +243,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             //{
             //    this.BuildProperty(VCard.PropKeys.NonStandard.InstantMessenger.X_GADUGADU, prop, i == 0 && prop.Parameters.Preference < 100);
             //}
-            else if (val.StartsWith("gtalk:", StringComparison.OrdinalIgnoreCase) ||  val.StartsWith("com.google.hangouts:", StringComparison.OrdinalIgnoreCase))
+            else if (val.StartsWith("gtalk:", StringComparison.OrdinalIgnoreCase) || val.StartsWith("com.google.hangouts:", StringComparison.OrdinalIgnoreCase))
             {
                 return IMType.GoogleTalk;
             }
@@ -336,7 +281,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 return IMType.Qq;
             }
 #else
-            else if(val.Contains("qq", StringComparison.OrdinalIgnoreCase))
+            else if (val.Contains("qq", StringComparison.OrdinalIgnoreCase))
             {
                 return IMType.Qq;
             }

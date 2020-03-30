@@ -96,7 +96,7 @@
         internal const string AddressWorkStreet = "Address 2 - Street";
         internal const string AddressWorkCity = "Address 2 - City";
         internal const string AddressWorkPOBox = "Address 2 - PO Box";
-        internal const string AddressWorkRegion = "Address 2 - Region";
+        internal const string AddressWorkState = "Address 2 - Region";
         internal const string AddressWorkPostalCode = "Address 2 - Postal Code";
         internal const string AddressWorkCountry = "Address 2 - Country";
         internal const string AddressWorkExtendedAddress = "Address 2 - Extended Address";
@@ -123,11 +123,11 @@
         internal const string RelationType = "Relation 1 - Type";
         internal const string RelationValue = "Relation 1 - Value";
 
-        internal const string Website1Type = "Website 1 - Type";
-        internal const string Website1Value = "Website 1 - Value";
+        internal const string WebHomeType = "Website 1 - Type";
+        internal const string WebHomeValue = "Website 1 - Value";
 
-        internal const string Website2Type = "Website 2 - Type";
-        internal const string Website2Value = "Website 2 - Value";
+        internal const string WebWorkType = "Website 2 - Type";
+        internal const string WebWorkValue = "Website 2 - Value";
 
         internal const string EventType = "Event 1 - Type";
         internal const string EventValue = "Event 1 - Value";

@@ -34,11 +34,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         AddressHomeType,
 
         AddressWorkType,
-        AddressWorkStreet,
-        AddressWorkCity,
-        AddressWorkState,
-        AddressWorkPostalCode,
-        AddressWorkCountry,
+        //AddressWorkStreet,
+        //AddressWorkCity,
+        //AddressWorkState,
+        //AddressWorkPostalCode,
+        //AddressWorkCountry,
 
         InstantMessenger1Type,
         InstantMessenger1Service,
@@ -48,11 +48,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         RelationType,
 
-        Website1Type,
-        Website1Value,
+        WebHomeType,
+        //WebHomeValue,
 
-        Website2Type,
-        Website2Value,
+        WebWorkType,
+        //WebWorkValue,
 
         EventType,
 
@@ -60,7 +60,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         /// Dummy-Property, die am Ende von <see cref="CsvRecordWrapper"/> eingefügt wird, um beim Lesen von CSV am
         /// Ende der Initialisierung von <see cref="Contact"/> AddressHome und AddressWork ggf. zu vertauschen.
         /// </summary>
-        SwapAddresses
+        Swap
         
     }
 }

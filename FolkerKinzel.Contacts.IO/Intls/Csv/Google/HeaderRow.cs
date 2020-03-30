@@ -99,7 +99,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             ColumnName.AddressWorkStreet,
             ColumnName.AddressWorkCity,
             ColumnName.AddressWorkPOBox,
-            ColumnName.AddressWorkRegion,
+            ColumnName.AddressWorkState,
             ColumnName.AddressWorkPostalCode,
             ColumnName.AddressWorkCountry,
             ColumnName.AddressWorkExtendedAddress,
@@ -126,18 +126,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             ColumnName.RelationType,
             ColumnName.RelationValue,
 
-            ColumnName.Website1Type,
-            ColumnName.Website1Value,
+            ColumnName.WebHomeType,
+            ColumnName.WebHomeValue,
 
-            ColumnName.Website2Type,
-            ColumnName.Website2Value,
+            ColumnName.WebWorkType,
+            ColumnName.WebWorkValue,
 
             ColumnName.EventType,
             ColumnName.EventValue
         };
 
 
-        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new List<Tuple<string, ContactProp?, IList<string>>>
+        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMapping() => new List<Tuple<string, ContactProp?, IList<string>>>
         {
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Name),                       ContactProp.DisplayName,                          new string[]{ColumnName.Name}),
                                                                                                                                                             
@@ -230,23 +230,23 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                                                                                                                                                              
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkType),            (ContactProp)AdditionalProp.AddressWorkType,       new string[]{ColumnName.AddressWorkType}),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkFormatted),       null,                                              new string[]{ColumnName.AddressWorkFormatted}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkStreet),          (ContactProp)AdditionalProp.AddressWorkStreet,     new string[]{ColumnName.AddressWorkStreet}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCity),            (ContactProp)AdditionalProp.AddressWorkCity,       new string[]{ColumnName.AddressWorkCity }),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkStreet),          ContactProp.AddressWorkStreet,                     new string[]{ColumnName.AddressWorkStreet}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCity),            ContactProp.AddressWorkCity,                       new string[]{ColumnName.AddressWorkCity }),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkPOBox),           null,                                              new string[]{ColumnName.AddressWorkPOBox}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkRegion),          (ContactProp)AdditionalProp.AddressWorkState,      new string[]{ColumnName.AddressWorkRegion}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkPostalCode),      (ContactProp)AdditionalProp.AddressWorkPostalCode, new string[]{ColumnName.AddressWorkPostalCode}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCountry),         (ContactProp)AdditionalProp.AddressWorkCountry,    new string[]{ColumnName.AddressWorkCountry}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkState),           ContactProp.AddressWorkState,                      new string[]{ColumnName.AddressWorkState}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkPostalCode),      ContactProp.AddressWorkPostalCode,                 new string[]{ColumnName.AddressWorkPostalCode}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCountry),         ContactProp.AddressWorkCountry,                    new string[]{ColumnName.AddressWorkCountry}),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkExtendedAddress), null,                                              new string[]{ColumnName.AddressWorkExtendedAddress}),
                                                                                                                                                
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Type),                     null,                                              new string[]{En.Address3Type}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Formatted),                null,                                              new string[]{En.Address3Formatted}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Street),                   null,                                              new string[]{En.Address3Street}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3City),                     null,                                              new string[]{En.Address3City}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3POBox),                    null,                                              new string[]{En.Address3POBox}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Region),                   null,                                              new string[]{En.Address3Region}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3PostalCode),               null,                                              new string[]{En.Address3PostalCode}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Country),                  null,                                              new string[]{En.Address3Country}),
-            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3ExtendedAddress),          null,                                              new string[]{En.Address3ExtendedAddress}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Type),                       null,                                              new string[]{En.Address3Type}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Formatted),                  null,                                              new string[]{En.Address3Formatted}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Street),                     null,                                              new string[]{En.Address3Street}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3City),                       null,                                              new string[]{En.Address3City}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3POBox),                      null,                                              new string[]{En.Address3POBox}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Region),                     null,                                              new string[]{En.Address3Region}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3PostalCode),                 null,                                              new string[]{En.Address3PostalCode}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3Country),                    null,                                              new string[]{En.Address3Country}),
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(En.Address3ExtendedAddress),            null,                                              new string[]{En.Address3ExtendedAddress}),
                                                                                                                                                              
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationType),           null,                                              new string[]{ColumnName.OrganizationType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.OrganizationName),           ContactProp.WorkCompany,                           new string[]{ColumnName.OrganizationName}),
@@ -260,11 +260,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationType),               (ContactProp)AdditionalProp.RelationType,          new string[]{ColumnName.RelationType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationValue),              ContactProp.Spouse,                                new string[]{ColumnName.RelationValue}),
                                                                                                                                                              
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website1Type),               (ContactProp)AdditionalProp.Website1Type,          new string[]{ColumnName.Website1Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website1Value),              (ContactProp)AdditionalProp.Website1Value,         new string[]{ColumnName.Website1Value }),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebHomeType),                (ContactProp)AdditionalProp.WebHomeType,           new string[]{ColumnName.WebHomeType}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebHomeValue),               ContactProp.HomePagePersonal,                      new string[]{ColumnName.WebHomeValue }),
                                                                                                                                                              
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website2Type),               (ContactProp)AdditionalProp.Website2Type,          new string[]{ColumnName.Website2Type}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Website2Value),              (ContactProp)AdditionalProp.Website2Value,         new string[]{ColumnName.Website2Value}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebWorkType),                (ContactProp)AdditionalProp.WebWorkType,           new string[]{ColumnName.WebWorkType}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebWorkValue),               ContactProp.HomePageWork,                          new string[]{ColumnName.WebWorkValue}),
 
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventType),                  (ContactProp)AdditionalProp.EventType,             new string[]{ColumnName.EventType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventValue),                 ContactProp.Anniversary,                           new string[]{ColumnName.EventValue}),

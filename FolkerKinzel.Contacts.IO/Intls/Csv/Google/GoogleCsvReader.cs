@@ -13,13 +13,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
-            var mapping = HeaderRow.GetMappingEN();
+            var mapping = HeaderRow.GetMapping();
 
             mapping.Add(
 
             // Dummy-Property, die am Ende von <see cref="CsvRecordWrapper"/> eingefügt wird, um beim Lesen von CSV am Ende der Initialisierung von <see cref="Contact"/> 
             // AddressHome und AddressWork ggf. zu vertauschen:
-            new Tuple<string, ContactProp?, IList<string>>("SwapAddresses", (ContactProp)AdditionalProp.SwapAddresses, EmptyStringArray));
+            new Tuple<string, ContactProp?, IList<string>>(nameof(AdditionalProp.Swap), (ContactProp)AdditionalProp.Swap, EmptyStringArray));
 
             return mapping;
         }
@@ -40,7 +40,69 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, object? value)
         {
-            throw new NotImplementedException();
+            switch ((AdditionalProp)prop)
+            {
+                case AdditionalProp.Phone1Type:
+                    break;
+                case AdditionalProp.Phone1Value:
+                    break;
+                case AdditionalProp.Phone2Type:
+                    break;
+                case AdditionalProp.Phone2Value:
+                    break;
+                case AdditionalProp.Phone3Type:
+                    break;
+                case AdditionalProp.Phone3Value:
+                    break;
+                case AdditionalProp.Phone4Type:
+                    break;
+                case AdditionalProp.Phone4Value:
+                    break;
+                case AdditionalProp.Phone5Type:
+                    break;
+                case AdditionalProp.Phone5Value:
+                    break;
+                case AdditionalProp.Phone6Type:
+                    break;
+                case AdditionalProp.Phone6Value:
+                    break;
+                case AdditionalProp.Phone7Type:
+                    break;
+                case AdditionalProp.Phone7Value:
+                    break;
+                case AdditionalProp.Phone8Type:
+                    break;
+                case AdditionalProp.Phone8Value:
+                    break;
+                case AdditionalProp.Phone9Type:
+                    break;
+                case AdditionalProp.Phone9Value:
+                    break;
+                case AdditionalProp.AddressHomeType:
+                    break;
+                case AdditionalProp.AddressWorkType:
+                    break;
+                case AdditionalProp.InstantMessenger1Type:
+                    break;
+                case AdditionalProp.InstantMessenger1Service:
+                    break;
+                case AdditionalProp.InstantMessenger2Type:
+                    break;
+                case AdditionalProp.InstantMessenger2Service:
+                    break;
+                case AdditionalProp.RelationType:
+                    break;
+                case AdditionalProp.WebHomeType:
+                    break;
+                case AdditionalProp.WebWorkType:
+                    break;
+                case AdditionalProp.EventType:
+                    break;
+                case AdditionalProp.Swap:
+                    break;
+                default:
+                    break;
+            }
         }
 
 
