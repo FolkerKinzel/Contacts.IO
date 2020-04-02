@@ -19,11 +19,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
         /// Existiert die Datei schon, wird sie überschrieben.</param>
         /// <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
-        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        internal static void Write(Contact? contact, string fileName, VCardVersion version)
+        internal static void Write(Contact contact, string fileName, VCardVersion version)
         {
+            if(contact is null)
+            {
+                throw new ArgumentNullException(nameof(contact));
+            }
+
             ToVCard(contact)?.Save(fileName, (VC::Enums.VCdVersion)version);
         }
 

@@ -23,15 +23,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         protected CsvReader(Encoding? textEncoding) : base(textEncoding)
         {
-            
+
         }
 
 
-        
+
 
         protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 
-       
+
 
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         public List<Contact> Read(string fileName)
         {
             var list = new List<Contact>();
-    
+
             Analyzer.Analyze(fileName);
 
             if (!Analyzer.HasHeader)
@@ -73,7 +73,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     list.Add(InitContact(wrapper, mapping));
                 }
             }
-            catch(InvalidCsvException e)
+            catch (InvalidCsvException e)
             {
                 throw new IOException(e.Message, e);
             }
@@ -138,80 +138,91 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             for (int i = 0; i < wrapper.Count; i++)
             {
+                var val = wrapper[i];
+
+                if (val is null) continue;
+
                 ContactProp? prop = mapping[i].Item2;
-#nullable disable
+
                 switch (prop)
                 {
                     case ContactProp.DisplayName:
-                        contact.DisplayName = (string)wrapper[i];
+                        contact.DisplayName = (string)val;
                         break;
                     case ContactProp.FirstName:
                         InitName();
-                        name.FirstName = (string)wrapper[i];
+                        name!.FirstName = (string)val;
                         break;
                     case ContactProp.MiddleName:
                         InitName();
-                        name.MiddleName = (string)wrapper[i];
+                        name!.MiddleName = (string)val;
                         break;
                     case ContactProp.LastName:
                         InitName();
-                        name.LastName = (string)wrapper[i];
+                        name!.LastName = (string)val;
                         break;
                     case ContactProp.NamePrefix:
                         InitName();
-                        name.Prefix = (string)wrapper[i];
+                        name!.Prefix = (string)val;
                         break;
                     case ContactProp.NameSuffix:
                         InitName();
-                        name.Suffix = (string)wrapper[i];
+                        name!.Suffix = (string)val;
                         break;
                     case ContactProp.NickName:
                         InitPerson();
-                        person.NickName = (string)wrapper[i];
+                        person!.NickName = (string)val;
                         break;
                     case ContactProp.Gender:
-                        InitPerson();
-                        person.Gender = (Sex)wrapper[i];
+                        {
+                            var sex = (Sex)val!;
+
+                            if (sex != default)
+                            {
+                                InitPerson();
+                                person!.Gender = sex;
+                            }
+                        }
                         break;
                     case ContactProp.BirthDay:
                         InitPerson();
-                        person.BirthDay = (DateTime?)wrapper[i];
+                        person!.BirthDay = (DateTime)val;
                         break;
                     case ContactProp.Spouse:
                         InitPerson();
-                        person.Spouse = (string)wrapper[i];
+                        person!.Spouse = (string)val;
                         break;
                     case ContactProp.Anniversary:
                         InitPerson();
-                        person.Anniversary = (DateTime?)wrapper[i];
+                        person!.Anniversary = (DateTime)val;
                         break;
                     case ContactProp.AddressHomeStreet:
                         InitAddressHome();
-                        addressHome.Street = (string)wrapper[i];
+                        addressHome!.Street = (string)val;
                         break;
                     case ContactProp.AddressHomePostalCode:
                         InitAddressHome();
-                        addressHome.PostalCode = (string)wrapper[i];
+                        addressHome!.PostalCode = (string)val;
                         break;
                     case ContactProp.AddressHomeCity:
                         InitAddressHome();
-                        addressHome.City = (string)wrapper[i];
+                        addressHome!.City = (string)val;
                         break;
                     case ContactProp.AddressHomeState:
                         InitAddressHome();
-                        addressHome.State = (string)wrapper[i];
+                        addressHome!.State = (string)val;
                         break;
                     case ContactProp.AddressHomeCountry:
                         InitAddressHome();
-                        addressHome.Country = (string)wrapper[i];
+                        addressHome!.Country = (string)val;
                         break;
                     case ContactProp.Email1:
                         InitEmails();
-                        emails[EMAIL_1] = (string)wrapper[i];
+                        emails![EMAIL_1] = (string)val;
                         break;
                     case ContactProp.Email2:
                         InitEmails();
-                        emails[EMAIL_2] = (string)wrapper[i];
+                        emails![EMAIL_2] = (string)val;
                         break;
                     //case ContactProp.Email3:
                     //    InitEmails();
@@ -231,39 +242,39 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     //    break;
                     case ContactProp.PhoneHome:
                         InitPhones();
-                        phones[PHONE_HOME] = new PhoneNumber((string)wrapper[i]);
+                        phones![PHONE_HOME] = new PhoneNumber((string)val);
                         break;
                     case ContactProp.PhoneWork:
                         InitPhones();
-                        phones[PHONE_WORK] = new PhoneNumber((string)wrapper[i], isWork: true);
+                        phones![PHONE_WORK] = new PhoneNumber((string)val, isWork: true);
                         break;
                     case ContactProp.FaxHome:
                         InitPhones();
-                        phones[FAX_HOME] = new PhoneNumber((string)wrapper[i], isFax: true);
+                        phones![FAX_HOME] = new PhoneNumber((string)val, isFax: true);
                         break;
                     case ContactProp.FaxWork:
                         InitPhones();
-                        phones[FAX_WORK] = new PhoneNumber((string)wrapper[i], isWork: true, isFax: true);
+                        phones![FAX_WORK] = new PhoneNumber((string)val, isWork: true, isFax: true);
                         break;
                     case ContactProp.Cell:
                         InitPhones();
-                        phones[CELL] = new PhoneNumber((string)wrapper[i], isCell: true);
+                        phones![CELL] = new PhoneNumber((string)val, isCell: true);
                         break;
                     case ContactProp.CellWork:
                         InitPhones();
-                        phones[CELL_WORK] = new PhoneNumber((string)wrapper[i], isWork: true, isCell: true);
+                        phones![CELL_WORK] = new PhoneNumber((string)val, isWork: true, isCell: true);
                         break;
                     case ContactProp.PhoneOther1:
                         InitPhones();
-                        phones[PHONE_OTHER_1] = new PhoneNumber((string)wrapper[i]);
+                        phones![PHONE_OTHER_1] = new PhoneNumber((string)val);
                         break;
                     case ContactProp.PhoneOther2:
                         InitPhones();
-                        phones[PHONE_OTHER_2] = new PhoneNumber((string)wrapper[i]);
+                        phones![PHONE_OTHER_2] = new PhoneNumber((string)val);
                         break;
                     case ContactProp.PhoneOther3:
                         InitPhones();
-                        phones[PHONE_OTHER_3] = new PhoneNumber((string)wrapper[i]);
+                        phones![PHONE_OTHER_3] = new PhoneNumber((string)val);
                         break;
                     //case ContactProp.PhoneOther4:
                     //    InitPhones();
@@ -279,11 +290,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     //    break;
                     case ContactProp.InstantMessenger1:
                         InitInstMessengers();
-                        instMessengers[INST_MESSENGER_1] = (string)wrapper[i];
+                        instMessengers![INST_MESSENGER_1] = (string)val;
                         break;
                     case ContactProp.InstantMessenger2:
                         InitInstMessengers();
-                        instMessengers[INST_MESSENGER_2] = (string)wrapper[i];
+                        instMessengers![INST_MESSENGER_2] = (string)val;
                         break;
                     //case ContactProp.InstantMessenger3:
                     //    InitInstMessengers();
@@ -302,55 +313,55 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     //    instMessengers[INST_MESSENGER_6] = (string)wrapper[i];
                     //    break;
                     case ContactProp.HomePagePersonal:
-                        contact.HomePagePersonal = (string)wrapper[i];
+                        contact.HomePagePersonal = (string?)val;
                         break;
                     case ContactProp.HomePageWork:
-                        contact.HomePageWork = (string)wrapper[i];
+                        contact.HomePageWork = (string?)val;
                         break;
                     case ContactProp.WorkCompany:
                         InitWork();
-                        work.Company = (string)wrapper[i];
+                        work!.Company = (string)val;
                         break;
                     case ContactProp.WorkDepartment:
                         InitWork();
-                        work.Department = (string)wrapper[i];
+                        work!.Department = (string)val;
                         break;
                     case ContactProp.WorkOffice:
                         InitWork();
-                        work.Office = (string)wrapper[i];
+                        work!.Office = (string)val;
                         break;
                     case ContactProp.WorkPosition:
                         InitWork();
-                        work.Position = (string)wrapper[i];
+                        work!.Position = (string)val;
                         break;
                     case ContactProp.AddressWorkStreet:
                         InitAddressWork();
-                        addressWork.Street = (string)wrapper[i];
+                        addressWork!.Street = (string)val;
                         break;
                     case ContactProp.AddressWorkPostalCode:
                         InitAddressWork();
-                        addressWork.PostalCode = (string)wrapper[i];
+                        addressWork!.PostalCode = (string)val;
                         break;
                     case ContactProp.AddressWorkCity:
                         InitAddressWork();
-                        addressWork.City = (string)wrapper[i];
+                        addressWork!.City = (string)val;
                         break;
                     case ContactProp.AddressWorkState:
                         InitAddressWork();
-                        addressWork.State = (string)wrapper[i];
+                        addressWork!.State = (string)val;
                         break;
                     case ContactProp.AddressWorkCountry:
                         InitAddressWork();
-                        addressWork.Country = (string)wrapper[i];
+                        addressWork!.Country = (string)val;
                         break;
                     case ContactProp.Comment:
-                        contact.Comment = (string)wrapper[i];
+                        contact.Comment = (string)val;
                         break;
                     case ContactProp.TimeStamp:
-                        contact.TimeStamp = (DateTime)wrapper[i];
+                        contact.TimeStamp = (DateTime)val;
                         break;
                     default:
-                        if(prop.HasValue)
+                        if (prop.HasValue)
                         {
                             InitContactNonStandardProp(contact, prop.Value, wrapper, i);
                         }
@@ -376,7 +387,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 InitPerson();
 
                 name ??= new Name();
-                person.Name = name;
+                person!.Name = name;
             }
 
             void InitAddressHome()
@@ -417,14 +428,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 phones ??= new PhoneNumber[PHONES_LENGTH];
                 contact.PhoneNumbers = phones;
             }
-
-#nullable enable
         }
 
 
 
 
         protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
-       
+
     }
 }

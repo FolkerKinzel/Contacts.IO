@@ -8,8 +8,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
     /// </summary>
     internal class SexConverter : ICsvTypeConverter
     {
-        
-
         public object? FallbackValue => Sex.Unspecified;
 
         public Type Type => typeof(Sex);

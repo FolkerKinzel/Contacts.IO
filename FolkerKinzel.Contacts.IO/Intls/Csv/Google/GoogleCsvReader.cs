@@ -1,7 +1,9 @@
 ﻿using FolkerKinzel.CsvTools.Helpers;
+using FolkerKinzel.CsvTools.Helpers.Converters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
@@ -9,7 +11,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
     internal class GoogleCsvReader : CsvReader
     {
         internal GoogleCsvReader(Encoding? textEncoding) : base(textEncoding) { }
-
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
@@ -29,11 +30,23 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         {
             Debug.Assert(tpl.Item2.HasValue);
 
-            wrapper.AddProperty(
-                        new CsvProperty(
-                            tpl.Item1,
-                            tpl.Item3,
-                            this.StringConverter));
+
+            if (tpl.Item2 == (ContactProp)AdditionalProp.Swap)
+            {
+                wrapper.AddProperty(
+                            new CsvProperty(
+                                tpl.Item1,
+                                tpl.Item3,
+                                CsvConverterFactory.CreateConverter(CsvTypeCode.String, false)));
+            }
+            else
+            {
+                wrapper.AddProperty(
+                            new CsvProperty(
+                                tpl.Item1,
+                                tpl.Item3,
+                                this.StringConverter));
+            }
         }
 
 
@@ -63,9 +76,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Type:
                 case AdditionalProp.Phone9Type:
                     {
-                        var phoneNumbers = (List<PhoneNumber>)contact.PhoneNumbers!;
-                        Debug.Assert(phoneNumbers != null);
-                        Debug.Assert(phoneNumbers.Count >= 1);
+                        var phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        contact.PhoneNumbers = phoneNumbers;
+
+                        if (phoneNumbers.Count == 0)
+                        {
+                            phoneNumbers.Add(new PhoneNumber());
+                        }
 
 #if NET40
                         var lastNumber = phoneNumbers[phoneNumbers.Count - 1];
@@ -97,9 +114,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Value:
                 case AdditionalProp.Phone9Value:
                     {
-                        var phoneNumbers = (List<PhoneNumber>)contact.PhoneNumbers!;
-                        Debug.Assert(phoneNumbers != null);
-                        Debug.Assert(phoneNumbers.Count >= 1);
+                        var phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        contact.PhoneNumbers = phoneNumbers;
+
+                        if (phoneNumbers.Count == 0)
+                        {
+                            phoneNumbers.Add(new PhoneNumber());
+                        }
+
 #if NET40
                         phoneNumbers[phoneNumbers.Count - 1].Value = (string?)wrapper[index];
 #else
@@ -130,13 +152,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Swap:
                     {
                         // Swap Addresses:
-
-                        Debug.Assert(contact.AddressHome != null);
-                        Debug.Assert(contact.Work != null);
-                        Debug.Assert(contact.Work.AddressWork != null);
-
-                        Address addrHome = contact.AddressHome;
-                        Address addrWork = contact.Work.AddressWork;
+                        Address? addrHome = contact.AddressHome;
+                        Address? addrWork = contact.Work?.AddressWork;
 
 #if NET40
                         if(((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? false)
@@ -145,7 +162,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         if (((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? false)
 #endif
                         {
-                            contact.Work.AddressWork = addrHome;
+                            var work = contact.Work ?? new Work();
+                            contact.Work = work;
+
+
+                            work.AddressWork = addrHome;
                             contact.AddressHome = null;
 
 #if NET40
@@ -159,33 +180,34 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             }
                         }
 
-                        // check RelationType
+                        var person = contact.Person;
 
+                        if (person != null)
+                        {
+                            // check RelationType
 #if NET40
-                        if(!((string?)wrapper[nameof(ColumnName.RelationType)])?.ToUpperInvariant().Contains(RelationType.SpouseUpperCase) ?? true)
+                            if(!((string?)wrapper[nameof(ColumnName.RelationType)])?.ToUpperInvariant().Contains(RelationType.SpouseUpperCase) ?? true)
 
 #else
-                        if (!((string?)wrapper[nameof(ColumnName.RelationType)])?.Contains(RelationType.Spouse, StringComparison.OrdinalIgnoreCase) ?? true)
+                            if (!((string?)wrapper[nameof(ColumnName.RelationType)])?.Contains(RelationType.Spouse, StringComparison.OrdinalIgnoreCase) ?? true)
 #endif
-                        {
-                            Debug.Assert(contact.Person != null);
+                            {
+                                person.Spouse = null;
+                            }
 
-                            contact.Person.Spouse = null;
-                        }
-
-                        // check Anniversary
-
+                            // check Anniversary
 #if NET40
-                        if(!((string?)wrapper[nameof(ColumnName.EventType)])?.ToUpperInvariant().Contains(EventType.AnniversaryUpperCase) ?? true)
+                            if(!((string?)wrapper[nameof(ColumnName.EventType)])?.ToUpperInvariant().Contains(EventType.AnniversaryUpperCase) ?? true)
 
 #else
-                        if (!((string?)wrapper[nameof(ColumnName.EventType)])?.Contains(EventType.Anniversary, StringComparison.OrdinalIgnoreCase) ?? true)
+                            if (!((string?)wrapper[nameof(ColumnName.EventType)])?.Contains(EventType.Anniversary, StringComparison.OrdinalIgnoreCase) ?? true)
 #endif
-                        {
-                            Debug.Assert(contact.Person != null);
-
-                            contact.Person.Anniversary = null;
+                            {
+                                Debug.Assert(contact.Person != null);
+                                contact.Person.Anniversary = null;
+                            }
                         }
+
 
                         // swap Homepages
 
@@ -194,7 +216,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
 #if NET40
                         if (((string?)wrapper[nameof(ColumnName.WebHomeType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? false)
-
 #else
                         if (((string?)wrapper[nameof(ColumnName.WebHomeType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? false)
 #endif
@@ -249,12 +270,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             {
                 phone.IsCell = true;
             }
-            
+
             if (value.Contains("FAX", StringComparison.OrdinalIgnoreCase))
             {
                 phone.IsFax = true;
             }
-                    
+
             if (value.Contains("WORK", StringComparison.OrdinalIgnoreCase))
             {
                 phone.IsWork = true;

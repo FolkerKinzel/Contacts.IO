@@ -53,7 +53,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
                     for (int i = 0; i < mapping.Count; i++)
                     {
-                        mapping[i].Item3[0] = germanColumnNames[i];
+                        mapping[i].Item3[0] = Analyzer.ColumnNames[i];
                     }
 
                     for (int i = end; i < mapping.Count; i++)
@@ -84,7 +84,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             //case (ContactProp)AdditionalProps.BirthDay:
 
 
-            _intConverter ??= Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32, nullable: true);
+            _intConverter ??= Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32, nullable: false);
             wrapper.AddProperty(
                         new CsvProperty(
                             tpl.Item1,
@@ -96,9 +96,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
         protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
-            var value = (int?)wrapper[index];
+            var value = (int)wrapper[index]!;
 
-            if (!value.HasValue) return;
+            if (value <= 0) return;
 
             var person = contact.Person ?? new Person();
             contact.Person = person;
@@ -109,21 +109,25 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
             try
             {
-                switch (prop)
+                switch ((AdditionalProp)prop)
                 {
-                    case (ContactProp)AdditionalProp.BirthYear:
-                        person.BirthDay = new DateTime(value.Value, 1, 1);
+                    case AdditionalProp.BirthYear:
+                        person.BirthDay = new DateTime(value, 1, 1);
                         break;
-                    case (ContactProp)AdditionalProp.BirthMonth:
+                    case AdditionalProp.BirthMonth:
                         if (birthDay.HasValue)
                         {
-                            person.BirthDay = new DateTime(birthDay.Value.Year, value.Value, birthDay.Value.Day);
+                            person.BirthDay = new DateTime(birthDay.Value.Year, value, birthDay.Value.Day);
+                        }
+                        else
+                        {
+                            person.BirthDay = new DateTime(1, value, 1);
                         }
                         break;
-                    case (ContactProp)AdditionalProp.BirthDay:
+                    case AdditionalProp.BirthDay:
                         if (birthDay.HasValue)
                         {
-                            person.BirthDay = new DateTime(birthDay.Value.Year, birthDay.Value.Month, value.Value);
+                            person.BirthDay = new DateTime(birthDay.Value.Year, birthDay.Value.Month, value);
                         }
                         break;
                     default:

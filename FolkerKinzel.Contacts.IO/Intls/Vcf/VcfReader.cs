@@ -19,16 +19,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist null.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
-        internal static Contact[] Read(string fileName)
+        internal static List<Contact> Read(string fileName)
         {
             List<VCard> vcards = VCard.Load(fileName);
            
 
-            var wabContacts = new Contact[vcards.Count];
+            var wabContacts = new List<Contact>(vcards.Count);
 
-            for (int i = 0; i < wabContacts.Length; i++)
+            for (int i = 0; i < vcards.Count; i++)
             {
-                wabContacts[i] = ConvertToContact(vcards[i]);
+                wabContacts.Add(ConvertToContact(vcards[i]));
             }
 
             return wabContacts;

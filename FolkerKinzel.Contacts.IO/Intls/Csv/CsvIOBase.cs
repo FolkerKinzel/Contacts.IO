@@ -56,6 +56,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, false);
 
 
+        protected virtual SexConverter InitSexConverter() => new SexConverter();
+
         /// <summary>
         /// Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
         /// </summary>
@@ -218,7 +220,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         }
 
 
-        protected virtual SexConverter InitSexConverter() => new SexConverter();
+        
 
 
         /// <summary>

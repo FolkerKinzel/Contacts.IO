@@ -17,9 +17,9 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
 
         [TestMethod()]
-        public void ReadCsvTest_Thunderbird()
+        public void LoadCsvTest_Thunderbird()
         {
-            var conts = ContactPersistence.ReadCsv(TestFiles.ThunderbirdUtf8Csv, CsvTarget.Thunderbird);
+            var conts = ContactPersistence.LoadCsv(TestFiles.ThunderbirdUtf8Csv, CsvTarget.Thunderbird);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -27,20 +27,20 @@ namespace FolkerKinzel.Contacts.IO.Tests
         }
 
         [TestMethod()]
-        public void WriteCsvTest_Thunderbird()
+        public void SaveCsvTest_Thunderbird()
         {
             
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Thunderbird.csv");
 
 
-            ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Thunderbird);
+            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Thunderbird);
         }
 
 
         [TestMethod()]
-        public void ReadCsvTest_Google()
+        public void LoadCsvTest_Google()
         {
-            var conts = ContactPersistence.ReadCsv(TestFiles.GoogleCsv, CsvTarget.Google);
+            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvTarget.Google);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -48,26 +48,27 @@ namespace FolkerKinzel.Contacts.IO.Tests
         }
 
         [TestMethod()]
-        public void WriteCsvTest_Google()
+        public void SaveCsvTest_Google()
         {
-
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
-
-
-            ContactPersistence.WriteCsv(fileName, new Contact[] { Utility.InitTestContact() }, CsvTarget.Google);
+            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Google);
         }
 
 
         [TestMethod()]
-        public void ReadVCardTest()
+        public void LoadVCardTest()
         {
-            Assert.Fail();
+            var conts = ContactPersistence.LoadVCard(TestFiles.V3vcf);
+
+            Assert.IsNotNull(conts);
+            Assert.AreEqual(2, conts.Count);
         }
 
         [TestMethod()]
-        public void WriteVCardTest()
+        public void SaveVCardTest_3_0()
         {
-            Assert.Fail();
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "3_0.vcf");
+            Utility.InitTestContact().SaveVCard(fileName);
         }
 
         
