@@ -227,18 +227,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.Email2:
                         wrapper[i] = emails.ElementAtOrDefault(1);
                         break;
-                    //case ContactProp.Email3:
-                    //    wrapper[i] = emails.ElementAtOrDefault(2);
-                    //    break;
-                    //case ContactProp.Email4:
-                    //    wrapper[i] = emails.ElementAtOrDefault(3);
-                    //    break;
-                    //case ContactProp.Email5:
-                    //    wrapper[i] = emails.ElementAtOrDefault(4);
-                    //    break;
-                    //case ContactProp.Email6:
-                    //    wrapper[i] = emails.ElementAtOrDefault(5);
-                    //    break;
+                    case ContactProp.Email3:
+                        wrapper[i] = emails.ElementAtOrDefault(2);
+                        break;
+                    case ContactProp.Email4:
+                        wrapper[i] = emails.ElementAtOrDefault(3);
+                        break;
+                    case ContactProp.Email5:
+                        wrapper[i] = emails.ElementAtOrDefault(4);
+                        break;
+                    case ContactProp.Email6:
+                        wrapper[i] = emails.ElementAtOrDefault(5);
+                        break;
                     case ContactProp.PhoneWork:
                         wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsWork)?.Value;
                         break;
@@ -280,33 +280,33 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.PhoneOther3:
                         wrapper[i] = otherPhones.ElementAtOrDefault(3)?.Value;
                         break;
-                    //case ContactProp.PhoneOther4:
-                    //    wrapper[i] = otherPhones.ElementAtOrDefault(4)?.Value;
-                    //    break;
-                    //case ContactProp.PhoneOther5:
-                    //    wrapper[i] = otherPhones.ElementAtOrDefault(5)?.Value;
-                    //    break;
-                    //case ContactProp.PhoneOther6:
-                    //    wrapper[i] = otherPhones.ElementAtOrDefault(6)?.Value;
-                    //    break;
+                    case ContactProp.PhoneOther4:
+                        wrapper[i] = otherPhones.ElementAtOrDefault(4)?.Value;
+                        break;
+                    case ContactProp.PhoneOther5:
+                        wrapper[i] = otherPhones.ElementAtOrDefault(5)?.Value;
+                        break;
+                    case ContactProp.PhoneOther6:
+                        wrapper[i] = otherPhones.ElementAtOrDefault(6)?.Value;
+                        break;
                     case ContactProp.InstantMessenger1:
                         wrapper[i] = ims.FirstOrDefault();
                         break;
                     case ContactProp.InstantMessenger2:
                         wrapper[i] = ims.ElementAtOrDefault(1);
                         break;
-                    //case ContactProp.InstantMessenger3:
-                    //    wrapper[i] = ims.ElementAtOrDefault(2);
-                    //    break;
-                    //case ContactProp.InstantMessenger4:
-                    //    wrapper[i] = ims.ElementAtOrDefault(3);
-                    //    break;
-                    //case ContactProp.InstantMessenger5:
-                    //    wrapper[i] = ims.ElementAtOrDefault(4);
-                    //    break;
-                    //case ContactProp.InstantMessenger6:
-                    //    wrapper[i] = ims.ElementAtOrDefault(5);
-                    //    break;
+                    case ContactProp.InstantMessenger3:
+                        wrapper[i] = ims.ElementAtOrDefault(2);
+                        break;
+                    case ContactProp.InstantMessenger4:
+                        wrapper[i] = ims.ElementAtOrDefault(3);
+                        break;
+                    case ContactProp.InstantMessenger5:
+                        wrapper[i] = ims.ElementAtOrDefault(4);
+                        break;
+                    case ContactProp.InstantMessenger6:
+                        wrapper[i] = ims.ElementAtOrDefault(5);
+                        break;
                     case ContactProp.HomePagePersonal:
                         wrapper[i] = contact.HomePagePersonal;
                         break;

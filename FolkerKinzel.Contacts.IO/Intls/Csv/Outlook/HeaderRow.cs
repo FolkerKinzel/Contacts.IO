@@ -3,25 +3,6 @@ using System.Collections.Generic;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {
-    internal enum AdditionalProp
-    {
-        BusinessStreet2 = 1000,
-        BusinessStreet3,
-        HomeStreet2,
-        HomeStreet3,
-        AssistantsPhone,
-        BusinessPhone2,
-        Callback,
-        CompanyMainPhone,
-        HomePhone2,
-        ISDN,
-        OtherFax,
-        Pager,
-        RadioPhone,
-        TTY_TDD_Phone,
-        Telex,
-        Email3Address
-    }
 
     internal static class HeaderRow
     {
@@ -254,7 +235,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.BusinessFax),            ContactProp.FaxWork,                          new string[]{En.BusinessFax}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.BusinessPhone),          ContactProp.PhoneWork,                        new string[]{En.BusinessPhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.BusinessPhone2),         (ContactProp)AdditionalProp.BusinessPhone2,   new string[]{En.BusinessPhone2}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Callback),               (ContactProp)AdditionalProp.Callback,         new string[]{En.Callback}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Callback),               ContactProp.PhoneOther4,                      new string[]{En.Callback}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.CarPhone),               ContactProp.CellWork,                         new string[]{En.CarPhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.CompanyMainPhone),       (ContactProp)AdditionalProp.CompanyMainPhone, new string[]{En.CompanyMainPhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.HomeFax),                ContactProp.FaxHome,                          new string[]{En.HomeFax}),
@@ -264,11 +245,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.MobilePhone),            ContactProp.Cell,                             new string[]{En.MobilePhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.OtherFax),               (ContactProp)AdditionalProp.OtherFax,         new string[]{En.OtherFax}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.OtherPhone),             ContactProp.PhoneOther2,                      new string[]{En.OtherPhone}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Pager),                  (ContactProp)AdditionalProp.Pager,            new string[]{En.Pager}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Pager),                  ContactProp.PhoneOther5,                      new string[]{En.Pager}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.PrimaryPhone),           ContactProp.PhoneOther1,                      new string[]{En.PrimaryPhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.RadioPhone),             (ContactProp)AdditionalProp.RadioPhone,       new string[]{En.RadioPhone}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.TTY_TDD_Phone),          (ContactProp)AdditionalProp.TTY_TDD_Phone,    new string[]{En.TTY_TDD_Phone}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Telex),                  (ContactProp)AdditionalProp.Telex,            new string[]{En.Telex}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Telex),                  ContactProp.PhoneOther6,                      new string[]{En.Telex}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Account),                null,                                         new string[]{En.Account}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Anniversary),            ContactProp.Anniversary,                      new string[]{En.Anniversary}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.AssistantsName),         null,                                         new string[]{En.AssistantsName}),
@@ -284,7 +265,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email2Address),          ContactProp.Email2,                           new string[]{En.Email2Address}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email2Type),             null,                                         new string[]{En.Email2Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email2DisplayName),      null,                                         new string[]{En.Email2DisplayName}),
-            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email3Address),          (ContactProp)AdditionalProp.Email3Address,    new string[]{En.Email3Address}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email3Address),          ContactProp.Email3,                           new string[]{En.Email3Address}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email3Type),             null,                                         new string[]{En.Email3Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Email3DisplayName),      null,                                         new string[]{En.Email3DisplayName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Gender),                 ContactProp.Gender,                           new string[]{En.Gender}),

@@ -214,7 +214,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
 
             PropInfo[TWO_CELL_PROPERTIES] = (cellProperties >= 2);
-            PropInfo[TWO_PHONE_PROPERTIES] = (cellProperties >= 2);
+            PropInfo[TWO_PHONE_PROPERTIES] = (phoneProperties >= 2);
 
             return wrapper;
         }

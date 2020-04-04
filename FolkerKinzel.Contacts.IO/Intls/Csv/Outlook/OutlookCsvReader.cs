@@ -35,17 +35,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                     mapping[i].Item3[0] = Analyzer.ColumnNames[i];
                 }
 
-//                for (int i = end; i < mapping.Count; i++)
-//                {
-//                    var currentTpl = mapping[i];
+                //                for (int i = end; i < mapping.Count; i++)
+                //                {
+                //                    var currentTpl = mapping[i];
 
-//#if NET40
-//                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, currentTpl.Item3);
+                //#if NET40
+                //                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, currentTpl.Item3);
 
-//#else
-//                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, Array.Empty<string>());
-//#endif
-//                }
+                //#else
+                //                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, Array.Empty<string>());
+                //#endif
+                //                }
 
             }
 
@@ -59,7 +59,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
         protected override ICsvTypeConverter InitNullableDateTimeConverter() => new DateTimeConverter("M/d/yyyy", true);
 
 
-        
+
 
 
         protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)
@@ -74,40 +74,62 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
         protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
+            Debug.Assert(wrapper[index] != null);
+
             switch ((AdditionalProp)prop)
             {
                 case AdditionalProp.BusinessStreet2:
-                    break;
                 case AdditionalProp.BusinessStreet3:
+                    {
+                        contact.Work ??= new Work();
+                        var adrWork = contact.Work.AddressWork;
+                        adrWork ??= new Address();
+                        contact.Work.AddressWork = adrWork;
+
+                        adrWork.Street += $" {(string?)wrapper[index]}";
+                    }
                     break;
                 case AdditionalProp.HomeStreet2:
-                    break;
                 case AdditionalProp.HomeStreet3:
+                    {
+                        var adrHome = contact.AddressHome ?? new Address();
+                        contact.AddressHome = adrHome;
+
+                        adrHome.Street += $" {(string?)wrapper[index]}";
+                    }
                     break;
                 case AdditionalProp.AssistantsPhone:
-                    break;
                 case AdditionalProp.BusinessPhone2:
-                    break;
-                case AdditionalProp.Callback:
-                    break;
                 case AdditionalProp.CompanyMainPhone:
+                    {
+                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        contact.PhoneNumbers = phones;
+
+                        phones.Add(new PhoneNumber((string?)wrapper[index], true));
+                    }
                     break;
-                case AdditionalProp.HomePhone2:
-                    break;
+                case AdditionalProp.HomePhone2:   
                 case AdditionalProp.ISDN:
+                case AdditionalProp.RadioPhone:
+                case AdditionalProp.TTY_TDD_Phone:
+                    {
+                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        contact.PhoneNumbers = phones;
+
+                        phones.Add(new PhoneNumber((string?)wrapper[index]));
+                    }
                     break;
                 case AdditionalProp.OtherFax:
+                    {
+                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        contact.PhoneNumbers = phones;
+
+                        phones.Add(new PhoneNumber((string?)wrapper[index], isFax: true));
+                    }
                     break;
-                case AdditionalProp.Pager:
-                    break;
-                case AdditionalProp.RadioPhone:
-                    break;
-                case AdditionalProp.TTY_TDD_Phone:
-                    break;
-                case AdditionalProp.Telex:
-                    break;
-                case AdditionalProp.Email3Address:
-                    break;
+                
+               
+                
                 default:
                     break;
             }

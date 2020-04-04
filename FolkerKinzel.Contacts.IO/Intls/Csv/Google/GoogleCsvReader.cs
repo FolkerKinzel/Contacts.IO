@@ -53,9 +53,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
-            var addProp = (AdditionalProp)prop;
+            Debug.Assert(wrapper[index] != null);
 
-            switch (addProp)
+            switch ((AdditionalProp)prop)
             {
                 case AdditionalProp.Phone1Type:
                     {

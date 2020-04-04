@@ -93,36 +93,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
         private Contact InitContact(CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
         {
-            const int INST_MESSENGER_1 = 0;
-            const int INST_MESSENGER_2 = 1;
-            //const int INST_MESSENGER_3 = 2;
-            //const int INST_MESSENGER_4 = 3;
-            //const int INST_MESSENGER_5 = 4;
-            //const int INST_MESSENGER_6 = 5;
-            const int INST_MESSENGERS_LENGTH = 2;
-
-            const int EMAIL_1 = 0;
-            const int EMAIL_2 = 1;
-            //const int EMAIL_3 = 2;
-            //const int EMAIL_4 = 3;
-            //const int EMAIL_5 = 4;
-            //const int EMAIL_6 = 5;
-            const int EMAILS_LENGTH = 2;
-
-            const int PHONE_HOME = 0;
-            const int PHONE_WORK = 1;
-            const int CELL = 2;
-            const int CELL_WORK = 3;
-            const int FAX_HOME = 4;
-            const int FAX_WORK = 5;
-            const int PHONE_OTHER_1 = 6;
-            const int PHONE_OTHER_2 = 7;
-            const int PHONE_OTHER_3 = 8;
-            //const int PHONE_OTHER_4 = 9;
-            //const int PHONE_OTHER_5 = 10;
-            //const int PHONE_OTHER_6 = 11;
-            const int PHONES_LENGTH = 9;
-
             var contact = new Contact();
 
             Person? person = null;
@@ -130,9 +100,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             Address? addressHome = null;
             Work? work = null;
             Address? addressWork = null;
-            string?[]? instMessengers = null;
-            string?[]? emails = null;
-            PhoneNumber?[]? phones = null;
+            List<string>? instMessengers = null;
+            List<string>? emails = null;
+            List<PhoneNumber>? phones = null;
 
 
 
@@ -218,63 +188,63 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.Email1:
                         InitEmails();
-                        emails![EMAIL_1] = (string)val;
+                        emails!.Add((string)val);
                         break;
                     case ContactProp.Email2:
                         InitEmails();
-                        emails![EMAIL_2] = (string)val;
+                        emails!.Add((string)val);
                         break;
-                    //case ContactProp.Email3:
-                    //    InitEmails();
-                    //    emails[EMAIL_3] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.Email4:
-                    //    InitEmails();
-                    //    emails[EMAIL_4] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.Email5:
-                    //    InitEmails();
-                    //    emails[EMAIL_5] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.Email6:
-                    //    InitEmails();
-                    //    emails[EMAIL_6] = (string)wrapper[i];
-                    //    break;
+                    case ContactProp.Email3:
+                        InitEmails();
+                        emails!.Add((string)val);
+                        break;
+                    case ContactProp.Email4:
+                        InitEmails();
+                        emails!.Add((string)val);
+                        break;
+                    case ContactProp.Email5:
+                        InitEmails();
+                        emails!.Add((string)val);
+                        break;
+                    case ContactProp.Email6:
+                        InitEmails();
+                        emails!.Add((string)val);
+                        break;
                     case ContactProp.PhoneHome:
                         InitPhones();
-                        phones![PHONE_HOME] = new PhoneNumber((string)val);
+                        phones!.Add(new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneWork:
                         InitPhones();
-                        phones![PHONE_WORK] = new PhoneNumber((string)val, isWork: true);
+                        phones!.Add(new PhoneNumber((string)val, isWork: true));
                         break;
                     case ContactProp.FaxHome:
                         InitPhones();
-                        phones![FAX_HOME] = new PhoneNumber((string)val, isFax: true);
+                        phones!.Add(new PhoneNumber((string)val, isFax: true));
                         break;
                     case ContactProp.FaxWork:
                         InitPhones();
-                        phones![FAX_WORK] = new PhoneNumber((string)val, isWork: true, isFax: true);
+                        phones!.Add(new PhoneNumber((string)val, isWork: true, isFax: true));
                         break;
                     case ContactProp.Cell:
                         InitPhones();
-                        phones![CELL] = new PhoneNumber((string)val, isCell: true);
+                        phones!.Add(new PhoneNumber((string)val, isCell: true));
                         break;
                     case ContactProp.CellWork:
                         InitPhones();
-                        phones![CELL_WORK] = new PhoneNumber((string)val, isWork: true, isCell: true);
+                        phones!.Add(new PhoneNumber((string)val, isWork: true, isCell: true));
                         break;
                     case ContactProp.PhoneOther1:
                         InitPhones();
-                        phones![PHONE_OTHER_1] = new PhoneNumber((string)val);
+                        phones!.Add(new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneOther2:
                         InitPhones();
-                        phones![PHONE_OTHER_2] = new PhoneNumber((string)val);
+                        phones!.Add(new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneOther3:
                         InitPhones();
-                        phones![PHONE_OTHER_3] = new PhoneNumber((string)val);
+                        phones!.Add(new PhoneNumber((string)val));
                         break;
                     //case ContactProp.PhoneOther4:
                     //    InitPhones();
@@ -290,28 +260,28 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     //    break;
                     case ContactProp.InstantMessenger1:
                         InitInstMessengers();
-                        instMessengers![INST_MESSENGER_1] = (string)val;
+                        instMessengers!.Add((string)val);
                         break;
                     case ContactProp.InstantMessenger2:
                         InitInstMessengers();
-                        instMessengers![INST_MESSENGER_2] = (string)val;
+                        instMessengers!.Add((string)val);
                         break;
-                    //case ContactProp.InstantMessenger3:
-                    //    InitInstMessengers();
-                    //    instMessengers[INST_MESSENGER_3] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.InstantMessenger4:
-                    //    InitInstMessengers();
-                    //    instMessengers[INST_MESSENGER_4] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.InstantMessenger5:
-                    //    InitInstMessengers();
-                    //    instMessengers[INST_MESSENGER_5] = (string)wrapper[i];
-                    //    break;
-                    //case ContactProp.InstantMessenger6:
-                    //    InitInstMessengers();
-                    //    instMessengers[INST_MESSENGER_6] = (string)wrapper[i];
-                    //    break;
+                    case ContactProp.InstantMessenger3:
+                        InitInstMessengers();
+                        instMessengers!.Add((string)val);
+                        break;
+                    case ContactProp.InstantMessenger4:
+                        InitInstMessengers();
+                        instMessengers!.Add((string)val);
+                        break;
+                    case ContactProp.InstantMessenger5:
+                        InitInstMessengers();
+                        instMessengers!.Add((string)val);
+                        break;
+                    case ContactProp.InstantMessenger6:
+                        InitInstMessengers();
+                        instMessengers!.Add((string)val);
+                        break;
                     case ContactProp.HomePagePersonal:
                         contact.HomePagePersonal = (string?)val;
                         break;
@@ -408,24 +378,24 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 InitWork();
 
                 addressWork ??= new Address();
-                work.AddressWork = addressWork;
+                work!.AddressWork = addressWork;
             }
 
             void InitInstMessengers()
             {
-                instMessengers ??= new string[INST_MESSENGERS_LENGTH];
+                instMessengers ??= new List<string>();
                 contact.InstantMessengerHandles = instMessengers;
             }
 
             void InitEmails()
             {
-                emails ??= new string[EMAILS_LENGTH];
+                emails ??= new List<string>();
                 contact.EmailAddresses = emails;
             }
 
             void InitPhones()
             {
-                phones ??= new PhoneNumber[PHONES_LENGTH];
+                phones ??= new List<PhoneNumber>();
                 contact.PhoneNumbers = phones;
             }
         }
