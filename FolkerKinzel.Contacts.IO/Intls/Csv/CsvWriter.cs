@@ -165,7 +165,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             var workAddress = work?.AddressWork;
 
             var phones = contact.PhoneNumbers ?? EmptyPhonesArray;
-            var otherPhones = phones.Where(x => !(x is null || x.IsCell || x.IsFax || x.IsWork)).ToArray();
+            var otherPhones = phones.Where(x => !(x is null || x.IsMobile || x.IsFax || x.IsWork)).ToArray();
 
             for (int i = 0; i < mapping.Count; i++)
             {
@@ -251,15 +251,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.Cell:
                         if (PropInfo[TWO_CELL_PROPERTIES])
                         {
-                            wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsCell && !x.IsWork)?.Value;
+                            wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsMobile && !x.IsWork)?.Value;
                         }
                         else
                         {
-                            wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsCell)?.Value;
+                            wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsMobile)?.Value;
                         }
                         break;
                     case ContactProp.CellWork:
-                        wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsCell && x.IsWork)?.Value;
+                        wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsMobile && x.IsWork)?.Value;
                         break;
                     case ContactProp.PhoneHome:
                         wrapper[i] = otherPhones.FirstOrDefault()?.Value;
@@ -308,10 +308,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         wrapper[i] = ims.ElementAtOrDefault(5);
                         break;
                     case ContactProp.HomePagePersonal:
-                        wrapper[i] = contact.HomePagePersonal;
+                        wrapper[i] = contact.WebPagePersonal;
                         break;
                     case ContactProp.HomePageWork:
-                        wrapper[i] = contact.HomePageWork;
+                        wrapper[i] = contact.WebPageWork;
                         break;
                     case ContactProp.WorkCompany:
                         wrapper[i] = work?.Company;
@@ -323,7 +323,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         wrapper[i] = work?.Office;
                         break;
                     case ContactProp.WorkPosition:
-                        wrapper[i] = work?.Position;
+                        wrapper[i] = work?.JobTitle;
                         break;
                     case ContactProp.AddressWorkStreet:
                         wrapper[i] = workAddress?.Street;

@@ -49,6 +49,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             ColumnName.Email2Type,
             ColumnName.Email2Value,
 
+            ColumnName.Email3Type,
+            ColumnName.Email3Value,
+
+            ColumnName.Email4Type,
+            ColumnName.Email4Value,
+
+            ColumnName.Email5Type,
+            ColumnName.Email5Value,
+
+            ColumnName.Email6Type,
+            ColumnName.Email6Value,
+
             ColumnName.IM1Type,
             ColumnName.IM1Service,
             ColumnName.IM1Value,
@@ -183,6 +195,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email2Type),                 null,                                             new string[]{ColumnName.Email2Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email2Value),                ContactProp.Email2,                               new string[]{ColumnName.Email2Value}),
            
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email3Type),                 null,                                             new string[]{ColumnName.Email3Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email3Value),                ContactProp.Email3,                               new string[]{ColumnName.Email3Value}),
+
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email4Type),                 null,                                             new string[]{ColumnName.Email4Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email4Value),                ContactProp.Email4,                               new string[]{ColumnName.Email4Value}),
+
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email2Type),                 null,                                             new string[]{ColumnName.Email2Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email5Value),                ContactProp.Email5,                               new string[]{ColumnName.Email5Value}),
+
+            //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email6Type),                 null,                                             new string[]{ColumnName.Email6Type}),
+            new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Email6Value),                ContactProp.Email6,                               new string[]{ColumnName.Email6Value}),
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Type),                    (ContactProp)AdditionalProp.InstantMessenger1Type,    new string[]{ColumnName.IM1Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Service),                 (ContactProp)AdditionalProp.InstantMessenger1Service, new string[]{ColumnName.IM1Service}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.IM1Value),                   ContactProp.InstantMessenger1,                        new string[]{ColumnName.IM1Value}),

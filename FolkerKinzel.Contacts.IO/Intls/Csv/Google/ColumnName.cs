@@ -46,6 +46,18 @@
         internal const string Email2Type = "E-mail 2 - Type";
         internal const string Email2Value = "E-mail 2 - Value";
 
+        internal const string Email3Type = "E-mail 3 - Type";
+        internal const string Email3Value = "E-mail 3 - Value";
+
+        internal const string Email4Type = "E-mail 4 - Type";
+        internal const string Email4Value = "E-mail 4 - Value";
+
+        internal const string Email5Type = "E-mail 5 - Type";
+        internal const string Email5Value = "E-mail 5 - Value";
+
+        internal const string Email6Type = "E-mail 6 - Type";
+        internal const string Email6Value = "E-mail 6 - Value";
+
         internal const string IM1Type = "IM 1 - Type";
         internal const string IM1Service = "IM 1 - Service";
         internal const string IM1Value = "IM 1 - Value";

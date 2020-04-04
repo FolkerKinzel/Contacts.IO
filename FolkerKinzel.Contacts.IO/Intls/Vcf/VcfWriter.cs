@@ -137,12 +137,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     orgs.Add(orgProp);
                 }
 
-                if(work.Position != null)
+                if(work.JobTitle != null)
                 {
                     var titles = new List<VC::TextProperty>();
                     vcard.Titles = titles;
 
-                    var titleProp = new VC::TextProperty(work.Position);
+                    var titleProp = new VC::TextProperty(work.JobTitle);
 
                     titles.Add(titleProp);
                 }
@@ -183,8 +183,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 }
             }
 
-            var webPersonal = contact.HomePagePersonal;
-            var webWork = contact.HomePageWork;
+            var webPersonal = contact.WebPagePersonal;
+            var webWork = contact.WebPageWork;
             bool writeWebWork = true;
 
             if(webPersonal != null)
@@ -307,7 +307,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                     VC::Enums.TelTypes? telType = null;
 
-                    if(number.IsCell)
+                    if(number.IsMobile)
                     {
                         telType = VC::Enums.TelTypes.Cell;
                     }

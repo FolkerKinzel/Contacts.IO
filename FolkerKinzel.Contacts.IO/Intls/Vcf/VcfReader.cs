@@ -147,7 +147,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 var work = contact.Work ?? new Work();
                                 contact.Work = work;
 
-                                work.Position = title;
+                                work.JobTitle = title;
                             }
 
                             break;
@@ -327,11 +327,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 {
                                     if (url.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
                                     {
-                                        contact.HomePageWork ??= url.Value;
+                                        contact.WebPageWork ??= url.Value;
                                     }
                                     else
                                     {
-                                        contact.HomePagePersonal ??= url.Value;
+                                        contact.WebPagePersonal ??= url.Value;
                                     }
                                 }
                             }

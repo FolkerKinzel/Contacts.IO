@@ -228,11 +228,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.Cell:
                         InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isCell: true));
+                        phones!.Add(new PhoneNumber((string)val, isMobile: true));
                         break;
                     case ContactProp.CellWork:
                         InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isWork: true, isCell: true));
+                        phones!.Add(new PhoneNumber((string)val, isWork: true, isMobile: true));
                         break;
                     case ContactProp.PhoneOther1:
                         InitPhones();
@@ -283,10 +283,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         instMessengers!.Add((string)val);
                         break;
                     case ContactProp.HomePagePersonal:
-                        contact.HomePagePersonal = (string?)val;
+                        contact.WebPagePersonal = (string?)val;
                         break;
                     case ContactProp.HomePageWork:
-                        contact.HomePageWork = (string?)val;
+                        contact.WebPageWork = (string?)val;
                         break;
                     case ContactProp.WorkCompany:
                         InitWork();
@@ -302,7 +302,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.WorkPosition:
                         InitWork();
-                        work!.Position = (string)val;
+                        work!.JobTitle = (string)val;
                         break;
                     case ContactProp.AddressWorkStreet:
                         InitAddressWork();

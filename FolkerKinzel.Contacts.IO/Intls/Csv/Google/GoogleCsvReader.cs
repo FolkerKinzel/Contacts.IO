@@ -10,6 +10,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
     internal class GoogleCsvReader : CsvReader
     {
+#if NET40
+        private readonly string[] GOOGLE_SEPARATOR = new string[] { " ::: " };
+#else
+        private const string GOOGLE_SEPARATOR = " ::: ";
+#endif
+
         internal GoogleCsvReader(Encoding? textEncoding) : base(textEncoding) { }
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
@@ -149,7 +155,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 //    break;
                 //case AdditionalProp.EventType:
                 //    break;
-                case AdditionalProp.Swap:
+                case AdditionalProp.Swap: // diverse Aufräumarbeiten
                     {
                         // Swap Addresses:
                         Address? addrHome = contact.AddressHome;
@@ -211,8 +217,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         // swap Homepages
 
-                        var homePagePersonal = contact.HomePagePersonal;
-                        var homePageWork = contact.HomePageWork;
+                        var homePagePersonal = contact.WebPagePersonal;
+                        var homePageWork = contact.WebPageWork;
 
 #if NET40
                         if (((string?)wrapper[nameof(ColumnName.WebHomeType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? false)
@@ -220,8 +226,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         if (((string?)wrapper[nameof(ColumnName.WebHomeType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? false)
 #endif
                         {
-                            contact.HomePageWork = homePagePersonal;
-                            contact.HomePagePersonal = null;
+                            contact.WebPageWork = homePagePersonal;
+                            contact.WebPagePersonal = null;
 
 #if NET40
                             if (!((string?)wrapper[nameof(ColumnName.WebWorkType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? true)
@@ -230,7 +236,92 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             if (!((string?)wrapper[nameof(ColumnName.WebWorkType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? true)
 #endif
                             {
-                                contact.HomePagePersonal = homePageWork;
+                                contact.WebPagePersonal = homePageWork;
+                            }
+                        }
+
+
+                        // Split CombinedValues
+
+                        var emails = (List<string>?)contact.EmailAddresses;
+
+                        if(emails != null)
+                        {
+                            for (int i = 0; i < emails.Count; i++)
+                            {
+                                var arr = emails[i].Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+
+                                if (arr.Length > 1)
+                                {
+                                    emails.RemoveAt(i);
+
+
+                                    int j = 0;
+                                    for (; j < arr.Length; j++)
+                                    {
+                                        emails.Insert(i + j, arr[j]);
+                                    }
+
+                                    i += j - 1;
+                                }
+                            }
+                        }
+
+                        var ims = (List<string>?)contact.InstantMessengerHandles;
+
+                        if (ims != null)
+                        {
+                            for (int i = 0; i < ims.Count; i++)
+                            {
+                                var arr = ims[i].Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+
+                                if (arr.Length > 1)
+                                {
+                                    ims.RemoveAt(i);
+
+                                    int j = 0;
+                                    for (; j < arr.Length; j++)
+                                    {
+                                        ims.Insert(i + j, arr[j]);
+                                    }
+
+                                    i += j - 1;
+                                }
+                            }
+                        }
+
+
+                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers;
+
+                        if (phones != null)
+                        {
+                            for (int i = 0; i < phones.Count; i++)
+                            {
+                                var phone = phones[i];
+
+                                string? phoneNumber = phone.Value;
+
+                                if (phoneNumber != null)
+                                {
+                                    var arr = phoneNumber.Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+
+                                    if (arr.Length > 1)
+                                    {
+                                        phones.RemoveAt(i);
+
+                                        int j = 0;
+
+                                        for (; j < arr.Length; j++)
+                                        {
+                                            phone = j == 0 ? phone : (PhoneNumber)phone.Clone();
+                                            phone.Value = arr[j];
+
+                                            phones.Insert(i + j, phone);
+                                        }
+
+                                        i += j - 1;
+                                    }
+                                }
                             }
                         }
                     }
@@ -246,14 +337,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         {
             if (value is null) return;
 
-            phone.IsCell = phone.IsFax = phone.IsWork = false;
+            phone.IsMobile = phone.IsFax = phone.IsWork = false;
 
 #if NET40
             value = value.ToUpperInvariant();
 
             if (value.Contains("MOBILE"))
             {
-                phone.IsCell = true;
+                phone.IsMobile = true;
             }
 
             if (value.Contains("FAX"))
@@ -268,7 +359,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 #else
             if (value.Contains("MOBILE", StringComparison.OrdinalIgnoreCase))
             {
-                phone.IsCell = true;
+                phone.IsMobile = true;
             }
 
             if (value.Contains("FAX", StringComparison.OrdinalIgnoreCase))

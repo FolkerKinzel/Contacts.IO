@@ -30,7 +30,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
                 Company = "Maxls Firma",
                 Department = "Chefetage",
                 Office = "Büro",
-                Position = "Chef"
+                JobTitle = "Chef"
             };
 
             var pers = new Person
@@ -47,8 +47,8 @@ namespace FolkerKinzel.Contacts.IO.Tests
             return new Contact
             {
                 Work = work,
-                HomePagePersonal = "www.folker.de",
-                HomePageWork = "work.de",
+                WebPagePersonal = "www.folker.de",
+                WebPageWork = "work.de",
                 DisplayName = "Folker",
                 EmailAddresses = new string?[] { "folker@freenet.de", "info@folker.de", null },
                 Person = pers,
@@ -57,8 +57,8 @@ namespace FolkerKinzel.Contacts.IO.Tests
                 PhoneNumbers = new PhoneNumber[] {
                     new PhoneNumber("1"),
                     new PhoneNumber("2", isWork: true),
-                    new PhoneNumber("3", isCell: true),
-                    new PhoneNumber("4", isWork: true, isCell: true),
+                    new PhoneNumber("3", isMobile: true),
+                    new PhoneNumber("4", isWork: true, isMobile: true),
                     new PhoneNumber("5", isFax: true),
                     new PhoneNumber("6", isWork: true, isFax: true),
                     new PhoneNumber("7")

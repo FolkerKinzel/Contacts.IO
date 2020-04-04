@@ -10,7 +10,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
         internal UniversalCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
 
 
-        protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
+        protected override string[] CreateColumnNames() => HeaderRow.GetColumnNames();
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {

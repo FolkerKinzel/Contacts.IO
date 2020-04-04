@@ -176,7 +176,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         }
                     }
 
-                    if (contact.HomePagePersonal is null)
+                    if (contact.WebPagePersonal is null)
                     {
                         var webWorkType = wrapper[nameof(ColumnName.WebWorkType)];
 
@@ -207,7 +207,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 return phone.IsWork ? TelephoneTypes.FaxWork : TelephoneTypes.FaxHome;
             }
 
-            if (phone.IsCell)
+            if (phone.IsMobile)
             {
                 return TelephoneTypes.Cell;
             }

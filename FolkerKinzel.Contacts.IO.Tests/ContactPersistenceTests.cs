@@ -45,6 +45,12 @@ namespace FolkerKinzel.Contacts.IO.Tests
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
 
+
+            //string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Maxl.vcf");
+
+            //conts[0].SaveVCard(fileName);
+
+
         }
 
         [TestMethod()]
