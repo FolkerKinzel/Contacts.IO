@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
         protected override SexConverter InitSexConverter() => new OutlookSexConverter();
 
 
-        protected override ICsvTypeConverter InitNullableDateTimeConverter() => new DateTimeConverter("M/d/yyyy", true);
+        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", true);
 
 
         protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)

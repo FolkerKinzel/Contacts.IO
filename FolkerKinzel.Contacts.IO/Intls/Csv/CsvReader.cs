@@ -283,10 +283,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         instMessengers!.Add((string)val);
                         break;
                     case ContactProp.HomePagePersonal:
-                        contact.WebPagePersonal = (string?)val;
+                        contact.WebPagePersonal = (string)val;
                         break;
                     case ContactProp.HomePageWork:
-                        contact.WebPageWork = (string?)val;
+                        contact.WebPageWork = (string)val;
                         break;
                     case ContactProp.WorkCompany:
                         InitWork();

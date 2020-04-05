@@ -61,6 +61,18 @@ namespace FolkerKinzel.Contacts.IO.Tests
         }
 
 
+
+        [TestMethod()]
+        public void LoadCsvTest_Unspecified()
+        {
+            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvTarget.Unspecified);
+
+            Assert.IsNotNull(conts);
+            Assert.AreEqual(1, conts.Count);
+
+        }
+
+
         [TestMethod()]
         public void LoadVCardTest()
         {

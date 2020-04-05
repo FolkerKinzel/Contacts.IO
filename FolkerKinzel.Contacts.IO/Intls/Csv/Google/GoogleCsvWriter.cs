@@ -15,7 +15,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         internal GoogleCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
 
 
-        protected override ICsvTypeConverter InitNullableDateTimeConverter() => new DateTimeConverter("yyyy-MM-dd", true);
+        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("yyyy-MM-dd", true);
 
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();

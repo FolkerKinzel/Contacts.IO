@@ -32,6 +32,9 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
         internal static string Outlook365Csv => Path.Combine(_testFileDirectory, "Outlook365.csv");
 
+        internal static string WindowsLiveMail => Path.Combine(_testFileDirectory, "WindowsLiveMail.csv");
+
+
         internal static string ThunderbirdAnsiCsv => Path.Combine(_testFileDirectory, "ThunderbirdAnsi.csv");
 
         internal static string ThunderbirdUtf8Csv => Path.Combine(_testFileDirectory, "ThunderbirdUtf8.csv");

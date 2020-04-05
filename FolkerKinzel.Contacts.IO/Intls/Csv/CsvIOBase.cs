@@ -40,17 +40,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected Conv::ICsvTypeConverter StringConverter { get; } = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
 
 
-        protected Conv::ICsvTypeConverter NullableDateTimeConverter
+        protected Conv::ICsvTypeConverter NullableDateConverter
         {
             get
             {
-                this._nullableDateTimeConverter ??= InitNullableDateTimeConverter();
+                this._nullableDateTimeConverter ??= InitNullableDateConverter();
 
                 return this._nullableDateTimeConverter;
             }
         }
 
-        protected virtual ICsvTypeConverter InitNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, true);
+        protected virtual ICsvTypeConverter InitNullableDateConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.Date, true);
 
 
         protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, false);
@@ -112,16 +112,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.AddressHomeCountry:
                     case ContactProp.Email1:
                     case ContactProp.Email2:
-                    //case ContactProp.Email3:
-                    //case ContactProp.Email4:
-                    //case ContactProp.Email5:
-                    //case ContactProp.Email6:
+                    case ContactProp.Email3:
+                    case ContactProp.Email4:
+                    case ContactProp.Email5:
+                    case ContactProp.Email6:
                     case ContactProp.InstantMessenger1:
                     case ContactProp.InstantMessenger2:
-                    //case ContactProp.InstantMessenger3:
-                    //case ContactProp.InstantMessenger4:
-                    //case ContactProp.InstantMessenger5:
-                    //case ContactProp.InstantMessenger6:
+                    case ContactProp.InstantMessenger3:
+                    case ContactProp.InstantMessenger4:
+                    case ContactProp.InstantMessenger5:
+                    case ContactProp.InstantMessenger6:
                     case ContactProp.HomePagePersonal:
                     case ContactProp.HomePageWork:
                     case ContactProp.WorkCompany:
@@ -164,9 +164,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                     case ContactProp.PhoneOther1:
                     case ContactProp.PhoneOther2:
                     case ContactProp.PhoneOther3:
-                    //case ContactProp.PhoneOther4:
-                    //case ContactProp.PhoneOther5:
-                    //case ContactProp.PhoneOther6:
+                    case ContactProp.PhoneOther4:
+                    case ContactProp.PhoneOther5:
+                    case ContactProp.PhoneOther6:
                         wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item1,
@@ -187,7 +187,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                                 new CsvProperty(
                                     tpl.Item1,
                                     tpl.Item3,
-                                    NullableDateTimeConverter));
+                                    NullableDateConverter));
                         break;
                     case ContactProp.TimeStamp:
                         wrapper.AddProperty(
@@ -203,6 +203,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         }
                         else
                         {
+                            // Dummy-Property, um die gewünschte Index-Reihenfolge herzustellen
                             wrapper.AddProperty(
                             new CsvProperty(
                                 tpl.Item1,
