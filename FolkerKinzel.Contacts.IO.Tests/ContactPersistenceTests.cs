@@ -1,6 +1,7 @@
 ﻿using FolkerKinzel.Contacts.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace FolkerKinzel.Contacts.IO.Tests
@@ -65,7 +66,12 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Unspecified()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvTarget.Unspecified);
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            var conts = ContactPersistence.LoadCsv(TestFiles.WindowsLiveMail, CsvTarget.Unspecified);
+            sw.Stop();
+
+            TestContext.WriteLine($"Stopwatch: {sw.ElapsedMilliseconds}");
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);

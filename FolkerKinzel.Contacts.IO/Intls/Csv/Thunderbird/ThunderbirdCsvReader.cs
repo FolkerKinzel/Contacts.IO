@@ -3,16 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using Conv = FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvReader : CsvReader
     {
-        private Conv::ICsvTypeConverter? _intConverter = null;
+        private readonly Conv::ICsvTypeConverter _intConverter;
 
 
-        internal ThunderbirdCsvReader(System.Text.Encoding? textEncoding) : base(textEncoding) { }
+        internal ThunderbirdCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding)
+        {
+            _intConverter = Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32, nullable: false, formatProvider: this.FormatProvider);
+        }
 
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
@@ -84,7 +88,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             //case (ContactProp)AdditionalProps.BirthDay:
 
 
-            _intConverter ??= Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32, nullable: false);
             wrapper.AddProperty(
                         new CsvProperty(
                             tpl.Item1,

@@ -11,7 +11,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {
     internal class OutlookCsvReader : CsvReader
     {
-        internal OutlookCsvReader(Encoding? textEncoding) : base(textEncoding) { }
+        internal OutlookCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
@@ -56,7 +56,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
         protected override SexConverter InitSexConverter() => new OutlookSexConverter();
 
 
-        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", true);
+        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", nullable:true, formatProvider: this.FormatProvider);
 
 
 

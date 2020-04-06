@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 using System.Text;
+using System.Globalization;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
@@ -15,8 +16,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         private const int PROPINFO_LENGTH = 2;
 
 
-        protected CsvIOBase(Encoding? textEncoding)
+        protected CsvIOBase(IFormatProvider? formatProvider, Encoding? textEncoding)
         {
+            this.FormatProvider = formatProvider ?? CultureInfo.InvariantCulture;
             this.TextEncoding = textEncoding;
 
 #if NET40
@@ -34,10 +36,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         protected Encoding? TextEncoding { get; }
 
+        protected IFormatProvider FormatProvider { get; }
+
         private Conv::ICsvTypeConverter? _nullableDateTimeConverter;
 
 
-        protected Conv::ICsvTypeConverter StringConverter { get; } = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
+        protected Conv::ICsvTypeConverter StringConverter { get; } 
+            = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
 
 
         protected Conv::ICsvTypeConverter NullableDateConverter
@@ -50,10 +55,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
         }
 
-        protected virtual ICsvTypeConverter InitNullableDateConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.Date, true);
+        protected virtual ICsvTypeConverter InitNullableDateConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.Date, nullable: true, formatProvider: this.FormatProvider);
 
 
-        protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, false);
+        protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, nullable:false, formatProvider: this.FormatProvider);
 
 
         protected virtual SexConverter InitSexConverter() => new SexConverter();

@@ -3,7 +3,6 @@ using System.IO;
 
 namespace FolkerKinzel.Contacts.IO.Tests
 {
-    [TestClass]
     internal static class TestFiles
     {
         private const string TEST_FILE_DIRECTORY_NAME = "TestFiles";

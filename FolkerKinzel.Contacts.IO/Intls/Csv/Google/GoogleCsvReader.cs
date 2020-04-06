@@ -16,7 +16,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
         private const string GOOGLE_SEPARATOR = " ::: ";
 #endif
 
-        internal GoogleCsvReader(Encoding? textEncoding) : base(textEncoding) { }
+        internal GoogleCsvReader(Encoding? textEncoding) : base(null, textEncoding) { }
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {

@@ -9,9 +9,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 {
     internal class ThunderbirdCsvWriter : CsvWriter
     {
-        private ICsvTypeConverter? _intConverter = null;
+        private readonly ICsvTypeConverter _intConverter;
 
-        internal ThunderbirdCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
+        internal ThunderbirdCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding)
+        {
+            _intConverter = CsvConverterFactory.CreateConverter(CsvTypeCode.Int32, nullable: true, formatProvider: this.FormatProvider);
+        }
 
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
@@ -29,7 +32,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             //case (ContactProp)AdditionalProps.BirthDay:
 
             
-            _intConverter ??= CsvConverterFactory.CreateConverter(CsvTypeCode.Int32, nullable: true);
             wrapper.AddProperty(
                         new CsvProperty(
                             tpl.Item1,

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 namespace FolkerKinzel.Contacts.IO
 {
@@ -17,18 +18,19 @@ namespace FolkerKinzel.Contacts.IO
         /// </summary>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, von der die CSV-Datei stammt.</param>
+        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>
+        /// für <see cref="CultureInfo.InvariantCulture"/>.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="Encoding.UTF8"/>.</param>
         /// <returns>Inhalt der CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.</returns>
-        /// 
         ///<exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">
         /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
         /// <para>- oder -</para>
         /// <para>die Datei enthält ungültiges CSV.</para></exception>
-        public static List<Contact> LoadCsv(string fileName, CsvTarget platform, Encoding? textEncoding = null)
+        public static List<Contact> LoadCsv(string fileName, CsvTarget platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
         {
-            return CsvReader.GetInstance(platform, textEncoding).Read(fileName);
+            return CsvReader.GetInstance(platform, formatProvider, textEncoding).Read(fileName);
         }
 
 
@@ -38,6 +40,8 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="contacts">Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.</param>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
+        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>
+        /// für <see cref="CultureInfo.InvariantCulture"/>.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
         /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist<c>null</c>.</exception>
         /// <exception cref="ArgumentException">
@@ -46,9 +50,9 @@ namespace FolkerKinzel.Contacts.IO
         /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
         /// </exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void SaveCsv(IEnumerable<Contact> contacts, string fileName,  CsvTarget platform, Encoding? textEncoding = null)
+        public static void SaveCsv(IEnumerable<Contact> contacts, string fileName,  CsvTarget platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
         {
-            CsvWriter.GetInstance(platform, textEncoding).Write(fileName, contacts);
+            CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, contacts);
         }
 
 
@@ -58,6 +62,8 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="contact">Das zu speichernde von <see cref="Contact"/>-Objekt.</param>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
+        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>
+        /// für <see cref="CultureInfo.InvariantCulture"/>.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
         /// <exception cref = "ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist<c>null</c>.</exception>
         /// <exception cref="ArgumentException">
@@ -66,14 +72,14 @@ namespace FolkerKinzel.Contacts.IO
         /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
         /// </exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void SaveCsv(this Contact contact, string fileName, CsvTarget platform, Encoding? textEncoding = null)
+        public static void SaveCsv(this Contact contact, string fileName, CsvTarget platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
         {
             if(contact is null)
             {
                 throw new ArgumentNullException(nameof(contact));
             }
 
-            CsvWriter.GetInstance(platform, textEncoding).Write(fileName, new Contact[] { contact });
+            CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, new Contact[] { contact });
         }
 
 

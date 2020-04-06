@@ -12,22 +12,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvReader : CsvIOBase
     {
-        internal static CsvReader GetInstance(CsvTarget platform, Encoding? textEncoding) => platform switch
+        internal static CsvReader GetInstance(CsvTarget platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
         {
-            CsvTarget.Unspecified => new Universal.UniversalCsvReader(textEncoding),
-            CsvTarget.Outlook => new Outlook.OutlookCsvReader(textEncoding),
+            CsvTarget.Unspecified => new Universal.UniversalCsvReader(formatProvider, textEncoding),
+            CsvTarget.Outlook => new Outlook.OutlookCsvReader(formatProvider, textEncoding),
             CsvTarget.Google => new Google.GoogleCsvReader(textEncoding),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(textEncoding),
+            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(formatProvider, textEncoding),
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 
-        protected CsvReader(Encoding? textEncoding) : base(textEncoding)
-        {
-
-        }
-
-
-
+        protected CsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
+       
 
         protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 

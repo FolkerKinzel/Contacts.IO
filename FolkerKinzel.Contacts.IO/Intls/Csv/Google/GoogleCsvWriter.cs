@@ -12,7 +12,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
     internal class GoogleCsvWriter : CsvWriter
     {
-        internal GoogleCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
+        internal GoogleCsvWriter(Encoding? textEncoding) : base(null, textEncoding) { }
 
 
         protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("yyyy-MM-dd", true);

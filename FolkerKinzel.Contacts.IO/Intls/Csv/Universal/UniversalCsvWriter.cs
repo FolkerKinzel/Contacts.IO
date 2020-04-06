@@ -7,8 +7,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
 
     internal class UniversalCsvWriter : CsvWriter
     {
-        internal UniversalCsvWriter(Encoding? textEncoding) : base(textEncoding) { }
-
+        internal UniversalCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNames();
 

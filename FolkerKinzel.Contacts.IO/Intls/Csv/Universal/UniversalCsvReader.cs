@@ -7,7 +7,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
     internal class UniversalCsvReader : CsvReader
     {
 
-        internal UniversalCsvReader(Encoding? textEncoding) : base(textEncoding) { }
+        internal UniversalCsvReader(IFormatProvider? formatProvider, Encoding ? textEncoding) : base(formatProvider, textEncoding) { }
 
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => new Tuple<string, ContactProp?, IList<string>>[]
