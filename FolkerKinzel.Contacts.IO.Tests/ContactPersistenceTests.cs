@@ -39,6 +39,26 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
 
         [TestMethod()]
+        public void LoadCsvTest_Outlook()
+        {
+            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvTarget.Outlook);
+
+            Assert.IsNotNull(conts);
+            Assert.AreEqual(5, conts.Count);
+
+        }
+
+        [TestMethod()]
+        public void SaveCsvTest_Outlook()
+        {
+
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook.csv");
+
+            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Outlook);
+        }
+
+
+        [TestMethod()]
         public void LoadCsvTest_Google()
         {
             var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvTarget.Google);

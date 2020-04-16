@@ -36,7 +36,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
             var pers = new Person
             {
                 BirthDay = new DateTime(1985, 6, 28),
-                Name = new Name { FirstName = "Max", LastName = "Mustermann" },
+                Name = new Name {Prefix = "Dr.", FirstName = "Max", MiddleName = "Peter", LastName = "Mustermann", Suffix = "jr." },
                 Gender = Sex.Male,
                 Anniversary = new DateTime(2001, 4, 22),
                 NickName = "Maxl",
