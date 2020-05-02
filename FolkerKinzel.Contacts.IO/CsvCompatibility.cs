@@ -3,7 +3,7 @@
     /// <summary>
     /// Benannte Konstanten, um die Zielplattform einer CSV-Datei anzugeben.
     /// </summary>
-    public enum CsvTarget
+    public enum CsvCompatibility
     {
         /// <summary>
         /// Keine Angabe.

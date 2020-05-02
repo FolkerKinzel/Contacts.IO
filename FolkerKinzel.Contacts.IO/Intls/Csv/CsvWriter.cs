@@ -12,12 +12,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
     internal abstract class CsvWriter : CsvIOBase
     {
-        public static CsvWriter GetInstance(CsvTarget platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
+        public static CsvWriter GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
         {
-            CsvTarget.Unspecified => new Universal.UniversalCsvWriter(formatProvider, textEncoding),
-            CsvTarget.Outlook => new Outlook.OutlookCsvWriter(formatProvider, textEncoding),
-            CsvTarget.Google => new Google.GoogleCsvWriter(textEncoding),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvWriter(formatProvider, textEncoding),
+            CsvCompatibility.Unspecified => new Universal.UniversalCsvWriter(formatProvider, textEncoding),
+            CsvCompatibility.Outlook => new Outlook.OutlookCsvWriter(formatProvider, textEncoding),
+            CsvCompatibility.Google => new Google.GoogleCsvWriter(textEncoding),
+            CsvCompatibility.Thunderbird => new Thunderbird.ThunderbirdCsvWriter(formatProvider, textEncoding),
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 

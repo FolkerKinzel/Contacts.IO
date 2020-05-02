@@ -12,12 +12,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvReader : CsvIOBase
     {
-        internal static CsvReader GetInstance(CsvTarget platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
+        internal static CsvReader GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
         {
-            CsvTarget.Unspecified => new Universal.UniversalCsvReader(formatProvider, textEncoding),
-            CsvTarget.Outlook => new Outlook.OutlookCsvReader(formatProvider, textEncoding),
-            CsvTarget.Google => new Google.GoogleCsvReader(textEncoding),
-            CsvTarget.Thunderbird => new Thunderbird.ThunderbirdCsvReader(formatProvider, textEncoding),
+            CsvCompatibility.Unspecified => new Universal.UniversalCsvReader(formatProvider, textEncoding),
+            CsvCompatibility.Outlook => new Outlook.OutlookCsvReader(formatProvider, textEncoding),
+            CsvCompatibility.Google => new Google.GoogleCsvReader(textEncoding),
+            CsvCompatibility.Thunderbird => new Thunderbird.ThunderbirdCsvReader(formatProvider, textEncoding),
             _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
         };
 
@@ -46,7 +46,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             Analyzer.Analyze(fileName);
 
-            if (!Analyzer.HasHeader)
+            if (!Analyzer.HasHeaderRow)
             {
                 return list;
             }

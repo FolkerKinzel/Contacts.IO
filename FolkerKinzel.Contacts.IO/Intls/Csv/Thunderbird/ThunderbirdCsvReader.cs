@@ -21,7 +21,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
-            Debug.Assert(Analyzer.HasHeader == true);
+            Debug.Assert(Analyzer.HasHeaderRow == true);
             Debug.Assert(Analyzer.ColumnNames != null);
 
 

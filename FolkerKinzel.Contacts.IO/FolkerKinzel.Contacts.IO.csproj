@@ -4,7 +4,7 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <NeutralLanguage>en</NeutralLanguage>
-    <FileVersion>1.1.38.0</FileVersion>
+    <FileVersion>1.1.52.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <!-- nuget-Package: -->
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
@@ -47,13 +47,10 @@
     <ProjectReference Include="..\..\FolkerKinzel.VCards\FolkerKinzel.VCards\FolkerKinzel.VCards.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Resources\Res.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Res.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Update="Resources\Res.de.resx">
+      <SubType>Designer</SubType>
+      <Generator></Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>

@@ -20,7 +20,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Thunderbird()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.ThunderbirdUtf8Csv, CsvTarget.Thunderbird);
+            var conts = ContactPersistence.LoadCsv(TestFiles.ThunderbirdUtf8Csv, CsvCompatibility.Thunderbird);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -34,14 +34,14 @@ namespace FolkerKinzel.Contacts.IO.Tests
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Thunderbird.csv");
 
 
-            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Thunderbird);
+            Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Thunderbird);
         }
 
 
         [TestMethod()]
         public void LoadCsvTest_Outlook()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvTarget.Outlook);
+            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(5, conts.Count);
@@ -54,14 +54,14 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook.csv");
 
-            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Outlook);
+            Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Outlook);
         }
 
 
         [TestMethod()]
         public void LoadCsvTest_Google()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvTarget.Google);
+            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvCompatibility.Google);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -78,7 +78,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         public void SaveCsvTest_Google()
         {
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
-            Utility.InitTestContact().SaveCsv(fileName, CsvTarget.Google);
+            Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Google);
         }
 
 
@@ -88,7 +88,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            var conts = ContactPersistence.LoadCsv(TestFiles.WindowsLiveMail, CsvTarget.Unspecified);
+            var conts = ContactPersistence.LoadCsv(TestFiles.WindowsLiveMail, CsvCompatibility.Unspecified);
             sw.Stop();
 
             TestContext.WriteLine($"Stopwatch: {sw.ElapsedMilliseconds}");
