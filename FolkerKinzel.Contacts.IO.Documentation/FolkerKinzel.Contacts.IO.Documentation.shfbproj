@@ -15,7 +15,7 @@
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
-    <HtmlHelpName>FolkerKinzel.Contacts.IO</HtmlHelpName>
+    <HtmlHelpName>FolkerKinzel.Contacts.IO.de</HtmlHelpName>
     <Language>de-DE</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -54,8 +54,9 @@
     <ProjectSummary>FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO stellen eine einfache .NET-Api zum Speichern und Bearbeiten von Kontaktdaten von Organisationen und nat&amp;#252%3brlichen Personen dar.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO stellen eine einfache .NET-Api zum Speichern und Bearbeiten von Kontaktdaten von Organisationen und natürlichen Personen dar. Dabei ist FolkerKinzel.Contacts.Contact das Datenmodell und der Namensraum FolkerKinzel.Contacts.IO stellt Klassen zur Verfügung, um dieses zu serialisieren und zu persistieren.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Der Namensraum enthält ein einfaches Datenmodell zum Speichern von Kontaktdaten von Organisationen und natürlichen Personen.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Der Namensraum stellt Klassen zur Verfügung, um die in der Klasse FolkerKinzel.Contacts.Contact gespeicherten Kontaktdaten zu serialisieren und zu persistieren.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Der Namensraum enthält ein einfaches Datenmodell zum Speichern von Kontaktdaten von Organisationen und natürlichen Personen.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Der Namensraum stellt Klassen zur Verfügung, um die in der Klasse FolkerKinzel.Contacts.Contact gespeicherten Kontaktdaten zu serialisieren und zu persistieren.</NamespaceSummaryItem>
+    </NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
