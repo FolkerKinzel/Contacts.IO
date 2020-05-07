@@ -1,5 +1,6 @@
 # FolkerKinzel.Contacts.IO
-.NET-API to read and persist contact data of organizations and natural persons from and to vCards (vcf-files) and CSV.
+Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persisist this 
+as vCard (*.vcf) or CSV.
 
 ```
 nuget Package Manager:
