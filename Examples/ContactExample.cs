@@ -28,7 +28,7 @@ namespace Examples
                     Work = new Work
                     {
                         JobTitle = "Facility Manager",
-                        Company = "Contoso"
+                        Company = "Does Company"
                     },
 
                     PhoneNumbers = new PhoneNumber[]
@@ -42,7 +42,7 @@ namespace Examples
 
                     EmailAddresses = new string[]
                     {
-                        "john.doe@contoso.com"
+                        "john.doe@internet.com"
                     }
                 },//new Contact()
 
@@ -67,7 +67,7 @@ namespace Examples
                     Work = new Work
                     {
                         JobTitle = "CEO",
-                        Company = "Contoso"
+                        Company = "Does Company"
                     },
 
                     PhoneNumbers = new PhoneNumber[]
