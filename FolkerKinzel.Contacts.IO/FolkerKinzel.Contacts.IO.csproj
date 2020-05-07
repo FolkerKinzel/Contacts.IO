@@ -8,10 +8,10 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.1.0</Version>
-    <FileVersion>1.1.76.0</FileVersion>
+    <FileVersion>1.1.78.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageTags>vcf csv vcard contactdata</PackageTags>
-    <Description>.NET-API to read and persist contact data of organizations and natural persons from and to vCards (vcf-files) and CSV.</Description>
+    <PackageTags>vcf csv vcard contact</PackageTags>
+    <Description>Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persisist this as vCard (*.vcf) or CSV.</Description>
     <Authors>Folker Kinzel</Authors>
     <Copyright>Copyright © 2020 Folker Kinzel</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
