@@ -8,15 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FolkerKinzel.Contacts" Version="1.2.0" />
+    <PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FolkerKinzel.Contacts.IO\FolkerKinzel.Contacts.IO.csproj" />
   </ItemGroup>
 
 </Project>
