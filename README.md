@@ -4,16 +4,16 @@ as vCard (*.vcf) or CSV.
 
 ```
 nuget Package Manager:
-PM> 
+PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.1.0
 
 .NET CLI:
-> 
+> dotnet add package FolkerKinzel.Contacts.IO --version 1.1.0
 
 PackageReference (Visual Studio Project File):
-
+<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.1.0" />
 
 Paket CLI:
-> 
+> paket add FolkerKinzel.Contacts.IO --version 1.1.0
 ```
 
 * [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/FolkerKinzel.Contacts.IO.Reference.en/Help/FolkerKinzel.Contacts.IO.en.chm)

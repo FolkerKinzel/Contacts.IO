@@ -333,7 +333,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
 
 
-        private void SetTelephoneType(PhoneNumber phone, string? value)
+        private static void SetTelephoneType(PhoneNumber phone, string? value)
         {
             if (value is null) return;
 

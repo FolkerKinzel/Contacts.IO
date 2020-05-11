@@ -8,7 +8,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.1.0</Version>
-    <FileVersion>1.1.82.0</FileVersion>
+    <FileVersion>1.1.83.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageTags>vcf csv vcard contact</PackageTags>
     <Description>Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persisist this as vCard (*.vcf) or CSV.</Description>
