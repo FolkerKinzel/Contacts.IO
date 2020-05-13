@@ -163,7 +163,6 @@ namespace Examples
                 Console.WriteLine(contactArr[i]);
                 Console.WriteLine();
             }
-
         }
     }
 }
