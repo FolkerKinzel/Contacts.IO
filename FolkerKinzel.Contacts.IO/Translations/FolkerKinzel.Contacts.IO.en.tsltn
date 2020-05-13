@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tsltn Version="1.0" SourceFile="..\bin\Release\net40\de\FolkerKinzel.Contacts.IO.xml" SourceLanguage="de" TargetLanguage="en">
+  <T ID="D9CF37B00D6AB81">Extension methods for the &lt;see cref="T:FolkerKinzel.Contacts.Contact" /&gt; class.</T>
+  <T ID="256A24FC3F7FC84B">Static class for loading and saving &lt;see cref="T:FolkerKinzel.Contacts.Contact" /&gt; objects.</T>
+  <T ID="C26C9E732BC18007">Named constants to specify the target platform of a CSV file.</T>
+  <T ID="DB1BA40279A95997">Named constants to indicate the VCF version.</T>
+</Tsltn>
