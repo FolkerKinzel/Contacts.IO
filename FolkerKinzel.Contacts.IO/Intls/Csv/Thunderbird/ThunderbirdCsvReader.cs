@@ -28,7 +28,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             // englische Spaltennamen
             var mapping = HeaderRow.GetMappingEN();
 
-            if (mapping.Where(x => x.Item2.HasValue).All(x => Analyzer.ColumnNames.Contains(x.Item3[0])))
+            if (Analyzer.ColumnNames.Where(s => mapping.Any(tpl => tpl.Item2.HasValue && StringComparer.OrdinalIgnoreCase.Equals(tpl.Item3[0], s))).Count() > 3)
             {
                 return mapping;
             }
@@ -45,7 +45,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
                     mapping[i].Item3[0] = germanColumnNames[i];
                 }
 
-                if (mapping.Where(x => x.Item2.HasValue).All(x => Analyzer.ColumnNames.Contains(x.Item3[0])))
+                if (Analyzer.ColumnNames.Where(s => mapping.Any(tpl => tpl.Item2.HasValue && StringComparer.OrdinalIgnoreCase.Equals(tpl.Item3[0], s))).Count() > 3)
                 {
                     return mapping;
                 }
@@ -55,7 +55,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
                     var end = Math.Min(mapping.Count, Analyzer.ColumnNames.Count);
 
-                    for (int i = 0; i < mapping.Count; i++)
+                    for (int i = 0; i < end; i++)
                     {
                         mapping[i].Item3[0] = Analyzer.ColumnNames[i];
                     }
@@ -63,13 +63,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
                     for (int i = end; i < mapping.Count; i++)
                     {
                         var currentTpl = mapping[i];
-
-#if NET40
-                        mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, currentTpl.Item3);
-
-#else
-                        mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, Array.Empty<string>());
-#endif
+                        mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, EmptyStringArray);
                     }
                 }
             }

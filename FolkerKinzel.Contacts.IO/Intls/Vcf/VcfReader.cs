@@ -194,8 +194,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 var person = contact.Person ?? new Person();
                                 contact.Person = person;
 
-                                person.BirthDay = birthdayProp.DateTimeOffset.DateTime.ToLocalTime();
-                                
+                                person.BirthDay = birthdayProp.DateTimeOffset.Date;
                             }
                             break;
                         }
@@ -211,7 +210,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 var person = contact.Person ?? new Person();
                                 contact.Person = person;
 
-                                person.Anniversary = anniversaryProp.DateTimeOffset.DateTime.ToLocalTime();
+                                person.Anniversary = anniversaryProp.DateTimeOffset.Date;
 
                             }
                             break;

@@ -31,8 +31,8 @@ namespace FolkerKinzel.Contacts.IO
         /// </summary>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, von der die CSV-Datei stammt.</param>
-        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>
-        /// für <see cref="CultureInfo.InvariantCulture"/>.</param>
+        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
+        /// um automatisch die am besten geeignete für <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="Encoding.UTF8"/>.</param>
         /// <returns>Inhalt der CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.</returns>
         ///<exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
@@ -53,8 +53,8 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="contacts">Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.</param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>
-        /// für <see cref="CultureInfo.InvariantCulture"/>.</param>
+        /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
+        /// um automatisch die am besten geeignete für <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
         /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist<c>null</c>.</exception>
         /// <exception cref="ArgumentException">

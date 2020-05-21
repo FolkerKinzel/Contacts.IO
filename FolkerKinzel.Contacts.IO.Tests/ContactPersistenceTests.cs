@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 
 namespace FolkerKinzel.Contacts.IO.Tests
@@ -24,6 +25,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
+            CollectionAssert.DoesNotContain(conts, null);
 
         }
 
@@ -41,11 +43,14 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Outlook()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook);
+            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(5, conts.Count);
-
+            CollectionAssert.DoesNotContain(conts, null);
+            Assert.IsNotNull(conts[0].Person);
+            Assert.AreEqual(new DateTime(1981, 1, 20), conts[0]?.Person?.BirthDay);
+            Assert.AreEqual(new DateTime(2005, 6, 3), conts[0]?.Person?.Anniversary);
         }
 
         [TestMethod()]
@@ -65,7 +70,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
-
+            CollectionAssert.DoesNotContain(conts, null);
 
             //string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Maxl.vcf");
 
@@ -95,6 +100,8 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
+            CollectionAssert.DoesNotContain(conts, null);
+
 
         }
 
@@ -107,6 +114,35 @@ namespace FolkerKinzel.Contacts.IO.Tests
             Assert.IsNotNull(conts);
             Assert.AreEqual(2, conts.Count);
         }
+
+        [TestMethod()]
+        public void LoadVCardTest2()
+        {
+            var conts = ContactPersistence.LoadVCard(@"C:\Users\fkinz\Desktop\Test\Wittig\Wittig.vcf");
+
+            Assert.IsNotNull(conts);
+        }
+
+        //[TestMethod()]
+        //public void LoadCsvTest_Google2()
+        //{
+        //    var conts = ContactPersistence.LoadCsv(@"C:\Users\fkinz\Desktop\Test\Wittig\Wittig-Google.csv", CsvCompatibility.Google);
+
+        //    Assert.IsNotNull(conts);
+        //}
+
+        //[TestMethod()]
+        //public void LoadCsvTest_Outlook2()
+        //{
+        //    var conts = ContactPersistence.LoadCsv(@"C:\Users\fkinz\Desktop\Test\Wittig\Wittig-Outlook.csv", CsvCompatibility.Outlook);
+
+        //    Assert.IsNotNull(conts);
+
+        //    var bday = conts[0].Person.BirthDay;
+
+        //}
+
+
 
         [TestMethod()]
         public void SaveVCardTest_3_0()

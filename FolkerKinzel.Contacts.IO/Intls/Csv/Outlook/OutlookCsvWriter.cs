@@ -3,6 +3,7 @@ using FolkerKinzel.CsvTools.Helpers.Converters;
 using FolkerKinzel.CsvTools.Helpers.Converters.Specialized;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
     internal class OutlookCsvWriter : CsvWriter
     {
-        internal OutlookCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
+        internal OutlookCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider ?? CultureInfo.CurrentCulture, textEncoding) { }
 
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
@@ -22,7 +23,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
         protected override SexConverter InitSexConverter() => new OutlookSexConverter();
 
 
-        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", nullable: true, formatProvider: this.FormatProvider);
+        //protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", nullable: true, formatProvider: this.FormatProvider);
 
 
         protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)

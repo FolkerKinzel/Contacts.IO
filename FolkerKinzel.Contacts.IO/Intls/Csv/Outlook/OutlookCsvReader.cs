@@ -4,6 +4,7 @@ using FolkerKinzel.CsvTools.Helpers.Converters.Specialized;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 {
     internal class OutlookCsvReader : CsvReader
     {
-        internal OutlookCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
+        internal OutlookCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider ?? CultureInfo.CurrentCulture, textEncoding) { }
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
@@ -20,7 +21,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
             var mapping = HeaderRow.GetMappingEN();
 
-            if (mapping.Where(x => x.Item2.HasValue).All(x => Analyzer.ColumnNames.Contains(x.Item3[0])))
+            if (Analyzer.ColumnNames.Where(s => mapping.Any(tpl => tpl.Item2.HasValue && StringComparer.OrdinalIgnoreCase.Equals(tpl.Item3[0], s))).Count() > 3)
             {
                 return mapping;
             }
@@ -30,22 +31,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
                 var end = Math.Min(mapping.Count, Analyzer.ColumnNames.Count);
 
-                for (int i = 0; i < mapping.Count; i++)
+                for (int i = 0; i < end; i++)
                 {
                     mapping[i].Item3[0] = Analyzer.ColumnNames[i];
                 }
 
-                //                for (int i = end; i < mapping.Count; i++)
-                //                {
-                //                    var currentTpl = mapping[i];
-
-                //#if NET40
-                //                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, currentTpl.Item3);
-
-                //#else
-                //                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, Array.Empty<string>());
-                //#endif
-                //                }
+                for (int i = end; i < mapping.Count; i++)
+                {
+                    var currentTpl = mapping[i];
+                    mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, EmptyStringArray);
+                }
 
             }
 
@@ -56,7 +51,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
         protected override SexConverter InitSexConverter() => new OutlookSexConverter();
 
 
-        protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", nullable:true, formatProvider: this.FormatProvider);
+        //protected override ICsvTypeConverter InitNullableDateConverter() => new DateTimeConverter("M/d/yyyy", nullable:true, formatProvider: this.FormatProvider);
 
 
 

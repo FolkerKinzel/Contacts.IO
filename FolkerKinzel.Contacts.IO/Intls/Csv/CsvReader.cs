@@ -151,7 +151,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.BirthDay:
                         InitPerson();
-                        person!.BirthDay = (DateTime)val;
+                        person!.BirthDay = ((DateTime)val).Date;
                         break;
                     case ContactProp.Spouse:
                         InitPerson();
@@ -159,7 +159,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.Anniversary:
                         InitPerson();
-                        person!.Anniversary = (DateTime)val;
+                        person!.Anniversary = ((DateTime)val).Date;
                         break;
                     case ContactProp.AddressHomeStreet:
                         InitAddressHome();

@@ -14,3 +14,5 @@ Reading-Strategy:
 
     The mapping and CsvRecordWrapper must contain all known columns in the known standard order, because the file 
     is probably accessed by index!
+
+Outlook seems to use culture dependent formatting for DateTime.
