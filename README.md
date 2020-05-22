@@ -1,7 +1,7 @@
 # FolkerKinzel.Contacts.IO
 [![NuGet](https://img.shields.io/nuget/v/FolkerKinzel.Contacts.IO)](https://www.nuget.org/packages/FolkerKinzel.Contacts.IO/)
 
-Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persisist this 
+Easy to use .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it 
 as vCard (*.vcf) or CSV.
 
 ```
@@ -30,9 +30,9 @@ Paket CLI:
 ## Example Code
 _(For better readability exception handling is ommitted in the following examples.)_
 
-* [Initialize Contact Objects](#initialize-contact-objects)
-* [Read and Write VCF Files](#read-and-write-vcf-files)
-* [Read and Write CSV Files](#read-and-write-csv-files)
+* [Example: Initialize Contact Objects](#initialize-contact-objects)
+* [Example: Read and Write VCF Files](#read-and-write-vcf-files)
+* [Example: Read and Write CSV Files](#read-and-write-csv-files)
 
 #### Initialize `Contact` Objects:
 ```csharp

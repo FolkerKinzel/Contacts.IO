@@ -1,5 +1,5 @@
 # FolkerKinzel.Contacts.IO
-Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persisist this 
+Easy to use .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it 
 as vCard (*.vcf) or CSV.
 
 * [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/FolkerKinzel.Contacts.IO.Reference.en/Help/FolkerKinzel.Contacts.IO.en.chm)
