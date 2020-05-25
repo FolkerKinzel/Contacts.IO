@@ -37,7 +37,6 @@ namespace Examples
                 Console.WriteLine(contactArr[i]);
                 Console.WriteLine();
             }
-
         }
     }
 }
@@ -111,5 +110,4 @@ Phone Numbers:
 Company Data:
         Company:  Does Company
         Position: CEO
-
-*/
+ */

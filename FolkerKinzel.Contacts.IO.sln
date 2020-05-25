@@ -17,9 +17,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples", "Examples\Examples.csproj", "{0FFF2EE7-982A-4C84-9375-AEFC0898A2AC}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "FolkerKinzel.Contacts.IO.Doku.de", "FolkerKinzel.Contacts.IO.Doku.de\FolkerKinzel.Contacts.IO.Doku.de.shfbproj", "{440657BD-3C89-4063-81E2-834CFF918AED}"
-	ProjectSection(ProjectDependencies) = postProject
-		{651DB5FD-9957-43CB-86C6-1F27170F775B} = {651DB5FD-9957-43CB-86C6-1F27170F775B}
-	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "FolkerKinzel.Contacts.IO.Reference.en", "FolkerKinzel.Contacts.IO.Reference.en\FolkerKinzel.Contacts.IO.Reference.en.shfbproj", "{7C3489B0-06E6-4198-9ED4-CC92A531F36B}"
 EndProject

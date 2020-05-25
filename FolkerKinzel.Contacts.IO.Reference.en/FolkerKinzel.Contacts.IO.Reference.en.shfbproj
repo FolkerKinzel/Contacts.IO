@@ -54,8 +54,9 @@
     <ProjectSummary>Simple .NET-Api to manage contact data of organizations or natural persons.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">Simple .NET-Api to manage contact data of organizations or natural persons.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations or natural persons.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact-objects .</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations or natural persons.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact-objects .</NamespaceSummaryItem>
+    </NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
