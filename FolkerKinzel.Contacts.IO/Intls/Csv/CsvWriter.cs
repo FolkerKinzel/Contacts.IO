@@ -24,7 +24,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected CsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
         
 
-        internal void Write(string fileName, IEnumerable<Contact> data)
+        internal void Write(string fileName, IEnumerable<Contact?> data)
         {
             
             if (data is null)
@@ -46,14 +46,19 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             foreach (var cont in data)
             {
-                if (cont is null) continue;
+                if (cont is null)
+                {
+                    continue;
+                }
 
-                Contact contact = (Contact)cont.Clone();
-                contact.Clean();
+                cont.Clean();
 
-                if (contact.IsEmpty) continue;
+                if (cont.IsEmpty)
+                {
+                    continue;
+                }
 
-                FillCsvRecord(contact, wrapper, mapping);
+                FillCsvRecord(cont, wrapper, mapping);
                 writer.WriteRecord();
             }
         }

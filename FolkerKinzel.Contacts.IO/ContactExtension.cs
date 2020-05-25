@@ -15,6 +15,20 @@ namespace FolkerKinzel.Contacts.IO
         /// <summary>
         /// Speichert den Inhalt eines <see cref="Contact"/>-Objekts als CSV-Datei.
         /// </summary>
+        /// <remarks>
+        /// <para>Die Methode erzeugt bei jedem Aufruf eine neue CSV-Datei. Wenn Sie mehrere <see cref="Contact"/>-Objekte in einer 
+        /// gemeinsamen CSV-Datei speichern möchten, eignet sich die Methode 
+        /// <see cref="ContactPersistence.SaveCsv(string, System.Collections.Generic.IEnumerable{Contact?}, CsvCompatibility, IFormatProvider?, Encoding?)"/>.</para>
+        /// <para>
+        /// Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="Contact.Clean"/> auf. Wenn
+        /// die Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, wird eine leere Datei erzeugt.
+        /// </para>
+        /// <para>
+        /// Wenn es unerwünscht ist, dass die Methode <paramref name="contact"/> durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        /// können Sie vorher mit <see cref="Contact.Clone"/> eine
+        /// Kopie von <paramref name="contact"/> erstellen und der Methode die Kopie übergeben.
+        /// </para>
+        /// </remarks>
         /// <param name="contact">Das zu speichernde <see cref="Contact"/>-Objekt.</param>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
@@ -56,8 +70,19 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        /// <remarks>Verwenden Sie zum Speichern mehrerer <see cref="Contact"/>-Objekte in einer gemeinsamen vcf-Datei die
-        /// Methode <see cref="ContactPersistence.SaveVCard(string, System.Collections.Generic.IEnumerable{Contact?}, VCardVersion)"/>!</remarks>
+        /// <remarks>
+        /// <para>
+        /// Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="Contact.Clean"/> auf. Wenn
+        /// die Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, wird eine keine Datei erzeugt.
+        /// </para>
+        /// <para>
+        /// Falls es unerwünscht ist, dass die Methode <paramref name="contact"/> durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        /// können Sie vorher mit <see cref="Contact.Clone"/> eine
+        /// Kopie von <paramref name="contact"/> erstellen und der Methode die Kopie übergeben.
+        /// </para>
+        /// <para>Zum Speichern mehrerer <see cref="Contact"/>-Objekte in einer gemeinsamen vcf-Datei eignet sich die
+        /// Methode <see cref="ContactPersistence.SaveVCard(string, System.Collections.Generic.IEnumerable{Contact?}, VCardVersion)"/>.</para>
+        /// </remarks>
         public static void SaveVCard(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0)
         {
             VcfWriter.Write(contact, fileName, version);

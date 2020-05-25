@@ -29,6 +29,8 @@ namespace FolkerKinzel.Contacts.IO
         /// <summary>
         /// Lädt den Inhalt einer CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.
         /// </summary>
+        /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
+        /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, von der die CSV-Datei stammt.</param>
         /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
@@ -50,20 +52,40 @@ namespace FolkerKinzel.Contacts.IO
         /// <summary>
         /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine CSV-Datei.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
+        /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
+        /// die Datei geschrieben.
+        /// </para>
+        /// <para>
+        /// Wenn es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        /// können Sie vorher mit <see cref="Contact.Clone"/>
+        /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode die Kopien übergeben.
+        /// </para>
+        /// </remarks>
         /// <param name="fileName">Dateipfad der CSV-Datei.</param>
-        /// <param name="contacts">Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.</param>
+        /// <param name="contacts">
+        /// <para>
+        /// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
+        /// </para>
+        /// <para>
+        /// Die Sammlung darf leer sein oder <c>null</c>-Werte
+        /// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird eine leere Datei erzeugt.
+        /// </para>
+        /// </param>
         /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
         /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
         /// um automatisch die am besten geeignete für <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
-        /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist<c>null</c>.</exception>
+        /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
         /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
         /// <para>- oder -</para>
         /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
         /// </exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void SaveCsv(string fileName, IEnumerable<Contact> contacts, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
+        public static void SaveCsv(string fileName, IEnumerable<Contact?> contacts, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
         {
             CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, contacts);
         }
@@ -75,6 +97,8 @@ namespace FolkerKinzel.Contacts.IO
         /// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="Contact"/>-Array zurück. (Eine vcf-Datei kann
         /// mehrere aneinandergehängte vCards enthalten.) Enthält die Datei keinen Text, wird ein leeres Array zurückgegeben.
         /// </summary>
+        /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
+        /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
         /// <param name="fileName">Der vollständige Pfad der vCard-Datei.</param>
         /// <returns>Die geladenen Daten als <see cref="Contact"/>-Array.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
@@ -93,16 +117,32 @@ namespace FolkerKinzel.Contacts.IO
         /// Speichert den Inhalt einer Auflistung  von <see cref="Contact"/>-Objekten in eine gemeinsame 
         /// vCard-Datei (*.vcf).
         /// </summary>
-        /// /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
+        /// <remarks>
+        /// <para>
+        /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
+        /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
+        /// die Datei geschrieben.
+        /// </para>
+        /// <para>
+        /// Wenn es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        /// können Sie vorher mit <see cref="Contact.Clone"/>
+        /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode die Kopien übergeben.
+        /// </para>
+        /// </remarks>
+        /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
         /// Existiert die Datei schon, wird sie überschrieben.</param>
-        /// <param name="contacts">Auflistung der in eine gemeinsame vCard-Datei zu schreibenden <see cref="Contact"/>-Objekte.
-        /// Die Auflistung darf leer sein oder <c>null</c>-Werte
-        /// enthalten. Wenn die Auflistung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei geschrieben.</param>
-        /// <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
+        /// <param name="contacts">
+        /// <para>
+        /// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
+        /// </para>
+        /// <para>
+        /// Die Sammlung darf leer sein oder <c>null</c>-Werte
+        /// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei geschrieben.
+        /// </para></param>
+        /// <param name="version">Dateiversion der zu speichernden vCard.</param>
         /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        /// <remarks><paramref name="contacts"/> darf nicht <c>null</c> sein, aber <c>null</c>-Werte enthalten.</remarks>
         public static void SaveVCard(string fileName, IEnumerable<Contact?> contacts, VCardVersion version = VCardVersion.V3_0)
         {
             VcfWriter.Write(contacts, fileName, version);

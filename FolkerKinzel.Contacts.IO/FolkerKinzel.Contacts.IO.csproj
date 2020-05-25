@@ -7,8 +7,8 @@
     <!-- nuget-Package: -->
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
-    <Version>1.1.3</Version>
-    <FileVersion>1.1.7.3</FileVersion>
+    <Version>1.2.0</Version>
+    <FileVersion>1.1.11.3</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageTags>vcf csv vcard contact</PackageTags>
     <Description>Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist this as vCard (*.vcf) or CSV.</Description>

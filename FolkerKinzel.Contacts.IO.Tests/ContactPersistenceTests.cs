@@ -115,13 +115,13 @@ namespace FolkerKinzel.Contacts.IO.Tests
             Assert.AreEqual(2, conts.Count);
         }
 
-        [TestMethod()]
-        public void LoadVCardTest2()
-        {
-            var conts = ContactPersistence.LoadVCard(@"C:\Users\fkinz\Desktop\Test\Wittig\Wittig.vcf");
+        //[TestMethod()]
+        //public void LoadVCardTest2()
+        //{
+        //    var conts = ContactPersistence.LoadVCard(@"C:\Users\fkinz\Desktop\Test\Wittig\Wittig.vcf");
 
-            Assert.IsNotNull(conts);
-        }
+        //    Assert.IsNotNull(conts);
+        //}
 
         //[TestMethod()]
         //public void LoadCsvTest_Google2()

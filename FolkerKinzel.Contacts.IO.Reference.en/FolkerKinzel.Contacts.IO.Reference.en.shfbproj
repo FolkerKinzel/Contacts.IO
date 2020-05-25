@@ -51,12 +51,11 @@
     <IndentHtml>False</IndentHtml>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <ProjectSummary>Simple .NET-Api to manage contact data of organizations or natural persons.</ProjectSummary>
+    <ProjectSummary>Easy to use .NET-API to manage contact data of organizations or natural persons.</ProjectSummary>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">Simple .NET-Api to manage contact data of organizations or natural persons.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations or natural persons.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact-objects .</NamespaceSummaryItem>
-    </NamespaceSummaries>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">The namespaces FolkerKinzel.Contacts and FolkerKinzel.Contacts.IO represent a simple .NET API for storing and editing contact data of organizations and natural persons. The namespace FolkerKinzel.Contacts contains the data model and the namespace FolkerKinzel.Contacts.IO provides classes to persist it as CSV or vCard (*.vcf).</NamespaceSummaryItem>
+<NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations or natural persons.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact objects as CSV or vCard (*.vcf).</NamespaceSummaryItem></NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

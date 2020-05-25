@@ -58,12 +58,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
         private static VCard? ToVCard(Contact? contact)
         {
-            if (contact is null) return null;
+            if (contact is null)
+            {
+                return null;
+            }
 
-            contact = (Contact)contact.Clone();
             contact.Clean();
 
-            if (contact.IsEmpty) return null;
+            if (contact.IsEmpty)
+            {
+                return null;
+            }
 
             var vcard = new VCard();
             bool writeAdrWork = true;
