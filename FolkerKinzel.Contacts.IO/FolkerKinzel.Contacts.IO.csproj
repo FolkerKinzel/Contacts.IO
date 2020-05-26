@@ -12,7 +12,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>Bug fixes and complete IntelliSense in English and German (Deutsch).</PackageReleaseNotes>
     <PackageTags>vcf csv vcard contact</PackageTags>
-    <Description>Simple .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.</Description>
+    <Description>.NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.</Description>
     <Authors>Folker Kinzel</Authors>
     <Copyright>Copyright © 2020 Folker Kinzel</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
