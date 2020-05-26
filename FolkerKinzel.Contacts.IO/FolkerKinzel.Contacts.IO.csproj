@@ -33,8 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FolkerKinzel.Contacts" Version="1.3.0" />
-    <PackageReference Include="FolkerKinzel.CsvTools" Version="1.3.0" />
-    <PackageReference Include="FolkerKinzel.VCards" Version="1.4.2" />
+    <PackageReference Include="FolkerKinzel.CsvTools" Version="1.3.1" />
+    <PackageReference Include="FolkerKinzel.VCards" Version="1.4.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
