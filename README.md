@@ -5,16 +5,16 @@
 
 ```
 nuget Package Manager:
-PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.2.0
+PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.2.1
 
 .NET CLI:
-> dotnet add package FolkerKinzel.Contacts.IO --version 1.2.0
+> dotnet add package FolkerKinzel.Contacts.IO --version 1.2.1
 
 PackageReference (Visual Studio Project File):
-<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.2.0" />
+<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.2.1" />
 
 Paket CLI:
-> paket add FolkerKinzel.Contacts.IO --version 1.2.0
+> paket add FolkerKinzel.Contacts.IO --version 1.2.1
 ```
 
 * [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/FolkerKinzel.Contacts.IO.Reference.en/Help/FolkerKinzel.Contacts.IO.en.chm)
