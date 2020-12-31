@@ -43,10 +43,9 @@ namespace FolkerKinzel.Contacts.IO
         /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
         /// <para>- oder -</para>
         /// <para>die Datei enthält ungültiges CSV.</para></exception>
-        public static List<Contact> LoadCsv(string fileName, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
-        {
-            return CsvReader.GetInstance(platform, formatProvider, textEncoding).Read(fileName);
-        }
+        public static List<Contact> LoadCsv
+            (string fileName, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null) 
+            => CsvReader.GetInstance(platform, formatProvider, textEncoding).Read(fileName);
 
 
         /// <summary>
@@ -83,10 +82,9 @@ namespace FolkerKinzel.Contacts.IO
         /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
         /// </exception>
         /// <exception cref="IOException">E/A-Fehler.</exception>
-        public static void SaveCsv(string fileName, IEnumerable<Contact?> contacts, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
-        {
-            CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, contacts);
-        }
+        public static void SaveCsv
+            (string fileName, IEnumerable<Contact?> contacts, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
+            => CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, contacts);
 
 
 
@@ -102,10 +100,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
-        public static List<Contact> LoadVCard(string fileName)
-        {
-            return VcfReader.Read(fileName);
-        }
+        public static List<Contact> LoadVCard(string fileName) => VcfReader.Read(fileName);
 
 
 
@@ -140,9 +135,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         public static void SaveVCard(string fileName, IEnumerable<Contact?> contacts, VCardVersion version = VCardVersion.V3_0)
-        {
-            VcfWriter.Write(contacts, fileName, version);
-        }
+            => VcfWriter.Write(contacts, fileName, version);
 
 
     }

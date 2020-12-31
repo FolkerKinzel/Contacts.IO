@@ -26,7 +26,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
 
             // englische Spaltennamen
-            var mapping = HeaderRow.GetMappingEN();
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = HeaderRow.GetMappingEN();
 
             if (Analyzer.ColumnNames.Where(s => mapping.Any(tpl => tpl.Item2.HasValue && StringComparer.OrdinalIgnoreCase.Equals(tpl.Item3[0], s))).Count() > 3)
             {
@@ -62,7 +62,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
                     for (int i = end; i < mapping.Count; i++)
                     {
-                        var currentTpl = mapping[i];
+                        Tuple<string, ContactProp?, IList<string>>? currentTpl = mapping[i];
                         mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, EmptyStringArray);
                     }
                 }
@@ -97,10 +97,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
             if (value <= 0) return;
 
-            var person = contact.Person ?? new Person();
+            Person? person = contact.Person ?? new Person();
             contact.Person = person;
 
-            var birthDay = person.BirthDay;
+            DateTime? birthDay = person.BirthDay;
 
             // Der CsvRecordWrapper bestimmt die Reihenfolge der Auswertung. Deshalb wird immer zuerst Year, dann Month, dann Day initialisiert.
 

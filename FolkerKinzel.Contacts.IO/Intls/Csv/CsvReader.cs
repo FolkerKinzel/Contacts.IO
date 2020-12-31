@@ -52,17 +52,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
 
 
-            var mapping = CreateMapping();
-            var wrapper = InitCsvRecordWrapper(mapping);
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = CreateMapping();
+            CsvRecordWrapper? wrapper = InitCsvRecordWrapper(mapping);
 
             Debug.Assert(wrapper.Count == mapping.Count);
 
-            using Csv::CsvReader reader =
+            using var reader =
                new Csv::CsvReader(fileName, hasHeaderRow: true, options: Analyzer.Options | CsvOptions.DisableCaching, textEncoding: TextEncoding, fieldSeparator: Analyzer.FieldSeparator);
 
             try
             {
-                foreach (var record in reader.Read())
+                foreach (CsvRecord? record in reader.Read())
                 {
                     wrapper.Record = record;
                     list.Add(InitContact(wrapper, mapping));
@@ -103,9 +103,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             for (int i = 0; i < wrapper.Count; i++)
             {
-                var val = wrapper[i];
+                object? val = wrapper[i];
 
-                if (val is null) continue;
+                if (val is null)
+                {
+                    continue;
+                }
 
                 ContactProp? prop = mapping[i].Item2;
 

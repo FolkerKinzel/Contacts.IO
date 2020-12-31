@@ -36,15 +36,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
             using var writer = new Csv::CsvWriter(fileName, columnNames, textEncoding: TextEncoding);
 
-            var mapping = CreateMapping();
-            var wrapper = InitCsvRecordWrapper(mapping);
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = CreateMapping();
+            CsvRecordWrapper? wrapper = InitCsvRecordWrapper(mapping);
             wrapper.Record = writer.Record;
 
             
 
             Debug.Assert(wrapper.Count == mapping.Count);
 
-            foreach (var cont in data)
+            foreach (Contact? cont in data)
             {
                 if (cont is null)
                 {
@@ -69,16 +69,16 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         private void FillCsvRecord(Contact contact, CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
         {
-            var person = contact.Person;
-            var name = person?.Name;
-            var homeAddress = contact.AddressHome;
-            var emails = contact.EmailAddresses ?? EmptyStringArray;
-            var ims = contact.InstantMessengerHandles ?? EmptyStringArray;
-            var work = contact.Work;
-            var workAddress = work?.AddressWork;
+            Person? person = contact.Person;
+            Name? name = person?.Name;
+            Address? homeAddress = contact.AddressHome;
+            IEnumerable<string?>? emails = contact.EmailAddresses ?? EmptyStringArray;
+            IEnumerable<string?>? ims = contact.InstantMessengerHandles ?? EmptyStringArray;
+            Work? work = contact.Work;
+            Address? workAddress = work?.AddressWork;
 
-            var phones = contact.PhoneNumbers ?? EmptyPhonesArray;
-            var otherPhones = phones.Where(x => !(x is null || x.IsMobile || x.IsFax || x.IsWork)).ToArray();
+            IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers ?? EmptyPhonesArray;
+            PhoneNumber?[]? otherPhones = phones.Where(x => !(x is null || x.IsMobile || x.IsFax || x.IsWork)).ToArray();
 
             for (int i = 0; i < mapping.Count; i++)
             {

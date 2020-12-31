@@ -81,7 +81,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
         private static string? GetValueFromPhone(IEnumerable<PhoneNumber?>? phones, int index)
         {
-            var phone = phones?.ElementAtOrDefault(index);
+            PhoneNumber? phone = phones?.ElementAtOrDefault(index);
 
             return phone?.Value;
         }

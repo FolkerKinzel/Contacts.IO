@@ -38,7 +38,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
         private static Contact ConvertToContact(VCard vcard)
         {
-            Contact contact = new Contact();
+            var contact = new Contact();
 
 #if NET40
             IEnumerable<string> emptyArray = new string[0];
@@ -47,7 +47,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 #endif
             
 
-            foreach (var property in vcard)
+            foreach (KeyValuePair<VC.Enums.VCdProp, object> property in vcard)
             {
                 switch (property.Key)
                 {
@@ -83,13 +83,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         break;
                     case VC::Enums.VCdProp.NameViews:
                         {
-                            var vcardName = ((IEnumerable<VC::NameProperty>)property.Value)
+                            VC.PropertyParts.Name? vcardName = ((IEnumerable<VC::NameProperty>)property.Value)
                                 .Where(x => !x.IsEmpty)
                                 .FirstOrDefault()?.Value;
 
                             if(vcardName != null)
                             {
-                                var person = contact.Person ?? new Person();
+                                Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
 
                                 var name = new Name();
@@ -106,7 +106,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.NickNames:
                         {
-                            var person = contact.Person ?? new Person();
+                            Person? person = contact.Person ?? new Person();
                             contact.Person = person;
 
                             person.NickName = ((IEnumerable<VC::StringCollectionProperty>)property.Value)
@@ -118,14 +118,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.Organizations:
                         {
-                            var org = ((IEnumerable<VC::OrganizationProperty>)property.Value)
+                            VC.PropertyParts.Organization? org = ((IEnumerable<VC::OrganizationProperty>)property.Value)
                                 .Where(x => !x.IsEmpty)
                                 .OrderBy(x => x.Parameters.Preference)
                                 .FirstOrDefault()?.Value;
 
                             if (org != null)
                             {
-                                var work = contact.Work ?? new Work();
+                                Work? work = contact.Work ?? new Work();
                                 contact.Work = work;
 
                                 work.Company = org.OrganizationName;
@@ -144,7 +144,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                             if (title != null)
                             {
-                                var work = contact.Work ?? new Work();
+                                Work? work = contact.Work ?? new Work();
                                 contact.Work = work;
 
                                 work.JobTitle = title;
@@ -156,10 +156,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.GenderViews:
                         {
-                            var person = contact.Person ?? new Person();
+                            Person? person = contact.Person ?? new Person();
                             contact.Person = person;
 
-                            var vcardGender = ((IEnumerable<VC::GenderProperty>)property.Value)
+                            VC.PropertyParts.Gender? vcardGender = ((IEnumerable<VC::GenderProperty>)property.Value)
                                 .Where(x => !x.IsEmpty)
                                 .FirstOrDefault()?.Value;
 
@@ -184,14 +184,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.BirthDayViews:
                         {
-                            var birthdayProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
+                            VC.DateTimeOffsetProperty? birthdayProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
                                                .Select(x => x as VC::DateTimeOffsetProperty)
                                                .Where(x => x != null && !x.IsEmpty)
                                                .FirstOrDefault();
 
                             if (birthdayProp != null)
                             {
-                                var person = contact.Person ?? new Person();
+                                Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
 
                                 person.BirthDay = birthdayProp.DateTimeOffset.Date;
@@ -200,14 +200,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.AnniversaryViews:
                         {
-                            var anniversaryProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
+                            VC.DateTimeOffsetProperty? anniversaryProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
                                                .Select(x => x as VC::DateTimeOffsetProperty)
                                                .Where(x => x != null && !x.IsEmpty)
                                                .FirstOrDefault();
 
                             if (anniversaryProp != null)
                             {
-                                var person = contact.Person ?? new Person();
+                                Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
 
                                 person.Anniversary = anniversaryProp.DateTimeOffset.Date;
@@ -217,7 +217,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.Relations:
                         {
-                            var spouseProp = ((IEnumerable<VC::RelationProperty>)property.Value)
+                            VC.RelationProperty? spouseProp = ((IEnumerable<VC::RelationProperty>)property.Value)
                                                .Where(x => x.Parameters.RelationType.IsSet(VC::Enums.RelationTypes.Spouse)
                                                     && x.IsEmpty
                                                     && (x is VC::RelationTextProperty || x is VC::RelationVCardProperty))
@@ -239,7 +239,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                             if(spouseName != null)
                             {
-                                var person = contact.Person ?? new Person();
+                                Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
                                 person.Spouse = spouseName;
                             }
@@ -257,11 +257,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                             string separator = " ";
 
-                            foreach (var vcardAddress in vcardAddresses.Where(x => x.Value != null).OrderByDescending(x => x.Parameters.Preference))
+                            foreach (VC.AddressProperty? vcardAddress in vcardAddresses.Where(x => x.Value != null).OrderByDescending(x => x.Parameters.Preference))
                             {
                                 if(vcardAddress.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
                                 {
-                                    var work = contact.Work ?? new Work();
+                                    Work? work = contact.Work ?? new Work();
                                     contact.Work = work;
 
                                     work.AddressWork = new Address()
@@ -322,7 +322,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                             if (vcardUrls != null)
                             {
-                                foreach (var url in vcardUrls.Where(x => x.Value != null).OrderByDescending(x => x.Parameters.Preference))
+                                foreach (VC.TextProperty? url in vcardUrls.Where(x => x.Value != null).OrderByDescending(x => x.Parameters.Preference))
                                 {
                                     if (url.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
                                     {

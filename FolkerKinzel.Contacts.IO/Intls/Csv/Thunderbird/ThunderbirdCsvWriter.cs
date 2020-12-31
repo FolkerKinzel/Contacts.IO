@@ -42,7 +42,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
 
         protected override void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
         {
-            var _birthDay = contact.Person?.BirthDay;
+            DateTime? _birthDay = contact.Person?.BirthDay;
 
             wrapper[index] = _birthDay.HasValue ? prop switch
             {

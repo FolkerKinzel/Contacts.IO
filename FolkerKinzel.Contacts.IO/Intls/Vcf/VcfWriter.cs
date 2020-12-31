@@ -49,7 +49,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
         public static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
         {
-            if (contacts is null) throw new ArgumentNullException(nameof(contacts));
+            if (contacts is null)
+            {
+                throw new ArgumentNullException(nameof(contacts));
+            }
 
             VCard.Save(fileName, contacts.Select(x => ToVCard(x)).ToList(), (VC::Enums.VCdVersion)version);
         }
@@ -72,9 +75,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
             var vcard = new VCard();
             bool writeAdrWork = true;
-            var work = contact.Work;
+            Work? work = contact.Work;
 
-            var adrHome = contact.AddressHome;
+            Address? adrHome = contact.AddressHome;
 
             if(adrHome != null)
             {
@@ -111,7 +114,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
             
             if(work != null)
             {
-                var adrWork = work.AddressWork;
+                Address? adrWork = work.AddressWork;
 
                 if(writeAdrWork && adrWork != null)
                 {
@@ -170,7 +173,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 dispNames.Add(new VC::TextProperty(displayName));
             }
 
-            var emails = contact.EmailAddresses;
+            IEnumerable<string?>? emails = contact.EmailAddresses;
             if(emails != null)
             {
                 var emailProps = new List<VC::TextProperty>();
@@ -213,7 +216,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
             if(writeWebWork && webWork != null)
             {
-                var urls = (List<VC::TextProperty?>?)vcard.URLs ?? new List<VC::TextProperty?>();
+                List<VC.TextProperty?>? urls = (List<VC::TextProperty?>?)vcard.URLs ?? new List<VC::TextProperty?>();
                 vcard.URLs = urls;
 
                 var urlWorkProp = new VC::TextProperty(webWork);
@@ -222,7 +225,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 urlWorkProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
             }
 
-            var impps = contact.InstantMessengerHandles;
+            IEnumerable<string?>? impps = contact.InstantMessengerHandles;
             if (impps != null)
             {
                 var imppProps = new List<VC::TextProperty>();
@@ -239,10 +242,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 }
             }
 
-            var person = contact.Person;
+            Person? person = contact.Person;
             if (person != null)
             {
-                var bday = person.BirthDay;
+                DateTime? bday = person.BirthDay;
                 if (bday.HasValue)
                 {
                     var bdays = new List<VC::DateTimeProperty>();
@@ -251,7 +254,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     bdays.Add(bdayProp);
                 }
 
-                var name = person.Name;
+                Name? name = person.Name;
                 if (name != null)
                 {
                     var names = new List<VC::NameProperty>();
@@ -259,7 +262,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     names.Add(new VC::NameProperty(name.LastName, name.FirstName, name.MiddleName, name.Prefix, name.Suffix));
                 }
 
-                var gender = person.Gender;
+                Sex gender = person.Gender;
                 if(gender != Sex.Unspecified)
                 {
                     var genders = new List<VC::GenderProperty>();
@@ -287,7 +290,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     spouseProp.Parameters.RelationType = VC::Enums.RelationTypes.Spouse;
                 }
 
-                var anniversary = person.Anniversary;
+                DateTime? anniversary = person.Anniversary;
                 if(anniversary.HasValue)
                 {
                     var anniversaries = new List<VC::DateTimeProperty>();
@@ -298,14 +301,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 }
             }
 
-            var phones = contact.PhoneNumbers;
+            IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers;
             if(phones != null)
             {
                 var phoneProps = new List<VC::TextProperty>();
                 vcard.PhoneNumbers = phoneProps;
                 VC::TextProperty phoneProp;
 
-                foreach (var number in phones)
+                foreach (PhoneNumber? number in phones)
                 {
                     phoneProp = new VC::TextProperty(number!.Value);
                     phoneProps.Add(phoneProp);

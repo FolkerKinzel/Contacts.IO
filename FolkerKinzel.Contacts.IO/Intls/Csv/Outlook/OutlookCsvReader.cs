@@ -19,7 +19,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             Debug.Assert(Analyzer.HasHeaderRow == true);
             Debug.Assert(Analyzer.ColumnNames != null);
 
-            var mapping = HeaderRow.GetMappingEN();
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = HeaderRow.GetMappingEN();
 
             if (Analyzer.ColumnNames.Where(s => mapping.Any(tpl => tpl.Item2.HasValue && StringComparer.OrdinalIgnoreCase.Equals(tpl.Item3[0], s))).Count() > 3)
             {
@@ -38,7 +38,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
 
                 for (int i = end; i < mapping.Count; i++)
                 {
-                    var currentTpl = mapping[i];
+                    Tuple<string, ContactProp?, IList<string>>? currentTpl = mapping[i];
                     mapping[i] = new Tuple<string, ContactProp?, IList<string>>(currentTpl.Item1, null, EmptyStringArray);
                 }
 
@@ -77,7 +77,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.BusinessStreet3:
                     {
                         contact.Work ??= new Work();
-                        var adrWork = contact.Work.AddressWork;
+                        Address? adrWork = contact.Work.AddressWork;
                         adrWork ??= new Address();
                         contact.Work.AddressWork = adrWork;
 
@@ -87,7 +87,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.HomeStreet2:
                 case AdditionalProp.HomeStreet3:
                     {
-                        var adrHome = contact.AddressHome ?? new Address();
+                        Address? adrHome = contact.AddressHome ?? new Address();
                         contact.AddressHome = adrHome;
 
                         adrHome.Street += $" {(string?)wrapper[index]}";
@@ -97,7 +97,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.BusinessPhone2:
                 case AdditionalProp.CompanyMainPhone:
                     {
-                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
                         contact.PhoneNumbers = phones;
 
                         phones.Add(new PhoneNumber((string?)wrapper[index], true));
@@ -108,7 +108,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.RadioPhone:
                 case AdditionalProp.TTY_TDD_Phone:
                     {
-                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
                         contact.PhoneNumbers = phones;
 
                         phones.Add(new PhoneNumber((string?)wrapper[index]));
@@ -116,7 +116,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                     break;
                 case AdditionalProp.OtherFax:
                     {
-                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
                         contact.PhoneNumbers = phones;
 
                         phones.Add(new PhoneNumber((string?)wrapper[index], isFax: true));

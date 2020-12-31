@@ -106,7 +106,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             int cellProperties = 0;
             int phoneProperties = 0;
 
-            foreach (var tpl in mapping)
+            foreach (Tuple<string, ContactProp?, IList<string>>? tpl in mapping)
             {
                 switch (tpl.Item2)
                 {

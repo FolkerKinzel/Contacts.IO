@@ -20,7 +20,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
-            var mapping = HeaderRow.GetMapping();
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = HeaderRow.GetMapping();
 
             mapping.Add(
 
@@ -82,7 +82,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Type:
                 case AdditionalProp.Phone9Type:
                     {
-                        var phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        List<PhoneNumber>? phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
                         contact.PhoneNumbers = phoneNumbers;
 
                         if (phoneNumbers.Count == 0)
@@ -93,7 +93,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 #if NET40
                         var lastNumber = phoneNumbers[phoneNumbers.Count - 1];
 #else
-                        var lastNumber = phoneNumbers[^1];
+                        PhoneNumber? lastNumber = phoneNumbers[^1];
 #endif
 
 
@@ -120,7 +120,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Value:
                 case AdditionalProp.Phone9Value:
                     {
-                        var phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
+                        List<PhoneNumber>? phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
                         contact.PhoneNumbers = phoneNumbers;
 
                         if (phoneNumbers.Count == 0)
@@ -168,7 +168,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         if (((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? false)
 #endif
                         {
-                            var work = contact.Work ?? new Work();
+                            Work? work = contact.Work ?? new Work();
                             contact.Work = work;
 
 
@@ -186,7 +186,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             }
                         }
 
-                        var person = contact.Person;
+                        Person? person = contact.Person;
 
                         if (person != null)
                         {
@@ -297,7 +297,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         {
                             for (int i = 0; i < phones.Count; i++)
                             {
-                                var phone = phones[i];
+                                PhoneNumber? phone = phones[i];
 
                                 string? phoneNumber = phone.Value;
 

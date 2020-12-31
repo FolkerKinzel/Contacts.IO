@@ -73,10 +73,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <para>Zum Speichern mehrerer <see cref="Contact"/>-Objekte in einer gemeinsamen vcf-Datei eignet sich die
         /// Methode <see cref="ContactPersistence.SaveVCard(string, System.Collections.Generic.IEnumerable{Contact?}, VCardVersion)"/>.</para>
         /// </remarks>
-        public static void SaveVCard(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0)
-        {
-            VcfWriter.Write(contact, fileName, version);
-        }
+        public static void SaveVCard(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0) => VcfWriter.Write(contact, fileName, version);
 
     }
 }

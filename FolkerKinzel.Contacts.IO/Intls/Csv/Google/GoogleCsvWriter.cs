@@ -23,7 +23,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
         {
-            var mapping = HeaderRow.GetMapping();
+            IList<Tuple<string, ContactProp?, IList<string>>>? mapping = HeaderRow.GetMapping();
 
             mapping.Add(
 
@@ -124,7 +124,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                     break;
                 case AdditionalProp.EventType:
                     {
-                        var anniversary = contact.Person?.Anniversary;
+                        DateTime? anniversary = contact.Person?.Anniversary;
 
                         if (anniversary.HasValue)
                         {
@@ -198,7 +198,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         private static string? GetTelephoneTypeFromPhone(IEnumerable<PhoneNumber?>? phones, int index)
         {
-            var phone = phones?.ElementAtOrDefault(index);
+            PhoneNumber? phone = phones?.ElementAtOrDefault(index);
 
             if (phone is null) return null;
 
@@ -228,7 +228,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         private static string? GetValueFromPhone(IEnumerable<PhoneNumber?>? phones, int index)
         {
-            var phone = phones?.ElementAtOrDefault(index);
+            PhoneNumber? phone = phones?.ElementAtOrDefault(index);
 
             return phone?.Value;
         }

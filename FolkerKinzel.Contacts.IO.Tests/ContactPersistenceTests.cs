@@ -21,7 +21,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Thunderbird()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.ThunderbirdUtf8Csv, CsvCompatibility.Thunderbird);
+            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.ThunderbirdUtf8Csv, CsvCompatibility.Thunderbird);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -43,7 +43,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Outlook()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
+            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(5, conts.Count);
@@ -66,7 +66,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Google()
         {
-            var conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvCompatibility.Google);
+            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvCompatibility.Google);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
@@ -91,9 +91,9 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Unspecified()
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
-            var conts = ContactPersistence.LoadCsv(TestFiles.WindowsLiveMail, CsvCompatibility.Unspecified);
+            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.WindowsLiveMail, CsvCompatibility.Unspecified);
             sw.Stop();
 
             TestContext.WriteLine($"Stopwatch: {sw.ElapsedMilliseconds}");
@@ -109,7 +109,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadVCardTest()
         {
-            var conts = ContactPersistence.LoadVCard(TestFiles.V3vcf);
+            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadVCard(TestFiles.V3vcf);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(2, conts.Count);
