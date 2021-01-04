@@ -194,7 +194,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
 
-                                person.BirthDay = birthdayProp.DateTimeOffset.Date;
+                                person.BirthDay = birthdayProp.Value?.Date;
                             }
                             break;
                         }
@@ -210,7 +210,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                                 Person? person = contact.Person ?? new Person();
                                 contact.Person = person;
 
-                                person.Anniversary = anniversaryProp.DateTimeOffset.Date;
+                                person.Anniversary = anniversaryProp.Value?.Date;
 
                             }
                             break;
@@ -228,8 +228,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                             }
                             var spouseName = spouseProp switch
                             {
-                                VC::RelationTextProperty textProp => textProp.Text,
-                                VC::RelationVCardProperty vcProp => ((IEnumerable<VC::TextProperty>?)vcProp.VCard?.DisplayNames)?
+                                VC::RelationTextProperty textProp => textProp.Value,
+                                VC::RelationVCardProperty vcProp => ((IEnumerable<VC::TextProperty>?)vcProp.Value?.DisplayNames)?
                                             .Where(x => !x.IsEmpty)
                                             .OrderBy(x => x.Parameters.Preference)
                                             .FirstOrDefault()?.Value,
