@@ -3,7 +3,7 @@ using System;
 
 namespace Examples
 {
-    static class ContactExample
+    public static class ContactExample
     {
         public static Contact[] InitializeContacts() => new Contact[]
             {

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Examples
 {
-    static class VCardExample
+    public static class VCardExample
     {
         public static void ReadingAndWritingVCard()
         {

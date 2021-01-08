@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Examples
 {
-    static class CsvExample
+    public static class CsvExample
     {
         public static void ReadingAndWritingCsv()
         {

@@ -342,7 +342,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         {
             var builder = new StringBuilder();
 
-            builder.Append(adr.Street).Append(VCard.NewLine)
+            _ = builder.Append(adr.Street).Append(VCard.NewLine)
                    .Append(adr.PostalCode).Append(' ').Append(adr.City);
 
             return builder.ToString();

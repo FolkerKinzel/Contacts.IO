@@ -61,7 +61,7 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
 #Style - modifier options
 
 #do not prefer accessibility modifiers to be specified
-dotnet_style_require_accessibility_modifiers = never:suggestion
+#dotnet_style_require_accessibility_modifiers = never:suggestion
 
 #Style - Modifier preferences
 
@@ -70,3 +70,30 @@ csharp_preferred_modifier_order = public,private,protected,internal,static,exter
 
 # IDE0036: Modifizierer anordnen
 dotnet_diagnostic.IDE0036.severity = none
+
+# CA1012: Abstrakte Typen dürfen keine öffentlichen Konstruktoren enthalten
+dotnet_diagnostic.CA1012.severity = suggestion
+
+# CA1044: Eigenschaften dürfen nicht lesegeschützt sein
+dotnet_diagnostic.CA1044.severity = warning
+
+# CA1062: Argumente von öffentlichen Methoden validieren
+dotnet_diagnostic.CA1062.severity = suggestion
+
+# CA1066: "IEquatable" beim Außerkraftsetzen von "Object.Equals" implementieren
+dotnet_diagnostic.CA1066.severity = suggestion
+
+# CA1307: "StringComparison" zur Verdeutlichung angeben
+dotnet_diagnostic.CA1307.severity = suggestion
+
+# CA1813: Nicht versiegelte Attribute vermeiden
+dotnet_diagnostic.CA1813.severity = suggestion
+
+# CA1819: Eigenschaften dürfen keine Arrays zurückgeben
+dotnet_diagnostic.CA1819.severity = suggestion
+
+# CA1820: Anhand der Zeichenfolgenlänge auf leere Zeichenfolgen prüfen
+dotnet_diagnostic.CA1820.severity = warning
+
+# CA1823: Nicht verwendete private Felder vermeiden
+dotnet_diagnostic.CA1823.severity = suggestion

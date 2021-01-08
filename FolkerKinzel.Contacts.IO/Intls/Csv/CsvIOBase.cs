@@ -18,15 +18,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         protected CsvIOBase(IFormatProvider? formatProvider, Encoding? textEncoding)
         {
-            this.FormatProvider = formatProvider ?? CultureInfo.InvariantCulture;
-            this.TextEncoding = textEncoding;
+            FormatProvider = formatProvider ?? CultureInfo.InvariantCulture;
+            TextEncoding = textEncoding;
 
 #if NET40
-            this.EmptyStringArray = new string[0];
-            this.EmptyPhonesArray = new PhoneNumber[0];
+            EmptyStringArray = new string[0];
+            EmptyPhonesArray = new PhoneNumber[0];
 #else
-            this.EmptyStringArray = Array.Empty<string>();
-            this.EmptyPhonesArray = Array.Empty<PhoneNumber>();
+            EmptyStringArray = Array.Empty<string>();
+            EmptyPhonesArray = Array.Empty<PhoneNumber>();
 #endif
         }
 
@@ -219,8 +219,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 }
             }
 
-            PropInfo[TWO_CELL_PROPERTIES] = (cellProperties >= 2);
-            PropInfo[TWO_PHONE_PROPERTIES] = (phoneProperties >= 2);
+            PropInfo[TWO_CELL_PROPERTIES] = cellProperties >= 2;
+            PropInfo[TWO_PHONE_PROPERTIES] = phoneProperties >= 2;
 
             return wrapper;
         }
