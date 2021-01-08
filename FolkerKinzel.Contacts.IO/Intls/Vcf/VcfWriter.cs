@@ -81,14 +81,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
             if(adrHome != null)
             {
-                var adrProp = new VC::AddressProperty(
-                    null,
-                    null,
-                    adrHome.Street,
-                    adrHome.City,
-                    adrHome.State,
-                    adrHome.PostalCode,
-                    adrHome.Country);
+                var adrProp = new VC::AddressProperty(street: adrHome.Street,
+                                                      locality: adrHome.City,
+                                                      postalCode: adrHome.PostalCode,
+                                                      region: adrHome.State,
+                                                      country: adrHome.Country);
 
                 var addresses = new List<VC::AddressProperty?>();
                 vcard.Addresses = addresses;
@@ -118,14 +115,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                 if(writeAdrWork && adrWork != null)
                 {
-                    var adrProp = new VC::AddressProperty(
-                    null,
-                    null,
-                    adrWork.Street,
-                    adrWork.City,
-                    adrWork.State,
-                    adrWork.PostalCode,
-                    adrWork.Country);
+                    var adrProp = new VC::AddressProperty(street: adrWork.Street,
+                                                          locality: adrWork.City,
+                                                          postalCode: adrWork.PostalCode,
+                                                          region: adrWork.State,
+                                                          country: adrWork.Country);
 
                     List<VC::AddressProperty?> addresses = (List<VC::AddressProperty?>?)vcard.Addresses ?? new List<VC::AddressProperty?>();
                     vcard.Addresses = addresses;
@@ -333,122 +327,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     }
                 }
 
-                
-
-                //string? fax = phones.Fax;
-                //string? faxWork = phones.FaxWork;
-                //string? phone = phones.Phone;
-                //string? phoneWork = phones.PhoneWork;
-                //bool writeWork = true;
-                //bool writePhone = true;
-                //bool writePhoneWork = true;
-
-                //if(fax != null)
-                //{
-                //    phoneProp = new VC::TextProperty(fax);
-                //    phoneProps.Add(phoneProp);
-
-                //    if(fax == faxWork)
-                //    {
-                //        phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home | VC::Enums.PropertyClassTypes.Work;
-                //        writeWork = false;
-                //    }
-                //    else
-                //    {
-                //        phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home;
-                //    }
-
-                //    if (fax == phone)
-                //    {
-                //        phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Voice | VC::Enums.TelTypes.Fax;
-                //        writePhone = false;
-                //    }
-                //    else
-                //    {
-                //        phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Fax;
-                //    }
-                //}
-
-                //if(writeWork && faxWork != null)
-                //{
-                //    phoneProp = new VC::TextProperty(faxWork);
-                //    phoneProps.Add(phoneProp);
-
-                //    phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
-
-                //    if (faxWork == phoneWork)
-                //    {
-                //        phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Voice | VC::Enums.TelTypes.Fax;
-                //        writePhoneWork = false;
-                //    }
-                //    else
-                //    {
-                //        phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Fax;
-                //    }
-                //}
-
-                //if(writePhone && phone != null)
-                //{
-                //    phoneProp = new VC::TextProperty(phone);
-                //    phoneProps.Add(phoneProp);
-
-                //    if (phone == phoneWork)
-                //    {
-                //        phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home | VC::Enums.PropertyClassTypes.Work;
-                //        writePhoneWork = false;
-                //    }
-                //    else
-                //    {
-                //        phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home;
-                //    }
-
-                //    phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Voice;
-                //}
-
-
-                //if(writePhoneWork && phoneWork != null)
-                //{
-                //    phoneProp = new VC::TextProperty(phoneWork);
-                //    phoneProps.Add(phoneProp);
-
-                //    phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
-                //    phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Voice;
-                //}
-
-
-                //phone = phones.MobilePhone;
-
-                //if(phone != null)
-                //{
-                //    phoneProp = new VC::TextProperty(phone);
-                //    phoneProps.Add(phoneProp);
-
-                //    phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Voice | VC::Enums.TelTypes.Cell;
-                //}
-
-                //phone = phones.OtherPhone;
-
-                //if (phone != null)
-                //{
-                //    phoneProp = new VC::TextProperty(phone);
-                //    phoneProps.Add(phoneProp);
-                //}
-
-
-                //phone = phones.Pager;
-
-                //if (phone != null)
-                //{
-                //    phoneProp = new VC::TextProperty(phone);
-                //    phoneProps.Add(phoneProp);
-
-                //    phoneProp.Parameters.TelephoneType = VC::Enums.TelTypes.Pager;
-                //}
             }
 
           
             
-            vcard.LastRevision = contact.TimeStamp == default ? null : new VC::TimestampProperty(contact.TimeStamp);
+            vcard.LastRevision = contact.TimeStamp == default ? null : new VC::TimeStampProperty(contact.TimeStamp);
             
 
             return vcard;

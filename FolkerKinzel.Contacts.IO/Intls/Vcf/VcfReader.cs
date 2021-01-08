@@ -57,7 +57,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.LastRevision:
                         {
-                            contact.TimeStamp = ((VC::TimestampProperty)property.Value).Value.DateTime;
+                            contact.TimeStamp = ((VC::TimeStampProperty)property.Value).Value.DateTime;
                             
                             break;
                         }
