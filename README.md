@@ -15,6 +15,9 @@ PackageReference (Visual Studio Project File):
 
 Paket CLI:
 > paket add FolkerKinzel.Contacts.IO --version 1.2.2
+
+F# Interactive:
+> #r "nuget: FolkerKinzel.Contacts.IO, 1.2.2"
 ```
 
 * [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.2.2/FolkerKinzel.Contacts.IO.en.chm)
