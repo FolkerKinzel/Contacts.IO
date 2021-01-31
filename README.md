@@ -5,24 +5,24 @@
 
 ```
 nuget Package Manager:
-PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.2.1
+PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.2.2
 
 .NET CLI:
-> dotnet add package FolkerKinzel.Contacts.IO --version 1.2.1
+> dotnet add package FolkerKinzel.Contacts.IO --version 1.2.2
 
 PackageReference (Visual Studio Project File):
-<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.2.1" />
+<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.2.2" />
 
 Paket CLI:
-> paket add FolkerKinzel.Contacts.IO --version 1.2.1
+> paket add FolkerKinzel.Contacts.IO --version 1.2.2
 ```
 
-* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/FolkerKinzel.Contacts.IO.Reference.en/Help/FolkerKinzel.Contacts.IO.en.chm)
+* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.2.2/FolkerKinzel.Contacts.IO.en.chm)
 
-* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/FolkerKinzel.Contacts.IO.Doku.de/Help/FolkerKinzel.Contacts.IO.de.chm)
+* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.2.2/FolkerKinzel.Contacts.IO.de.chm)
 
-> IMPORTANT: On some systems, the content of the CHM file is blocked. Before extracting it,
->  right click on the file, select Properties, and check the "Allow" checkbox - if it 
+> IMPORTANT: On some systems, the content of the CHM file is blocked. Before opening the file
+>  right click on the file icon, select Properties, and check the "Allow" checkbox - if it 
 > is present - in the lower right corner of the General tab in the Properties dialog.
 
 

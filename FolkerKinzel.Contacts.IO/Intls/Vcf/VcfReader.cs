@@ -1,5 +1,5 @@
 ﻿using FolkerKinzel.VCards;
-using FolkerKinzel.VCards.Models.Helpers;
+using FolkerKinzel.VCards.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,7 +55,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     //case VCards.Model.Enums.VCdProp.Mailer:
                     //    break;
-                    case VC::Enums.VCdProp.LastRevision:
+                    case VC::Enums.VCdProp.TimeStamp:
                         {
                             contact.TimeStamp = ((VC::TimeStampProperty)property.Value).Value.DateTime;
                             

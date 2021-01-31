@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using FolkerKinzel.VCards;
-using FolkerKinzel.VCards.Models.Helpers;
+using FolkerKinzel.VCards.Extensions;
 using VC = FolkerKinzel.VCards.Models;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Vcf
@@ -278,10 +278,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     var spouseNames = new List<VC::RelationProperty>();
                     vcard.Relations = spouseNames;
 
-                    var spouseProp = new VC::RelationTextProperty(spouseName);
+                    var spouseProp = new VC::RelationTextProperty(spouseName, VC::Enums.RelationTypes.Spouse);
                     spouseNames.Add(spouseProp);
-
-                    spouseProp.Parameters.RelationType = VC::Enums.RelationTypes.Spouse;
                 }
 
                 DateTime? anniversary = person.Anniversary;
@@ -331,7 +329,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
           
             
-            vcard.LastRevision = contact.TimeStamp == default ? null : new VC::TimeStampProperty(contact.TimeStamp);
+            vcard.TimeStamp = contact.TimeStamp == default ? null : new VC::TimeStampProperty(contact.TimeStamp);
             
 
             return vcard;
