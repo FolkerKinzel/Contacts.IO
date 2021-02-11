@@ -324,13 +324,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
                     }
                 }
-
             }
-
-          
             
             vcard.TimeStamp = contact.TimeStamp == default ? null : new VC::TimeStampProperty(contact.TimeStamp);
-            
 
             return vcard;
         }

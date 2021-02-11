@@ -4,15 +4,15 @@ using System.Threading;
 
 namespace Examples
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
-             CsvExample.ReadingAndWritingCsv();
-            // VCardExample.ReadingAndWritingVCard();
+             //CsvExample.ReadingAndWritingCsv();
+             VCardExample.ReadingAndWritingVCard();
 
         }
     }
