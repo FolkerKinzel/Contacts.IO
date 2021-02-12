@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
@@ -11,7 +12,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
     internal class GoogleCsvReader : CsvReader
     {
 #if NET40
-        private readonly string[] GOOGLE_SEPARATOR = new string[] { " ::: " };
+        private readonly string[] _googleSeparator = new string[] { " ::: " };
 #else
         private const string GOOGLE_SEPARATOR = " ::: ";
 #endif
@@ -147,7 +148,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         Address? addrWork = contact.Work?.AddressWork;
 
 #if NET40
-                        if(((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? false)
+                        if (((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? false)
 
 #else
                         if (((string?)wrapper[nameof(ColumnName.AddressHomeType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? false)
@@ -161,7 +162,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             contact.AddressHome = null;
 
 #if NET40
-                            if(!((string?)wrapper[nameof(ColumnName.AddressWorkType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? true)
+                            if (!((string?)wrapper[nameof(ColumnName.AddressWorkType)])?.ToUpperInvariant().Contains(PropertyClassType.WorkUpperCase) ?? true)
 
 #else
                             if (!((string?)wrapper[nameof(ColumnName.AddressWorkType)])?.Contains(PropertyClassType.Work, StringComparison.OrdinalIgnoreCase) ?? true)
@@ -177,7 +178,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         {
                             // check RelationType
 #if NET40
-                            if(!((string?)wrapper[nameof(ColumnName.RelationType)])?.ToUpperInvariant().Contains(RelationType.SpouseUpperCase) ?? true)
+                            if (!((string?)wrapper[nameof(ColumnName.RelationType)])?.ToUpperInvariant().Contains(RelationType.SpouseUpperCase) ?? true)
 
 #else
                             if (!((string?)wrapper[nameof(ColumnName.RelationType)])?.Contains(RelationType.Spouse, StringComparison.OrdinalIgnoreCase) ?? true)
@@ -188,7 +189,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                             // check Anniversary
 #if NET40
-                            if(!((string?)wrapper[nameof(ColumnName.EventType)])?.ToUpperInvariant().Contains(EventType.AnniversaryUpperCase) ?? true)
+                            if (!((string?)wrapper[nameof(ColumnName.EventType)])?.ToUpperInvariant().Contains(EventType.AnniversaryUpperCase) ?? true)
 
 #else
                             if (!((string?)wrapper[nameof(ColumnName.EventType)])?.Contains(EventType.Anniversary, StringComparison.OrdinalIgnoreCase) ?? true)
@@ -230,24 +231,29 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         var emails = (List<string>?)contact.EmailAddresses;
 
-                        if(emails != null)
+                        if (emails != null)
                         {
-                            for (int i = 0; i < emails.Count; i++)
+                            for (int i = emails.Count - 1; i >= 0; i--)
                             {
-                                var arr = emails[i].Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+                                var currentEmail = emails[i];
+
+                                if(!ContainsGoogleSeparator(currentEmail))
+                                {
+                                    continue;
+                                }
+
+                                var arr = SplitAtGoogleSeparator(currentEmail);
 
                                 if (arr.Length > 1)
                                 {
                                     emails.RemoveAt(i);
 
-
                                     int j = 0;
-                                    for (; j < arr.Length; j++)
+                                    while(j < arr.Length)
                                     {
                                         emails.Insert(i + j, arr[j]);
+                                        j++;
                                     }
-
-                                    i += j - 1;
                                 }
                             }
                         }
@@ -256,43 +262,56 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                         if (ims != null)
                         {
-                            for (int i = 0; i < ims.Count; i++)
+                            for (int i = ims.Count - 1; i >= 0; i--)
                             {
-                                var arr = ims[i].Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+                                var currentIms = ims[i];
+
+                                if (!ContainsGoogleSeparator(currentIms))
+                                {
+                                    continue;
+                                }
+
+                                var arr = SplitAtGoogleSeparator(currentIms);
 
                                 if (arr.Length > 1)
                                 {
                                     ims.RemoveAt(i);
 
                                     int j = 0;
-                                    for (; j < arr.Length; j++)
+                                    while (j < arr.Length)
                                     {
                                         ims.Insert(i + j, arr[j]);
+                                        j++;
                                     }
-
-                                    i += j - 1;
                                 }
                             }
                         }
 
-                        if (contact.PhoneNumbers != null && contact.PhoneNumbers.Any(x => x!.Value?.Contains(GOOGLE_SEPARATOR[0]
-#if !NET40
-                                                                                                           , StringComparison.Ordinal
-#endif
-                                                                                                           ) ?? false))
+                        IEnumerable<PhoneNumber?>? contactPhones = contact.PhoneNumbers;
+                        if (contactPhones != null && contactPhones.Any(x => x!.Value != null && ContainsGoogleSeparator(x.Value)))
                         {
-                            List<PhoneNumber> phones = contact.PhoneNumbers.ToList()!;
-                            contact.PhoneNumbers = phones;
+                            List<PhoneNumber> phones;
 
-                            for (int i = 0; i < phones.Count; i++)
+                            if (contactPhones is PhoneNumber pn)
+                            {
+                                phones = new List<PhoneNumber>() { pn };
+                                contact.PhoneNumbers = phones;
+                            }
+                            else
+                            {
+                                Debug.Assert(contactPhones is List<PhoneNumber>);
+                                phones = (List<PhoneNumber>)contactPhones;
+                            }
+
+                            for (int i = phones.Count - 1; i >= 0; i--)
                             {
                                 PhoneNumber phone = phones[i];
 
                                 string? phoneNumber = phone.Value;
 
-                                if (phoneNumber != null)
+                                if (phoneNumber != null && ContainsGoogleSeparator(phoneNumber))
                                 {
-                                    var arr = phoneNumber.Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+                                    string[] arr = SplitAtGoogleSeparator(phoneNumber);
 
                                     if (arr.Length > 1)
                                     {
@@ -300,15 +319,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
                                         int j = 0;
 
-                                        for (; j < arr.Length; j++)
+                                        while (j < arr.Length)
                                         {
                                             phone = j == 0 ? phone : (PhoneNumber)phone.Clone();
                                             phone.Value = arr[j];
 
                                             phones.Insert(i + j, phone);
+                                            j++;
                                         }
-
-                                        i += j - 1;
                                     }
                                 }
                             }
@@ -320,6 +338,21 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             }
         }
 
+
+
+#if NET40
+        private bool ContainsGoogleSeparator(string s) => s.Contains(_googleSeparator[0]);
+#else
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool ContainsGoogleSeparator(string s) => s.Contains(GOOGLE_SEPARATOR, StringComparison.Ordinal);
+#endif
+
+#if NET40
+        private string[] SplitAtGoogleSeparator(string s) => s.Split(_googleSeparator, StringSplitOptions.RemoveEmptyEntries);
+#else
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static string[] SplitAtGoogleSeparator(string s) => s.Split(GOOGLE_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
+#endif
 
 
         private static void SetTelephoneType(PhoneNumber phone, string? value)

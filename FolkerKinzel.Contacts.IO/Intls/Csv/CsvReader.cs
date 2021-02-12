@@ -385,7 +385,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 
         }
 
-        protected void AddPhoneNumber(Contact contact, PhoneNumber newNumber)
+        protected static void AddPhoneNumber(Contact contact, PhoneNumber newNumber)
         {
             IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers;
 

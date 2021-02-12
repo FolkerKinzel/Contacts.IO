@@ -12,7 +12,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-    <PackageReleaseNotes>Dependencies updated.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updates the dependencies and make use of the new features of FolkerKinzel.Contacts and FolkerKinzel.VCards.</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
     <Description>.NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.</Description>
     <Authors>Folker Kinzel</Authors>
