@@ -21,7 +21,7 @@
   <T ID="64F42C9B7773BFAF">The file could not be written.</T>
   <T ID="DC4A57C97C58352A">&lt;para&gt; The method calls &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; on &lt;paramref name ="contact"/&gt;. If the property &lt;see cref ="P:FolkerKinzel.Contacts.Contact.IsEmpty"/&gt; of &lt;paramref name ="contact"/&gt; then returns &lt;c&gt;true&lt;/c&gt;, no file is created. If it is undesirable for the method  to change &lt;paramref name ="contact"/&gt; by calling &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt;, you can create beforehand a copy of &lt;paramref name ="contact"/&gt; with &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clone"/&gt; and transfer the copy as argument. &lt;/para&gt;
 &lt;para&gt;For storing several &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects in a single vcf file the method &lt;see cref ="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveVCard(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.VCardVersion)"/&gt; is suitable . &lt;/para&gt;</T>
-  <T ID="49D9F186168423AC">&lt;note type ="important"&gt; For better readability, the examples do not contain any exception handling. &lt;/note&gt; &lt;para&gt; Initializing &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects: &lt;/para &gt; &lt;code/&gt; &lt;para&gt; Read and write vCards (* .vcf): &lt;/para&gt; &lt;code/&gt; &lt;para&gt; Read and write CSV files: &lt;/para&gt; &lt;code/&gt;</T>
+  <T ID="49D9F186168423AC">&lt;note type ="important"&gt; For the sake of better readability, the examples do not contain any exception handling. &lt;/note&gt; &lt;para&gt; Initializing &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects: &lt;/para &gt; &lt;code/&gt; &lt;para&gt; Reading and writing vCards (* .vcf): &lt;/para&gt; &lt;code/&gt; &lt;para&gt; Reading and writing CSV files: &lt;/para&gt; &lt;code/&gt;</T>
   <T ID="D836047E4A123A05">Loads the content of a CSV file as &lt;see cref ="T:System.Collections.Generic.List`1"/&gt; of &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects.</T>
   <T ID="6C1C242FC2C16ECB">The method executes &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; on each returned &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; object. Therefore it is usually not necessary to call &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; in your own code.</T>
   <T ID="78E9ADD96388CE8B">The file path of the CSV file.</T>
@@ -145,7 +145,6 @@
   <T ID="4A0D1E0FFD3AD865"></T>
   <T ID="9C1D8DFA5703DD34"></T>
   <T ID="5BE8E70ECDD0E627"></T>
-  <T ID="94419A16D74FCBCB"></T>
   <T ID="55330A5A32DE2369"></T>
   <T ID="48AB89A4D1E0AAAB"></T>
   <T ID="F6F44B02D20AE911"></T>
@@ -167,4 +166,5 @@
   <T ID="3368633987FCA7D1"></T>
   <T ID="F62B5BBAC333693A"></T>
   <T ID="12EC6D45E2C8FDCF"></T>
+  <T ID="94419A16C46C7EAE"></T>
 </Tsltn>

@@ -30,13 +30,13 @@ F# Interactive:
 
 
 ## Example Code
-_(For better readability exception handling is ommitted in the following examples.)_
+_(For the sake of better readability exception handling is ommitted in the following examples.)_
 
-* [Example: Initialize Contact Objects](#initialize-contact-objects)
-* [Example: Read and Write VCF Files](#read-and-write-vcf-files)
-* [Example: Read and Write CSV Files](#read-and-write-csv-files)
+* [Example: Initializing Contact Objects](#initializing-contact-objects)
+* [Example: Reading and Writing VCF Files](#reading-and-writing-vcf-files)
+* [Example: Reading and Writing CSV Files](#reading-and-writing-csv-files)
 
-#### Initialize `Contact` Objects:
+#### Initializing `Contact` Objects:
 ```csharp
 using FolkerKinzel.Contacts;
 using System;
@@ -124,7 +124,7 @@ namespace Examples
 }
 ```
 
-#### Read and Write VCF Files:
+#### Reading and Writing VCF Files:
 ```csharp
 using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
@@ -241,7 +241,7 @@ Company Data:
 */
 ```
 
-#### Read and Write CSV Files:
+#### Reading and Writing CSV Files:
 ```csharp
 using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
