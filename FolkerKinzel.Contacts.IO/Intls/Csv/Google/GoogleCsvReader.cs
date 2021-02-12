@@ -65,11 +65,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             {
                 case AdditionalProp.Phone1Type:
                     {
-                        var phoneNumbers = new List<PhoneNumber>();
-                        contact.PhoneNumbers = phoneNumbers;
-
                         var newNumber = new PhoneNumber();
-                        phoneNumbers.Add(newNumber);
+                        AddPhoneNumber(contact, newNumber);
                         SetTelephoneType(newNumber, (string?)wrapper[index]);
                     }
                     break;
@@ -82,19 +79,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Type:
                 case AdditionalProp.Phone9Type:
                     {
-                        List<PhoneNumber>? phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
-                        contact.PhoneNumbers = phoneNumbers;
-
-                        if (phoneNumbers.Count == 0)
+                        if (contact.PhoneNumbers is null)
                         {
-                            phoneNumbers.Add(new PhoneNumber());
+                            contact.PhoneNumbers = new PhoneNumber();
                         }
 
-#if NET40
-                        var lastNumber = phoneNumbers[phoneNumbers.Count - 1];
-#else
-                        PhoneNumber? lastNumber = phoneNumbers[^1];
-#endif
+                        PhoneNumber lastNumber = contact.PhoneNumbers.Last()!;
 
 
                         if (lastNumber.IsEmpty)
@@ -104,7 +94,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                         else
                         {
                             var newNumber = new PhoneNumber();
-                            phoneNumbers.Add(newNumber);
+                            AddPhoneNumber(contact, newNumber);
                             SetTelephoneType(newNumber, (string?)wrapper[index]);
                         }
 
@@ -120,19 +110,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                 case AdditionalProp.Phone8Value:
                 case AdditionalProp.Phone9Value:
                     {
-                        List<PhoneNumber>? phoneNumbers = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
-                        contact.PhoneNumbers = phoneNumbers;
-
-                        if (phoneNumbers.Count == 0)
+                        if (contact.PhoneNumbers is null)
                         {
-                            phoneNumbers.Add(new PhoneNumber());
+                            contact.PhoneNumbers = new PhoneNumber();
                         }
 
-#if NET40
-                        phoneNumbers[phoneNumbers.Count - 1].Value = (string?)wrapper[index];
-#else
-                        phoneNumbers[^1].Value = (string?)wrapper[index];
-#endif
+                        PhoneNumber lastNumber = contact.PhoneNumbers.Last()!;
+
+                        lastNumber.Value = (string?)wrapper[index];
                     }
                     break;
                 //case AdditionalProp.AddressHomeType:
@@ -290,14 +275,18 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                             }
                         }
 
-
-                        var phones = (List<PhoneNumber>?)contact.PhoneNumbers;
-
-                        if (phones != null)
+                        if (contact.PhoneNumbers != null && contact.PhoneNumbers.Any(x => x!.Value?.Contains(GOOGLE_SEPARATOR[0]
+#if !NET40
+                                                                                                           , StringComparison.Ordinal
+#endif
+                                                                                                           ) ?? false))
                         {
+                            List<PhoneNumber> phones = contact.PhoneNumbers.ToList()!;
+                            contact.PhoneNumbers = phones;
+
                             for (int i = 0; i < phones.Count; i++)
                             {
-                                PhoneNumber? phone = phones[i];
+                                PhoneNumber phone = phones[i];
 
                                 string? phoneNumber = phone.Value;
 
@@ -335,7 +324,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
         private static void SetTelephoneType(PhoneNumber phone, string? value)
         {
-            if (value is null) return;
+            if (value is null)
+            {
+                return;
+            }
 
             phone.IsMobile = phone.IsFax = phone.IsWork = false;
 

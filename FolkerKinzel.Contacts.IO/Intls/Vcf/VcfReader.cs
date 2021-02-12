@@ -51,6 +51,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.TimeStamp:
                         {
+                            Debug.Assert(property.Value is VC::TimeStampProperty);
+
                             contact.TimeStamp = ((VC::TimeStampProperty)property.Value).Value.DateTime;
 
                             break;
@@ -70,15 +72,21 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //case VCards.Model.Enums.VCdProp.Source:
                     //    break;
                     case VC::Enums.VCdProp.DisplayNames:
-                        contact.DisplayName = ((IEnumerable<VC::TextProperty?>)property.Value)
-                            .Where(x => x?.Value != null)
-                            .OrderBy(x => x!.Parameters.Preference)
+                        Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                        Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
+
+                        contact.DisplayName = ((IEnumerable<VC::TextProperty>)property.Value)
+                            .Where(x => x.Value != null)
+                            .OrderBy(x => x.Parameters.Preference)
                             .FirstOrDefault()?.Value;
                         break;
                     case VC::Enums.VCdProp.NameViews:
                         {
-                            VC::PropertyParts.Name? vcardName = ((IEnumerable<VC::NameProperty?>)property.Value)
-                                .Where(x => !x?.IsEmpty ?? false)
+                            Debug.Assert(property.Value is IEnumerable<VC::NameProperty>);
+                            Debug.Assert(((IEnumerable<VC::NameProperty>)property.Value).All(x => x != null));
+
+                            VC::PropertyParts.Name? vcardName = ((IEnumerable<VC::NameProperty>)property.Value)
+                                .Where(x => !x.IsEmpty)
                                 .FirstOrDefault()?.Value;
 
                             if (vcardName != null)
@@ -100,26 +108,32 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.NickNames:
                         {
+                            Debug.Assert(property.Value is IEnumerable<VC::StringCollectionProperty>);
+                            Debug.Assert(((IEnumerable<VC::StringCollectionProperty>)property.Value).All(x => x != null));
+
                             Person? person = contact.Person ?? new Person();
                             contact.Person = person;
 
-                            person.NickName = ((IEnumerable<VC::StringCollectionProperty?>)property.Value)
-                                .Where(x => !x?.IsEmpty ?? false)
-                                .OrderBy(x => x!.Parameters.Preference)
+                            person.NickName = ((IEnumerable<VC::StringCollectionProperty>)property.Value)
+                                .Where(x => !x.IsEmpty)
+                                .OrderBy(x => x.Parameters.Preference)
                                 .FirstOrDefault()?.Value.FirstOrDefault();
 
                             break;
                         }
                     case VC::Enums.VCdProp.Organizations:
                         {
-                            VC.PropertyParts.Organization? org = ((IEnumerable<VC::OrganizationProperty?>)property.Value)
-                                .Where(x => !x?.IsEmpty ?? false)
-                                .OrderBy(x => x!.Parameters.Preference)
+                            Debug.Assert(property.Value is IEnumerable<VC::OrganizationProperty>);
+                            Debug.Assert(((IEnumerable<VC::OrganizationProperty>)property.Value).All(x => x != null));
+
+                            VC::PropertyParts.Organization? org = ((IEnumerable<VC::OrganizationProperty>)property.Value)
+                                .Where(x => !x.IsEmpty)
+                                .OrderBy(x => x.Parameters.Preference)
                                 .FirstOrDefault()?.Value;
 
                             if (org != null)
                             {
-                                Work? work = contact.Work ?? new Work();
+                                Work work = contact.Work ?? new Work();
                                 contact.Work = work;
 
                                 work.Company = org.OrganizationName;
@@ -131,14 +145,17 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.Titles:
                         {
-                            var title = ((IEnumerable<VC::TextProperty?>)property.Value)
-                                .Where(x => x?.Value != null)
-                                .OrderBy(x => x!.Parameters.Preference)
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
+
+                            var title = ((IEnumerable<VC::TextProperty>)property.Value)
+                                .Where(x => x.Value != null)
+                                .OrderBy(x => x.Parameters.Preference)
                                 .FirstOrDefault()?.Value;
 
                             if (title != null)
                             {
-                                Work? work = contact.Work ?? new Work();
+                                Work work = contact.Work ?? new Work();
                                 contact.Work = work;
 
                                 work.JobTitle = title;
@@ -150,11 +167,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.GenderViews:
                         {
-                            Person? person = contact.Person ?? new Person();
+                            Debug.Assert(property.Value is IEnumerable<VC::GenderProperty>);
+                            Debug.Assert(((IEnumerable<VC::GenderProperty>)property.Value).All(x => x != null));
+
+                            Person person = contact.Person ?? new Person();
                             contact.Person = person;
 
-                            VC.PropertyParts.Gender? vcardGender = ((IEnumerable<VC::GenderProperty?>)property.Value)
-                                .Where(x => !x?.IsEmpty ?? false)
+                            VC.PropertyParts.Gender? vcardGender = ((IEnumerable<VC::GenderProperty>)property.Value)
+                                .Where(x => !x.IsEmpty)
                                 .FirstOrDefault()?.Value;
 
                             if (vcardGender != null)
@@ -178,7 +198,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.BirthDayViews:
                         {
-                            VC.DateTimeOffsetProperty? birthdayProp = ((IEnumerable<VC::DateTimeProperty?>)property.Value)
+                            Debug.Assert(property.Value is IEnumerable<VC::DateTimeProperty>);
+                            Debug.Assert(((IEnumerable<VC::DateTimeProperty>)property.Value).All(x => x != null));
+
+                            VC.DateTimeOffsetProperty? birthdayProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
                                                .Select(x => x as VC::DateTimeOffsetProperty)
                                                .Where(x => x != null && !x.IsEmpty)
                                                .FirstOrDefault();
@@ -194,7 +217,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.AnniversaryViews:
                         {
-                            VC.DateTimeOffsetProperty? anniversaryProp = ((IEnumerable<VC::DateTimeProperty?>)property.Value)
+                            Debug.Assert(property.Value is IEnumerable<VC::DateTimeProperty>);
+                            Debug.Assert(((IEnumerable<VC::DateTimeProperty>)property.Value).All(x => x != null));
+
+                            VC.DateTimeOffsetProperty? anniversaryProp = ((IEnumerable<VC::DateTimeProperty>)property.Value)
                                                .Select(x => x as VC::DateTimeOffsetProperty)
                                                .Where(x => x != null && !x.IsEmpty)
                                                .FirstOrDefault();
@@ -211,20 +237,22 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.Relations:
                         {
-                            VC.RelationProperty? spouseProp = ((IEnumerable<VC::RelationProperty?>)property.Value)
-                                               .Where(x => (!x?.IsEmpty ?? false)
-                                                    && x!.Parameters.RelationType.IsSet(VC::Enums.RelationTypes.Spouse)
+                            Debug.Assert(property.Value is IEnumerable<VC::RelationProperty>);
+                            Debug.Assert(((IEnumerable<VC::RelationProperty>)property.Value).All(x => x != null));
+
+                            VC.RelationProperty? spouseProp = ((IEnumerable<VC::RelationProperty>)property.Value)
+                                               .Where(x => (!x.IsEmpty)
+                                                    && x.Parameters.RelationType.IsSet(VC::Enums.RelationTypes.Spouse)
                                                     && (x is VC::RelationTextProperty || x is VC::RelationVCardProperty))
                                                .FirstOrDefault();
-                            
+
                             var spouseName = spouseProp switch
                             {
                                 VC::RelationTextProperty textProp => textProp.Value,
-                                VC::RelationVCardProperty vcProp => ((IEnumerable<VC::TextProperty?>?)vcProp.Value?.DisplayNames)?
-                                                                                                     .Where(x => !x?.IsEmpty ?? false)
-                                                                                                     .OrderBy(x => x!.Parameters.Preference)
+                                VC::RelationVCardProperty vcProp => ((IEnumerable<VC::TextProperty>?)vcProp.Value?.DisplayNames)?
+                                                                                                     .Where(x => !x.IsEmpty)
+                                                                                                     .OrderBy(x => x.Parameters.Preference)
                                                                                                      .FirstOrDefault()?.Value,
-
                                 _ => null,
                             };
 
@@ -244,17 +272,20 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.Addresses:
                         {
-                            var vcardAddresses = (IEnumerable<VC::AddressProperty?>)property.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::AddressProperty>);
+                            Debug.Assert(((IEnumerable<VC::AddressProperty>)property.Value).All(x => x != null));
+
+                            var vcardAddresses = (IEnumerable<VC::AddressProperty>)property.Value;
 
                             string separator = " ";
 
-                            foreach (VC::AddressProperty? vcardAddress in vcardAddresses
-                                                                          .Where(x => x?.Value != null)
-                                                                          .OrderByDescending(x => x!.Parameters.Preference))
+                            foreach (VC::AddressProperty vcardAddress in vcardAddresses
+                                                                          .Where(x => x.Value != null)
+                                                                          .OrderByDescending(x => x.Parameters.Preference))
                             {
-                                if (vcardAddress!.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
+                                if (vcardAddress.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
                                 {
-                                    Work? work = contact.Work ?? new Work();
+                                    Work work = contact.Work ?? new Work();
                                     contact.Work = work;
 
                                     work.AddressWork = new Address()
@@ -283,14 +314,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.PhoneNumbers:
                         {
-                            var vcardNumbers = (IEnumerable<VC::TextProperty?>)property.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
 
-                            Debug.Assert(vcardNumbers != null);
+                            var vcardNumbers = (IEnumerable<VC::TextProperty>)property.Value;
 
                             contact.PhoneNumbers = vcardNumbers
-                                .Where(x => x?.Value != null)
-                                .OrderBy(x => x!.Parameters.Preference)
-                                .Select(x => new PhoneNumber(x!.Value,
+                                .Where(x => x.Value != null)
+                                .OrderBy(x => x.Parameters.Preference)
+                                .Select(x => new PhoneNumber(x.Value,
                                                              x.Parameters.PropertyClass.IsSet(VC.Enums.PropertyClassTypes.Work),
                                                              x.Parameters.TelephoneType.IsSet(VC.Enums.TelTypes.Cell),
                                                              x.Parameters.TelephoneType.IsSet(VC.Enums.TelTypes.Fax)))
@@ -299,28 +331,30 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.EmailAddresses:
                         {
-                            var vcardEmails = (IEnumerable<VC::TextProperty?>)property.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
 
-                            Debug.Assert(vcardEmails != null);
+                            var vcardEmails = (IEnumerable<VC::TextProperty>)property.Value;
 
                             contact.EmailAddresses = vcardEmails
-                                                     .Where(x => x?.Value != null)
-                                                     .OrderBy(x => x!.Parameters.Preference)
-                                                     .Select(x => x!.Value)
+                                                     .Where(x => x.Value != null)
+                                                     .OrderBy(x => x.Parameters.Preference)
+                                                     .Select(x => x.Value)
                                                      .ToArray();
                             break;
                         }
                     case VC::Enums.VCdProp.URLs:
                         {
-                            var vcardUrls = (IEnumerable<VC::TextProperty?>)property.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
 
-                            Debug.Assert(vcardUrls != null);
+                            var vcardUrls = (IEnumerable<VC::TextProperty>)property.Value;
 
-                            foreach (VC::TextProperty? url in vcardUrls
-                                                              .Where(x => x?.Value != null)
-                                                              .OrderByDescending(x => x!.Parameters.Preference))
+                            foreach (VC::TextProperty url in vcardUrls
+                                                              .Where(x => x.Value != null)
+                                                              .OrderByDescending(x => x.Parameters.Preference))
                             {
-                                if (url!.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
+                                if (url.Parameters.PropertyClass.IsSet(VC::Enums.PropertyClassTypes.Work))
                                 {
                                     contact.WebPageWork ??= url.Value;
                                 }
@@ -333,14 +367,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                         }
                     case VC::Enums.VCdProp.InstantMessengerHandles:
                         {
-                            var vcardIMPPs = (IEnumerable<VC::TextProperty?>)property.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
 
-                            Debug.Assert(vcardIMPPs != null);
+                            var vcardIMPPs = (IEnumerable<VC::TextProperty>)property.Value;
 
                             var impps = vcardIMPPs
-                                        .Where(x => x?.Value != null)
-                                        .OrderBy(x => x!.Parameters.Preference)
-                                        .Select(x => x!.Value)
+                                        .Where(x => x.Value != null)
+                                        .OrderBy(x => x.Parameters.Preference)
+                                        .Select(x => x.Value)
                                         .ToArray();
                             contact.InstantMessengerHandles = impps;
                             break;
@@ -353,8 +388,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                     //    break;
                     case VC::Enums.VCdProp.Notes:
                         {
-                            contact.Comment = ((IEnumerable<VC::TextProperty?>)property.Value)
-                                              .FirstOrDefault(x => x?.Value != null)?.Value;
+                            Debug.Assert(property.Value is IEnumerable<VC::TextProperty>);
+                            Debug.Assert(((IEnumerable<VC::TextProperty>)property.Value).All(x => x != null));
+
+                            contact.Comment = ((IEnumerable<VC::TextProperty>)property.Value)
+                                              .FirstOrDefault(x => x.Value != null)?.Value;
                             break;
                         }
                     //case VCards.Model.Enums.VCdProp.NonStandardProperties:

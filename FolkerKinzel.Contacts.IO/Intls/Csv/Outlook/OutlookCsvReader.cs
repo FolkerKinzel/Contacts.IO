@@ -97,10 +97,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.BusinessPhone2:
                 case AdditionalProp.CompanyMainPhone:
                     {
-                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
-                        contact.PhoneNumbers = phones;
-
-                        phones.Add(new PhoneNumber((string?)wrapper[index], true));
+                        AddPhoneNumber(contact, new PhoneNumber((string?)wrapper[index], true));
                     }
                     break;
                 case AdditionalProp.HomePhone2:   
@@ -108,22 +105,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
                 case AdditionalProp.RadioPhone:
                 case AdditionalProp.TTY_TDD_Phone:
                     {
-                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
-                        contact.PhoneNumbers = phones;
-
-                        phones.Add(new PhoneNumber((string?)wrapper[index]));
+                        AddPhoneNumber(contact, new PhoneNumber((string?)wrapper[index]));
                     }
                     break;
                 case AdditionalProp.OtherFax:
                     {
-                        List<PhoneNumber>? phones = (List<PhoneNumber>?)contact.PhoneNumbers ?? new List<PhoneNumber>();
-                        contact.PhoneNumbers = phones;
-
-                        phones.Add(new PhoneNumber((string?)wrapper[index], isFax: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string?)wrapper[index], isFax: true));
                     }
                     break;
-                
-               
                 
                 default:
                     break;

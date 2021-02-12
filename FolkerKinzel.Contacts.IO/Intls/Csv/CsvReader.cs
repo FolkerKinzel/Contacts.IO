@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         };
 
         protected CsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
-       
+
 
         protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 
@@ -97,7 +97,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             Address? addressWork = null;
             List<string>? instMessengers = null;
             List<string>? emails = null;
-            List<PhoneNumber>? phones = null;
+            //List<PhoneNumber>? phones = null;
 
 
 
@@ -209,40 +209,31 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         emails!.Add((string)val);
                         break;
                     case ContactProp.PhoneHome:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneWork:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isWork: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val, isWork: true));
                         break;
                     case ContactProp.FaxHome:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isFax: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val, isFax: true));
                         break;
                     case ContactProp.FaxWork:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isWork: true, isFax: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val, isWork: true, isFax: true));
                         break;
                     case ContactProp.Cell:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isMobile: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val, isMobile: true));
                         break;
                     case ContactProp.CellWork:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val, isWork: true, isMobile: true));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val, isWork: true, isMobile: true));
                         break;
                     case ContactProp.PhoneOther1:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneOther2:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val));
                         break;
                     case ContactProp.PhoneOther3:
-                        InitPhones();
-                        phones!.Add(new PhoneNumber((string)val));
+                        AddPhoneNumber(contact, new PhoneNumber((string)val));
                         break;
                     //case ContactProp.PhoneOther4:
                     //    InitPhones();
@@ -391,14 +382,26 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 contact.EmailAddresses = emails;
             }
 
-            void InitPhones()
-            {
-                phones ??= new List<PhoneNumber>();
-                contact.PhoneNumbers = phones;
-            }
+
         }
 
+        protected void AddPhoneNumber(Contact contact, PhoneNumber newNumber)
+        {
+            IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers;
 
+            if (phones is null)
+            {
+                contact.PhoneNumbers = newNumber;
+            }
+            else if (phones is PhoneNumber recentNumber)
+            {
+                contact.PhoneNumbers = new List<PhoneNumber>(2) { recentNumber, newNumber };
+            }
+            else
+            {
+                ((List<PhoneNumber>)phones).Add(newNumber);
+            }
+        }
 
 
         protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
