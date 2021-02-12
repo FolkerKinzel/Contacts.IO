@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         internal static void Write(Contact contact, string fileName, VCardVersion version)
         {
-            if(contact is null)
+            if (contact is null)
             {
                 throw new ArgumentNullException(nameof(contact));
             }
@@ -79,96 +80,89 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
             Address? adrHome = contact.AddressHome;
 
-            if(adrHome != null)
+            if (adrHome != null)
             {
-                var adrProp = new VC::AddressProperty(street: adrHome.Street,
+                var homeAdr = new VC::AddressProperty(street: adrHome.Street,
                                                       locality: adrHome.City,
                                                       postalCode: adrHome.PostalCode,
                                                       region: adrHome.State,
                                                       country: adrHome.Country);
 
-                var addresses = new List<VC::AddressProperty?>();
-                vcard.Addresses = addresses;
+                vcard.Addresses = homeAdr;
 
-                addresses.Add(adrProp);
-
-                adrProp.Parameters.AddressType = VC::Enums.AddressTypes.Dom | VC::Enums.AddressTypes.Intl | VC::Enums.AddressTypes.Parcel | VC::Enums.AddressTypes.Postal;
+                homeAdr.Parameters.AddressType = VC::Enums.AddressTypes.Dom | VC::Enums.AddressTypes.Intl | VC::Enums.AddressTypes.Parcel | VC::Enums.AddressTypes.Postal;
 
                 if (adrHome == work?.AddressWork)
                 {
-                    adrProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home | VC::Enums.PropertyClassTypes.Work;
+                    homeAdr.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home | VC::Enums.PropertyClassTypes.Work;
                     writeAdrWork = false;
                 }
                 else
                 {
-                    adrProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home;
+                    homeAdr.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home;
                 }
 
-                adrProp.Parameters.Label = BuildAddressLabel(adrHome);
+                homeAdr.Parameters.Label = BuildAddressLabel(adrHome);
             }
 
 
-            
-            if(work != null)
+
+            if (work != null)
             {
                 Address? adrWork = work.AddressWork;
 
-                if(writeAdrWork && adrWork != null)
+                if (writeAdrWork && adrWork != null)
                 {
-                    var adrProp = new VC::AddressProperty(street: adrWork.Street,
+                    var workAdr = new VC::AddressProperty(street: adrWork.Street,
                                                           locality: adrWork.City,
                                                           postalCode: adrWork.PostalCode,
                                                           region: adrWork.State,
                                                           country: adrWork.Country);
 
-                    List<VC::AddressProperty?> addresses = (List<VC::AddressProperty?>?)vcard.Addresses ?? new List<VC::AddressProperty?>();
-                    vcard.Addresses = addresses;
+                    IEnumerable<VC::AddressProperty?>? addresses = vcard.Addresses;
 
-                    addresses.Add(adrProp);
-                    adrProp.Parameters.AddressType = VC::Enums.AddressTypes.Dom | VC::Enums.AddressTypes.Intl | VC::Enums.AddressTypes.Parcel | VC::Enums.AddressTypes.Postal;
-                    adrProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
+                    if (addresses is null)
+                    {
+                        vcard.Addresses = workAdr;
+                    }
+                    else if (addresses is VC::AddressProperty homeAdr)
+                    {
+                        vcard.Addresses = new VC::AddressProperty[] { homeAdr, workAdr };
+                    }
 
-                    adrProp.Parameters.Label = BuildAddressLabel(adrWork);
+                    workAdr.Parameters.AddressType = VC::Enums.AddressTypes.Dom | VC::Enums.AddressTypes.Intl | VC::Enums.AddressTypes.Parcel | VC::Enums.AddressTypes.Postal;
+                    workAdr.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
+
+                    workAdr.Parameters.Label = BuildAddressLabel(adrWork);
                 }
 
-                if(work.Company != null || work.Department != null || work.Office != null)
+                if (work.Company != null || work.Department != null || work.Office != null)
                 {
-                    var orgProp = new VC::OrganizationProperty(work.Company, new string?[] { work.Department, work.Office });
-                    var orgs = new List<VC::OrganizationProperty>();
-                    vcard.Organizations = orgs;
-                    orgs.Add(orgProp);
+                    vcard.Organizations =
+                        new VC::OrganizationProperty(work.Company,
+                                                     new string?[] { work.Department, work.Office });
                 }
 
-                if(work.JobTitle != null)
+                if (work.JobTitle != null)
                 {
-                    var titles = new List<VC::TextProperty>();
-                    vcard.Titles = titles;
-
-                    var titleProp = new VC::TextProperty(work.JobTitle);
-
-                    titles.Add(titleProp);
+                    vcard.Titles = new VC::TextProperty(work.JobTitle);
                 }
             }
 
             var comment = contact.Comment;
-            if(comment != null)
+            if (comment != null)
             {
-                var notes = new List<VC::TextProperty>();
-                vcard.Notes = notes;
-                notes.Add(new VC::TextProperty(comment));
+                vcard.Notes = new VC::TextProperty(comment);
             }
 
             var displayName = contact.DisplayName;
-            if(displayName != null)
+            if (displayName != null)
             {
-                var dispNames = new List<VC::TextProperty>();
-                vcard.DisplayNames = dispNames;
-
-                dispNames.Add(new VC::TextProperty(displayName));
+                vcard.DisplayNames = new VC::TextProperty(displayName);
             }
 
             IEnumerable<string?>? emails = contact.EmailAddresses;
-            if(emails != null)
+            if (emails != null)
             {
                 var emailProps = new List<VC::TextProperty>();
                 vcard.EmailAddresses = emailProps;
@@ -177,6 +171,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                 foreach (var mailAddress in emails)
                 {
+                    Debug.Assert(mailAddress != null);
+
                     var mailProp = new VC::TextProperty(mailAddress);
                     emailProps.Add(mailProp);
 
@@ -189,15 +185,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
             var webWork = contact.WebPageWork;
             bool writeWebWork = true;
 
-            if(webPersonal != null)
+            if (webPersonal != null)
             {
-                var urls = new List<VC::TextProperty?>();
-                vcard.URLs = urls;
-
                 var urlHomeProp = new VC::TextProperty(webPersonal);
-                urls.Add(urlHomeProp);
+                vcard.URLs = urlHomeProp;
 
-                if(webPersonal == webWork)
+                if (webPersonal == webWork)
                 {
                     urlHomeProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Home | VC::Enums.PropertyClassTypes.Work;
                     writeWebWork = false;
@@ -208,15 +201,21 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 }
             }
 
-            if(writeWebWork && webWork != null)
+            if (writeWebWork && webWork != null)
             {
-                List<VC.TextProperty?>? urls = (List<VC::TextProperty?>?)vcard.URLs ?? new List<VC::TextProperty?>();
-                vcard.URLs = urls;
+                var urlWork = new VC::TextProperty(webWork);
+                urlWork.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
 
-                var urlWorkProp = new VC::TextProperty(webWork);
-                urls.Add(urlWorkProp);
+                IEnumerable<VC::TextProperty?>? urls = vcard.URLs;
 
-                urlWorkProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
+                if(urls is null)
+                {
+                    vcard.URLs = urlWork;
+                }
+                else if (urls is VC::TextProperty urlHome)
+                {
+                    vcard.URLs = new VC::TextProperty[] { urlHome, urlWork };
+                }
             }
 
             IEnumerable<string?>? impps = contact.InstantMessengerHandles;
@@ -229,6 +228,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
 
                 foreach (var imppAddress in impps)
                 {
+                    Debug.Assert(imppAddress != null);
+
                     var imppProp = new VC::TextProperty(imppAddress);
                     imppProps.Add(imppProp);
 
@@ -242,90 +243,80 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 DateTime? bday = person.BirthDay;
                 if (bday.HasValue)
                 {
-                    var bdays = new List<VC::DateTimeProperty>();
-                    vcard.BirthDayViews = bdays;
-                    var bdayProp = new VC::DateTimeOffsetProperty(bday.Value);
-                    bdays.Add(bdayProp);
+                    vcard.BirthDayViews = new VC::DateTimeOffsetProperty(bday.Value);
                 }
 
                 Name? name = person.Name;
                 if (name != null)
                 {
-                    var names = new List<VC::NameProperty>();
-                    vcard.NameViews = names;
-                    names.Add(new VC::NameProperty(name.LastName, name.FirstName, name.MiddleName, name.Prefix, name.Suffix));
+                    vcard.NameViews = new VC::NameProperty(name.LastName,
+                                                           name.FirstName,
+                                                           name.MiddleName,
+                                                           name.Prefix,
+                                                           name.Suffix);
                 }
 
                 Sex gender = person.Gender;
-                if(gender != Sex.Unspecified)
+                if (gender != Sex.Unspecified)
                 {
-                    var genders = new List<VC::GenderProperty>();
-                    vcard.GenderViews = genders;
-                    genders.Add(new VC::GenderProperty(gender == Sex.Female ? VC::Enums.VCdSex.Female : VC::Enums.VCdSex.Male));
+                    vcard.GenderViews = new VC::GenderProperty(
+                        gender == Sex.Female ? VC::Enums.VCdSex.Female : VC::Enums.VCdSex.Male);
                 }
 
                 var nickName = person.NickName;
-                if(nickName != null)
+                if (nickName != null)
                 {
-                    var nickNames = new List<VC::StringCollectionProperty>();
-                    vcard.NickNames = nickNames;
-                    nickNames.Add(new VC::StringCollectionProperty(nickName));
+                    vcard.NickNames = new VC::StringCollectionProperty(nickName);
                 }
 
                 var spouseName = person.Spouse;
-                if(spouseName != null)
+                if (spouseName != null)
                 {
-                    var spouseNames = new List<VC::RelationProperty>();
-                    vcard.Relations = spouseNames;
-
-                    var spouseProp = new VC::RelationTextProperty(spouseName, VC::Enums.RelationTypes.Spouse);
-                    spouseNames.Add(spouseProp);
+                    vcard.Relations = new VC::RelationTextProperty(
+                        spouseName, VC::Enums.RelationTypes.Spouse);
                 }
 
                 DateTime? anniversary = person.Anniversary;
-                if(anniversary.HasValue)
+                if (anniversary.HasValue)
                 {
-                    var anniversaries = new List<VC::DateTimeProperty>();
-                    vcard.AnniversaryViews = anniversaries;
-
-                    var anniversaryProp = new VC::DateTimeOffsetProperty(anniversary.Value);
-                    anniversaries.Add(anniversaryProp);
+                    vcard.AnniversaryViews = new VC::DateTimeOffsetProperty(anniversary.Value);
                 }
             }
 
             IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers;
-            if(phones != null)
+            if (phones != null)
             {
                 var phoneProps = new List<VC::TextProperty>();
                 vcard.PhoneNumbers = phoneProps;
-                VC::TextProperty phoneProp;
 
                 foreach (PhoneNumber? number in phones)
                 {
-                    phoneProp = new VC::TextProperty(number!.Value);
+                    Debug.Assert(number != null);
+
+                    var phoneProp = new VC::TextProperty(number!.Value);
                     phoneProps.Add(phoneProp);
 
                     VC::Enums.TelTypes? telType = null;
 
-                    if(number.IsMobile)
+                    if (number.IsMobile)
                     {
                         telType = VC::Enums.TelTypes.Cell;
                     }
 
-                    if(number.IsFax)
+                    if (number.IsFax)
                     {
                         telType = telType.Set(VC.Enums.TelTypes.Fax);
                     }
 
                     phoneProp.Parameters.TelephoneType = telType;
 
-                    if(number.IsWork)
+                    if (number.IsWork)
                     {
                         phoneProp.Parameters.PropertyClass = VC::Enums.PropertyClassTypes.Work;
                     }
                 }
             }
-            
+
             vcard.TimeStamp = contact.TimeStamp == default ? null : new VC::TimeStampProperty(contact.TimeStamp);
 
             return vcard;
