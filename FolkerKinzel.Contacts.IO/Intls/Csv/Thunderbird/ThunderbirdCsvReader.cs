@@ -13,10 +13,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         private readonly Conv::ICsvTypeConverter _intConverter;
 
 
-        internal ThunderbirdCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding)
-        {
-            _intConverter = Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32, nullable: false, formatProvider: this.FormatProvider);
-        }
+        internal ThunderbirdCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) 
+            : base(formatProvider, textEncoding)
+            => _intConverter = Conv::CsvConverterFactory.CreateConverter(Conv.CsvTypeCode.Int32,
+                                                                         nullable: false,
+                                                                         formatProvider: this.FormatProvider);
 
 
         protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
@@ -95,7 +96,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
         {
             var value = (int)wrapper[index]!;
 
-            if (value <= 0) return;
+            if (value <= 0)
+            {
+                return;
+            }
 
             Person? person = contact.Person ?? new Person();
             contact.Person = person;
@@ -112,14 +116,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
                         person.BirthDay = new DateTime(value, 1, 1);
                         break;
                     case AdditionalProp.BirthMonth:
-                        if (birthDay.HasValue)
-                        {
-                            person.BirthDay = new DateTime(birthDay.Value.Year, value, birthDay.Value.Day);
-                        }
-                        else
-                        {
-                            person.BirthDay = new DateTime(1, value, 1);
-                        }
+                        person.BirthDay = birthDay.HasValue 
+                                            ? (DateTime?)new DateTime(birthDay.Value.Year, value, birthDay.Value.Day)
+                                            : (DateTime?)new DateTime(1, value, 1);
                         break;
                     case AdditionalProp.BirthDay:
                         if (birthDay.HasValue)

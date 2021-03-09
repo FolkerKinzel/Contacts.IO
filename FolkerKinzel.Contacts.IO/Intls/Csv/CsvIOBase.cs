@@ -11,8 +11,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
     internal abstract class CsvIOBase
     {
+#pragma warning disable IDE1006 // Benennungsstile
         protected const int TWO_CELL_PROPERTIES = 0;
         protected const int TWO_PHONE_PROPERTIES = 1;
+#pragma warning restore IDE1006 // Benennungsstile
+
         private const int PROPINFO_LENGTH = 2;
 
 
@@ -61,12 +64,12 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         protected virtual ICsvTypeConverter InitNonNullableDateTimeConverter() => Conv::CsvConverterFactory.CreateConverter(CsvTypeCode.DateTime, nullable:false, formatProvider: this.FormatProvider);
 
 
-        protected virtual SexConverter InitSexConverter() => new SexConverter();
+        protected virtual SexConverter InitSexConverter() => new();
 
         /// <summary>
         /// Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
         /// </summary>
-        protected readonly bool[] PropInfo = new bool[PROPINFO_LENGTH];
+        protected readonly bool[] _propInfo = new bool[PROPINFO_LENGTH];
 
 
         /// <summary>
@@ -219,8 +222,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 }
             }
 
-            PropInfo[TWO_CELL_PROPERTIES] = cellProperties >= 2;
-            PropInfo[TWO_PHONE_PROPERTIES] = phoneProperties >= 2;
+            _propInfo[TWO_CELL_PROPERTIES] = cellProperties >= 2;
+            _propInfo[TWO_PHONE_PROPERTIES] = phoneProperties >= 2;
 
             return wrapper;
         }

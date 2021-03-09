@@ -4,3 +4,9 @@
 [*.cs]
 
 
+
+# CA1002: Generische Listen nicht verfügbar machen
+dotnet_diagnostic.CA1002.severity = none
+
+# IDE0078: Musterabgleich verwenden
+dotnet_diagnostic.IDE0078.severity = silent

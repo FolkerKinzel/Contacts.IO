@@ -117,7 +117,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                             person.NickName = ((IEnumerable<VC::StringCollectionProperty>)property.Value)
                                 .Where(x => !x.IsEmpty)
                                 .OrderBy(x => x.Parameters.Preference)
-                                .FirstOrDefault()?.Value.FirstOrDefault();
+                                .FirstOrDefault()?.Value!.FirstOrDefault();
 
                             break;
                         }

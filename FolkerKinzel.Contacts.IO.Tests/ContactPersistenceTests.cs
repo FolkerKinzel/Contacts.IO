@@ -9,7 +9,6 @@ namespace FolkerKinzel.Contacts.IO.Tests
 {
 
     [TestClass()]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1707:Bezeichner dürfen keine Unterstriche enthalten", Justification = "<Ausstehend>")]
     public class ContactPersistenceTests
     {
 #pragma warning disable CS8618 // Das Non-Nullable-Feld ist nicht initialisiert. Deklarieren Sie das Feld ggf. als "Nullable".

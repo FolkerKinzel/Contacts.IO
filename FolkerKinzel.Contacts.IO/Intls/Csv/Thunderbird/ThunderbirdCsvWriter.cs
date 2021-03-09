@@ -11,10 +11,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
     {
         private readonly ICsvTypeConverter _intConverter;
 
-        internal ThunderbirdCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding)
-        {
-            _intConverter = CsvConverterFactory.CreateConverter(CsvTypeCode.Int32, nullable: true, formatProvider: this.FormatProvider);
-        }
+        internal ThunderbirdCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding)
+            : base(formatProvider, textEncoding)
+            => _intConverter = CsvConverterFactory.CreateConverter(CsvTypeCode.Int32,
+                                                                   nullable: true,
+                                                                   formatProvider: this.FormatProvider);
 
 
         protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();

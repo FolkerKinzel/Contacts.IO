@@ -24,8 +24,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             Sex.Unspecified => null,
             _ => throw new InvalidCastException()
             };
-        
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:In bedingten Ausdruck konvertieren", Justification = "<Ausstehend>")]
         public object? Parse(string? value)
         {
             if(value is null || value.Length == 0)
@@ -33,7 +33,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                 return FallbackValue;
             }
 
-            char c = Char.ToUpperInvariant(value[0]);
+            char c = char.ToUpperInvariant(value[0]);
             if (c == 'M' || c == '2')
             {
                 return Sex.Male;

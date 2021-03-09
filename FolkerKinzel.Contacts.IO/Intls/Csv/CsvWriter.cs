@@ -162,7 +162,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         wrapper[i] = phones.FirstOrDefault(x => x != null && x.IsFax && x.IsWork)?.Value;
                         break;
                     case ContactProp.Cell:
-                        wrapper[i] = PropInfo[TWO_CELL_PROPERTIES]
+                        wrapper[i] = _propInfo[TWO_CELL_PROPERTIES]
                             ? (phones.FirstOrDefault(x => x != null && x.IsMobile && !x.IsWork)?.Value)
                             : (phones.FirstOrDefault(x => x != null && x.IsMobile)?.Value);
                         break;
@@ -173,7 +173,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         wrapper[i] = otherPhones.FirstOrDefault()?.Value;
                         break;
                     case ContactProp.PhoneOther1:
-                        wrapper[i] = PropInfo[TWO_PHONE_PROPERTIES] ? (otherPhones.ElementAtOrDefault(1)?.Value) : (otherPhones.FirstOrDefault()?.Value);
+                        wrapper[i] = _propInfo[TWO_PHONE_PROPERTIES] ? (otherPhones.ElementAtOrDefault(1)?.Value) : (otherPhones.FirstOrDefault()?.Value);
                         break;
                     case ContactProp.PhoneOther2:
                         wrapper[i] = otherPhones.ElementAtOrDefault(2)?.Value;

@@ -195,12 +195,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             }
         }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:In bedingten Ausdruck konvertieren", Justification = "<Ausstehend>")]
         private static string? GetTelephoneTypeFromPhone(IEnumerable<PhoneNumber?>? phones, int index)
         {
             PhoneNumber? phone = phones?.ElementAtOrDefault(index);
 
-            if (phone is null) return null;
+            if (phone is null)
+            {
+                return null;
+            }
 
             if (phone.IsFax)
             {
