@@ -246,7 +246,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
                         break;
                     case ContactProp.TimeStamp:
                         DateTime? timeStamp = contact.TimeStamp;
-                        wrapper[i] = timeStamp == default(DateTime) ? null : timeStamp;
+                        wrapper[i] = timeStamp;
                         break;
                     default:
                         if (prop.HasValue)

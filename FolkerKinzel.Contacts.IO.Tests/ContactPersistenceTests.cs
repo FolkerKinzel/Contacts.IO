@@ -1,7 +1,9 @@
 ﻿using FolkerKinzel.Contacts.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 
@@ -11,9 +13,8 @@ namespace FolkerKinzel.Contacts.IO.Tests
     [TestClass()]
     public class ContactPersistenceTests
     {
-#pragma warning disable CS8618 // Das Non-Nullable-Feld ist nicht initialisiert. Deklarieren Sie das Feld ggf. als "Nullable".
-        public TestContext TestContext { get; set; }
-#pragma warning restore CS8618 // Das Non-Nullable-Feld ist nicht initialisiert. Deklarieren Sie das Feld ggf. als "Nullable".
+        [NotNull]
+        public TestContext? TestContext { get; set; }
 
 
 
@@ -42,7 +43,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void LoadCsvTest_Outlook()
         {
-            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
+            List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(5, conts.Count);
@@ -53,28 +54,33 @@ namespace FolkerKinzel.Contacts.IO.Tests
         }
 
         [TestMethod()]
-        public void SaveCsvTest_Outlook()
+        public void SaveCsvTest_Outlook1()
         {
 
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook1.csv");
 
             Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Outlook);
+        }
+
+        [TestMethod]
+        public void SaveTest_Outlook2()
+        {
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook2.csv");
+
+            List<Contact> conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
+
+            conts.SaveCsv(fileName, CsvCompatibility.Outlook);
         }
 
 
         [TestMethod()]
         public void LoadCsvTest_Google()
         {
-            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvCompatibility.Google);
+            List<Contact>? conts = ContactPersistence.LoadCsv(TestFiles.GoogleCsv, CsvCompatibility.Google);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
             CollectionAssert.DoesNotContain(conts, null);
-
-            //string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Maxl.vcf");
-
-            //conts[0].SaveVCard(fileName);
-
 
         }
 
@@ -100,15 +106,20 @@ namespace FolkerKinzel.Contacts.IO.Tests
             Assert.IsNotNull(conts);
             Assert.AreEqual(1, conts.Count);
             CollectionAssert.DoesNotContain(conts, null);
+        }
 
-
+        [TestMethod]
+        public void SaveCsvTest_Unspecified()
+        {
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Unspecified.csv");
+            Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Unspecified);
         }
 
 
         [TestMethod()]
         public void LoadVCardTest()
         {
-            System.Collections.Generic.List<Contact>? conts = ContactPersistence.LoadVCard(TestFiles.V3vcf);
+            List<Contact> conts = ContactPersistence.LoadVcf(TestFiles.V3vcf);
 
             Assert.IsNotNull(conts);
             Assert.AreEqual(2, conts.Count);
@@ -147,7 +158,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         public void SaveVCardTest_3_0()
         {
             string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "3_0.vcf");
-            Utility.InitTestContact().SaveVCard(fileName);
+            Utility.InitTestContact().SaveVcf(fileName);
         }
 
         
