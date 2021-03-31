@@ -8,7 +8,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.3.0-rc</Version>
-    <FileVersion>1.3.0.8</FileVersion>
+    <FileVersion>1.3.0.9</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
