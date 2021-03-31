@@ -5,27 +5,27 @@
 
 ```
 nuget Package Manager:
-PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.2.2
+PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.3.0
 
 .NET CLI:
-> dotnet add package FolkerKinzel.Contacts.IO --version 1.2.2
+> dotnet add package FolkerKinzel.Contacts.IO --version 1.3.0
 
 PackageReference (Visual Studio Project File):
-<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.2.2" />
+<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.3.0" />
 
 Paket CLI:
-> paket add FolkerKinzel.Contacts.IO --version 1.2.2
+> paket add FolkerKinzel.Contacts.IO --version 1.3.0
 
 F# Interactive:
-> #r "nuget: FolkerKinzel.Contacts.IO, 1.2.2"
+> #r "nuget: FolkerKinzel.Contacts.IO, 1.3.0"
 ```
 
-* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.2.2/FolkerKinzel.Contacts.IO.en.chm)
+* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.0/FolkerKinzel.Contacts.IO.en.chm)
 
-* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.2.2/FolkerKinzel.Contacts.IO.de.chm)
+* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.0/FolkerKinzel.Contacts.IO.de.chm)
 
 > IMPORTANT: On some systems the content of the CHM file is blocked. Before opening the file
->  right click on the file icon, select Properties, and check the "Allow" checkbox - if it 
+> right click on the file icon, select Properties, and check the "Allow" checkbox - if it 
 > is present - in the lower right corner of the General tab in the Properties dialog.
 
 
@@ -33,17 +33,17 @@ F# Interactive:
 _(For the sake of better readability exception handling is ommitted in the following examples.)_
 
 * [Example: Initializing Contact Objects](#initializing-contact-objects)
-* [Example: Reading and Writing VCF Files](#reading-and-writing-vcf-files)
+* [Example: Reading and Writing vCard Files (*.vcf)](#reading-and-writing-vcard-files-(*.vcf))
 * [Example: Reading and Writing CSV Files](#reading-and-writing-csv-files)
 
 #### Initializing `Contact` Objects:
 ```csharp
-using FolkerKinzel.Contacts;
 using System;
+using FolkerKinzel.Contacts;
 
 namespace Examples
 {
-    static class ContactExample
+    public static class ContactExample
     {
         public static Contact[] InitializeContacts() => new Contact[]
             {
@@ -75,8 +75,13 @@ namespace Examples
                     {
                         new PhoneNumber
                         {
-                            Value = "0123-45678",
-                            IsWork = true
+                            Value = "876-54321",
+                            IsMobile = true
+                        },
+                        new PhoneNumber
+                        {
+                            Value = "123-45678",
+                            IsWork = true,
                         }
                     },
 
@@ -110,13 +115,12 @@ namespace Examples
                         Company = "Does Company"
                     },
 
-                    PhoneNumbers = new PhoneNumber[]
+                    // PhoneNumber implements IEnumerable<PhoneNumber>, so
+                    // a single instance can be assigned directly:
+                    PhoneNumbers = new PhoneNumber
                     {
-                        new PhoneNumber
-                        {
-                            Value = "876-54321",
-                            IsMobile = true
-                        }
+                        Value = "123-45678",
+                        IsWork = true,
                     }
                 }//new Contact()
             };//new Contact[]
@@ -124,17 +128,17 @@ namespace Examples
 }
 ```
 
-#### Reading and Writing VCF Files:
+#### Reading and Writing vCard Files (*.vcf):
 ```csharp
-using FolkerKinzel.Contacts;
-using FolkerKinzel.Contacts.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using FolkerKinzel.Contacts;
+using FolkerKinzel.Contacts.IO;
 
 namespace Examples
 {
-    static class VCardExample
+    public static class VCardExample
     {
         public static void ReadingAndWritingVCard()
         {
@@ -143,20 +147,20 @@ namespace Examples
 
             const string fileName = "FamilyDoe.vcf";
 
-            // Save both contacts to a single vcf-file:
-            ContactPersistence.SaveVCard(fileName, contactArr);
+            // Save all contacts to a common VCF file:
+            contactArr.SaveVcf(fileName);
 
-            // Show the content of the vcf-File:
+            // Display the content of the VCF file:
             Console.WriteLine("Saved VCF:");
             Console.WriteLine();
             Console.WriteLine(File.ReadAllText(fileName));
 
-            // Load the contacts:
-            List<Contact> contactList = ContactPersistence.LoadVCard(fileName);
+            // Reload the VCF file:
+            List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
 
-            // Show the content of the loaded Contact-objects:
+            // Display the content of the reloaded Contact objects:
             Console.WriteLine();
-            Console.WriteLine("Loaded Contact-objects:");
+            Console.WriteLine("Reloaded Contact objects:");
 
             for (int i = 0; i < contactList.Count; i++)
             {
@@ -182,7 +186,8 @@ TITLE:Facility Manager
 ORG:Does Company
 BDAY;VALUE=DATE:1972-01-03
 X-ANNIVERSARY:2001-06-15
-TEL;TYPE=WORK:0123-45678
+TEL;TYPE=CELL:876-54321
+TEL;TYPE=WORK:123-45678
 EMAIL;TYPE=INTERNET,PREF:john.doe@internet.com
 X-SPOUSE:Jane Doe
 END:VCARD
@@ -194,12 +199,12 @@ TITLE:CEO
 ORG:Does Company
 BDAY;VALUE=DATE:1981-05-04
 X-ANNIVERSARY:2001-06-15
-TEL;TYPE=CELL:876-54321
+TEL;TYPE=WORK:123-45678
 X-SPOUSE:John Doe
 END:VCARD
 
 
-Loaded Contact-objects:
+Reloaded Contact objects:
 
 Contact 1:
 Display Name:
@@ -215,7 +220,8 @@ E-Mails:
         john.doe@internet.com
 
 Phone Numbers:
-        0123-45678 (w.)
+        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
@@ -233,25 +239,25 @@ Personal Data:
         Anniversary: 06/15/2001
 
 Phone Numbers:
-        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
         Position: CEO
-*/
+ */
 ```
 
 #### Reading and Writing CSV Files:
 ```csharp
-using FolkerKinzel.Contacts;
-using FolkerKinzel.Contacts.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using FolkerKinzel.Contacts;
+using FolkerKinzel.Contacts.IO;
 
 namespace Examples
 {
-    static class CsvExample
+    public static class CsvExample
     {
         public static void ReadingAndWritingCsv()
         {
@@ -260,20 +266,20 @@ namespace Examples
 
             const string fileName = "FamilyDoe.csv";
 
-            // Save the contacts:
-            ContactPersistence.SaveCsv(fileName, contactArr, CsvCompatibility.Thunderbird);
+            // Save the Contacts:
+            contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
 
-            // Show the content of the csv-File:
+            // Display the content of the CSV file:
             Console.WriteLine("Saved CSV:");
             Console.WriteLine();
             Console.WriteLine(File.ReadAllText(fileName));
 
-            // Load the contacts:
+            // Reload the CSV file:
             List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
 
-            // Show the content of the loaded Contact-objects:
+            // Display the content of the reloaded Contact objects:
             Console.WriteLine();
-            Console.WriteLine("Loaded Contact-objects:");
+            Console.WriteLine("Reloaded Contact objects:");
 
             for (int i = 0; i < contactList.Count; i++)
             {
@@ -289,16 +295,12 @@ namespace Examples
 /*
 Saved CSV:
 
-First Name,Last Name,Display Name,Nickname,Primary Email,Secondary Email,Screen Name,Work Phone,
-Home Phone,Fax Number,Pager Number,Mobile Number,Home Address,Home Address2,Home City,Home State,
-Home Zipcode,Home Country,Work Address,Work Address2,Work City,Work State,Work Zip,Work Country,
-Job Title,Department,Organization,Web Page 1,Web Page 2,Birth Year,Birth Month,Birth Day,Custom 1,
-Custom 2,Custom 3,Custom 4,Notes
-John,Doe,John Doe,,john.doe@internet.com,,,0123-45678,,,,,,,,,,,,,,,,,Facility Manager,,Does Company,,,1972,1,3,,,,,
-Jane,Doe,Jane Doe,,,,,,,,,876-54321,,,,,,,,,,,,,CEO,,Does Company,,,1981,5,4,,,,,
+First Name,Last Name,Display Name,Nickname,Primary Email,Secondary Email,Screen Name,Work Phone,Home Phone,Fax Number,Pager Number,Mobile Number,Home Address,Home Address2,Home City,Home State,Home Zipcode,Home Country,Work Address,Work Address2,Work City,Work State,Work Zip,Work Country,Job Title,Department,Organization,Web Page 1,Web Page 2,Birth Year,Birth Month,Birth Day,Custom 1,Custom 2,Custom 3,Custom 4,Notes
+John,Doe,John Doe,,john.doe@internet.com,,,123-45678,,,,876-54321,,,,,,,,,,,,,Facility Manager,,Does Company,,,1972,1,3,,,,,
+Jane,Doe,Jane Doe,,,,,123-45678,,,,,,,,,,,,,,,,,CEO,,Does Company,,,1981,5,4,,,,,
 
 
-Loaded Contact-objects:
+Reloaded Contact objects:
 
 Contact 1:
 Display Name:
@@ -314,7 +316,8 @@ E-Mails:
         john.doe@internet.com
 
 Phone Numbers:
-        0123-45678 (w.)
+        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
@@ -332,7 +335,7 @@ Personal Data:
         Anniversary: 06/15/2001
 
 Phone Numbers:
-        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
