@@ -33,7 +33,7 @@ F# Interactive:
 _(For the sake of better readability exception handling is ommitted in the following examples.)_
 
 * [Example: Initializing Contact Objects](#initializing-contact-objects)
-* [Example: Reading and Writing vCard Files (*.vcf)](#reading-and-writing-vcard-files-(*.vcf))
+* [Example: Reading and Writing vCard Files (*.vcf)](#reading-and-writing-vcard-files-vcf)
 * [Example: Reading and Writing CSV Files](#reading-and-writing-csv-files)
 
 #### Initializing `Contact` Objects:
