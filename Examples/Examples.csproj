@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.3.0-beta" />
+    <ProjectReference Include="..\FolkerKinzel.Contacts.IO\FolkerKinzel.Contacts.IO.csproj" />
   </ItemGroup>
 
 </Project>

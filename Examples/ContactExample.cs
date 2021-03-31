@@ -35,8 +35,13 @@ namespace Examples
                     {
                         new PhoneNumber
                         {
-                            Value = "0123-45678",
-                            IsWork = true
+                            Value = "876-54321",
+                            IsMobile = true
+                        },
+                        new PhoneNumber
+                        {
+                            Value = "123-45678",
+                            IsWork = true,
                         }
                     },
 
@@ -70,13 +75,12 @@ namespace Examples
                         Company = "Does Company"
                     },
 
-                    PhoneNumbers = new PhoneNumber[]
+                    // PhoneNumber implements IEnumerable<PhoneNumber>, so
+                    // a single instance can be assigned directly:
+                    PhoneNumbers = new PhoneNumber
                     {
-                        new PhoneNumber
-                        {
-                            Value = "876-54321",
-                            IsMobile = true
-                        }
+                        Value = "123-45678",
+                        IsWork = true,
                     }
                 }//new Contact()
             };//new Contact[]

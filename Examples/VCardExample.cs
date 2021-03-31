@@ -15,8 +15,8 @@ namespace Examples
 
             const string fileName = "FamilyDoe.vcf";
 
-            // Save both contacts to a single vcf-file:
-            ContactPersistence.SaveVCard(fileName, contactArr);
+            // Save all contacts to a single VCF file:
+            contactArr.SaveVcf(fileName);
 
             // Show the content of the vcf-File:
             Console.WriteLine("Saved VCF:");
@@ -24,11 +24,11 @@ namespace Examples
             Console.WriteLine(File.ReadAllText(fileName));
 
             // Load the contacts:
-            List<Contact> contactList = ContactPersistence.LoadVCard(fileName);
+            List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
 
-            // Show the content of the loaded Contact-objects:
+            // Show the content of the loaded Contact objects:
             Console.WriteLine();
-            Console.WriteLine("Loaded Contact-objects:");
+            Console.WriteLine("Loaded Contact objects:");
 
             for (int i = 0; i < contactList.Count; i++)
             {

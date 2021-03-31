@@ -90,17 +90,17 @@ namespace FolkerKinzel.Contacts.IO
 
 
 
-        /// <summary>
-        /// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten zurück. (Eine VCF-Datei kann
-        /// mehrere aneinandergehängte vCards enthalten.)
-        /// </summary>
-        /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
-        /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
-        /// <param name="fileName">Der Dateipfad der VCF-Datei.</param>
-        /// <returns>Die geladenen Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten. Enthält die Datei keinen Text, wird eine leere Liste zurückgegeben.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-        /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
+        ///// <summary>
+        ///// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten zurück. (Eine VCF-Datei kann
+        ///// mehrere aneinandergehängte vCards enthalten.)
+        ///// </summary>
+        ///// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
+        ///// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
+        ///// <param name="fileName">Der Dateipfad der VCF-Datei.</param>
+        ///// <returns>Die geladenen Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten. Enthält die Datei keinen Text, wird eine leere Liste zurückgegeben.</returns>
+        ///// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
+        ///// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        ///// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
         [Obsolete("Use LoadVcf instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
@@ -121,34 +121,34 @@ namespace FolkerKinzel.Contacts.IO
 
 
 
-        /// <summary>
-        /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine gemeinsame 
-        /// vCard-Datei (*.vcf).
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
-        /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
-        /// die Datei geschrieben.
-        /// Falls es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
-        /// können Sie vorher mit <see cref="Contact.Clone"/>
-        /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
-        /// </para>
-        /// </remarks>
-        /// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei.
-        /// Existiert die Datei schon, wird sie überschrieben.</param>
-        /// <param name="contacts">
-        /// <para>
-        /// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
-        /// </para>
-        /// <para>
-        /// Die Sammlung darf leer sein oder <c>null</c>-Werte
-        /// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei erzeugt.
-        /// </para></param>
-        /// <param name="version">Dateiversion der zu speichernden vCard.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-        /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
+        ///// <summary>
+        ///// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine gemeinsame 
+        ///// vCard-Datei (*.vcf).
+        ///// </summary>
+        ///// <remarks>
+        ///// <para>
+        ///// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
+        ///// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
+        ///// die Datei geschrieben.
+        ///// Falls es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        ///// können Sie vorher mit <see cref="Contact.Clone"/>
+        ///// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
+        ///// </para>
+        ///// </remarks>
+        ///// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei.
+        ///// Existiert die Datei schon, wird sie überschrieben.</param>
+        ///// <param name="contacts">
+        ///// <para>
+        ///// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
+        ///// </para>
+        ///// <para>
+        ///// Die Sammlung darf leer sein oder <c>null</c>-Werte
+        ///// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei erzeugt.
+        ///// </para></param>
+        ///// <param name="version">Dateiversion der zu speichernden vCard.</param>
+        ///// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
+        ///// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        ///// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         [Obsolete("Use SaveVcf instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
