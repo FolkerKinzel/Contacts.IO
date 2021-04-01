@@ -6,13 +6,14 @@ using System.Linq;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
 using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
 
     internal abstract class CsvWriter : CsvIOBase
     {
-        public static CsvWriter GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
+        internal static CsvWriter GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
         {
             CsvCompatibility.Unspecified => new Universal.UniversalCsvWriter(formatProvider, textEncoding),
             CsvCompatibility.Outlook => new Outlook.OutlookCsvWriter(formatProvider, textEncoding),
@@ -39,8 +40,6 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             IList<Tuple<string, ContactProp?, IList<string>>>? mapping = CreateMapping();
             CsvRecordWrapper? wrapper = InitCsvRecordWrapper(mapping);
             wrapper.Record = writer.Record;
-
-            
 
             Debug.Assert(wrapper.Count == mapping.Count);
 
@@ -258,7 +257,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
             }
         }
 
-
+        [ExcludeFromCodeCoverage]
         protected virtual void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
         
 

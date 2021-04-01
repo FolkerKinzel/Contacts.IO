@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
@@ -8,10 +9,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
     /// </summary>
     internal class SexConverter : ICsvTypeConverter
     {
+        [ExcludeFromCodeCoverage]
         public object? FallbackValue => Sex.Unspecified;
 
+        [ExcludeFromCodeCoverage]
         public Type Type => typeof(Sex);
 
+        [ExcludeFromCodeCoverage]
         public bool ThrowsOnParseErrors => false;
 
        

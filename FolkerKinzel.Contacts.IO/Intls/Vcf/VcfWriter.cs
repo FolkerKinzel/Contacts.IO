@@ -30,6 +30,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 throw new ArgumentNullException(nameof(contact));
             }
 
+            if(fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             ToVCard(contact)?.Save(fileName, (VC::Enums.VCdVersion)version);
         }
 
