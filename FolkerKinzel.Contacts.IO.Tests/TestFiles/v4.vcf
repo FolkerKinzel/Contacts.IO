@@ -4,6 +4,7 @@ PRODID:-//Thunderbird.net/NONSGML Thunderbird CardBook V36.3//DE
 UID:9e49143d-201c-46cc-b1ca-b84cac8211e9
 FN:Möhrke Marina
 N:Möhrke;Marina;;;
+GENDER:F
 ORG:KiTa Hohenmölsen
 EMAIL;PREF=1;TYPE=HOME:info@kinderland-hhm.de
 TEL;TYPE=WORK:034441/ 2 22 67
@@ -24,10 +25,13 @@ GENDER:M
 TITLE:Gröfaz
 ROLE:Generalsekretär
 ORG:SED
+ANNIVERSARY:19960415
+RELATED;TYPE=spouse:urn:uuid:9e49143d-201c-46cc-b1ca-b84cac8211e9
 EMAIL;TYPE=HOME:privat@freenet.de
 EMAIL;TYPE=WORK:geschaeftlich@freenet.de
 EMAIL;TYPE=OTHER:sonstige@freenet.de
 EMAIL:nichts@freenet.de
+IMPP;PREF=1:xmpp:alice@example.com
 TEL;TYPE=HOME:Privattelefon
 TEL;TYPE=WORK:Diensttelefon
 TEL;TYPE=FAX:Fax

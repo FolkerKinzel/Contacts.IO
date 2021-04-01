@@ -7,6 +7,7 @@ using FolkerKinzel.CsvTools;
 using System.Diagnostics;
 using FolkerKinzel.Contacts.IO.Resources;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv
 {
@@ -404,6 +405,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv
         }
 
 
+        [ExcludeFromCodeCoverage]
         protected virtual void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
 
     }

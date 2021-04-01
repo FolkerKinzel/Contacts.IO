@@ -29,12 +29,24 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
         internal static string Outlook365Csv => Path.Combine(_testFileDirectory, "Outlook365.csv");
 
+        internal static string Outlook365DifferentColumnNamesCsv => Path.Combine(_testFileDirectory, "Outlook365_DifferentColumnNames.csv");
+
+        internal static string Outlook365DifferentColumnNamesLessColumnsCsv => Path.Combine(_testFileDirectory, "Outlook365_DifferentColumnNamesLessColumns.csv");
+
+        internal static string NoHeaderCsv => Path.Combine(_testFileDirectory, "NoHeader.csv");
+
+
         internal static string WindowsLiveMail => Path.Combine(_testFileDirectory, "WindowsLiveMail.csv");
 
 
         internal static string ThunderbirdAnsiCsv => Path.Combine(_testFileDirectory, "ThunderbirdAnsi.csv");
 
         internal static string ThunderbirdUtf8Csv => Path.Combine(_testFileDirectory, "ThunderbirdUtf8.csv");
+
+        internal static string ThunderbirdUtf8UnknownAndLessColumnNamesCsv => Path.Combine(_testFileDirectory, "ThunderbirdUtf8UnknownAndLessColumnNames.csv");
+
+        internal static string ThunderbirdUtf8EnglishColumnsInvalidBDayCsv => Path.Combine(_testFileDirectory, "ThunderbirdUtf8EnglishColumnsInvalidBDay.csv");
+
 
         internal static string V2vcf => Path.Combine(_testFileDirectory, "v2_1.vcf");
 

@@ -53,7 +53,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
                 EmailAddresses = new string?[] { "folker@freenet.de", "info@folker.de", null },
                 Person = pers,
                 AddressHome = addr,
-                InstantMessengerHandles = new string?[] { "Maxl@twitter.com", "Maxl@skype.com" },
+                InstantMessengerHandles = new string?[] { "aim:address.com", "gtalk:googletalk.com", "icq:address.com", "xmpp:jabber.com", "msnim:msn.com", "skype:address.com", "ymsgr:yahoo.com", "address.qq", "Maxl@twitter.com", "Maxl@skype.com" },
                 PhoneNumbers = new PhoneNumber[] {
                     new PhoneNumber("1"),
                     new PhoneNumber("2", isWork: true),

@@ -38,8 +38,12 @@ namespace FolkerKinzel.Contacts.IO
         /// um automatisch die am besten geeignete <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="Encoding.UTF8"/>.</param>
         /// <returns>Inhalt der CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.</returns>
-        ///<exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
+        /// <exception cref="ArgumentException"><exception cref="ArgumentException">
+        /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
+        /// <para>- oder -</para>
+        /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
+        /// </exception>
         /// <exception cref="IOException">
         /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
         /// <para>- oder -</para>
