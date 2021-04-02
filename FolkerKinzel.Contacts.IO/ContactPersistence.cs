@@ -168,6 +168,20 @@ namespace FolkerKinzel.Contacts.IO
         /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine gemeinsame 
         /// vCard-Datei (*.vcf).
         /// </summary>
+        /// 
+        /// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei.
+        /// Existiert die Datei schon, wird sie überschrieben.</param>
+        /// <param name="contacts">
+        /// <para>
+        /// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
+        /// </para>
+        /// <para>
+        /// Die Sammlung darf leer sein oder <c>null</c>-Werte
+        /// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei erzeugt.
+        /// </para>
+        /// </param>
+        /// <param name="version">Dateiversion der zu speichernden vCard.</param>
+        /// 
         /// <remarks>
         /// <para>
         /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
@@ -178,19 +192,13 @@ namespace FolkerKinzel.Contacts.IO
         /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
         /// </para>
         /// </remarks>
-        /// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei.
-        /// Existiert die Datei schon, wird sie überschrieben.</param>
-        /// <param name="contacts">
-        /// <para>
-        /// Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.
-        /// </para>
-        /// <para>
-        /// Die Sammlung darf leer sein oder <c>null</c>-Werte
-        /// enthalten. Wenn die Sammlung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei erzeugt.
-        /// </para></param>
-        /// <param name="version">Dateiversion der zu speichernden vCard.</param>
+        /// 
         /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        /// <exception cref="ArgumentException">
+        /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
+        /// <para>- oder -</para>
+        /// <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
+        /// </exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         public static void SaveVcf(string fileName, IEnumerable<Contact?> contacts, VCardVersion version = VCardVersion.V3_0)
             => VcfWriter.Write(contacts, fileName, version);

@@ -51,12 +51,11 @@
     <IndentHtml>False</IndentHtml>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <ProjectSummary>Die Namensr&amp;#228%3bume FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO stellen eine einfache .NET-API zum Speichern und Bearbeiten von Kontaktdaten von Organisationen und nat&amp;#252%3brlichen Personen dar.</ProjectSummary>
+    <ProjectSummary>Die Namensr&amp;#228%3bume FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO bilden eine einfach zu verwendende .NET-API zum Speichern und Bearbeiten der Kontaktdaten von Organisationen und nat&amp;#252%3brlichen Personen.</ProjectSummary>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">Die Namensräume FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO stellen eine einfache .NET-Api zum Speichern und Bearbeiten von Kontaktdaten von Organisationen und natürlichen Personen dar. Im Namensraum FolkerKinzel.Contacts befindet sich das Datenmodell und der Namensraum FolkerKinzel.Contacts.IO stellt Klassen zur Verfügung, um dieses als CSV oder vCard (*.vcf) zu persistieren.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Der Namensraum enthält ein einfaches Datenmodell zum Speichern von Kontaktdaten von Organisationen und natürlichen Personen.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Der Namensraum stellt Klassen zur Verfügung, die dazu dienen, die in der Klasse FolkerKinzel.Contacts.Contact gespeicherten Kontaktdaten als CSV oder vCard (*.vcf) zu persistieren.</NamespaceSummaryItem>
-    </NamespaceSummaries>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">Die Namensräume FolkerKinzel.Contacts und FolkerKinzel.Contacts.IO bilden eine einfach zu verwendende .NET-Api zum Speichern und Bearbeiten von Kontaktdaten von Organisationen und natürlichen Personen. Im Namensraum FolkerKinzel.Contacts befindet sich das Datenmodell und der Namensraum FolkerKinzel.Contacts.IO stellt Klassen zur Verfügung, um dieses Datenmodell als CSV-Datei oder vCard (*.vcf - Datei) zu persistieren.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Der Namensraum enthält ein leicht zu verwendendes Datenmodell zum Speichern der Kontaktdaten von Organisationen und natürlichen Personen.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Der Namensraum stellt Klassen zur Verfügung, die dazu dienen, die in der Klasse FolkerKinzel.Contacts.Contact gespeicherten Kontaktdaten als CSV-Datei oder vCard (*.vcf - Datei) zu persistieren.</NamespaceSummaryItem></NamespaceSummaries>
     <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform

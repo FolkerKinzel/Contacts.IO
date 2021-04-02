@@ -59,7 +59,11 @@ namespace FolkerKinzel.Contacts.IO
         /// </remarks>
         /// 
         /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+        /// <exception cref="ArgumentException">
+        /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
+        /// <para>- oder -</para>
+        /// <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
+        /// </exception>
         /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         public static void SaveVcf(this IEnumerable<Contact?> contacts,
                                      string fileName,

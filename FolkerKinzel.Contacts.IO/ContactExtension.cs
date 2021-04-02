@@ -93,9 +93,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei. 
         /// Existiert die Datei schon, wird sie überschrieben.</param>
         /// <param name="version">Dateiversion der zu speichernden VCF-Datei.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-        /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
+        /// 
         /// <remarks>
         /// <para>
         /// Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="Contact.Clean"/> auf. Wenn
@@ -106,8 +104,17 @@ namespace FolkerKinzel.Contacts.IO
         /// </para>
         /// <para>Zum Speichern mehrerer <see cref="Contact"/>-Objekte in einer gemeinsamen VCF-Datei eignet sich die
         /// Methode <see cref="ContactPersistence.SaveVcf(string, IEnumerable{Contact?}, VCardVersion)"/> oder die 
-        /// Erweiterungsmethode <see cref="ContactCollectionExtension.SaveVcf(IEnumerable{Contact?}, string, VCardVersion)"/>.</para>
+        /// Erweiterungsmethode <see cref="ContactCollectionExtension.SaveVcf(IEnumerable{Contact?}, string, VCardVersion)"/>.
+        /// </para>
         /// </remarks>
+        /// 
+        /// <exception cref="ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">
+        /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
+        /// <para>- oder -</para>
+        /// <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
+        /// </exception>
+        /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
         public static void SaveVcf(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0)
             => VcfWriter.Write(contact, fileName, version);
     }

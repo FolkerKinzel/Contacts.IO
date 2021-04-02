@@ -167,4 +167,21 @@
   <T ID="12EC6D45E2C8FDCF"></T>
   <T ID="94419A16C46C7EAE"></T>
   <T ID="7A2CCF0F8C061CA1"></T>
+  <T ID="99B4A9C093B40260">Extension methods for &lt;see cref="T:System.Collections.Generic.IEnumerable`1"&gt;IEnumerable&amp;lt;Contact?&amp;gt;&lt;/see&gt;.</T>
+  <T ID="B0FD5717377211A8">Saves the content of a collection of &lt;see cref="T:FolkerKinzel.Contacts.Contact"/&gt; objects as CSV file.</T>
+  <T ID="92037DAC59656599">The collection of &lt;see cref="T:FolkerKinzel.Contacts.Contact"/&gt; objects to save.</T>
+  <T ID="73F14C08CFA5BB41">The file path of the CSV file to be created. If the file already exists, it will be overwritten.</T>
+  <T ID="7941B348C6BAB675">The platform that the CSV file targets.</T>
+  <T ID="EEDC78E24D21EADB">An object, that provides culture-specific formatting information, or &lt;c&gt;null&lt;/c&gt; to automatically choose the most suitable &lt;see cref ="T:System.Globalization.CultureInfo"/&gt;.</T>
+  <T ID="34065519AF0F0154">The text encoding to use or &lt;c&gt;null&lt;/c&gt; for UTF-8 with BOM (&lt;see cref ="P:System.Text.Encoding.UTF8"/&gt;).</T>
+  <T ID="3953320EB06DCAB3">The method calls &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; on every &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; object in &lt;paramref name ="contacts"/&gt;.</T>
+  <T ID="D69852B821BB5AF">&lt;paramref name="contacts"/&gt; or &lt;paramref name="fileName"/&gt; is &lt;c&gt;null&lt;/c&gt;.</T>
+  <T ID="2989425D6B3A9BCB">&lt;para&gt; &lt;paramref name ="fileName"/&gt; is not a valid file path. &lt;/para&gt; &lt;para&gt; - or - &lt;/para&gt; &lt;para&gt; &lt;paramref name ="platform"/&gt; has an undefined value. &lt;/para&gt;</T>
+  <T ID="57D4D91C3696023E">I/O error.</T>
+  <T ID="64939AD5CE29BA2E">Saves the contents of a collection of &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects as a single VCF file.</T>
+  <T ID="A20496BDF621996D">The collection of &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; objects to be saved. The collection may be empty or contain &lt;c&gt;null&lt;/c&gt; values. If the collection does not contain an &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; object that contains data, no file is created.</T>
+  <T ID="3F1524DF76AD92EB">The file path of the VCF file. If the file already exists, it will be overwritten.</T>
+  <T ID="6E2E8A2BC334BBF8">File version of the vCard file (*.vcf) to be saved.</T>
+  <T ID="9135C192B06DCAB3">The method calls &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; on every &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; object in &lt;paramref name ="contacts"/&gt;.</T>
+  <T ID="E87E5451821BB5AF">&lt;paramref name="contacts"/&gt; or &lt;paramref name="fileName"/&gt; is &lt;c&gt;null&lt;/c&gt;.</T>
 </Tsltn>

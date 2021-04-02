@@ -6,6 +6,7 @@
 
 ### 2.0.0
 - [ ] Mark obsolete symbols as errors.
+- [ ] The Load methods should return `ReadOnlyCollection<Contact>`
 - [ ] Update FolkerKinzel.VCards to 3.0.0.
 - [ ] Update FolkerKinzel.CsvTools to 2.0.0.
 
