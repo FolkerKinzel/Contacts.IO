@@ -1,8 +1,8 @@
-﻿using FolkerKinzel.Contacts;
-using FolkerKinzel.Contacts.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using FolkerKinzel.Contacts;
+using FolkerKinzel.Contacts.IO;
 
 namespace Examples
 {

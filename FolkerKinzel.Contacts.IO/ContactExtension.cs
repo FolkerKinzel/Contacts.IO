@@ -10,7 +10,7 @@ using System.ComponentModel;
 namespace FolkerKinzel.Contacts.IO
 {
     /// <summary>
-    /// Enthält Erweiterungsmethoden für die <see cref="Contact"/>-Klasse.
+    /// Erweiterungsmethoden für die <see cref="Contact"/>-Klasse.
     /// </summary>
     public static class ContactExtension
     {
@@ -21,7 +21,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <para>Die Methode erzeugt bei jedem Aufruf eine neue CSV-Datei. Wenn Sie mehrere <see cref="Contact"/>-Objekte in einer 
         /// gemeinsamen CSV-Datei speichern möchten, eignet sich die Methode 
         /// <see cref="ContactPersistence.SaveCsv(string, IEnumerable{Contact?}, CsvCompatibility, IFormatProvider?, Encoding?)"/>
-        /// oder die Erweiterungsmethode <see cref="ContactCollectionExtension.SaveCsv(IEnumerable{Contact?}, string, CsvCompatibility, IFormatProvider?, Encoding?)".</para>
+        /// oder die Erweiterungsmethode <see cref="ContactCollectionExtension.SaveCsv(IEnumerable{Contact?}, string, CsvCompatibility, IFormatProvider?, Encoding?)"/>.</para>
         /// <para>
         /// Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="Contact.Clean"/> auf. Wenn
         /// die Eigenschaft <see cref="Contact.IsEmpty"/> von <paramref name="contact"/> danach <c>true</c> zurückgibt, wird eine leere Datei erzeugt.
@@ -80,7 +80,9 @@ namespace FolkerKinzel.Contacts.IO
         [Obsolete("Use SaveVcf instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
+#pragma warning disable CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
         public static void SaveVCard(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0)
+#pragma warning restore CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
             => SaveVcf(contact, fileName, version);
 
         /// <summary>
@@ -103,8 +105,8 @@ namespace FolkerKinzel.Contacts.IO
         /// Kopie von <paramref name="contact"/> erstellen und der Methode dann die Kopie übergeben.
         /// </para>
         /// <para>Zum Speichern mehrerer <see cref="Contact"/>-Objekte in einer gemeinsamen VCF-Datei eignet sich die
-        /// Methode <see cref="ContactPersistence.SaveVCard(string, IEnumerable{Contact?}, VCardVersion)"/> oder die 
-        /// Erweiterungsmethode <see cref="ContactCollectionExtension.SaveVcf(IEnumerable{Contact?}, string, VCardVersion)".</para>
+        /// Methode <see cref="ContactPersistence.SaveVcf(string, IEnumerable{Contact?}, VCardVersion)"/> oder die 
+        /// Erweiterungsmethode <see cref="ContactCollectionExtension.SaveVcf(IEnumerable{Contact?}, string, VCardVersion)"/>.</para>
         /// </remarks>
         public static void SaveVcf(this Contact contact, string fileName, VCardVersion version = VCardVersion.V3_0)
             => VcfWriter.Write(contact, fileName, version);

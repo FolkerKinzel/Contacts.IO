@@ -39,7 +39,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="Encoding.UTF8"/>.</param>
         /// <returns>Inhalt der CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><exception cref="ArgumentException">
+        /// <exception cref="ArgumentException">
         /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
         /// <para>- oder -</para>
         /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
@@ -108,7 +108,9 @@ namespace FolkerKinzel.Contacts.IO
         [Obsolete("Use LoadVcf instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
+#pragma warning disable CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
         public static List<Contact> LoadVCard(string fileName) => LoadVcf(fileName);
+#pragma warning restore CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
 
         /// <summary>
         /// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten zurück. (Eine VCF-Datei kann
@@ -156,7 +158,9 @@ namespace FolkerKinzel.Contacts.IO
         [Obsolete("Use SaveVcf instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
+#pragma warning disable CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
         public static void SaveVCard(string fileName, IEnumerable<Contact?> contacts, VCardVersion version = VCardVersion.V3_0)
+#pragma warning restore CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
             => SaveVcf(fileName, contacts, version);
 
 

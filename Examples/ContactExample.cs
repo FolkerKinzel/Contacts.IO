@@ -1,5 +1,5 @@
-﻿using FolkerKinzel.Contacts;
-using System;
+﻿using System;
+using FolkerKinzel.Contacts;
 
 namespace Examples
 {

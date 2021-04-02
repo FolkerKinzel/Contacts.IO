@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,9 @@ using FolkerKinzel.Contacts.IO.Intls.Vcf;
 
 namespace FolkerKinzel.Contacts.IO
 {
+    /// <summary>
+    /// Erweiterungsmethoden für <see cref="IEnumerable{T}">IEnumerable&lt;Contact?&gt;</see>.
+    /// </summary>
     public static class ContactCollectionExtension
     {
         /// <summary>
