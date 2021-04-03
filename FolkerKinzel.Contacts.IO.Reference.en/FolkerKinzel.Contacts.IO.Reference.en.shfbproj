@@ -13,7 +13,7 @@
     <RootNamespace>FolkerKinzel.Contacts.IO.Documentation</RootNamespace>
     <Name>FolkerKinzel.Contacts.IO.Doku.de</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>FolkerKinzel.Contacts.IO.en</HtmlHelpName>
     <Language>en-US</Language>
@@ -27,16 +27,14 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\bin\Release\net40\FolkerKinzel.Contacts.IO.xml" />
-      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\bin\Release\net40\FolkerKinzel.Contacts.IO.dll" />
-      <DocumentationSource sourceFile="..\..\FolkerKinzel.Contacts\FolkerKinzel.Contacts\bin\Release\net40\FolkerKinzel.Contacts.xml" />
-      <DocumentationSource sourceFile="..\..\FolkerKinzel.Contacts\FolkerKinzel.Contacts\bin\Release\net40\FolkerKinzel.Contacts.dll" />
+      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\FolkerKinzel.Contacts.IO.csproj" />
+      <DocumentationSource sourceFile="..\..\FolkerKinzel.Contacts\FolkerKinzel.Contacts\FolkerKinzel.Contacts.csproj" />
     </DocumentationSources>
     <HelpTitle>FolkerKinzel.Contacts.IO</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <NamingMethod>Guid</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
     <NamespaceGrouping>True</NamespaceGrouping>
     <MaximumGroupParts>4</MaximumGroupParts>
     <Preliminary>False</Preliminary>
@@ -54,9 +52,11 @@
     <ProjectSummary>An easy to use .NET-API to manage contact data of organizations and natural persons.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="FolkerKinzel.Contacts (Group)" isGroup="True" isDocumented="True">The namespaces FolkerKinzel.Contacts and FolkerKinzel.Contacts.IO represent an easy to use .NET API for storing and editing contact data of organizations and natural persons. The namespace FolkerKinzel.Contacts contains the data model and the namespace FolkerKinzel.Contacts.IO provides classes to persist it as CSV file or vCard (*.vcf file).</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations and natural persons.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact objects as CSV file or vCard (*.vcf file).</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts" isDocumented="True">Data model to store contact data of organizations and natural persons.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="FolkerKinzel.Contacts.IO" isDocumented="True">Classes to save and load FolkerKinzel.Contacts.Contact objects as CSV file or vCard (*.vcf file).</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
+    <RootNamespaceTitle>FolkerKinzel.Contacts Namespaces</RootNamespaceTitle>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

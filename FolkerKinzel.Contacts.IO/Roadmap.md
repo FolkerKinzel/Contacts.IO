@@ -3,6 +3,7 @@
 
 ### 1.3.1
 - [ ] Update FolkerKinzel.VCards to 2.1.1
+- [x] Passing an undefined enum value as VCardVersion will cause an ArgumentException.
 
 ### 2.0.0
 - [ ] Mark obsolete symbols as errors.

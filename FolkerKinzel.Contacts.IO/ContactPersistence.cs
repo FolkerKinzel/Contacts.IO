@@ -28,16 +28,20 @@ namespace FolkerKinzel.Contacts.IO
     public static class ContactPersistence
     {
         /// <summary>
-        /// Lädt den Inhalt einer CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.
+        /// Lädt den Inhalt einer CSV-Datei als <see cref="List{T}">Liste</see> von <see cref="Contact"/>-Objekten.
         /// </summary>
-        /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
-        /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
+        /// 
         /// <param name="fileName">Der Dateipfad der CSV-Datei.</param>
         /// <param name="platform">Die Plattform, von der die CSV-Datei stammt.</param>
         /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
         /// um automatisch die am besten geeignete <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="Encoding.UTF8"/>.</param>
-        /// <returns>Inhalt der CSV-Datei als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten.</returns>
+        /// 
+        /// <returns>Inhalt der CSV-Datei als <see cref="List{T}">Liste</see> von <see cref="Contact"/>-Objekten.</returns>
+        /// 
+        /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
+        /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
+        /// 
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
         /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
@@ -47,7 +51,8 @@ namespace FolkerKinzel.Contacts.IO
         /// <exception cref="IOException">
         /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
         /// <para>- oder -</para>
-        /// <para>die Datei enthält ungültiges CSV.</para></exception>
+        /// <para>die Datei enthält ungültiges CSV.</para>
+        /// </exception>
         public static List<Contact> LoadCsv
             (string fileName, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null) 
             => CsvReader.GetInstance(platform, formatProvider, textEncoding).Read(fileName);
@@ -56,16 +61,7 @@ namespace FolkerKinzel.Contacts.IO
         /// <summary>
         /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten in eine CSV-Datei.
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
-        /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
-        /// die Datei geschrieben.
-        /// Falls es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
-        /// können Sie vorher mit <see cref="Contact.Clone"/>
-        /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
-        /// </para>
-        /// </remarks>
+        /// 
         /// <param name="fileName">Der Dateipfad der zu erzeugenden CSV-Datei. Existiert die Datei schon, wird sie überschrieben.</param>
         /// <param name="contacts">
         /// <para>
@@ -80,6 +76,20 @@ namespace FolkerKinzel.Contacts.IO
         /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
         /// um automatisch die am besten geeignete für <see cref="CultureInfo"/> aussuchen zu lassen.</param>
         /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
+        /// 
+        /// <remarks>
+        /// <para>
+        /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
+        /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
+        /// die Datei geschrieben.
+        /// </para>
+        /// <para>
+        /// Falls es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
+        /// können Sie vorher mit <see cref="Contact.Clone"/>
+        /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
+        /// </para>
+        /// </remarks>
+        /// 
         /// <exception cref = "ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
         /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
@@ -113,13 +123,18 @@ namespace FolkerKinzel.Contacts.IO
 #pragma warning restore CS1591 // Fehlender XML-Kommentar für öffentlich sichtbaren Typ oder Element
 
         /// <summary>
-        /// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten zurück. (Eine VCF-Datei kann
+        /// Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="List{T}">Liste</see> von <see cref="Contact"/>-Objekten zurück. (Eine VCF-Datei kann
         /// mehrere aneinandergehängte vCards enthalten.)
         /// </summary>
+        /// 
+        /// <param name="fileName">Der Dateipfad der VCF-Datei.</param>
+        /// 
+        /// <returns>Die geladenen Daten als <see cref="List{T}">Liste</see> von <see cref="Contact"/>-Objekten. Enthält 
+        /// die Datei keinen Text, wird eine leere Liste zurückgegeben.</returns>
+        /// 
         /// <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="Contact"/>-Objekt <see cref="Contact.Clean"/> aus,
         /// weshalb es in der Regel nicht nötig ist, <see cref="Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
-        /// <param name="fileName">Der Dateipfad der VCF-Datei.</param>
-        /// <returns>Die geladenen Daten als <see cref="List{T}"/> von <see cref="Contact"/>-Objekten. Enthält die Datei keinen Text, wird eine leere Liste zurückgegeben.</returns>
+        /// 
         /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
@@ -187,6 +202,8 @@ namespace FolkerKinzel.Contacts.IO
         /// Die Methode ruft auf allen als Argument übergebenen <see cref="Contact"/>-Objekten <see cref="Contact.Clean"/> auf. Alle
         /// <see cref="Contact"/>-Objekte deren Eigenschaft <see cref="Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
         /// die Datei geschrieben.
+        /// </para>
+        /// <para>
         /// Falls es unerwünscht ist, dass die Methode die <see cref="Contact"/>-Objekte durch den Aufruf von <see cref="Contact.Clean"/> ändert,
         /// können Sie vorher mit <see cref="Contact.Clone"/>
         /// Kopien der <see cref="Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
