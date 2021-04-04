@@ -15,20 +15,20 @@ namespace Examples
 
             const string fileName = "FamilyDoe.csv";
 
-            // Save the contacts:
-            ContactPersistence.SaveCsv(fileName, contactArr, CsvCompatibility.Thunderbird);
+            // Save the Contacts:
+            contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
 
-            // Show the content of the csv-File:
+            // Display the content of the CSV file:
             Console.WriteLine("Saved CSV:");
             Console.WriteLine();
             Console.WriteLine(File.ReadAllText(fileName));
 
-            // Load the contacts:
+            // Reload the CSV file:
             List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
 
-            // Show the content of the loaded Contact-objects:
+            // Display the content of the reloaded Contact objects:
             Console.WriteLine();
-            Console.WriteLine("Loaded Contact-objects:");
+            Console.WriteLine("Reloaded Contact objects:");
 
             for (int i = 0; i < contactList.Count; i++)
             {
@@ -44,15 +44,12 @@ namespace Examples
 /*
 Saved CSV:
 
-First Name,Last Name,Display Name,Nickname,Primary Email,Secondary Email,Screen Name,Work Phone,Home Phone,Fax Number,
-Pager Number,Mobile Number,Home Address,Home Address2,Home City,Home State,Home Zipcode,Home Country,Work Address,
-Work Address2,Work City,Work State,Work Zip,Work Country,Job Title,Department,Organization,Web Page 1,Web Page 2,
-Birth Year,Birth Month,Birth Day,Custom 1,Custom 2,Custom 3,Custom 4,Notes
-John,Doe,John Doe,,john.doe@internet.com,,,0123-45678,,,,,,,,,,,,,,,,,Facility Manager,,Does Company,,,1972,1,3,,,,,
-Jane,Doe,Jane Doe,,,,,,,,,876-54321,,,,,,,,,,,,,CEO,,Does Company,,,1981,5,4,,,,,
+First Name,Last Name,Display Name,Nickname,Primary Email,Secondary Email,Screen Name,Work Phone,Home Phone,Fax Number,Pager Number,Mobile Number,Home Address,Home Address2,Home City,Home State,Home Zipcode,Home Country,Work Address,Work Address2,Work City,Work State,Work Zip,Work Country,Job Title,Department,Organization,Web Page 1,Web Page 2,Birth Year,Birth Month,Birth Day,Custom 1,Custom 2,Custom 3,Custom 4,Notes
+John,Doe,John Doe,,john.doe@internet.com,,,123-45678,,,,876-54321,,,,,,,,,,,,,Facility Manager,,Does Company,,,1972,1,3,,,,,
+Jane,Doe,Jane Doe,,,,,123-45678,,,,,,,,,,,,,,,,,CEO,,Does Company,,,1981,5,4,,,,,
 
 
-Loaded Contact-objects:
+Reloaded Contact objects:
 
 Contact 1:
 Display Name:
@@ -68,7 +65,8 @@ E-Mails:
         john.doe@internet.com
 
 Phone Numbers:
-        0123-45678 (w.)
+        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
@@ -86,9 +84,9 @@ Personal Data:
         Anniversary: 06/15/2001
 
 Phone Numbers:
-        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
         Position: CEO
- */
+. */

@@ -15,20 +15,20 @@ namespace Examples
 
             const string fileName = "FamilyDoe.vcf";
 
-            // Save all contacts to a single VCF file:
+            // Save all contacts to a common VCF file:
             contactArr.SaveVcf(fileName);
 
-            // Show the content of the vcf-File:
+            // Display the content of the VCF file:
             Console.WriteLine("Saved VCF:");
             Console.WriteLine();
             Console.WriteLine(File.ReadAllText(fileName));
 
-            // Load the contacts:
+            // Reload the VCF file:
             List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
 
-            // Show the content of the loaded Contact objects:
+            // Display the content of the reloaded Contact objects:
             Console.WriteLine();
-            Console.WriteLine("Loaded Contact objects:");
+            Console.WriteLine("Reloaded Contact objects:");
 
             for (int i = 0; i < contactList.Count; i++)
             {
@@ -54,7 +54,8 @@ TITLE:Facility Manager
 ORG:Does Company
 BDAY;VALUE=DATE:1972-01-03
 X-ANNIVERSARY:2001-06-15
-TEL;TYPE=WORK:0123-45678
+TEL;TYPE=CELL:876-54321
+TEL;TYPE=WORK:123-45678
 EMAIL;TYPE=INTERNET,PREF:john.doe@internet.com
 X-SPOUSE:Jane Doe
 END:VCARD
@@ -66,12 +67,12 @@ TITLE:CEO
 ORG:Does Company
 BDAY;VALUE=DATE:1981-05-04
 X-ANNIVERSARY:2001-06-15
-TEL;TYPE=CELL:876-54321
+TEL;TYPE=WORK:123-45678
 X-SPOUSE:John Doe
 END:VCARD
 
 
-Loaded Contact-objects:
+Reloaded Contact objects:
 
 Contact 1:
 Display Name:
@@ -87,7 +88,8 @@ E-Mails:
         john.doe@internet.com
 
 Phone Numbers:
-        0123-45678 (w.)
+        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
@@ -105,9 +107,9 @@ Personal Data:
         Anniversary: 06/15/2001
 
 Phone Numbers:
-        876-54321
+        123-45678 (w.)
 
 Company Data:
         Company:  Does Company
         Position: CEO
- */
+ .*/
