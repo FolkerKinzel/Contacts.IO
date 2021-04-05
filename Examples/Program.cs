@@ -11,8 +11,8 @@ namespace Examples
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 
-             CsvExample.ReadingAndWritingCsv();
-             //VCardExample.ReadingAndWritingVCard();        
+             //CsvExample.ReadingAndWritingCsv();
+             VCardExample.ReadingAndWritingVCard();        
         }
     }
 }

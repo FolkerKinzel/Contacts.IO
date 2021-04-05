@@ -14,6 +14,11 @@
     <NoWarn>$(NoWarn);8600;8601;8602;8603;8604</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="reports\**" />
+    <EmbeddedResource Remove="reports\**" />
+    <None Remove="reports\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="CsvMappingCollectionTests.cs" />
   </ItemGroup>
 
