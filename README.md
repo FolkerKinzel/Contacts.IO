@@ -1,5 +1,6 @@
 # FolkerKinzel.Contacts.IO
 [![NuGet](https://img.shields.io/nuget/v/FolkerKinzel.Contacts.IO)](https://www.nuget.org/packages/FolkerKinzel.Contacts.IO/)
+![GitHub](https://img.shields.io/github/license/FolkerKinzel/Contacts.IO)
 
 .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.
 
