@@ -1,25 +1,10 @@
 # FolkerKinzel.Contacts.IO
 [![NuGet](https://img.shields.io/nuget/v/FolkerKinzel.Contacts.IO)](https://www.nuget.org/packages/FolkerKinzel.Contacts.IO/)
-![GitHub](https://img.shields.io/github/license/FolkerKinzel/Contacts.IO)
+[![GitHub](https://img.shields.io/github/license/FolkerKinzel/Contacts.IO)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/LICENSE)
 
 .NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.
 
-```
-nuget Package Manager:
-PM> Install-Package FolkerKinzel.Contacts.IO -Version 1.3.1
 
-.NET CLI:
-> dotnet add package FolkerKinzel.Contacts.IO --version 1.3.1
-
-PackageReference (Visual Studio Project File):
-<PackageReference Include="FolkerKinzel.Contacts.IO" Version="1.3.1" />
-
-Paket CLI:
-> paket add FolkerKinzel.Contacts.IO --version 1.3.1
-
-F# Interactive:
-> #r "nuget: FolkerKinzel.Contacts.IO, 1.3.1"
-```
 
 * [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.1/FolkerKinzel.Contacts.IO.en.chm)
 

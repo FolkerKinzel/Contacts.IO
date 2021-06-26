@@ -27,6 +27,7 @@ Passing an undefined value of VCardVersion as method argument will cause an Argu
     <RepositoryUrl>https://github.com/FolkerKinzel/Contacts.IO.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/FolkerKinzel/Contacts.IO</PackageProjectUrl>
+    <PackageIconUrl />
   </PropertyGroup>
   <!-- 👇 disable the nullable warnings when compiling for .NET Standard 2.0 -->
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
@@ -63,7 +64,7 @@ Passing an undefined value of VCardVersion as method argument will cause an Argu
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Nuget-Logo\Logo.png">
+    <None Include="..\..\..\..\Nuget-Logo\Logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
