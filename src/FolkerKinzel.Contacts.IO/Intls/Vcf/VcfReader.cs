@@ -22,7 +22,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
         /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
         internal static List<Contact> Read(string fileName)
         {
-            List<VCard> vcards = VCard.Load(fileName);
+            IList<VCard> vcards = VCard.LoadVcf(fileName);
 
 
             var wabContacts = new List<Contact>(vcards.Count);

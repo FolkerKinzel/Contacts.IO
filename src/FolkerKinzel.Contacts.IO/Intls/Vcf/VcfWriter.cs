@@ -35,7 +35,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            ToVCard(contact)?.Save(fileName, (VC::Enums.VCdVersion)version);
+            ToVCard(contact)?.SaveVcf(fileName, (VC::Enums.VCdVersion)version);
         }
 
 
@@ -60,7 +60,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf
                 throw new ArgumentNullException(nameof(contacts));
             }
 
-            VCard.Save(fileName, contacts.Select(x => ToVCard(x)).ToList(), (VC::Enums.VCdVersion)version);
+            VCard.SaveVcf(fileName, contacts.Select(x => ToVCard(x)).ToList(), (VC::Enums.VCdVersion)version);
         }
 
 
