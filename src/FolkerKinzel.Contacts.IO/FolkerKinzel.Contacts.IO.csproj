@@ -7,18 +7,12 @@
     <!-- nuget-Package: -->
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
-    <Version>1.3.1</Version>
-    <FileVersion>1.3.0.26</FileVersion>
+    <Version>1.3.2</Version>
+    <FileVersion>1.3.2.1</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageReleaseNotes>Updates the dependencies and makes use of the new features of FolkerKinzel.Contacts and FolkerKinzel.VCards.
-    
-Fixes an issue, that CsvWriter might crash under certain circumstances if the TimeStamp of a Contact object is not explicitely set.
-
-SaveVCard and LoadVCard have been replaced by SaveVcf and LoadVcf to have a more consistent naming. Existing code will still compile and run but will give you Obsolete warnings when using the old naming.
-
-Passing an undefined value of VCardVersion as method argument will cause an ArgumentException now.</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/blob/master/docs/PackageReleaseNotes/1.3.2/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
-    <Description>.NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.</Description>
+    <Description>.NET Framework to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.</Description>
     <Authors>Folker Kinzel</Authors>
     <Copyright>Copyright © 2020 Folker Kinzel</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

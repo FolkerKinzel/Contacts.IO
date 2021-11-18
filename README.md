@@ -2,13 +2,11 @@
 [![NuGet](https://img.shields.io/nuget/v/FolkerKinzel.Contacts.IO)](https://www.nuget.org/packages/FolkerKinzel.Contacts.IO/)
 [![GitHub](https://img.shields.io/github/license/FolkerKinzel/Contacts.IO)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/LICENSE)
 
-.NET-API to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.
+.NET Framework to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.
 
+* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.2/FolkerKinzel.Contacts.IO.en.chm)
 
-
-* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.1/FolkerKinzel.Contacts.IO.en.chm)
-
-* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.1/FolkerKinzel.Contacts.IO.de.chm)
+* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.2/FolkerKinzel.Contacts.IO.de.chm)
 
 > IMPORTANT: On some systems the content of the CHM file is blocked. Before opening the file
 > right click on the file icon, select Properties, and check the "Allow" checkbox - if it 
@@ -328,3 +326,6 @@ Company Data:
         Position: CEO
  */
 ```
+.
+
+- [Version History](https://github.com/FolkerKinzel/Contacts.IO/releases)
