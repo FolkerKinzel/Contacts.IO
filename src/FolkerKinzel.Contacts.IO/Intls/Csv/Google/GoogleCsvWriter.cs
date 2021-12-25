@@ -7,6 +7,10 @@ using System.Linq;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 using FolkerKinzel.CsvTools.Helpers.Converters.Specialized;
 
+#if !NET40
+using FolkerKinzel.Strings.Polyfills;
+#endif
+
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
 

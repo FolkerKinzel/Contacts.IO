@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netstandard2.1;net40</TargetFrameworks>
+    <TargetFrameworks>net6.0;net5.0;netstandard2.1;net461;net40</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <NeutralLanguage>en</NeutralLanguage>
@@ -8,7 +8,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.3.2</Version>
-    <FileVersion>1.3.2.1</FileVersion>
+    <FileVersion>1.3.2.4</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/blob/master/docs/PackageReleaseNotes/1.3.2/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
@@ -24,7 +24,7 @@
     <PackageIconUrl />
   </PropertyGroup>
   <!-- 👇 disable the nullable warnings when compiling for .NET Standard 2.0 -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net461' or '$(TargetFramework)' == 'netstandard2.0'">
     <NoWarn>$(NoWarn);8600;8601;8602;8603;8604</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -39,9 +39,9 @@
     <Compile Remove="CsvMappingCollection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FolkerKinzel.Contacts" Version="1.4.1" />
+    <PackageReference Include="FolkerKinzel.Contacts" Version="1.5.0" />
     <PackageReference Include="FolkerKinzel.CsvTools" Version="1.5.0" />
-    <PackageReference Include="FolkerKinzel.VCards" Version="3.0.0" />
+    <PackageReference Include="FolkerKinzel.VCards" Version="3.1.0" />
     <PackageReference Include="Nullable" Version="1.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -7,6 +7,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+#if !NET40
+using FolkerKinzel.Strings.Polyfills;
+#endif
+
+
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 {
     internal class GoogleCsvReader : CsvReader
