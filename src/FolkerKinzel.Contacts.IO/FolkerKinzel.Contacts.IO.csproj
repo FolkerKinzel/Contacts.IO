@@ -9,7 +9,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.4.0</Version>
-    <FileVersion>1.4.0.9</FileVersion>
+    <FileVersion>1.4.0.11</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/blob/master/docs/PackageReleaseNotes/1.4.0/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
@@ -35,11 +35,6 @@
     <Using Remove="System.Net.Http" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Translations\**" />
-    <EmbeddedResource Remove="Translations\**" />
-    <None Remove="Translations\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="CsvMappingCollection.cs" />
