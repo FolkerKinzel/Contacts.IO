@@ -4,9 +4,9 @@
 
 Small and easy to use framework for .NET to manage contact data of organizations and natural persons, including a data model and classes to persist it as vCard (*.vcf) or CSV.
 
-* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.2/FolkerKinzel.Contacts.IO.en.chm)
+* [Download Reference (English)](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.4.0/FolkerKinzel.Contacts.IO.en.chm)
 
-* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.3.2/FolkerKinzel.Contacts.IO.de.chm)
+* [Projektdokumentation (Deutsch) herunterladen](https://github.com/FolkerKinzel/Contacts.IO/blob/master/ProjectReference/1.4.0/FolkerKinzel.Contacts.IO.de.chm)
 
 > IMPORTANT: On some systems the content of the CHM file is blocked. Before opening the file
 > right click on the file icon, select Properties, and check the "Allow" checkbox - if it 
@@ -22,15 +22,14 @@ _(For the sake of better readability exception handling is ommitted in the follo
 
 #### Initializing `Contact` Objects:
 ```csharp
-using System;
 using FolkerKinzel.Contacts;
 
-namespace Examples
+namespace Examples;
+
+public static class ContactExample
 {
-    public static class ContactExample
-    {
-        public static Contact[] InitializeContacts() => new Contact[]
-            {
+    public static Contact[] InitializeContacts() => new Contact[]
+        {
                 new Contact
                 {
                     DisplayName = "John Doe",
@@ -107,52 +106,47 @@ namespace Examples
                         IsWork = true,
                     }
                 }//new Contact()
-            };//new Contact[]
-    }
+        };//new Contact[]
 }
 ```
 
 #### Reading and Writing vCard Files (*.vcf):
 ```csharp
-using System;
-using System.Collections.Generic;
-using System.IO;
 using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
 
-namespace Examples
+namespace Examples;
+
+public static class VCardExample
 {
-    public static class VCardExample
+    public static void ReadingAndWritingVCard()
     {
-        public static void ReadingAndWritingVCard()
+        // Initialize data (see code-example above):
+        Contact[] contactArr = ContactExample.InitializeContacts();
+
+        const string fileName = "FamilyDoe.vcf";
+
+        // Save all contacts to a common VCF file:
+        contactArr.SaveVcf(fileName);
+
+        // Display the content of the VCF file:
+        Console.WriteLine("Saved VCF:");
+        Console.WriteLine();
+        Console.WriteLine(File.ReadAllText(fileName));
+
+        // Reload the VCF file:
+        List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
+
+        // Display the content of the reloaded Contact objects:
+        Console.WriteLine();
+        Console.WriteLine("Reloaded Contact objects:");
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            // Initialize data (see code-example above):
-            Contact[] contactArr = ContactExample.InitializeContacts();
-
-            const string fileName = "FamilyDoe.vcf";
-
-            // Save all contacts to a common VCF file:
-            contactArr.SaveVcf(fileName);
-
-            // Display the content of the VCF file:
-            Console.WriteLine("Saved VCF:");
             Console.WriteLine();
-            Console.WriteLine(File.ReadAllText(fileName));
-
-            // Reload the VCF file:
-            List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
-
-            // Display the content of the reloaded Contact objects:
+            Console.WriteLine($"Contact {i + 1}:");
+            Console.WriteLine(contactArr[i]);
             Console.WriteLine();
-            Console.WriteLine("Reloaded Contact objects:");
-
-            for (int i = 0; i < contactList.Count; i++)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Contact {i + 1}:");
-                Console.WriteLine(contactArr[i]);
-                Console.WriteLine();
-            }
         }
     }
 }
@@ -228,50 +222,46 @@ Phone Numbers:
 Company Data:
         Company:  Does Company
         Position: CEO
- */
+*/
 ```
 
 #### Reading and Writing CSV Files:
 ```csharp
-using System;
-using System.Collections.Generic;
-using System.IO;
 using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
 
-namespace Examples
+namespace Examples;
+
+public static class CsvExample
 {
-    public static class CsvExample
+    public static void ReadingAndWritingCsv()
     {
-        public static void ReadingAndWritingCsv()
+        // Initialize data (see code-example above):
+        Contact[] contactArr = ContactExample.InitializeContacts();
+
+        const string fileName = "FamilyDoe.csv";
+
+        // Save the Contacts:
+        contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
+
+        // Display the content of the CSV file:
+        Console.WriteLine("Saved CSV:");
+        Console.WriteLine();
+        Console.WriteLine(File.ReadAllText(fileName));
+
+        // Reload the CSV file:
+        List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
+
+        // Display the content of the reloaded Contact objects:
+        Console.WriteLine();
+        Console.WriteLine("Reloaded Contact objects:");
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            // Initialize data (see code-example above):
-            Contact[] contactArr = ContactExample.InitializeContacts();
-
-            const string fileName = "FamilyDoe.csv";
-
-            // Save the Contacts:
-            contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
-
-            // Display the content of the CSV file:
-            Console.WriteLine("Saved CSV:");
             Console.WriteLine();
-            Console.WriteLine(File.ReadAllText(fileName));
-
-            // Reload the CSV file:
-            List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
-
-            // Display the content of the reloaded Contact objects:
+            Console.WriteLine($"Contact {i + 1}:");
+            Console.WriteLine(contactArr[i]);
             Console.WriteLine();
-            Console.WriteLine("Reloaded Contact objects:");
-
-            for (int i = 0; i < contactList.Count; i++)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Contact {i + 1}:");
-                Console.WriteLine(contactArr[i]);
-                Console.WriteLine();
-            }
         }
     }
 }
@@ -324,7 +314,7 @@ Phone Numbers:
 Company Data:
         Company:  Does Company
         Position: CEO
- */
+*/
 ```
 .
 
