@@ -36,7 +36,7 @@
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <NamespaceGrouping>True</NamespaceGrouping>
-    <MaximumGroupParts>4</MaximumGroupParts>
+    <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
     <CopyrightHref>Copyright &amp;#169%3b 2020 Folker Kinzel</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>

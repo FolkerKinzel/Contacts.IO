@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Tsltn Version="1.0" SourceFile="..\bin\Release\net5.0\de\FolkerKinzel.Contacts.IO.xml" SourceLanguage="de" TargetLanguage="en">
+<Tsltn Version="1.0" SourceFile="..\bin\Release\net6.0\de\FolkerKinzel.Contacts.IO.xml" SourceLanguage="de" TargetLanguage="en">
   <T ID="C26C9E732BC18007">Named constants to specify the target platform of a CSV file.</T>
   <T ID="DB1BA40279A95997">Named constants to indicate the VCF version.</T>
   <T ID="5613AAFC2A13DC14">Saves the content of a &lt;see cref="T:FolkerKinzel.Contacts.Contact"/&gt; object as CSV file.</T>
@@ -141,8 +141,8 @@
   <T ID="92037DAC59656599">The collection of &lt;see cref="T:FolkerKinzel.Contacts.Contact"/&gt; objects to save.</T>
   <T ID="73F14C08CFA5BB41">The file path of the CSV file to be created. If the file already exists, it will be overwritten.</T>
   <T ID="7941B348C6BAB675">The platform that the CSV file targets.</T>
-  <T ID="EEDC78E24D21EADB">An object, that provides culture-specific formatting information, or &lt;c&gt;null&lt;/c&gt; to automatically choose the most suitable &lt;see cref ="T:System.Globalization.CultureInfo"/&gt;.</T>
-  <T ID="34065519AF0F0154">The text encoding to use or &lt;c&gt;null&lt;/c&gt; for UTF-8 with BOM (&lt;see cref ="P:System.Text.Encoding.UTF8"/&gt;).</T>
+  <T ID="EEDC78E24D21EADB">An object, which provides culture-specific formatting information, or &lt;c&gt;null&lt;/c&gt; to automatically choose the most suitable &lt;see cref ="T:System.Globalization.CultureInfo"/&gt;.</T>
+  <T ID="34065519AF0F0154">The text encoding to use, or &lt;c&gt;null&lt;/c&gt; for UTF-8 with BOM (&lt;see cref ="P:System.Text.Encoding.UTF8"/&gt;).</T>
   <T ID="3953320EB06DCAB3">The method calls &lt;see cref ="M:FolkerKinzel.Contacts.Contact.Clean"/&gt; on every &lt;see cref ="T:FolkerKinzel.Contacts.Contact"/&gt; object in &lt;paramref name ="contacts"/&gt;.</T>
   <T ID="D69852B821BB5AF">&lt;paramref name="contacts"/&gt; or &lt;paramref name="fileName"/&gt; is &lt;c&gt;null&lt;/c&gt;.</T>
   <T ID="2989425D6B3A9BCB">&lt;para&gt; &lt;paramref name ="fileName"/&gt; is not a valid file path. &lt;/para&gt; &lt;para&gt; - or - &lt;/para&gt; &lt;para&gt; &lt;paramref name ="platform"/&gt; has an undefined value. &lt;/para&gt;</T>

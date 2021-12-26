@@ -28,9 +28,9 @@
     </TransformComponentArguments>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\FolkerKinzel.Contacts.IO.csproj" />
-      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\bin\Release\net5.0\de\FolkerKinzel.Contacts.IO.xml" />
       <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\FolkerKinzel.Contacts.csproj" />
-      <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\bin\Release\net5.0\de\FolkerKinzel.Contacts.xml" />
+      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\bin\Release\net6.0\de\FolkerKinzel.Contacts.IO.xml" />
+      <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\bin\Release\net6.0\de\FolkerKinzel.Contacts.xml" />
     </DocumentationSources>
     <HelpTitle>FolkerKinzel.Contacts.IO</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
@@ -38,7 +38,7 @@
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <NamespaceGrouping>True</NamespaceGrouping>
-    <MaximumGroupParts>4</MaximumGroupParts>
+    <MaximumGroupParts>2</MaximumGroupParts>
     <Preliminary>False</Preliminary>
     <CopyrightHref>Copyright &amp;#169%3b 2020 Folker Kinzel</CopyrightHref>
     <SdkLinkTarget>Blank</SdkLinkTarget>
