@@ -1,12 +1,11 @@
-﻿using System;
-using FolkerKinzel.Contacts;
+﻿using FolkerKinzel.Contacts;
 
-namespace Examples
+namespace Examples;
+
+public static class ContactExample
 {
-    public static class ContactExample
-    {
-        public static Contact[] InitializeContacts() => new Contact[]
-            {
+    public static Contact[] InitializeContacts() => new Contact[]
+        {
                 new Contact
                 {
                     DisplayName = "John Doe",
@@ -83,6 +82,5 @@ namespace Examples
                         IsWork = true,
                     }
                 }//new Contact()
-            };//new Contact[]
-    }
+        };//new Contact[]
 }

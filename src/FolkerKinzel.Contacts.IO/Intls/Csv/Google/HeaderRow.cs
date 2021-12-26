@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google;
 
-namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
+internal static class HeaderRow
 {
-    internal static class HeaderRow
+    internal static string[] GetColumnNamesEn() => new string[]
     {
-        internal static string[] GetColumnNamesEn() => new string[]
-        {
             ColumnName.Name,
 
             ColumnName.GivenName,
@@ -146,13 +143,13 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
             ColumnName.EventType,
             ColumnName.EventValue
-        };
+    };
 
 
-        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMapping() => new List<Tuple<string, ContactProp?, IList<string>>>
+    internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMapping() => new List<Tuple<string, ContactProp?, IList<string>>>
         {
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Name),                       ContactProp.DisplayName,                          new string[]{ColumnName.Name}),
-                                                                                                                                                            
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.GivenName),                  ContactProp.FirstName,                            new string[]{ColumnName.GivenName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AdditionalName),             ContactProp.MiddleName,                           new string[]{ColumnName.AdditionalName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.FamilyName),                 ContactProp.LastName,                             new string[]{ColumnName.FamilyName}),
@@ -217,31 +214,31 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
 
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone1Type),                 (ContactProp)AdditionalProp.Phone1Type,            new string[]{ColumnName.Phone1Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone1Value),                (ContactProp)AdditionalProp.Phone1Value,           new string[]{ColumnName.Phone1Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone2Type),                 (ContactProp)AdditionalProp.Phone2Type,            new string[]{ColumnName.Phone2Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone2Value),                (ContactProp)AdditionalProp.Phone2Value,           new string[]{ColumnName.Phone2Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone3Type),                 (ContactProp)AdditionalProp.Phone3Type,            new string[]{ColumnName.Phone3Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone3Value),                (ContactProp)AdditionalProp.Phone3Value,           new string[]{ColumnName.Phone3Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone4Type),                 (ContactProp)AdditionalProp.Phone4Type,            new string[]{ColumnName.Phone4Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone4Value),                (ContactProp)AdditionalProp.Phone4Value,           new string[]{ColumnName.Phone4Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone5Type),                 (ContactProp)AdditionalProp.Phone5Type,            new string[]{ColumnName.Phone5Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone5Value),                (ContactProp)AdditionalProp.Phone5Value,           new string[]{ColumnName.Phone5Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone6Type),                 (ContactProp)AdditionalProp.Phone6Type,            new string[]{ColumnName.Phone6Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone6Value),                (ContactProp)AdditionalProp.Phone6Value,           new string[]{ColumnName.Phone6Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone7Type),                 (ContactProp)AdditionalProp.Phone7Type,            new string[]{ColumnName.Phone7Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone7Value),                (ContactProp)AdditionalProp.Phone7Value,           new string[]{ColumnName.Phone7Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone8Type),                 (ContactProp)AdditionalProp.Phone8Type,            new string[]{ColumnName.Phone8Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone8Value),                (ContactProp)AdditionalProp.Phone8Value,           new string[]{ColumnName.Phone8Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone9Type),                 (ContactProp)AdditionalProp.Phone9Type,            new string[]{ColumnName.Phone9Type}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Phone9Value),                (ContactProp)AdditionalProp.Phone9Value,           new string[]{ColumnName.Phone9Value}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeType),            (ContactProp)AdditionalProp.AddressHomeType,       new string[]{ColumnName.AddressHomeType}),
             //new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeFormatted),       null,                                              new string[]{ColumnName.AddressHomeFormatted}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressHomeStreet),          ContactProp.AddressHomeStreet,                     new string[]{ColumnName.AddressHomeStreet}),
@@ -283,10 +280,10 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
                                                                                                                                                              
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationType),               (ContactProp)AdditionalProp.RelationType,          new string[]{ColumnName.RelationType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.RelationValue),              ContactProp.Spouse,                                new string[]{ColumnName.RelationValue}),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebHomeType),                (ContactProp)AdditionalProp.WebHomeType,           new string[]{ColumnName.WebHomeType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebHomeValue),               ContactProp.HomePagePersonal,                      new string[]{ColumnName.WebHomeValue }),
-                                                                                                                                                             
+
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebWorkType),                (ContactProp)AdditionalProp.WebWorkType,           new string[]{ColumnName.WebWorkType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.WebWorkValue),               ContactProp.HomePageWork,                          new string[]{ColumnName.WebWorkValue}),
 
@@ -294,10 +291,9 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventValue),                 ContactProp.Anniversary,                           new string[]{ColumnName.EventValue}),
 
 
-           
-            
+
+
 
         };
 
-    }
 }

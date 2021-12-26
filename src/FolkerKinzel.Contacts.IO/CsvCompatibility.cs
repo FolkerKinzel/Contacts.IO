@@ -1,28 +1,27 @@
-﻿namespace FolkerKinzel.Contacts.IO
+﻿namespace FolkerKinzel.Contacts.IO;
+
+/// <summary>
+/// Benannte Konstanten, um die Zielplattform einer CSV-Datei anzugeben.
+/// </summary>
+public enum CsvCompatibility
 {
     /// <summary>
-    /// Benannte Konstanten, um die Zielplattform einer CSV-Datei anzugeben.
+    /// Keine Angabe.
     /// </summary>
-    public enum CsvCompatibility
-    {
-        /// <summary>
-        /// Keine Angabe.
-        /// </summary>
-        Unspecified,
+    Unspecified,
 
-        /// <summary>
-        /// Microsoft Outlook
-        /// </summary>
-        Outlook,
+    /// <summary>
+    /// Microsoft Outlook
+    /// </summary>
+    Outlook,
 
-        /// <summary>
-        /// Google Contacts
-        /// </summary>
-        Google,
+    /// <summary>
+    /// Google Contacts
+    /// </summary>
+    Google,
 
-        /// <summary>
-        /// Mozilla Thunderbird
-        /// </summary>
-        Thunderbird
-    }
+    /// <summary>
+    /// Mozilla Thunderbird
+    /// </summary>
+    Thunderbird
 }

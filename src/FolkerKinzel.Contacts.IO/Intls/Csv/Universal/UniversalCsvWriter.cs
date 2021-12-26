@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
-namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
+namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal;
+
+internal class UniversalCsvWriter : CsvWriter
 {
+    internal UniversalCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
-    internal class UniversalCsvWriter : CsvWriter
+    protected override string[] CreateColumnNames() => HeaderRow.GetColumnNames();
+
+    protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => new Tuple<string, ContactProp?, IList<string>>[]
     {
-        internal UniversalCsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
-
-        protected override string[] CreateColumnNames() => HeaderRow.GetColumnNames();
-
-        protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => new Tuple<string, ContactProp?, IList<string>>[]
-        {
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.DisplayName),           ContactProp.DisplayName,           new string[]{ColumnName.DisplayName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.FirstName),             ContactProp.FirstName,             new string[]{ColumnName.FirstName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.MiddleName),            ContactProp.MiddleName,            new string[]{ColumnName.MiddleName}),
@@ -66,6 +63,5 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.AddressWorkCountry),    ContactProp.AddressWorkCountry,    new string[]{ColumnName.AddressWorkCountry}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Comment),               ContactProp.Comment,               new string[]{ColumnName.Comment}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.TimeStamp),             ContactProp.TimeStamp,             new string[]{ColumnName.TimeStamp})
-        };
-    }
+    };
 }

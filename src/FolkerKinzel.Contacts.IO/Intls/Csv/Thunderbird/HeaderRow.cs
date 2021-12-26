@@ -1,60 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird;
 
-namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
+internal static class HeaderRow
 {
-    internal static class HeaderRow
+    private static class En
     {
-        private static class En
-        {
-            internal const string FirstName = "First Name";
-            internal const string LastName = "Last Name";
-            internal const string DisplayName = "Display Name";
-            internal const string Nickname = "Nickname";
-            internal const string PrimaryEmail = "Primary Email";
-            internal const string SecondaryEmail = "Secondary Email";
-            internal const string ScreenName = "Screen Name";
-            internal const string WorkPhone = "Work Phone";
-            internal const string HomePhone = "Home Phone";
-            internal const string FaxNumber = "Fax Number";
-            internal const string PagerNumber = "Pager Number";
-            internal const string MobileNumber = "Mobile Number";
-            internal const string HomeAddress = "Home Address";
-            internal const string HomeAddress2 = "Home Address2";
-            internal const string HomeCity = "Home City";
-            internal const string HomeState = "Home State";
-            internal const string HomeZipcode = "Home Zipcode";
-            internal const string HomeCountry = "Home Country";
-            internal const string WorkAddress = "Work Address";
-            internal const string WorkAddress2 = "Work Address2";
-            internal const string WorkCity = "Work City";
-            internal const string WorkState = "Work State";
-            internal const string WorkZip = "Work Zip";
-            internal const string WorkCountry = "Work Country";
-            internal const string JobTitle = "Job Title";
-            internal const string Department = "Department";
-            internal const string Organization = "Organization";
-            internal const string WebPage1 = "Web Page 1";
-            internal const string WebPage2 = "Web Page 2";
-            internal const string BirthYear = "Birth Year";
-            internal const string BirthMonth = "Birth Month";
-            internal const string BirthDay = "Birth Day";
-            internal const string Custom1 = "Custom 1";
-            internal const string Custom2 = "Custom 2";
-            internal const string Custom3 = "Custom 3";
-            internal const string Custom4 = "Custom 4";
-            internal const string Notes = "Notes";
-        }
+        internal const string FirstName = "First Name";
+        internal const string LastName = "Last Name";
+        internal const string DisplayName = "Display Name";
+        internal const string Nickname = "Nickname";
+        internal const string PrimaryEmail = "Primary Email";
+        internal const string SecondaryEmail = "Secondary Email";
+        internal const string ScreenName = "Screen Name";
+        internal const string WorkPhone = "Work Phone";
+        internal const string HomePhone = "Home Phone";
+        internal const string FaxNumber = "Fax Number";
+        internal const string PagerNumber = "Pager Number";
+        internal const string MobileNumber = "Mobile Number";
+        internal const string HomeAddress = "Home Address";
+        internal const string HomeAddress2 = "Home Address2";
+        internal const string HomeCity = "Home City";
+        internal const string HomeState = "Home State";
+        internal const string HomeZipcode = "Home Zipcode";
+        internal const string HomeCountry = "Home Country";
+        internal const string WorkAddress = "Work Address";
+        internal const string WorkAddress2 = "Work Address2";
+        internal const string WorkCity = "Work City";
+        internal const string WorkState = "Work State";
+        internal const string WorkZip = "Work Zip";
+        internal const string WorkCountry = "Work Country";
+        internal const string JobTitle = "Job Title";
+        internal const string Department = "Department";
+        internal const string Organization = "Organization";
+        internal const string WebPage1 = "Web Page 1";
+        internal const string WebPage2 = "Web Page 2";
+        internal const string BirthYear = "Birth Year";
+        internal const string BirthMonth = "Birth Month";
+        internal const string BirthDay = "Birth Day";
+        internal const string Custom1 = "Custom 1";
+        internal const string Custom2 = "Custom 2";
+        internal const string Custom3 = "Custom 3";
+        internal const string Custom4 = "Custom 4";
+        internal const string Notes = "Notes";
+    }
 
-        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
-        {
+    internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
+    {
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.FirstName),      ContactProp.FirstName,                   new string[]{En.FirstName}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.LastName),       ContactProp.LastName,                    new string[]{En.LastName}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.DisplayName),    ContactProp.DisplayName,                 new string[]{En.DisplayName}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Nickname),       ContactProp.NickName,                    new string[]{En.Nickname}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.PrimaryEmail),   ContactProp.Email1,                      new string[]{En.PrimaryEmail}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.SecondaryEmail), ContactProp.Email2,                      new string[]{En.SecondaryEmail}),   
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.ScreenName),     ContactProp.InstantMessenger1,           new string[]{En.ScreenName}), 
+            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.SecondaryEmail), ContactProp.Email2,                      new string[]{En.SecondaryEmail}),
+            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.ScreenName),     ContactProp.InstantMessenger1,           new string[]{En.ScreenName}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkPhone),      ContactProp.PhoneWork,                   new string[]{En.WorkPhone}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomePhone),      ContactProp.PhoneHome,                   new string[]{En.HomePhone}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.FaxNumber),      ContactProp.FaxHome,                     new string[]{En.FaxNumber}),
@@ -85,11 +82,11 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom3),        null,                                    new string[]{En.Custom3}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom4),        null,                                    new string[]{En.Custom4}),
             new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Notes ),         ContactProp.Comment,                     new string[]{En.Notes})
-        };
+    };
 
 
-        internal static string[] GetColumnNamesEn() => new string[]
-        {
+    internal static string[] GetColumnNamesEn() => new string[]
+    {
             En.FirstName,
             En.LastName,
             En.DisplayName,
@@ -127,14 +124,14 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             En.Custom3,
             En.Custom4,
             En.Notes
-        };
+    };
 
 
 
 
 
-        internal static string[] GetColumnNamesDe() => new string[]
-        {
+    internal static string[] GetColumnNamesDe() => new string[]
+    {
             "Vorname",
             "Nachname",
             "Anzeigename",
@@ -172,6 +169,5 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird
             "Benutzerdef. 3",
             "Benutzerdef. 4",
             "Notizen"
-        };
-    }
+    };
 }

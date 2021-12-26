@@ -1,207 +1,203 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook;
 
-namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
+internal static class HeaderRow
 {
-
-    internal static class HeaderRow
+    private static class En
     {
-        private static class En
-        {
-            internal const string Title = "Title";
-            internal const string FirstName  = "First Name";
-            internal const string MiddleName  = "Middle Name";
-            internal const string LastName  = "Last Name";
-            internal const string Suffix = "Suffix";
-            internal const string Company = "Company";
-            internal const string Department = "Department";
-            internal const string JobTitle  = "Job Title";
-            internal const string BusinessStreet  = "Business Street";
-            internal const string BusinessStreet2  = "Business Street 2";
-            internal const string BusinessStreet3  = "Business Street 3";
-            internal const string BusinessCity  = "Business City";
-            internal const string BusinessState  = "Business State";
-            internal const string BusinessPostalCode = "Business Postal Code";
-            internal const string BusinessCountryRegion  = "Business Country/Region";
-            internal const string HomeStreet  = "Home Street";
-            internal const string HomeStreet2  = "Home Street 2";
-            internal const string HomeStreet3  = "Home Street 3";
-            internal const string HomeCity = "Home City";
-            internal const string HomeState = "Home State";
-            internal const string HomePostalCode = "Home Postal Code";
-            internal const string HomeCountryRegion  = "Home Country/Region";
-            internal const string OtherStreet  = "Other Street";
-            internal const string OtherStreet2  = "Other Street 2";
-            internal const string OtherStreet3  = "Other Street 3";
-            internal const string OtherCity  = "Other City";
-            internal const string OtherState  = "Other State";
-            internal const string OtherPostalCode = "Other Postal Code";
-            internal const string OtherCountryRegion  = "Other Country/Region";
-            internal const string AssistantsPhone  = "Assistant's Phone";
-            internal const string BusinessFax  = "Business Fax";
-            internal const string BusinessPhone  = "Business Phone";
-            internal const string BusinessPhone2  = "Business Phone 2";
-            internal const string Callback = "Callback";
-            internal const string CarPhone  = "Car Phone";
-            internal const string CompanyMainPhone = "Company Main Phone";
-            internal const string HomeFax  = "Home Fax";
-            internal const string HomePhone  = "Home Phone";
-            internal const string HomePhone2  = "Home Phone 2";
-            internal const string ISDN = "ISDN";
-            internal const string MobilePhone  = "Mobile Phone";
-            internal const string OtherFax  = "Other Fax";
-            internal const string OtherPhone  = "Other Phone";
-            internal const string Pager = "Pager";
-            internal const string PrimaryPhone  = "Primary Phone";
-            internal const string RadioPhone  = "Radio Phone";
-            internal const string TTY_TDD_Phone = "TTY/TDD Phone";
-            internal const string Telex = "Telex";
-            internal const string Account = "Account";
-            internal const string Anniversary = "Anniversary";
-            internal const string AssistantsName  = "Assistant's Name";
-            internal const string BillingInformation  = "Billing Information";
-            internal const string Birthday = "Birthday";
-            internal const string BusinessAddressPOBox  = "Business Address PO Box";
-            internal const string Categories = "Categories";
-            internal const string Children = "Children";
-            internal const string DirectoryServer  = "Directory Server";
-            internal const string EmailAddress = "E-mail Address";
-            internal const string EmailType = "E-mail Type";
-            internal const string EmailDisplayName  = "E-mail Display Name";
-            internal const string Email2Address  = "E-mail 2 Address";
-            internal const string Email2Type  = "E-mail 2 Type";
-            internal const string Email2DisplayName = "E-mail 2 Display Name";
-            internal const string Email3Address  = "E-mail 3 Address";
-            internal const string Email3Type  = "E-mail 3 Type";
-            internal const string Email3DisplayName = "E-mail 3 Display Name";
-            internal const string Gender = "Gender";
-            internal const string GovernmentIDNumber = "Government ID Number";
-            internal const string Hobby = "Hobby";
-            internal const string HomeAddressPOBox  = "Home Address PO Box";
-            internal const string Initials = "Initials";
-            internal const string InternetFreeBusy = "Internet Free Busy";
-            internal const string Keywords = "Keywords";
-            internal const string Language = "Language";
-            internal const string Location = "Location";
-            internal const string ManagersName  = "Manager's Name";
-            internal const string Mileage = "Mileage";
-            internal const string Notes = "Notes";
-            internal const string OfficeLocation  = "Office Location";
-            internal const string OrganizationalIDNumber = "Organizational ID Number";
-            internal const string OtherAddressPOBox  = "Other Address PO Box";
-            internal const string Priority = "Priority";
-            internal const string Private = "Private";
-            internal const string Profession = "Profession";
-            internal const string ReferredBy  = "Referred By";
-            internal const string Sensitivity = "Sensitivity";
-            internal const string Spouse = "Spouse";
-            internal const string User1  = "User 1";
-            internal const string User2  = "User 2";
-            internal const string User3  = "User 3";
-            internal const string User4  = "User 4";
-            internal const string WebPage  = "Web Page";
-        }
+        internal const string Title = "Title";
+        internal const string FirstName = "First Name";
+        internal const string MiddleName = "Middle Name";
+        internal const string LastName = "Last Name";
+        internal const string Suffix = "Suffix";
+        internal const string Company = "Company";
+        internal const string Department = "Department";
+        internal const string JobTitle = "Job Title";
+        internal const string BusinessStreet = "Business Street";
+        internal const string BusinessStreet2 = "Business Street 2";
+        internal const string BusinessStreet3 = "Business Street 3";
+        internal const string BusinessCity = "Business City";
+        internal const string BusinessState = "Business State";
+        internal const string BusinessPostalCode = "Business Postal Code";
+        internal const string BusinessCountryRegion = "Business Country/Region";
+        internal const string HomeStreet = "Home Street";
+        internal const string HomeStreet2 = "Home Street 2";
+        internal const string HomeStreet3 = "Home Street 3";
+        internal const string HomeCity = "Home City";
+        internal const string HomeState = "Home State";
+        internal const string HomePostalCode = "Home Postal Code";
+        internal const string HomeCountryRegion = "Home Country/Region";
+        internal const string OtherStreet = "Other Street";
+        internal const string OtherStreet2 = "Other Street 2";
+        internal const string OtherStreet3 = "Other Street 3";
+        internal const string OtherCity = "Other City";
+        internal const string OtherState = "Other State";
+        internal const string OtherPostalCode = "Other Postal Code";
+        internal const string OtherCountryRegion = "Other Country/Region";
+        internal const string AssistantsPhone = "Assistant's Phone";
+        internal const string BusinessFax = "Business Fax";
+        internal const string BusinessPhone = "Business Phone";
+        internal const string BusinessPhone2 = "Business Phone 2";
+        internal const string Callback = "Callback";
+        internal const string CarPhone = "Car Phone";
+        internal const string CompanyMainPhone = "Company Main Phone";
+        internal const string HomeFax = "Home Fax";
+        internal const string HomePhone = "Home Phone";
+        internal const string HomePhone2 = "Home Phone 2";
+        internal const string ISDN = "ISDN";
+        internal const string MobilePhone = "Mobile Phone";
+        internal const string OtherFax = "Other Fax";
+        internal const string OtherPhone = "Other Phone";
+        internal const string Pager = "Pager";
+        internal const string PrimaryPhone = "Primary Phone";
+        internal const string RadioPhone = "Radio Phone";
+        internal const string TTY_TDD_Phone = "TTY/TDD Phone";
+        internal const string Telex = "Telex";
+        internal const string Account = "Account";
+        internal const string Anniversary = "Anniversary";
+        internal const string AssistantsName = "Assistant's Name";
+        internal const string BillingInformation = "Billing Information";
+        internal const string Birthday = "Birthday";
+        internal const string BusinessAddressPOBox = "Business Address PO Box";
+        internal const string Categories = "Categories";
+        internal const string Children = "Children";
+        internal const string DirectoryServer = "Directory Server";
+        internal const string EmailAddress = "E-mail Address";
+        internal const string EmailType = "E-mail Type";
+        internal const string EmailDisplayName = "E-mail Display Name";
+        internal const string Email2Address = "E-mail 2 Address";
+        internal const string Email2Type = "E-mail 2 Type";
+        internal const string Email2DisplayName = "E-mail 2 Display Name";
+        internal const string Email3Address = "E-mail 3 Address";
+        internal const string Email3Type = "E-mail 3 Type";
+        internal const string Email3DisplayName = "E-mail 3 Display Name";
+        internal const string Gender = "Gender";
+        internal const string GovernmentIDNumber = "Government ID Number";
+        internal const string Hobby = "Hobby";
+        internal const string HomeAddressPOBox = "Home Address PO Box";
+        internal const string Initials = "Initials";
+        internal const string InternetFreeBusy = "Internet Free Busy";
+        internal const string Keywords = "Keywords";
+        internal const string Language = "Language";
+        internal const string Location = "Location";
+        internal const string ManagersName = "Manager's Name";
+        internal const string Mileage = "Mileage";
+        internal const string Notes = "Notes";
+        internal const string OfficeLocation = "Office Location";
+        internal const string OrganizationalIDNumber = "Organizational ID Number";
+        internal const string OtherAddressPOBox = "Other Address PO Box";
+        internal const string Priority = "Priority";
+        internal const string Private = "Private";
+        internal const string Profession = "Profession";
+        internal const string ReferredBy = "Referred By";
+        internal const string Sensitivity = "Sensitivity";
+        internal const string Spouse = "Spouse";
+        internal const string User1 = "User 1";
+        internal const string User2 = "User 2";
+        internal const string User3 = "User 3";
+        internal const string User4 = "User 4";
+        internal const string WebPage = "Web Page";
+    }
 
 
-        internal static string[] GetColumnNamesEn() => new string[]
-        {
-            En.Title,                                                
-            En.FirstName,                                            
-            En.MiddleName,                                           
-            En.LastName,                                             
-            En.Suffix,                                               
-            En.Company,                                              
-            En.Department,                                           
-            En.JobTitle,                                             
-            En.BusinessStreet,                                       
-            En.BusinessStreet2,                                      
-            En.BusinessStreet3,                                      
-            En.BusinessCity,                                         
-            En.BusinessState,                                        
-            En.BusinessPostalCode,                                   
-            En.BusinessCountryRegion,                                
-            En.HomeStreet,                                           
-            En.HomeStreet2,                                          
-            En.HomeStreet3,                                          
-            En.HomeCity,                                             
-            En.HomeState,                                            
-            En.HomePostalCode,                                       
-            En.HomeCountryRegion,                                    
-            En.OtherStreet,                                          
-            En.OtherStreet2,                                         
-            En.OtherStreet3,                                         
-            En.OtherCity,                                            
-            En.OtherState,                                           
-            En.OtherPostalCode,                                      
-            En.OtherCountryRegion,                                   
-            En.AssistantsPhone,                                      
-            En.BusinessFax,                                          
-            En.BusinessPhone,                                        
-            En.BusinessPhone2,                                       
-            En.Callback,                                             
-            En.CarPhone,                                             
-            En.CompanyMainPhone,                                     
-            En.HomeFax,                                              
-            En.HomePhone,                                            
-            En.HomePhone2,                                           
-            En.ISDN,                                                 
-            En.MobilePhone,                                          
-            En.OtherFax,                                             
-            En.OtherPhone,                                           
-            En.Pager,                                                
-            En.PrimaryPhone,                                         
-            En.RadioPhone,                                           
-            En.TTY_TDD_Phone,                                        
-            En.Telex,                                                
-            En.Account,                                              
-            En.Anniversary,                                          
-            En.AssistantsName,                                       
-            En.BillingInformation,                                   
-            En.Birthday,                                             
-            En.BusinessAddressPOBox,                                 
-            En.Categories,                                           
-            En.Children,                                             
-            En.DirectoryServer,                                      
-            En.EmailAddress,                                         
-            En.EmailType,                                            
-            En.EmailDisplayName,                                     
-            En.Email2Address,                                        
-            En.Email2Type,                                           
-            En.Email2DisplayName,                                    
-            En.Email3Address,                                        
-            En.Email3Type,                                           
-            En.Email3DisplayName,                                    
-            En.Gender,                                               
-            En.GovernmentIDNumber,                                   
-            En.Hobby,                                                
-            En.HomeAddressPOBox,                                     
-            En.Initials,                                             
-            En.InternetFreeBusy,                                     
-            En.Keywords,                                             
-            En.Language,                                             
-            En.Location,                                             
-            En.ManagersName,                                         
-            En.Mileage,                                              
-            En.Notes,                                                
-            En.OfficeLocation,                                       
-            En.OrganizationalIDNumber,                               
-            En.OtherAddressPOBox,                                    
-            En.Priority,                                             
-            En.Private,                                              
-            En.Profession,                                           
-            En.ReferredBy,                                           
-            En.Sensitivity,                                          
-            En.Spouse,                                               
-            En.User1,                                                
-            En.User2,                                                
-            En.User3,                                                
-            En.User4,                                                
-            En.WebPage                                               
-    };
+    internal static string[] GetColumnNamesEn() => new string[]
+    {
+            En.Title,
+            En.FirstName,
+            En.MiddleName,
+            En.LastName,
+            En.Suffix,
+            En.Company,
+            En.Department,
+            En.JobTitle,
+            En.BusinessStreet,
+            En.BusinessStreet2,
+            En.BusinessStreet3,
+            En.BusinessCity,
+            En.BusinessState,
+            En.BusinessPostalCode,
+            En.BusinessCountryRegion,
+            En.HomeStreet,
+            En.HomeStreet2,
+            En.HomeStreet3,
+            En.HomeCity,
+            En.HomeState,
+            En.HomePostalCode,
+            En.HomeCountryRegion,
+            En.OtherStreet,
+            En.OtherStreet2,
+            En.OtherStreet3,
+            En.OtherCity,
+            En.OtherState,
+            En.OtherPostalCode,
+            En.OtherCountryRegion,
+            En.AssistantsPhone,
+            En.BusinessFax,
+            En.BusinessPhone,
+            En.BusinessPhone2,
+            En.Callback,
+            En.CarPhone,
+            En.CompanyMainPhone,
+            En.HomeFax,
+            En.HomePhone,
+            En.HomePhone2,
+            En.ISDN,
+            En.MobilePhone,
+            En.OtherFax,
+            En.OtherPhone,
+            En.Pager,
+            En.PrimaryPhone,
+            En.RadioPhone,
+            En.TTY_TDD_Phone,
+            En.Telex,
+            En.Account,
+            En.Anniversary,
+            En.AssistantsName,
+            En.BillingInformation,
+            En.Birthday,
+            En.BusinessAddressPOBox,
+            En.Categories,
+            En.Children,
+            En.DirectoryServer,
+            En.EmailAddress,
+            En.EmailType,
+            En.EmailDisplayName,
+            En.Email2Address,
+            En.Email2Type,
+            En.Email2DisplayName,
+            En.Email3Address,
+            En.Email3Type,
+            En.Email3DisplayName,
+            En.Gender,
+            En.GovernmentIDNumber,
+            En.Hobby,
+            En.HomeAddressPOBox,
+            En.Initials,
+            En.InternetFreeBusy,
+            En.Keywords,
+            En.Language,
+            En.Location,
+            En.ManagersName,
+            En.Mileage,
+            En.Notes,
+            En.OfficeLocation,
+            En.OrganizationalIDNumber,
+            En.OtherAddressPOBox,
+            En.Priority,
+            En.Private,
+            En.Profession,
+            En.ReferredBy,
+            En.Sensitivity,
+            En.Spouse,
+            En.User1,
+            En.User2,
+            En.User3,
+            En.User4,
+            En.WebPage
+};
 
 
-        internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
-        {
+    internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
+    {
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.Title),                  ContactProp.NamePrefix,                       new string[]{En.Title}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.FirstName),              ContactProp.FirstName,                        new string[]{En.FirstName}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.MiddleName),             ContactProp.MiddleName,                       new string[]{En.MiddleName}),
@@ -295,10 +291,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.User4),                  null,                                         new string[]{En.User4}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(En.WebPage),                ContactProp.HomePageWork,                     new string[]{ En.WebPage})
 
-
-        };
-
+    };
 
 
-    }
+
 }

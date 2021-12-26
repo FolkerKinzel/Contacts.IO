@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using FolkerKinzel.Contacts;
+﻿using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
 
-namespace Examples
+namespace Examples;
+
+public static class VCardExample
 {
-    public static class VCardExample
+    public static void ReadingAndWritingVCard()
     {
-        public static void ReadingAndWritingVCard()
+        // Initialize data (see code-example above):
+        Contact[] contactArr = ContactExample.InitializeContacts();
+
+        const string fileName = "FamilyDoe.vcf";
+
+        // Save all contacts to a common VCF file:
+        contactArr.SaveVcf(fileName);
+
+        // Display the content of the VCF file:
+        Console.WriteLine("Saved VCF:");
+        Console.WriteLine();
+        Console.WriteLine(File.ReadAllText(fileName));
+
+        // Reload the VCF file:
+        List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
+
+        // Display the content of the reloaded Contact objects:
+        Console.WriteLine();
+        Console.WriteLine("Reloaded Contact objects:");
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            // Initialize data (see code-example above):
-            Contact[] contactArr = ContactExample.InitializeContacts();
-
-            const string fileName = "FamilyDoe.vcf";
-
-            // Save all contacts to a common VCF file:
-            contactArr.SaveVcf(fileName);
-
-            // Display the content of the VCF file:
-            Console.WriteLine("Saved VCF:");
             Console.WriteLine();
-            Console.WriteLine(File.ReadAllText(fileName));
-
-            // Reload the VCF file:
-            List<Contact> contactList = ContactPersistence.LoadVcf(fileName);
-
-            // Display the content of the reloaded Contact objects:
+            Console.WriteLine($"Contact {i + 1}:");
+            Console.WriteLine(contactArr[i]);
             Console.WriteLine();
-            Console.WriteLine("Reloaded Contact objects:");
-
-            for (int i = 0; i < contactList.Count; i++)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Contact {i + 1}:");
-                Console.WriteLine(contactArr[i]);
-                Console.WriteLine();
-            }
         }
     }
 }

@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using FolkerKinzel.Contacts;
+﻿using FolkerKinzel.Contacts;
 using FolkerKinzel.Contacts.IO;
 
-namespace Examples
+namespace Examples;
+
+public static class CsvExample
 {
-    public static class CsvExample
+    public static void ReadingAndWritingCsv()
     {
-        public static void ReadingAndWritingCsv()
+        // Initialize data (see code-example above):
+        Contact[] contactArr = ContactExample.InitializeContacts();
+
+        const string fileName = "FamilyDoe.csv";
+
+        // Save the Contacts:
+        contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
+
+        // Display the content of the CSV file:
+        Console.WriteLine("Saved CSV:");
+        Console.WriteLine();
+        Console.WriteLine(File.ReadAllText(fileName));
+
+        // Reload the CSV file:
+        List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
+
+        // Display the content of the reloaded Contact objects:
+        Console.WriteLine();
+        Console.WriteLine("Reloaded Contact objects:");
+
+        for (int i = 0; i < contactList.Count; i++)
         {
-            // Initialize data (see code-example above):
-            Contact[] contactArr = ContactExample.InitializeContacts();
-
-            const string fileName = "FamilyDoe.csv";
-
-            // Save the Contacts:
-            contactArr.SaveCsv(fileName, CsvCompatibility.Thunderbird);
-
-            // Display the content of the CSV file:
-            Console.WriteLine("Saved CSV:");
             Console.WriteLine();
-            Console.WriteLine(File.ReadAllText(fileName));
-
-            // Reload the CSV file:
-            List<Contact> contactList = ContactPersistence.LoadCsv(fileName, CsvCompatibility.Thunderbird);
-
-            // Display the content of the reloaded Contact objects:
+            Console.WriteLine($"Contact {i + 1}:");
+            Console.WriteLine(contactArr[i]);
             Console.WriteLine();
-            Console.WriteLine("Reloaded Contact objects:");
-
-            for (int i = 0; i < contactList.Count; i++)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Contact {i + 1}:");
-                Console.WriteLine(contactArr[i]);
-                Console.WriteLine();
-            }
         }
     }
 }
