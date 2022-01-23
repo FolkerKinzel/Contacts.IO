@@ -1,725 +1,465 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <doc>
-    <assembly>
-        <name>FolkerKinzel.Contacts.IO</name>
-    </assembly>
-    <members>
-        <member name="T:FolkerKinzel.Contacts.IO.ContactCollectionExtension">
-            <summary>
-            Erweiterungsmethoden für <see cref="T:System.Collections.Generic.IEnumerable`1">IEnumerable&lt;Contact?&gt;</see>.
-            </summary>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveCsv(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
-            <summary>
-            Speichert den Inhalt einer Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten als CSV-Datei.
-            </summary>
-            
-            <param name="contacts">Die zu speichernde Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten.</param>
-            <param name="fileName">Der Dateipfad der zu erzeugenden CSV-Datei. Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-            <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>, um automatisch 
-            die am besten geeignete <see cref="T:System.Globalization.CultureInfo"/> aussuchen zu lassen.</param>
-            <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="P:System.Text.Encoding.UTF8"/>).</param>
-            
-            <remarks>
-            Die Methode ruft auf jedem <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt in <paramref name="contacts"/>&#160;<see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf.
-            </remarks>
-            
-            <exception cref = "T:System.ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">E/A-Fehler.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveVcf(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
-            <summary>
-            Speichert den Inhalt einer Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten als gemeinsame vCard-Datei (.vcf).
-            </summary>
-            <param name="contacts">Die zu speichernde Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten. 
-            Wenn <paramref name="contacts"/> keine Daten enthält, wird keine Datei erzeugt.</param>
-            <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei. 
-            Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="version">Dateiversion der zu speichernden VCF-Datei.</param>
-            
-            <remarks>
-            Die Methode ruft auf jedem <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt in <paramref name="contacts"/>&#160;<see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf.
-            </remarks>
-            
-            <exception cref="T:System.ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.ContactExtension">
-            <summary>
-            Erweiterungsmethoden für die <see cref="T:FolkerKinzel.Contacts.Contact"/>-Klasse.
-            </summary>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactExtension.SaveCsv(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
-            <summary>
-            Speichert den Inhalt eines <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekts als CSV-Datei.
-            </summary>
-            <remarks>
-            <para>Die Methode erzeugt bei jedem Aufruf eine neue CSV-Datei. Wenn Sie mehrere <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte in einer 
-            gemeinsamen CSV-Datei speichern möchten, eignet sich die Methode 
-            <see cref="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveCsv(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)"/>
-            oder die Erweiterungsmethode <see cref="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveCsv(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)"/>.</para>
-            <para>
-            Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf. Wenn
-            die Eigenschaft <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty"/> von <paramref name="contact"/> danach <c>true</c> zurückgibt, wird eine leere Datei erzeugt.
-            Falls es unerwünscht ist, dass die Methode <paramref name="contact"/> durch den Aufruf von <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> ändert,
-            können Sie vorher mit <see cref="M:FolkerKinzel.Contacts.Contact.Clone"/> eine
-            Kopie von <paramref name="contact"/> erstellen und der Methode dann die Kopie übergeben.
-            </para>
-            </remarks>
-            <param name="contact">Das zu speichernde <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt.</param>
-            <param name="fileName">Der Dateipfad der zu erzeugenden CSV-Datei. Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-            <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>, um automatisch 
-            die am besten geeignete <see cref="T:System.Globalization.CultureInfo"/> aussuchen zu lassen.</param>
-            <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="P:System.Text.Encoding.UTF8"/>).</param>
-            <exception cref = "T:System.ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">E/A-Fehler.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactExtension.SaveVcf(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
-            <summary>
-            Speichert den Inhalt eines <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekts als vCard-Datei (.vcf).
-            </summary>
-            <param name="contact">Das zu speichernde <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt. Wenn <paramref name="contact"/> keine Daten enthält,
-            wird keine Datei erzeugt.</param>
-            <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei. 
-            Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="version">Dateiversion der zu speichernden VCF-Datei.</param>
-            
-            <remarks>
-            <para>
-            Die Methode ruft auf <paramref name="contact"/>&#160;<see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf. Wenn
-            die Eigenschaft <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty"/> von <paramref name="contact"/> danach <c>true</c> zurückgibt, wird eine keine Datei erzeugt.
-            Falls es unerwünscht ist, dass die Methode <paramref name="contact"/> durch den Aufruf von <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> ändert,
-            können Sie vorher mit <see cref="M:FolkerKinzel.Contacts.Contact.Clone"/> eine
-            Kopie von <paramref name="contact"/> erstellen und der Methode dann die Kopie übergeben.
-            </para>
-            <para>Zum Speichern mehrerer <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte in einer gemeinsamen VCF-Datei eignet sich die
-            Methode <see cref="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveVcf(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.VCardVersion)"/> oder die 
-            Erweiterungsmethode <see cref="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveVcf(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)"/>.
-            </para>
-            </remarks>
-            
-            <exception cref="T:System.ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.ContactPersistence">
-            <summary>
-            Statische Klasse zum Laden und Speichern von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten als vCard (*.vcf) oder CSV.
-            </summary>
-            <example>
-            <note type="important">Die Beispiele enthalten - der besseren Lesbarkeit wegen - keine Ausnahmebehandlung.</note>
-            <para>Initialisieren von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten:</para>
-            <code language="cs" source="..\Examples\ContactExample.cs"/>
-            <para>
-            Lesen und Schreiben von vCards (*.vcf):
-            </para>
-            <code language="cs" source="..\Examples\VCardExample.cs" />
-            <para>
-            Lesen und Schreiben von CSV-Dateien:
-            </para>
-            <code language="cs" source="..\Examples\CsvExample.cs" />
-            </example>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.LoadCsv(System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
-            <summary>
-            Lädt den Inhalt einer CSV-Datei als <see cref="T:System.Collections.Generic.List`1">Liste</see> von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten.
-            </summary>
-            
-            <param name="fileName">Der Dateipfad der CSV-Datei.</param>
-            <param name="platform">Die Plattform, von der die CSV-Datei stammt.</param>
-            <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
-            um automatisch die am besten geeignete <see cref="T:System.Globalization.CultureInfo"/> aussuchen zu lassen.</param>
-            <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für <see cref="P:System.Text.Encoding.UTF8"/>.</param>
-            
-            <returns>Inhalt der CSV-Datei als <see cref="T:System.Collections.Generic.List`1">Liste</see> von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten.</returns>
-            
-            <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> aus,
-            weshalb es in der Regel nicht nötig ist, <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
-            
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">
-            <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
-            <para>- oder -</para>
-            <para>die Datei enthält ungültiges CSV.</para>
-            </exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveCsv(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
-            <summary>
-            Speichert den Inhalt einer Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten in eine CSV-Datei.
-            </summary>
-            
-            <param name="fileName">Der Dateipfad der zu erzeugenden CSV-Datei. Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="contacts">
-            <para>
-            Die zu speichernde Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten.
-            </para>
-            <para>
-            Die Sammlung darf leer sein oder <c>null</c>-Werte
-            enthalten. Wenn die Sammlung kein <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt enthält, das Daten enthält, wird eine leere Datei erzeugt.
-            </para>
-            </param>
-            <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-            <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>,
-            um automatisch die am besten geeignete für <see cref="T:System.Globalization.CultureInfo"/> aussuchen zu lassen.</param>
-            <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="P:System.Text.Encoding.UTF8"/>).</param>
-            
-            <remarks>
-            <para>
-            Die Methode ruft auf allen als Argument übergebenen <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf. Alle
-            <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte deren Eigenschaft <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
-            die Datei geschrieben.
-            </para>
-            <para>
-            Falls es unerwünscht ist, dass die Methode die <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte durch den Aufruf von <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> ändert,
-            können Sie vorher mit <see cref="M:FolkerKinzel.Contacts.Contact.Clone"/>
-            Kopien der <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
-            </para>
-            </remarks>
-            
-            <exception cref = "T:System.ArgumentNullException"><paramref name="fileName"/> oder <paramref name="contacts"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">E/A-Fehler.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.LoadVcf(System.String)">
-            <summary>
-            Lädt eine vCard-Datei (*.vcf) und gibt ihre Daten als <see cref="T:System.Collections.Generic.List`1">Liste</see> von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten zurück. (Eine VCF-Datei kann
-            mehrere aneinandergehängte vCards enthalten.)
-            </summary>
-            
-            <param name="fileName">Der Dateipfad der VCF-Datei.</param>
-            
-            <returns>Die geladenen Daten als <see cref="T:System.Collections.Generic.List`1">Liste</see> von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten. Enthält 
-            die Datei keinen Text, wird eine leere Liste zurückgegeben.</returns>
-            
-            <remarks>Die Methode führt auf jedem zurückgegebenen <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> aus,
-            weshalb es in der Regel nicht nötig ist, <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> in eigenem Code aufzurufen.</remarks>
-            
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geladen werden.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveVcf(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.VCardVersion)">
-            <summary>
-            Speichert den Inhalt einer Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten in eine gemeinsame 
-            vCard-Datei (*.vcf).
-            </summary>
-            
-            <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei.
-            Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="contacts">
-            <para>
-            Die zu speichernde Sammlung von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten.
-            </para>
-            <para>
-            Die Sammlung darf leer sein oder <c>null</c>-Werte
-            enthalten. Wenn die Sammlung kein <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei erzeugt.
-            </para>
-            </param>
-            <param name="version">Dateiversion der zu speichernden vCard.</param>
-            
-            <remarks>
-            <para>
-            Die Methode ruft auf allen als Argument übergebenen <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> auf. Alle
-            <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte deren Eigenschaft <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty"/> danach <c>true</c> zurückgibt, werden nicht in 
-            die Datei geschrieben.
-            </para>
-            <para>
-            Falls es unerwünscht ist, dass die Methode die <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte durch den Aufruf von <see cref="M:FolkerKinzel.Contacts.Contact.Clean"/> ändert,
-            können Sie vorher mit <see cref="M:FolkerKinzel.Contacts.Contact.Clone"/>
-            Kopien der <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte erstellen und der Methode dann die Kopien übergeben.
-            </para>
-            </remarks>
-            
-            <exception cref="T:System.ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException">
-            <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-            <para>- oder -</para>
-            <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
-            </exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.CsvCompatibility">
-            <summary>
-            Benannte Konstanten, um die Zielplattform einer CSV-Datei anzugeben.
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Unspecified">
-            <summary>
-            Keine Angabe.
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Outlook">
-            <summary>
-            Microsoft Outlook
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Google">
-            <summary>
-            Google Contacts
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Thunderbird">
-            <summary>
-            Mozilla Thunderbird
-            </summary>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp">
-            <summary>
-            Benannte Konstanten, um Eigenschaften der <see cref="T:FolkerKinzel.Contacts.Contact"/>-Klasse zu referenzieren.
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.DisplayName">
-            <summary>
-            Anzeigename im Adressbuch
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FirstName">
-            <summary>
-            Vorname
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.MiddleName">
-            <summary>
-            Zweiter Vorname
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.LastName">
-            <summary>
-            Familienname
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NamePrefix">
-            <summary>
-            Namenspräfix (z.B. "Prof. Dr.")
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NameSuffix">
-            <summary>
-            Namenssuffix (z.B. "jr.")
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NickName">
-            <summary>
-            Rufname
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Gender">
-            <summary>
-            Geschlecht
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.BirthDay">
-            <summary>
-            Geburtstag
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Spouse">
-            <summary>
-            Name des Ehepartners
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Anniversary">
-            <summary>
-            Hochzeitstag
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeStreet">
-            <summary>
-            Privatanschrift: Straße (und Hausnummer)
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomePostalCode">
-            <summary>
-            Privatanschrift: Postleitzahl
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeCity">
-            <summary>
-            Privatanschrift: Ort
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeState">
-            <summary>
-            Privatanschrift: Bundesland
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeCountry">
-            <summary>
-            Privatanschrift: Staat
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email1">
-            <summary>
-            E-Mail-Adresse 1
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email2">
-            <summary>
-            E-Mail-Adresse 2
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email3">
-            <summary>
-            E-Mail-Adresse 3
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email4">
-            <summary>
-            E-Mail-Adresse 4
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email5">
-            <summary>
-            E-Mail-Adresse 5
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email6">
-            <summary>
-            E-Mail-Adresse 6
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneHome">
-            <summary>
-            (Festnetz-) Telefon privat
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneWork">
-            <summary>
-            (Festnetz-) Telefon dienstlich
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FaxHome">
-            <summary>
-            Fax (privat)
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FaxWork">
-            <summary>
-            Fax (dienstlich)
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Cell">
-            <summary>
-            Mobiltelefon
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.CellWork">
-            <summary>
-            Mobiltelefon dienstlich
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther1">
-            <summary>
-            Andere Telefonnummer 1
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther2">
-            <summary>
-            Andere Telefonnummer 2
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther3">
-            <summary>
-            Andere Telefonnummer 3
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther4">
-            <summary>
-            Andere Telefonnummer 4
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther5">
-            <summary>
-            Andere Telefonnummer 5
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther6">
-            <summary>
-            Andere Telefonnummer 6
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger1">
-            <summary>
-            Instant-Messenger-Adresse 1
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger2">
-            <summary>
-            Instant-Messenger-Adresse 2
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger3">
-            <summary>
-            Instant-Messenger-Adresse 3
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger4">
-            <summary>
-            Instant-Messenger-Adresse 4
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger5">
-            <summary>
-            Instant-Messenger-Adresse 5
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger6">
-            <summary>
-            Instant-Messenger-Adresse 6
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.HomePagePersonal">
-            <summary>
-            Private Homepage
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.HomePageWork">
-            <summary>
-            Geshäftshomepage
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkCompany">
-            <summary>
-            Firmenname
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkDepartment">
-            <summary>
-            Abteilung in der Firma
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkOffice">
-            <summary>
-            Büro
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkPosition">
-            <summary>
-            Position in der Firma (z.B. Generaldirektor)
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkStreet">
-            <summary>
-            Geschäftsanschrift: Straße (und Hausnummer)
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkPostalCode">
-            <summary>
-            Geschäftsanschrift: Postleitzahl
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkCity">
-            <summary>
-            Geschäftsanschrift: Ort
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkState">
-            <summary>
-            Geschäftsanschrift: Bundesland
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkCountry">
-            <summary>
-            Geschäftsanschrift: Staat
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Comment">
-            <summary>
-            Kommentar
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.TimeStamp">
-            <summary>
-            Letzte Änderung
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase._propInfo">
-            <summary>
-            Ein <see cref="T:System.Boolean"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
-            </summary>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.CreateMapping">
-            <summary>
-            Erzeugt die Zuordnung zwischen Eigenschaftsnamen von <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>, Eigenschaft von <see cref="T:FolkerKinzel.Contacts.Contact"/> und Spaltenname der CSV-Datei.
-            </summary>
-            <returns>
-            <para>Eine Auflistung von <see cref="T:System.Tuple`3"/>.</para>
-            <para>Inhalt:</para>
-            <list type="bullet">
-            <item><see cref="P:System.Tuple`3.Item1"/>: Eigenschaftsname von <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>.</item>
-            <item><see cref="P:System.Tuple`3.Item2"/>: Eigenschaft von <see cref="T:FolkerKinzel.Contacts.Contact"/>.</item>
-            <item><see cref="P:System.Tuple`3.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
-            </list>
-            </returns>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.InitCsvRecordWrapper(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}}})">
-            <summary>
-            Initialisiert ein <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>-Objekt.
-            </summary>
-            <param name="mapping">
-            <para>Eine Collection von <see cref="T:System.Tuple`3"/>.</para>
-            <para>Inhalt:</para>
-            <list type="bullet">
-            <item><see cref="P:System.Tuple`3.Item1"/>: Eigenschaftsname von <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>.</item>
-            <item><see cref="P:System.Tuple`3.Item2"/>: Eigenschaft von <see cref="T:FolkerKinzel.Contacts.Contact"/>.</item>
-            <item><see cref="P:System.Tuple`3.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
-            </list>
-            </param>
-            <returns>Ein <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>-Objekt.</returns>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.InitCsvRecordWrapperUndefinedValues(System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}},FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper)">
-            <summary>
-            Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="T:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen
-            oder aus diesen zu lesen.
-            Diese Spalten werden dem <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/> hiermit hinzugefügt.
-            </summary>
-            <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="T:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp"/>-Enum.</param>
-            <param name="wrapper">Zu initialisierendes <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>-Objekt.</param>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvReader.Read(System.String)">
-            <summary>
-            Liest die mit <paramref name="fileName"/>
-            </summary>
-            <param name="fileName">Dateipfad der zu lesenden CSV-Datei.</param>
-            <returns>Liste von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten, die den Inhalt der CSV-Datei darstellen.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-            <exception cref="T:System.IO.IOException">
-            <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
-            <para>- oder -</para>
-            <para>die Datei enthält ungültiges CSV.</para></exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvReader.InitContact(FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper,System.Collections.Generic.IList{System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}}})">
-            <summary>
-            Initialisiert aus den Daten eine <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>-Objekts ein <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt.
-            </summary>
-            <param name="wrapper"><see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/></param>
-            <param name="mapping">Zuordnung zwischen Eigenschaftsnamen von <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/>, Eigenschaft von <see cref="T:FolkerKinzel.Contacts.Contact"/> und Spaltenname der CSV-Datei. 
-            Für die Methode ist nur <see cref="P:System.Tuple`3.Item2"/> relevant (Eigenschaft von <see cref="T:FolkerKinzel.Contacts.Contact"/>). <paramref name="mapping"/> muss die gleiche Länge
-            haben wie <paramref name="wrapper"/>.</param>
-            <returns>Ein <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt.</returns>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.Google.AdditionalProp.Swap">
-            <summary>
-            Dummy-Property, die am Ende von <see cref="T:FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper"/> eingefügt wird, um beim Lesen von CSV am
-            Ende der Initialisierung von <see cref="T:FolkerKinzel.Contacts.Contact"/> AddressHome und AddressWork ggf. zu vertauschen.
-            </summary>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.Intls.Csv.SexConverter">
-            <summary>
-            Can convert <see cref="T:FolkerKinzel.Contacts.Sex"/> to something better ;) !
-            </summary>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfReader.Read(System.String)">
-            <summary>
-            Liest eine vCard-Datei und gibt ihre Daten als <see cref="T:FolkerKinzel.Contacts.Contact"/>-Array zurück. (Eine vCard-Datei kann
-            mehrere aneinandergehängte vCards enthalten.) Enthält die Datei keinen Text, wird ein leeres Array zurückgegeben.
-            </summary>
-            <param name="fileName">Der vollständige Pfad der vCard-Datei.</param>
-            <returns>Die Daten der vCard als <see cref="T:FolkerKinzel.Contacts.Contact"/>-Array.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geladen werden.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfWriter.Write(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
-            <summary>
-            Schreibt den Inhalt eines <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekts in eine vCard-Datei.
-            </summary>
-            <param name="contact">Das zu serialisierende <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt. Wenn <paramref name="contact"/>&#160;<c>null</c> ist
-            oder keine Daten enthält, wird keine Datei geschrieben.</param>
-            <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
-            Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
-        </member>
-        <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfWriter.Write(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
-            <summary>
-            Schreibt den Inhalt einer Auflistung  von <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekten in eine gemeinsame 
-            vCard-Datei.
-            </summary>
-            <param name="contacts">Auflistung der in eine gemeinsame vCard-Datei zu schreibenden <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekte.
-            Die Auflistung darf leer sein oder <c>null</c>-Werte
-            enthalten. Wenn die Auflistung kein <see cref="T:FolkerKinzel.Contacts.Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei geschrieben.</param>
-            <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
-            Existiert die Datei schon, wird sie überschrieben.</param>
-            <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-            <exception cref="T:System.IO.IOException">Die Datei konnte nicht geschrieben werden.</exception>
-            <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.Resources.Res">
-            <summary>
-              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
-            </summary>
-        </member>
-        <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.ResourceManager">
-            <summary>
-              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
-            </summary>
-        </member>
-        <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.Culture">
-            <summary>
-              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
-              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
-            </summary>
-        </member>
-        <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.UndefinedEnumValue">
-            <summary>
-              Sucht eine lokalisierte Zeichenfolge, die Undefined enum value. ähnelt.
-            </summary>
-        </member>
-        <member name="T:FolkerKinzel.Contacts.IO.VCardVersion">
-            <summary>
-            Benannte Konstanten, um die VCF-Version anzugeben.
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V2_1">
-            <summary>
-            vCard 2.1
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V3_0">
-            <summary>
-            vCard 3.0
-            </summary>
-        </member>
-        <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V4_0">
-            <summary>
-            vCard 4.0
-            </summary>
-        </member>
-    </members>
+  <assembly>
+    <name>FolkerKinzel.Contacts.IO</name>
+  </assembly>
+  <members>
+    <member name="T:FolkerKinzel.Contacts.IO.ContactCollectionExtension">
+      <summary>Extension methods for <see cref="T:System.Collections.Generic.IEnumerable`1">IEnumerable&lt;Contact?&gt;</see>.</summary>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveCsv(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
+      <summary>Saves the content of a collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects as CSV file.</summary>
+      <param name="contacts">The collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects to save.</param>
+      <param name="fileName">The file path of the CSV file to be created. If the file already exists, it will be overwritten.</param>
+      <param name="platform">The platform that the CSV file targets.</param>
+      <param name="formatProvider">An object, which provides culture-specific formatting information, or <c>null</c> to automatically choose the most suitable <see cref="T:System.Globalization.CultureInfo" />.</param>
+      <param name="textEncoding">The text encoding to use, or <c>null</c> for UTF-8 with BOM (<see cref="P:System.Text.Encoding.UTF8" />).</param>
+      <remarks>The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on every <see cref="T:FolkerKinzel.Contacts.Contact" /> object in <paramref name="contacts" />.</remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="contacts" /> or <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="platform" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">I/O error.</exception>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveVcf(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
+      <summary>Saves the contents of a collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects as a single VCF file.</summary>
+      <param name="contacts">The collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects to be saved. The collection may be empty or contain <c>null</c> values. If the collection does not contain an <see cref="T:FolkerKinzel.Contacts.Contact" /> object that contains data, no file is created.</param>
+      <param name="fileName">The file path of the VCF file. If the file already exists, it will be overwritten.</param>
+      <param name="version">File version of the vCard file (*.vcf) to be saved.</param>
+      <remarks>The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on every <see cref="T:FolkerKinzel.Contacts.Contact" /> object in <paramref name="contacts" />.</remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="contacts" /> or <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="version" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">The file could not be written.</exception>
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.ContactExtension">
+      <summary>Extension methods for the <see cref="T:FolkerKinzel.Contacts.Contact" /> class.</summary>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactExtension.SaveCsv(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
+      <summary>Saves the content of a <see cref="T:FolkerKinzel.Contacts.Contact" /> object as CSV file.</summary>
+      <remarks>
+        <para>
+ The method creates a new CSV file with every call. (If you have to save several <see cref="T:FolkerKinzel.Contacts.Contact" /> objects in a common CSV file, <see cref="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveCsv(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)" /> or the extension method <see cref="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveCsv(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)" /> is suitable for your purposes.)
+</para>
+        <para>
+The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on <paramref name="contact" />. If the property <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty" /> of <paramref name="contact" /> then returns <c>true</c>, an empty file is created. If it is undesirable for the method  to change <paramref name="contact" /> by calling <see cref="M:FolkerKinzel.Contacts.Contact.Clean" />, you can create beforehand a copy of <paramref name="contact" /> with <see cref="M:FolkerKinzel.Contacts.Contact.Clone" /> and transfer then the copy as argument.
+</para>
+      </remarks>
+      <param name="contact">The <see cref="T:FolkerKinzel.Contacts.Contact" /> object to save.</param>
+      <param name="fileName">The file path of the CSV file to be created. If the file already exists, it will be overwritten.</param>
+      <param name="platform">The platform that the CSV file targets.</param>
+      <param name="formatProvider">An object, that provides culture-specific formatting information, or <c>null</c> to automatically choose the most suitable <see cref="T:System.Globalization.CultureInfo" />.</param>
+      <param name="textEncoding">The text encoding to use or <c>null</c> for UTF-8 with BOM (<see cref="P:System.Text.Encoding.UTF8" />).</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="contact" /> or <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="platform" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">I/O error</exception>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactExtension.SaveVcf(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
+      <summary>Saves the content of a <see cref="T:FolkerKinzel.Contacts.Contact" /> object as a vCard file (*.vcf).</summary>
+      <param name="contact">The <see cref="T:FolkerKinzel.Contacts.Contact" /> object to be saved. If <paramref name="contact" /> is <c>null</c> or contains no data, no file is created.</param>
+      <param name="fileName">The file path of the vCard file (*.vcf) to be created. If the file already exists, it will be overwritten.</param>
+      <param name="version">File version of the vCard file (*.vcf) to be saved.</param>
+      <remarks>
+        <para>
+The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on <paramref name="contact" />. If the property <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty" /> of <paramref name="contact" /> then returns <c>true</c>, no file is created. If it is undesirable for the method  to change <paramref name="contact" /> by calling <see cref="M:FolkerKinzel.Contacts.Contact.Clean" />, you can create beforehand a copy of <paramref name="contact" /> with <see cref="M:FolkerKinzel.Contacts.Contact.Clone" /> and transfer the copy as argument. 
+</para>
+        <para>
+For storing several <see cref="T:FolkerKinzel.Contacts.Contact" /> objects in a single VCF file the method <see cref="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveVcf(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.VCardVersion)" /> and the extension method  are suitable <see cref="M:FolkerKinzel.Contacts.IO.ContactCollectionExtension.SaveVcf(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)" />. </para>
+      </remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="contact" /> or <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="version" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">The file could not be written.</exception>
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.ContactPersistence">
+      <summary>Static class for loading and saving <see cref="T:FolkerKinzel.Contacts.Contact" /> objects as vCard (*.vcf) or CSV.</summary>
+      <example>
+        <note type="important"> For the sake of better readability, the examples do not contain any exception handling. </note>
+        <para> Initializing <see cref="T:FolkerKinzel.Contacts.Contact" /> objects: </para>
+        <code language="cs" source="..\Examples\ContactExample.cs" />
+        <para> Reading and writing vCards (* .vcf): </para>
+        <code language="cs" source="..\Examples\VCardExample.cs" />
+        <para> Reading and writing CSV files: </para>
+        <code language="cs" source="..\Examples\CsvExample.cs" />
+      </example>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.LoadCsv(System.String,FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
+      <summary>Loads the content of a CSV file as a generic <see cref="T:System.Collections.Generic.List`1">List</see> of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects.</summary>
+      <param name="fileName">The file path of the CSV file.</param>
+      <param name="platform">The platform from which the CSV file comes.</param>
+      <param name="formatProvider">An object, that provides culture-specific formatting information, or <c>null</c> to automatically choose the most suitable <see cref="T:System.Globalization.CultureInfo" />.</param>
+      <param name="textEncoding">The text encoding to use or <c>null</c> for UTF-8 with BOM (<see cref="P:System.Text.Encoding.UTF8" />).</param>
+      <returns>The contents of the CSV file as a generic <see cref="T:System.Collections.Generic.List`1">List</see> of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects.</returns>
+      <remarks>The method executes <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on each returned <see cref="T:FolkerKinzel.Contacts.Contact" /> object. Therefore it is usually not necessary to call <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> in your own code.</remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="platform" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">
+        <para> The file cannot be accessed </para>
+        <para> - or - </para>
+        <para> the file contains invalid CSV. </para>
+      </exception>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveCsv(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.CsvCompatibility,System.IFormatProvider,System.Text.Encoding)">
+      <summary>Saves the content of a collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects as CSV file.</summary>
+      <param name="fileName">The file path of the CSV file to be created. If the file already exists, it will be overwritten.</param>
+      <param name="contacts">
+        <para> The collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects to be saved. </para>
+        <para> The collection can be empty or contain <c>null</c> values. If the collection does not contain an <see cref="T:FolkerKinzel.Contacts.Contact" /> object that contains data, an empty file is created. </para>
+      </param>
+      <param name="platform">The platform that the CSV file targets.</param>
+      <param name="formatProvider">An object, that provides culture-specific formatting information, or <c>null</c> to automatically choose the most suitable <see cref="T:System.Globalization.CultureInfo" />.</param>
+      <param name="textEncoding">The text encoding to use or <c>null</c> for UTF-8 with BOM (<see cref="P:System.Text.Encoding.UTF8" />).</param>
+      <remarks>
+        <para> 
+The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on all <see cref="T:FolkerKinzel.Contacts.Contact" /> objects that are passed as an argument. All <see cref="T:FolkerKinzel.Contacts.Contact" /> objects whose property <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty" /> then returns <c>true</c> are not written to the file. 
+</para>
+        <para>
+If it is undesirable that the method can change the <see cref="T:FolkerKinzel.Contacts.Contact" /> objects by calling <see cref="M:FolkerKinzel.Contacts.Contact.Clean" />, make copies of the <see cref="T:FolkerKinzel.Contacts.Contact" /> objects beforehand with <see cref="M:FolkerKinzel.Contacts.Contact.Clone" /> and then transfer the copies to the method. </para>
+      </remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="fileName" /> or <paramref name="contacts" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="platform" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">I/O error</exception>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.LoadVcf(System.String)">
+      <summary>Loads the content of a VCF file (vCard) as a generic <see cref="T:System.Collections.Generic.List`1">List</see> of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects. (A VCF file can contain multiple vCards attached to each other.)</summary>
+      <param name="fileName">The file path of the VCF file.</param>
+      <returns>The loaded data as <see cref="T:System.Collections.Generic.List`1" /> of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects. If the file contains no text, an empty list is returned.</returns>
+      <remarks>The method executes <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on each returned <see cref="T:FolkerKinzel.Contacts.Contact" /> object. Therefore it is usually not necessary to call <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> in your own code.</remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="fileName" /> is not a valid file path.</exception>
+      <exception cref="T:System.IO.IOException">The file could not be loaded.</exception>
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.ContactPersistence.SaveVcf(System.String,System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},FolkerKinzel.Contacts.IO.VCardVersion)">
+      <summary>Saves the contents of a collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects as a single VCF file.</summary>
+      <param name="fileName">The file path of the vCard file (*.vcf) to be created. If the file already exists, it will be overwritten.</param>
+      <param name="contacts">
+        <para> The collection of <see cref="T:FolkerKinzel.Contacts.Contact" /> objects to be saved. </para>
+        <para> The collection may be empty or may contain <c>null</c> values. If the collection does not contain any <see cref="T:FolkerKinzel.Contacts.Contact" /> object that contains data, no file is created. </para>
+      </param>
+      <param name="version">File version of the vCard file (*.vcf) to be saved.</param>
+      <remarks>
+        <para> 
+The method calls <see cref="M:FolkerKinzel.Contacts.Contact.Clean" /> on all <see cref="T:FolkerKinzel.Contacts.Contact" /> objects that are passed as an argument. All <see cref="T:FolkerKinzel.Contacts.Contact" /> objects whose property <see cref="P:FolkerKinzel.Contacts.Contact.IsEmpty" /> then returns <c>true</c> are not written to the file. 
+</para>
+        <para>
+If it is undesirable that the method can change the <see cref="T:FolkerKinzel.Contacts.Contact" /> objects by calling <see cref="M:FolkerKinzel.Contacts.Contact.Clean" />, make copies of the <see cref="T:FolkerKinzel.Contacts.Contact" /> objects beforehand with <see cref="M:FolkerKinzel.Contacts.Contact.Clone" /> and then transfer the copies to the method.
+</para>
+      </remarks>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="contacts" /> or <paramref name="fileName" /> is <c>null</c>.</exception>
+      <exception cref="T:System.ArgumentException">
+        <para>
+          <paramref name="fileName" /> is not a valid file path. </para>
+        <para> - or - </para>
+        <para>
+          <paramref name="version" /> has an undefined value. </para>
+      </exception>
+      <exception cref="T:System.IO.IOException">The file could not be written.</exception>
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.CsvCompatibility">
+      <summary>Named constants to specify the target platform of a CSV file.</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Unspecified">
+      <summary>Unspecified</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Outlook">
+      <summary>Microsoft Outlook</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Google">
+      <summary>Google Contacts</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.CsvCompatibility.Thunderbird">
+      <summary>Mozilla Thunderbird</summary>
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.DisplayName">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FirstName">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.MiddleName">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.LastName">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NamePrefix">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NameSuffix">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.NickName">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Gender">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.BirthDay">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Spouse">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Anniversary">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeStreet">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomePostalCode">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeCity">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeState">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressHomeCountry">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email1">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email2">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email3">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email4">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email5">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Email6">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneHome">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneWork">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FaxHome">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.FaxWork">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Cell">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.CellWork">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther1">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther2">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther3">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther4">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther5">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.PhoneOther6">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger1">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger2">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger3">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger4">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger5">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.InstantMessenger6">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.HomePagePersonal">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.HomePageWork">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkCompany">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkDepartment">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkOffice">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.WorkPosition">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkStreet">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkPostalCode">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkCity">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkState">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.AddressWorkCountry">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.Comment">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp.TimeStamp">
+      <summary />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase._propInfo">
+      <summary />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.CreateMapping">
+      <summary />
+      <returns />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.InitCsvRecordWrapper(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}}})">
+      <summary />
+      <param name="mapping" />
+      <returns />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvIOBase.InitCsvRecordWrapperUndefinedValues(System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}},FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper)">
+      <summary />
+      <param name="tpl" />
+      <param name="wrapper" />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvReader.Read(System.String)">
+      <summary />
+      <param name="fileName" />
+      <returns />
+      <exception cref="T:System.ArgumentNullException" />
+      <exception cref="T:System.ArgumentException" />
+      <exception cref="T:System.IO.IOException" />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Csv.CsvReader.InitContact(FolkerKinzel.CsvTools.Helpers.CsvRecordWrapper,System.Collections.Generic.IList{System.Tuple{System.String,System.Nullable{FolkerKinzel.Contacts.IO.Intls.Csv.ContactProp},System.Collections.Generic.IList{System.String}}})">
+      <summary />
+      <param name="wrapper" />
+      <param name="mapping" />
+      <returns />
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.Intls.Csv.Google.AdditionalProp.Swap">
+      <summary />
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.Intls.Csv.SexConverter">
+      <summary />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfReader.Read(System.String)">
+      <summary />
+      <param name="fileName" />
+      <returns />
+      <exception cref="T:System.ArgumentNullException" />
+      <exception cref="T:System.ArgumentException" />
+      <exception cref="T:System.IO.IOException" />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfWriter.Write(FolkerKinzel.Contacts.Contact,System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
+      <summary />
+      <param name="contact" />
+      <param name="fileName" />
+      <param name="version" />
+      <exception cref="T:System.ArgumentNullException" />
+      <exception cref="T:System.ArgumentException" />
+      <exception cref="T:System.IO.IOException" />
+    </member>
+    <member name="M:FolkerKinzel.Contacts.IO.Intls.Vcf.VcfWriter.Write(System.Collections.Generic.IEnumerable{FolkerKinzel.Contacts.Contact},System.String,FolkerKinzel.Contacts.IO.VCardVersion)">
+      <summary />
+      <param name="contacts" />
+      <param name="fileName" />
+      <param name="version" />
+      <exception cref="T:System.ArgumentNullException" />
+      <exception cref="T:System.ArgumentException" />
+      <exception cref="T:System.IO.IOException" />
+      <remarks />
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.Resources.Res">
+      <summary />
+    </member>
+    <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.ResourceManager">
+      <summary />
+    </member>
+    <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.Culture">
+      <summary />
+    </member>
+    <member name="P:FolkerKinzel.Contacts.IO.Resources.Res.UndefinedEnumValue">
+      <summary />
+    </member>
+    <member name="T:FolkerKinzel.Contacts.IO.VCardVersion">
+      <summary>Named constants to indicate the VCF version.</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V2_1">
+      <summary>vCard 2.1</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V3_0">
+      <summary>vCard 3.0</summary>
+    </member>
+    <member name="F:FolkerKinzel.Contacts.IO.VCardVersion.V4_0">
+      <summary>vCard 4.0</summary>
+    </member>
+  </members>
 </doc>

@@ -29,8 +29,8 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\FolkerKinzel.Contacts.IO.csproj" />
       <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\FolkerKinzel.Contacts.csproj" />
-      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\bin\Release\net6.0\de\FolkerKinzel.Contacts.IO.xml" />
-      <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\bin\Release\net6.0\de\FolkerKinzel.Contacts.xml" />
+      <DocumentationSource sourceFile="..\..\..\FolkerKinzel.Contacts\src\FolkerKinzel.Contacts\Translations\de\FolkerKinzel.Contacts.xml" />
+      <DocumentationSource sourceFile="..\FolkerKinzel.Contacts.IO\Translations\de\FolkerKinzel.Contacts.IO.xml" />
     </DocumentationSources>
     <HelpTitle>FolkerKinzel.Contacts.IO</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Tsltn Version="1.0" SourceFile="..\bin\Release\net6.0\de\FolkerKinzel.Contacts.IO.xml" SourceLanguage="de" TargetLanguage="en">
+<Tsltn Version="1.0" SourceFile="de\FolkerKinzel.Contacts.IO.xml" SourceLanguage="de" TargetLanguage="en">
   <T ID="C26C9E732BC18007">Named constants to specify the target platform of a CSV file.</T>
   <T ID="DB1BA40279A95997">Named constants to indicate the VCF version.</T>
   <T ID="5613AAFC2A13DC14">Saves the content of a &lt;see cref="T:FolkerKinzel.Contacts.Contact"/&gt; object as CSV file.</T>
