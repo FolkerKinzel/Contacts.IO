@@ -48,18 +48,18 @@ internal static class VcfWriter
     /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
     /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
     /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
-    public static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
+    internal static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
     {
         if (contacts is null)
         {
             throw new ArgumentNullException(nameof(contacts));
         }
 
-        VCard.SaveVcf(fileName, contacts.Select(x => ToVCard(x)).ToList(), (VC::Enums.VCdVersion)version);
+        VCard.SaveVcf(fileName, contacts.Select(x => ToVCard(x)), (VC::Enums.VCdVersion)version);
     }
 
 
-
+    
     private static VCard? ToVCard(Contact? contact)
     {
         if (contact is null)
