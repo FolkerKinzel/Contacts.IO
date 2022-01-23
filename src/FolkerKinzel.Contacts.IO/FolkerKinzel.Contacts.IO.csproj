@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup Condition="True And '$(TargetFramework)' == 'net6.0' And '$(Configuration)'=='Release'">
+  <PropertyGroup Condition="False And '$(TargetFramework)' == 'net6.0' And '$(Configuration)'=='Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
@@ -12,7 +12,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>1.4.2</Version>
-    <FileVersion>1.4.2.1</FileVersion>
+    <FileVersion>1.4.2.4</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/blob/master/docs/PackageReleaseNotes/1.4.2/ReleaseNotes.md</PackageReleaseNotes>
