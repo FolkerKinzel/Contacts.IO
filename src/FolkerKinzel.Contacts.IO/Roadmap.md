@@ -17,5 +17,5 @@
 - [ ] Update FolkerKinzel.VCards to 5.0.0.
 - [ ] Update FolkerKinzel.CsvTools to 2.0.0.
 - [ ] Make the read and write methods ready to support classes, which are
-derived from `Contact`
+derived from `Contact`.
 
