@@ -24,7 +24,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             conts.Insert(0, null!);
 
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google_CollectionExtension1.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Google_CollectionExtension1.csv");
 
             conts.SaveCsv(fileName, CsvCompatibility.Google);
         }
@@ -37,7 +37,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
 
             conts.Insert(0, null!);
 
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "CollectionExtension1.vcf");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "CollectionExtension1.vcf");
 
 
             conts.SaveVcf(fileName);

@@ -53,7 +53,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         public void SaveCsvTest_Thunderbird()
         {
 
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Thunderbird.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Thunderbird.csv");
 
 
             Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Thunderbird);
@@ -120,7 +120,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         public void SaveCsvTest_Outlook1()
         {
 
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook1.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Outlook1.csv");
 
             Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Outlook);
         }
@@ -128,7 +128,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod]
         public void SaveTest_Outlook2()
         {
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Outlook2.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Outlook2.csv");
 
             List<Contact> conts = ContactPersistence.LoadCsv(TestFiles.Outlook365Csv, CsvCompatibility.Outlook, CultureInfo.InvariantCulture);
 
@@ -150,14 +150,14 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void SaveCsvTest_Google1()
         {
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Google.csv");
             Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Google);
         }
 
         [TestMethod()]
         public void SaveCsvTest_Google2()
         {
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Google.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Google.csv");
             Contact cont = Utility.InitTestContact();
 
             cont.AddressHome = null;
@@ -184,7 +184,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod]
         public void SaveCsvTest_Unspecified()
         {
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "Unspecified.csv");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "Unspecified.csv");
             Utility.InitTestContact().SaveCsv(fileName, CsvCompatibility.Unspecified);
         }
 
@@ -239,7 +239,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
         [TestMethod()]
         public void SaveVCardTest_3_0()
         {
-            string fileName = Path.Combine(TestContext.TestRunResultsDirectory, "3_0.vcf");
+            string fileName = Path.Combine(TestContext.TestRunResultsDirectory!, "3_0.vcf");
             Utility.InitTestContact().SaveVcf(fileName);
         }
 
