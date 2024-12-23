@@ -9,7 +9,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>2.0.0-alpha.1</Version>
-    <FileVersion>2.0.0.1</FileVersion>
+    <FileVersion>2.0.0.2</FileVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/releases/tag/v2.0.0-alpha.1</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
