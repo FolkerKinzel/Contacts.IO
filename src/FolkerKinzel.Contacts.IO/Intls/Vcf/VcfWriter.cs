@@ -57,8 +57,6 @@ internal static class VcfWriter
 
         VCard.SaveVcf(fileName, contacts.Select(x => ToVCard(x)), (VC::Enums.VCdVersion)version);
     }
-
-
     
     private static VCard? ToVCard(Contact? contact)
     {
@@ -104,8 +102,6 @@ internal static class VcfWriter
 
             homeAdr.Parameters.Label = BuildAddressLabel(adrHome);
         }
-
-
 
         if (work != null)
         {
@@ -321,7 +317,6 @@ internal static class VcfWriter
 
         return vcard;
     }
-
 
     private static string BuildAddressLabel(Address adr)
     {

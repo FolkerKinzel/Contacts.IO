@@ -19,9 +19,7 @@ internal abstract class CsvReader : CsvIOBase
 
     protected CsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
-
     protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
-
 
     /// <summary>
     /// Liest die mit <paramref name="fileName"/>
@@ -69,8 +67,6 @@ internal abstract class CsvReader : CsvIOBase
 
         return list;
     }
-
-
 
     /// <summary>
     /// Initialisiert aus den Daten eine <see cref="CsvRecordWrapper"/>-Objekts ein <see cref="Contact"/>-Objekt.
@@ -375,8 +371,6 @@ internal abstract class CsvReader : CsvIOBase
             emails ??= new List<string>();
             contact.EmailAddresses = emails;
         }
-
-
     }
 
     protected static void AddPhoneNumber(Contact contact, PhoneNumber newNumber)

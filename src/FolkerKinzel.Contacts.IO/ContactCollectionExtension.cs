@@ -62,5 +62,4 @@ public static class ContactCollectionExtension
                                  string fileName,
                                  VCardVersion version = VCardVersion.V3_0)
         => ContactPersistence.SaveVcf(fileName, contacts, version);
-
 }

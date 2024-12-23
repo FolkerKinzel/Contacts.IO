@@ -126,10 +126,6 @@ internal static class HeaderRow
             En.Notes
     };
 
-
-
-
-
     internal static string[] GetColumnNamesDe() => new string[]
     {
             "Vorname",

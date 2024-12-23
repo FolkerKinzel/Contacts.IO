@@ -61,7 +61,6 @@ internal enum ContactProp
     /// </summary>
     Anniversary,
 
-
     /// <summary>
     /// Privatanschrift: Straße (und Hausnummer)
     /// </summary>
@@ -206,7 +205,6 @@ internal enum ContactProp
     /// Instant-Messenger-Adresse 6
     /// </summary>
     InstantMessenger6,
-
 
     /// <summary>
     /// Private Homepage

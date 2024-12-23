@@ -289,11 +289,5 @@ internal static class HeaderRow
 
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventType),                  (ContactProp)AdditionalProp.EventType,             new string[]{ColumnName.EventType}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.EventValue),                 ContactProp.Anniversary,                           new string[]{ColumnName.EventValue}),
-
-
-
-
-
         };
-
 }

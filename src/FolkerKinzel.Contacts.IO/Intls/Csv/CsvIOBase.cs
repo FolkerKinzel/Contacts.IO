@@ -16,7 +16,6 @@ internal abstract class CsvIOBase
 
     private const int PROPINFO_LENGTH = 2;
 
-
     protected CsvIOBase(IFormatProvider? formatProvider, Encoding? textEncoding)
     {
         FormatProvider = formatProvider ?? CultureInfo.InvariantCulture;
@@ -41,10 +40,8 @@ internal abstract class CsvIOBase
 
     private Conv::ICsvTypeConverter? _nullableDateTimeConverter;
 
-
     protected Conv::ICsvTypeConverter StringConverter { get; }
         = Conv::CsvConverterFactory.CreateConverter(Conv::CsvTypeCode.String, nullable: true);
-
 
     protected Conv::ICsvTypeConverter NullableDateConverter
     {
@@ -226,10 +223,6 @@ internal abstract class CsvIOBase
         return wrapper;
     }
 
-
-
-
-
     /// <summary>
     /// Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen
     /// oder aus diesen zu lesen.
@@ -238,7 +231,5 @@ internal abstract class CsvIOBase
     /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"/>-Enum.</param>
     /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"/>-Objekt.</param>
     protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper) { }
-
-
 
 }

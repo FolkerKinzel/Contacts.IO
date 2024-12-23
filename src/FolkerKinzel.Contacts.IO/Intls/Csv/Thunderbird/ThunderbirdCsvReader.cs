@@ -15,7 +15,6 @@ internal class ThunderbirdCsvReader : CsvReader
                                                                      nullable: false,
                                                                      formatProvider: this.FormatProvider);
 
-
     protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping()
     {
         Debug.Assert(Analyzer.HasHeaderRow == true);
@@ -69,7 +68,6 @@ internal class ThunderbirdCsvReader : CsvReader
         return mapping;
     }
 
-
     protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)
     {
         Debug.Assert(tpl.Item2.HasValue);
@@ -85,8 +83,6 @@ internal class ThunderbirdCsvReader : CsvReader
                         tpl.Item3,
                         _intConverter));
     }
-
-
 
     protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
     {

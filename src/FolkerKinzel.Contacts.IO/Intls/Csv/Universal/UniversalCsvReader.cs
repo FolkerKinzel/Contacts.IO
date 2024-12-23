@@ -4,9 +4,7 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal;
 
 internal class UniversalCsvReader : CsvReader
 {
-
     internal UniversalCsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
-
 
     protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => new Tuple<string, ContactProp?, IList<string>>[]
     {
@@ -74,7 +72,5 @@ internal class UniversalCsvReader : CsvReader
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.Comment),               ContactProp.Comment,               new string[]{"Note?", "Comment?", "Annotation?", "Kommentar*", "Anmerkung*", "Notiz*"}),
             new Tuple<string, ContactProp?, IList<string>>(nameof(ColumnName.TimeStamp),             ContactProp.TimeStamp,             new string[]{ColumnName.TimeStamp, "*Change*", "*Revision*", "*Änder*"})
     };
-
-
 
 }

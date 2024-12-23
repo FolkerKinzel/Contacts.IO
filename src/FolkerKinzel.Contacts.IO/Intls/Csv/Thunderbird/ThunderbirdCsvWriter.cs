@@ -14,12 +14,9 @@ internal class ThunderbirdCsvWriter : CsvWriter
                                                                nullable: true,
                                                                formatProvider: this.FormatProvider);
 
-
     protected override string[] CreateColumnNames() => HeaderRow.GetColumnNamesEn();
 
-
     protected override IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping() => HeaderRow.GetMappingEN();
-
 
     protected override void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper)
     {
@@ -29,14 +26,12 @@ internal class ThunderbirdCsvWriter : CsvWriter
         //case (ContactProp)AdditionalProps.BirthMonth:
         //case (ContactProp)AdditionalProps.BirthDay:
 
-
         wrapper.AddProperty(
                     new CsvProperty(
                         tpl.Item1,
                         tpl.Item3,
                         _intConverter));
     }
-
 
     protected override void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
     {
@@ -51,7 +46,4 @@ internal class ThunderbirdCsvWriter : CsvWriter
         } : (int?)null;
 
     }
-
-
-
 }

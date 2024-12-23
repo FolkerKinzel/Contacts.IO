@@ -18,7 +18,6 @@ internal abstract class CsvWriter : CsvIOBase
 
     protected CsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
-
     internal void Write(string fileName, IEnumerable<Contact?> data)
     {
 
@@ -56,9 +55,7 @@ internal abstract class CsvWriter : CsvIOBase
         }
     }
 
-
     protected abstract string[] CreateColumnNames();
-
 
     private void FillCsvRecord(Contact contact, CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
     {
@@ -253,6 +250,5 @@ internal abstract class CsvWriter : CsvIOBase
 
     [ExcludeFromCodeCoverage]
     protected virtual void FillCsvRecordNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index) { }
-
 
 }

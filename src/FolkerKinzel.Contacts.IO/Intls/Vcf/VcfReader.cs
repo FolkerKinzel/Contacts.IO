@@ -30,8 +30,6 @@ internal static class VcfReader
         return wabContacts;
     }
 
-
-
     private static Contact ConvertToContact(VCard vcard)
     {
         var contact = new Contact();

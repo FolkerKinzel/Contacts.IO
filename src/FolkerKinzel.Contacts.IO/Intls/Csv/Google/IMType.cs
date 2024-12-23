@@ -10,6 +10,4 @@ internal static class IMType
     internal const string Skype = "Skype";
     internal const string Icq = "ICQ";
     internal const string Jabber = "Jabber";
-
-
 }
