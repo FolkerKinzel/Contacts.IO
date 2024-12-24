@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 using FolkerKinzel.CsvTools.Helpers;
 using FolkerKinzel.CsvTools.Helpers.Converters;
@@ -61,41 +61,63 @@ internal abstract class CsvIOBase
 
     protected virtual SexConverter InitSexConverter() => new();
 
-    /// <summary>
-    /// Ein <see cref="bool"/>-Array, das Informationen über das doppelte Vorkommen ähnlicher Parameter sammelt.
-    /// </summary>
+    /// <summary> Ein <see cref="bool" />-Array, das Informationen über das doppelte
+    /// Vorkommen ähnlicher Parameter sammelt. </summary>
     protected readonly bool[] _propInfo = new bool[PROPINFO_LENGTH];
 
 
-    /// <summary>
-    /// Erzeugt die Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"/>, Eigenschaft von <see cref="Contact"/> und Spaltenname der CSV-Datei.
-    /// </summary>
+    /// <summary> Erzeugt die Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"
+    /// />, Eigenschaft von <see cref="Contact" /> und Spaltenname der CSV-Datei. </summary>
     /// <returns>
-    /// <para>Eine Auflistung von <see cref="Tuple{T1, T2, T3}"/>.</para>
-    /// <para>Inhalt:</para>
+    /// <para>
+    /// Eine Auflistung von <see cref="Tuple{T1, T2, T3}" />.
+    /// </para>
+    /// <para>
+    /// Inhalt:
+    /// </para>
     /// <list type="bullet">
-    /// <item><see cref="Tuple{T1, T2, T3}.Item1"/>: Eigenschaftsname von <see cref="CsvRecordWrapper"/>.</item>
-    /// <item><see cref="Tuple{T1, T2, T3}.Item2"/>: Eigenschaft von <see cref="Contact"/>.</item>
-    /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item1" />: Eigenschaftsname von <see cref="CsvRecordWrapper"
+    /// />.
+    /// </item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item2" />: Eigenschaft von <see cref="Contact"
+    /// />.
+    /// </item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item3" />: Spaltenname der CSV-Datei und evtl.
+    /// Aliase
+    /// </item>
     /// </list>
     /// </returns>
     protected abstract IList<Tuple<string, ContactProp?, IList<string>>> CreateMapping();
 
 
 
-    /// <summary>
-    /// Initialisiert ein <see cref="CsvRecordWrapper"/>-Objekt.
-    /// </summary>
+    /// <summary> Initialisiert ein <see cref="CsvRecordWrapper" />-Objekt. </summary>
     /// <param name="mapping">
-    /// <para>Eine Collection von <see cref="Tuple{T1, T2, T3}"/>.</para>
-    /// <para>Inhalt:</para>
+    /// <para>
+    /// Eine Collection von <see cref="Tuple{T1, T2, T3}" />.
+    /// </para>
+    /// <para>
+    /// Inhalt:
+    /// </para>
     /// <list type="bullet">
-    /// <item><see cref="Tuple{T1, T2, T3}.Item1"/>: Eigenschaftsname von <see cref="CsvRecordWrapper"/>.</item>
-    /// <item><see cref="Tuple{T1, T2, T3}.Item2"/>: Eigenschaft von <see cref="Contact"/>.</item>
-    /// <item><see cref="Tuple{T1, T2, T3}.Item3"/>: Spaltenname der CSV-Datei und evtl. Aliase</item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item1" />: Eigenschaftsname von <see cref="CsvRecordWrapper"
+    /// />.
+    /// </item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item2" />: Eigenschaft von <see cref="Contact"
+    /// />.
+    /// </item>
+    /// <item>
+    /// <see cref="Tuple{T1, T2, T3}.Item3" />: Spaltenname der CSV-Datei und evtl.
+    /// Aliase
+    /// </item>
     /// </list>
     /// </param>
-    /// <returns>Ein <see cref="CsvRecordWrapper"/>-Objekt.</returns>
+    /// <returns>Ein <see cref="CsvRecordWrapper" />-Objekt.</returns>
     protected CsvRecordWrapper InitCsvRecordWrapper(IEnumerable<Tuple<string, ContactProp?, IList<string>>> mapping)
     {
         var wrapper = new CsvRecordWrapper();
@@ -223,13 +245,14 @@ internal abstract class CsvIOBase
         return wrapper;
     }
 
-    /// <summary>
-    /// Abgeleitete Klassen können dem Mapping nicht definierte Werte der <see cref="ContactProp"/>-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen
-    /// oder aus diesen zu lesen.
-    /// Diese Spalten werden dem <see cref="CsvRecordWrapper"/> hiermit hinzugefügt.
-    /// </summary>
-    /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"/>-Enum.</param>
-    /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"/>-Objekt.</param>
+    /// <summary> Abgeleitete Klassen können dem Mapping nicht definierte Werte der
+    /// <see cref="ContactProp" />-Enum hinzufügen, um inkompatible CSV-Spalten zu befüllen
+    /// oder aus diesen zu lesen. Diese Spalten werden dem <see cref="CsvRecordWrapper"
+    /// /> hiermit hinzugefügt. </summary>
+    /// <param name="tpl">Tuple aus dem Mapping mit nichtdefiniertem Wert der <see cref="ContactProp"
+    /// />-Enum.</param>
+    /// <param name="wrapper">Zu initialisierendes <see cref="Csv::Helpers.CsvRecordWrapper"
+    /// />-Objekt.</param>
     protected virtual void InitCsvRecordWrapperUndefinedValues(Tuple<string, ContactProp?, IList<string>> tpl, CsvRecordWrapper wrapper) { }
 
 }

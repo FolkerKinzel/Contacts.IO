@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FolkerKinzel.Contacts.IO.Resources;
 using FolkerKinzel.CsvTools.Helpers;
 using Csv = FolkerKinzel.CsvTools;

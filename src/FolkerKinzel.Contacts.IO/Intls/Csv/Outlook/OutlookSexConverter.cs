@@ -1,4 +1,4 @@
-﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook;
+namespace FolkerKinzel.Contacts.IO.Intls.Csv.Outlook;
 
 internal class OutlookSexConverter : SexConverter
 {

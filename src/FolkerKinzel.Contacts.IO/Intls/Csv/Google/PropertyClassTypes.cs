@@ -1,4 +1,4 @@
-﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google;
+namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google;
 
 internal static class PropertyClassType
 {

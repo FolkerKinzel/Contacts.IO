@@ -1,4 +1,4 @@
-﻿using FolkerKinzel.CsvTools.Helpers;
+using FolkerKinzel.CsvTools.Helpers;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv.Google;
 
@@ -56,10 +56,9 @@ internal enum AdditionalProp
 
     EventType,
 
-    /// <summary>
-    /// Dummy-Property, die am Ende von <see cref="CsvRecordWrapper"/> eingefügt wird, um beim Lesen von CSV am
-    /// Ende der Initialisierung von <see cref="Contact"/> AddressHome und AddressWork ggf. zu vertauschen.
-    /// </summary>
+    /// <summary> Dummy-Property, die am Ende von <see cref="CsvRecordWrapper" /> eingefügt
+    /// wird, um beim Lesen von CSV am Ende der Initialisierung von <see cref="Contact"
+    /// /> AddressHome und AddressWork ggf. zu vertauschen. </summary>
     Swap
 
 }

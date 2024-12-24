@@ -1,4 +1,4 @@
-﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird;
+namespace FolkerKinzel.Contacts.IO.Intls.Csv.Thunderbird;
 
 internal static class HeaderRow
 {

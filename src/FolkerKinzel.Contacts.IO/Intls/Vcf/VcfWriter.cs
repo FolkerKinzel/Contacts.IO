@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FolkerKinzel.VCards;
 using FolkerKinzel.VCards.Extensions;
 using VC = FolkerKinzel.VCards.Models;
@@ -7,17 +7,19 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf;
 
 internal static class VcfWriter
 {
-    /// <summary>
-    /// Schreibt den Inhalt eines <see cref="Contact"/>-Objekts in eine vCard-Datei.
+    /// <summary> Schreibt den Inhalt eines <see cref="Contact" />-Objekts in eine vCard-Datei.
     /// </summary>
-    /// <param name="contact">Das zu serialisierende <see cref="Contact"/>-Objekt. Wenn <paramref name="contact"/>&#160;<c>null</c> ist
-    /// oder keine Daten enthält, wird keine Datei geschrieben.</param>
-    /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
+    /// <param name="contact">Das zu serialisierende <see cref="Contact" />-Objekt.
+    /// Wenn <paramref name="contact" />&#160;<c>null</c> ist oder keine Daten enthält,
+    /// wird keine Datei geschrieben.</param>
+    /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei.
     /// Existiert die Datei schon, wird sie überschrieben.</param>
     /// <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
-    /// <exception cref="ArgumentNullException"><paramref name="contact"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-    /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
+    /// <exception cref="ArgumentNullException"> <paramref name="contact" /> or <paramref
+    /// name="fileName" /> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException"> <paramref name="fileName" /> is not a valid
+    /// file path.</exception>
+    /// <exception cref="IOException">The file could not be written.</exception>
     internal static void Write(Contact contact, string fileName, VCardVersion version)
     {
         if (contact is null)
@@ -34,20 +36,22 @@ internal static class VcfWriter
     }
 
 
-    /// <summary>
-    /// Schreibt den Inhalt einer Auflistung  von <see cref="Contact"/>-Objekten in eine gemeinsame 
-    /// vCard-Datei.
-    /// </summary>
-    /// <param name="contacts">Auflistung der in eine gemeinsame vCard-Datei zu schreibenden <see cref="Contact"/>-Objekte.
-    /// Die Auflistung darf leer sein oder <c>null</c>-Werte
-    /// enthalten. Wenn die Auflistung kein <see cref="Contact"/>-Objekt enthält, das Daten enthält, wird keine Datei geschrieben.</param>
-    /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei. 
+    /// <summary> Schreibt den Inhalt einer Auflistung von <see cref="Contact" />-Objekten
+    /// in eine gemeinsame vCard-Datei. </summary>
+    /// <param name="contacts">Auflistung der in eine gemeinsame vCard-Datei zu schreibenden
+    /// <see cref="Contact" />-Objekte. Die Auflistung darf leer sein oder <c>null</c>-Werte
+    /// enthalten. Wenn die Auflistung kein <see cref="Contact" />-Objekt enthält, das
+    /// Daten enthält, wird keine Datei geschrieben.</param>
+    /// <param name="fileName">Der vollständige Pfad der zu erzeugenden vCard-Datei.
     /// Existiert die Datei schon, wird sie überschrieben.</param>
     /// <param name="version">Dateiversion der zu speichernden vCard. (optional)</param>
-    /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-    /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
-    /// <remarks><paramref name="contacts"/> darf nicht null sein, aber null-Werte enthalten.</remarks>
+    /// <exception cref="ArgumentNullException"> <paramref name="contacts" /> or <paramref
+    /// name="fileName" /> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException"> <paramref name="fileName" /> is not a valid
+    /// file path.</exception>
+    /// <exception cref="IOException">The file could not be written.</exception>
+    /// <remarks> <paramref name="contacts" /> darf nicht null sein, aber null-Werte
+    /// enthalten.</remarks>
     internal static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
     {
         if (contacts is null)

@@ -1,35 +1,38 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 
 namespace FolkerKinzel.Contacts.IO;
 
-/// <summary>
-/// Erweiterungsmethoden für <see cref="IEnumerable{T}">IEnumerable&lt;Contact?&gt;</see>.
-/// </summary>
+/// <summary>Extension methods for <see cref="IEnumerable{T}">IEnumerable&lt;Contact?&gt;</see>.</summary>
 public static class ContactCollectionExtension
 {
-    /// <summary>
-    /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten als CSV-Datei.
-    /// </summary>
-    /// 
-    /// <param name="contacts">Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten.</param>
-    /// <param name="fileName">Der Dateipfad der zu erzeugenden CSV-Datei. Existiert die Datei schon, wird sie überschrieben.</param>
-    /// <param name="platform">Die Plattform, für die die CSV-Datei bestimmt ist.</param>
-    /// <param name="formatProvider">Ein Objekt, das kulturabhängige Formatierungsinformationen bereitstellt, oder <c>null</c>, um automatisch 
-    /// die am besten geeignete <see cref="CultureInfo"/> aussuchen zu lassen.</param>
-    /// <param name="textEncoding">Die zu verwendende Textkodierung oder <c>null</c> für UTF-8 mit BOM (<see cref="Encoding.UTF8"/>).</param>
-    /// 
-    /// <remarks>
-    /// Die Methode ruft auf jedem <see cref="Contact"/>-Objekt in <paramref name="contacts"/>&#160;<see cref="Contact.Clean"/> auf.
-    /// </remarks>
-    /// 
-    /// <exception cref = "ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
+    /// <summary>Saves the content of a collection of <see cref="Contact" /> objects
+    /// as a CSV file.</summary>
+    /// <param name="contacts">The collection of <see cref="Contact" /> objects to save.</param>
+    /// <param name="fileName">The file path of the CSV file to be created. If the file
+    /// already exists, it will be overwritten.</param>
+    /// <param name="platform">The platform that the CSV file targets.</param>
+    /// <param name="formatProvider">An object, which provides culture-specific formatting
+    /// information, or <c>null</c> to automatically choose the most suitable <see cref="CultureInfo"
+    /// />.</param>
+    /// <param name="textEncoding">The text encoding to use, or <c>null</c> for UTF-8
+    /// with BOM (<see cref="Encoding.UTF8" />).</param>
+    /// <remarks>The method calls <see cref="Contact.Clean" /> on every <see cref="Contact"
+    /// /> object in <paramref name="contacts" />.</remarks>
+    /// <exception cref="ArgumentNullException"> <paramref name="contacts" /> or <paramref
+    /// name="fileName" /> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException">
-    /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-    /// <para>- oder -</para>
-    /// <para><paramref name="platform"/> hat einen nichtdefinierten Wert.</para>
+    /// <para>
+    /// <paramref name="fileName" /> is not a valid file path.
+    /// </para>
+    /// <para>
+    /// - or -
+    /// </para>
+    /// <para>
+    /// <paramref name="platform" /> has an undefined value.
+    /// </para>
     /// </exception>
-    /// <exception cref="IOException">E/A-Fehler.</exception>
+    /// <exception cref="IOException">I/O error.</exception>
     public static void SaveCsv(this IEnumerable<Contact?> contacts,
                                string fileName,
                                CsvCompatibility platform,
@@ -38,26 +41,31 @@ public static class ContactCollectionExtension
         => ContactPersistence.SaveCsv(fileName, contacts, platform, formatProvider, textEncoding);
 
 
-    /// <summary>
-    /// Speichert den Inhalt einer Sammlung von <see cref="Contact"/>-Objekten als gemeinsame vCard-Datei (.vcf).
-    /// </summary>
-    /// <param name="contacts">Die zu speichernde Sammlung von <see cref="Contact"/>-Objekten. 
-    /// Wenn <paramref name="contacts"/> keine Daten enthält, wird keine Datei erzeugt.</param>
-    /// <param name="fileName">Der Dateipfad der zu erzeugenden VCF-Datei. 
-    /// Existiert die Datei schon, wird sie überschrieben.</param>
-    /// <param name="version">Dateiversion der zu speichernden VCF-Datei.</param>
-    /// 
-    /// <remarks>
-    /// Die Methode ruft auf jedem <see cref="Contact"/>-Objekt in <paramref name="contacts"/>&#160;<see cref="Contact.Clean"/> auf.
-    /// </remarks>
-    /// 
-    /// <exception cref="ArgumentNullException"><paramref name="contacts"/> oder <paramref name="fileName"/> ist <c>null</c>.</exception>
+    /// <summary>Saves the contents of a collection of <see cref="Contact" /> objects
+    /// as a single VCF file.</summary>
+    /// <param name="contacts">The collection of <see cref="Contact" /> objects to be
+    /// saved. The collection may be empty or contain <c>null</c> values. If the collection
+    /// does not contain an <see cref="Contact" /> object that contains data, no file
+    /// is created.</param>
+    /// <param name="fileName">The file path of the vCard file (*.vcf) to be created.
+    /// If the file already exists, it will be overwritten.</param>
+    /// <param name="version">File version of the vCard file (*.vcf) to be saved.</param>
+    /// <remarks>The method calls <see cref="Contact.Clean" /> on every <see cref="Contact"
+    /// /> object in <paramref name="contacts" />.</remarks>
+    /// <exception cref="ArgumentNullException"> <paramref name="contacts" /> or <paramref
+    /// name="fileName" /> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException">
-    /// <para><paramref name="fileName"/> ist kein gültiger Dateipfad.</para>
-    /// <para>- oder -</para>
-    /// <para><paramref name="version"/> hat einen nichtdefinierten Wert.</para>
+    /// <para>
+    /// <paramref name="fileName" /> is not a valid file path.
+    /// </para>
+    /// <para>
+    /// - or -
+    /// </para>
+    /// <para>
+    /// <paramref name="version" /> has an undefined value.
+    /// </para>
     /// </exception>
-    /// <exception cref="IOException">Die Datei konnte nicht geschrieben werden.</exception>
+    /// <exception cref="IOException">The file could not be written.</exception>
     public static void SaveVcf(this IEnumerable<Contact?> contacts,
                                  string fileName,
                                  VCardVersion version = VCardVersion.V3_0)

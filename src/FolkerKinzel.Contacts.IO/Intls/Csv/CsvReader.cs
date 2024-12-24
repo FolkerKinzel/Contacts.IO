@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FolkerKinzel.Contacts.IO.Resources;
 using FolkerKinzel.CsvTools;
 using FolkerKinzel.CsvTools.Helpers;
@@ -21,17 +21,24 @@ internal abstract class CsvReader : CsvIOBase
 
     protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 
-    /// <summary>
-    /// Liest die mit <paramref name="fileName"/>
-    /// </summary>
+    /// <summary> Liest die mit <paramref name="fileName" /></summary>
     /// <param name="fileName">Dateipfad der zu lesenden CSV-Datei.</param>
-    /// <returns>Liste von <see cref="Contact"/>-Objekten, die den Inhalt der CSV-Datei darstellen.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
+    /// <returns>Liste von <see cref="Contact" />-Objekten, die den Inhalt der CSV-Datei
+    /// darstellen.</returns>
+    /// <exception cref="ArgumentNullException"> <paramref name="fileName" /> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException"> <paramref name="fileName" /> is not a valid
+    /// file path.</exception>
     /// <exception cref="IOException">
-    /// <para>Es kann nicht auf den Datenträger zugegriffen werden</para>
-    /// <para>- oder -</para>
-    /// <para>die Datei enthält ungültiges CSV.</para></exception>
+    /// <para>
+    /// The file cannot be accessed
+    /// </para>
+    /// <para>
+    /// - or -
+    /// </para>
+    /// <para>
+    /// the file contains invalid CSV.
+    /// </para>
+    /// </exception>
     public List<Contact> Read(string fileName)
     {
         var list = new List<Contact>();
@@ -68,14 +75,15 @@ internal abstract class CsvReader : CsvIOBase
         return list;
     }
 
-    /// <summary>
-    /// Initialisiert aus den Daten eine <see cref="CsvRecordWrapper"/>-Objekts ein <see cref="Contact"/>-Objekt.
-    /// </summary>
-    /// <param name="wrapper"><see cref="CsvRecordWrapper"/></param>
-    /// <param name="mapping">Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"/>, Eigenschaft von <see cref="Contact"/> und Spaltenname der CSV-Datei. 
-    /// Für die Methode ist nur <see cref="Tuple{T1, T2, T3}.Item2"/> relevant (Eigenschaft von <see cref="Contact"/>). <paramref name="mapping"/> muss die gleiche Länge
-    /// haben wie <paramref name="wrapper"/>.</param>
-    /// <returns>Ein <see cref="Contact"/>-Objekt.</returns>
+    /// <summary> Initialisiert aus den Daten eine <see cref="CsvRecordWrapper" />-Objekts
+    /// ein <see cref="Contact" />-Objekt. </summary>
+    /// <param name="wrapper"> <see cref="CsvRecordWrapper" /> </param>
+    /// <param name="mapping">Zuordnung zwischen Eigenschaftsnamen von <see cref="CsvRecordWrapper"
+    /// />, Eigenschaft von <see cref="Contact" /> und Spaltenname der CSV-Datei. Für
+    /// die Methode ist nur <see cref="Tuple{T1, T2, T3}.Item2" /> relevant (Eigenschaft
+    /// von <see cref="Contact" />). <paramref name="mapping" /> muss die gleiche Länge
+    /// haben wie <paramref name="wrapper" />.</param>
+    /// <returns>Ein <see cref="Contact" />-Objekt.</returns>
     private Contact InitContact(CsvRecordWrapper wrapper, IList<Tuple<string, ContactProp?, IList<string>>> mapping)
     {
         var contact = new Contact();

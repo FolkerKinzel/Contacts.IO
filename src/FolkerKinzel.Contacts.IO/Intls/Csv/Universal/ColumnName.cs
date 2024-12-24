@@ -1,4 +1,4 @@
-﻿namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal;
+namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal;
 
 internal static class ColumnName
 {

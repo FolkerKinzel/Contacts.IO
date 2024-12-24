@@ -1,10 +1,8 @@
-﻿using FolkerKinzel.CsvTools.Helpers.Converters;
+using FolkerKinzel.CsvTools.Helpers.Converters;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv;
 
-/// <summary>
-/// Can convert <see cref="Sex"/> to something better ;) !
-/// </summary>
+    /// <summary> Can convert <see cref="Sex" /> to something better ;) ! </summary>
 internal class SexConverter : ICsvTypeConverter
 {
     [ExcludeFromCodeCoverage]

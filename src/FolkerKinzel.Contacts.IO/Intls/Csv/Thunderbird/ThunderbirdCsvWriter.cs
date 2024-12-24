@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using FolkerKinzel.CsvTools.Helpers;
 using FolkerKinzel.CsvTools.Helpers.Converters;
 

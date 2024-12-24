@@ -1,4 +1,4 @@
-﻿using FolkerKinzel.VCards;
+using FolkerKinzel.VCards;
 using FolkerKinzel.VCards.Extensions;
 using VC = FolkerKinzel.VCards.Models;
 
@@ -6,15 +6,15 @@ namespace FolkerKinzel.Contacts.IO.Intls.Vcf;
 
 internal static class VcfReader
 {
-    /// <summary>
-    /// Liest eine vCard-Datei und gibt ihre Daten als <see cref="Contact"/>-Array zurück. (Eine vCard-Datei kann
-    /// mehrere aneinandergehängte vCards enthalten.) Enthält die Datei keinen Text, wird ein leeres Array zurückgegeben.
-    /// </summary>
+    /// <summary> Liest eine vCard-Datei und gibt ihre Daten als <see cref="Contact"
+    /// />-Array zurück. (Eine vCard-Datei kann mehrere aneinandergehängte vCards enthalten.)
+    /// Enthält die Datei keinen Text, wird ein leeres Array zurückgegeben. </summary>
     /// <param name="fileName">Der vollständige Pfad der vCard-Datei.</param>
-    /// <returns>Die Daten der vCard als <see cref="Contact"/>-Array.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="fileName"/> ist <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="fileName"/> ist kein gültiger Dateipfad.</exception>
-    /// <exception cref="IOException">Die Datei konnte nicht geladen werden.</exception>
+    /// <returns>Die Daten der vCard als <see cref="Contact" />-Array.</returns>
+    /// <exception cref="ArgumentNullException"> <paramref name="fileName" /> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException"> <paramref name="fileName" /> is not a valid
+    /// file path.</exception>
+    /// <exception cref="IOException">The file could not be loaded.</exception>
     internal static List<Contact> Read(string fileName)
     {
         IList<VCard> vcards = VCard.LoadVcf(fileName);

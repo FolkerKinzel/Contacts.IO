@@ -9,7 +9,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>2.0.0-alpha.1</Version>
-    <FileVersion>2.0.0.4</FileVersion>
+    <FileVersion>2.0.0.7</FileVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/releases/tag/v2.0.0-alpha.1</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
@@ -36,6 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <!-- 👇 disable the nullable warnings when compiling for .NET Standard 2.0 -->
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net462' or '$(TargetFramework)' == 'netstandard2.0'">
@@ -80,58 +81,6 @@
     <None Include="md\NugetReadme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net6.0</PackagePath>
-    </None>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net5.0</PackagePath>
-    </None>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\netstandard2.1</PackagePath>
-    </None>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\netstandard2.0</PackagePath>
-    </None>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net462</PackagePath>
-    </None>
-    <None Include="Translations\en\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net40</PackagePath>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net6.0\de</PackagePath>
-    </None>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net5.0\de</PackagePath>
-    </None>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\netstandard2.1\de</PackagePath>
-    </None>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\netstandard2.0\de</PackagePath>
-    </None>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net462\de</PackagePath>
-    </None>
-    <None Include="Translations\de\FolkerKinzel.Contacts.IO.xml">
-      <Pack>True</Pack>
-      <PackagePath>lib\net40\de</PackagePath>
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
