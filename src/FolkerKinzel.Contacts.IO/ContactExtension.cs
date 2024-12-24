@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Text;
+using FolkerKinzel.Contacts.IO.Intls;
 using FolkerKinzel.Contacts.IO.Intls.Csv;
 using FolkerKinzel.Contacts.IO.Intls.Vcf;
 
@@ -53,12 +54,8 @@ public static class ContactExtension
     /// <exception cref="IOException">I/O error.</exception>
     public static void SaveCsv(this Contact contact, string fileName, CsvCompatibility platform, IFormatProvider? formatProvider = null, Encoding? textEncoding = null)
     {
-        if (contact is null)
-        {
-            throw new ArgumentNullException(nameof(contact));
-        }
-
-        CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, new Contact[] { contact });
+        _ArgumentNullException.ThrowIfNull(contact, nameof(contact));
+        CsvWriter.GetInstance(platform, formatProvider, textEncoding).Write(fileName, [contact]);
     }
 
     /// <summary>Saves the content of a <see cref="Contact" /> object as a vCard file

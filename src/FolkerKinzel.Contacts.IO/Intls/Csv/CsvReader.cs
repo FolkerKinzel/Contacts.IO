@@ -6,7 +6,7 @@ using Csv = FolkerKinzel.CsvTools;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv;
 
-internal abstract class CsvReader : CsvIOBase
+internal abstract class CsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : CsvIOBase(formatProvider, textEncoding)
 {
     internal static CsvReader GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
     {
@@ -16,8 +16,6 @@ internal abstract class CsvReader : CsvIOBase
         CsvCompatibility.Thunderbird => new Thunderbird.ThunderbirdCsvReader(formatProvider, textEncoding),
         _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
     };
-
-    protected CsvReader(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
 
     protected CsvAnalyzer Analyzer { get; } = new CsvAnalyzer();
 
@@ -381,6 +379,7 @@ internal abstract class CsvReader : CsvIOBase
         }
     }
 
+    [SuppressMessage("Style", "IDE0028:Simplify collection initialization", Justification = "Must be a List")]
     protected static void AddPhoneNumber(Contact contact, PhoneNumber newNumber)
     {
         IEnumerable<PhoneNumber?>? phones = contact.PhoneNumbers;

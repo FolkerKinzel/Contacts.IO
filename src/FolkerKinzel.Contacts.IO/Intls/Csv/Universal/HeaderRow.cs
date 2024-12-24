@@ -2,8 +2,8 @@ namespace FolkerKinzel.Contacts.IO.Intls.Csv.Universal;
 
 internal static class HeaderRow
 {
-    internal static string[] GetColumnNames() => new string[]
-    {
+    internal static string[] GetColumnNames() =>
+    [
             ColumnName.DisplayName,
             ColumnName.FirstName,
             ColumnName.MiddleName,
@@ -57,6 +57,6 @@ internal static class HeaderRow
             ColumnName.AddressWorkCountry,
             ColumnName.Comment,
             ColumnName.TimeStamp
-    };
+    ];
 
 }

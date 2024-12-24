@@ -43,50 +43,51 @@ internal static class HeaderRow
         internal const string Notes = "Notes";
     }
 
-    internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() => new Tuple<string, ContactProp?, IList<string>>[]
-    {
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.FirstName),      ContactProp.FirstName,                   new string[]{En.FirstName}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.LastName),       ContactProp.LastName,                    new string[]{En.LastName}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.DisplayName),    ContactProp.DisplayName,                 new string[]{En.DisplayName}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Nickname),       ContactProp.NickName,                    new string[]{En.Nickname}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.PrimaryEmail),   ContactProp.Email1,                      new string[]{En.PrimaryEmail}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.SecondaryEmail), ContactProp.Email2,                      new string[]{En.SecondaryEmail}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.ScreenName),     ContactProp.InstantMessenger1,           new string[]{En.ScreenName}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkPhone),      ContactProp.PhoneWork,                   new string[]{En.WorkPhone}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomePhone),      ContactProp.PhoneHome,                   new string[]{En.HomePhone}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.FaxNumber),      ContactProp.FaxHome,                     new string[]{En.FaxNumber}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.PagerNumber),    ContactProp.PhoneOther1,                 new string[]{En.PagerNumber}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.MobileNumber),   ContactProp.Cell,                        new string[]{En.MobileNumber}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeAddress),    ContactProp.AddressHomeStreet,           new string[]{En.HomeAddress}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeAddress2),   null,                                    new string[]{En.HomeAddress2}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeCity),       ContactProp.AddressHomeCity,             new string[]{En.HomeCity}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeState),      ContactProp.AddressHomeState,            new string[]{En.HomeState}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeZipcode),    ContactProp.AddressHomePostalCode,       new string[]{En.HomeZipcode}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.HomeCountry),    ContactProp.AddressHomeCountry,          new string[]{En.HomeCountry}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkAddress),    ContactProp.AddressWorkStreet,           new string[]{En.WorkAddress}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkAddress2),   null,                                    new string[]{En.WorkAddress2}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkCity),       ContactProp.AddressWorkCity,             new string[]{En.WorkCity}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkState),      ContactProp.AddressWorkState,            new string[]{En.WorkState}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkZip),        ContactProp.AddressWorkPostalCode,       new string[]{En.WorkZip}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WorkCountry),    ContactProp.AddressWorkCountry ,         new string[]{En.WorkCountry}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.JobTitle),       ContactProp.WorkPosition  ,              new string[]{En.JobTitle}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Department),     ContactProp.WorkDepartment  ,            new string[]{En.Department}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Organization),   ContactProp.WorkCompany  ,               new string[]{En.Organization}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WebPage1),       ContactProp.HomePagePersonal  ,          new string[]{En.WebPage1}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.WebPage2),       ContactProp.HomePageWork  ,              new string[]{En.WebPage2}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.BirthYear),      (ContactProp)AdditionalProp.BirthYear,   new string[]{En.BirthYear}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.BirthMonth),     (ContactProp)AdditionalProp.BirthMonth,  new string[]{En.BirthMonth}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.BirthDay),       (ContactProp)AdditionalProp.BirthDay,    new string[]{En.BirthDay}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom1),        null,                                    new string[]{En.Custom1}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom2),        null,                                    new string[]{En.Custom2}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom3),        null,                                    new string[]{En.Custom3}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Custom4),        null,                                    new string[]{En.Custom4}),
-            new Tuple<string, ContactProp?,   IList<string>>(nameof(En.Notes ),         ContactProp.Comment,                     new string[]{En.Notes})
-    };
+    [SuppressMessage("Style", "IDE0300:Simplify collection initialization", Justification = "Performance")]
+    internal static IList<Tuple<string, ContactProp?, IList<string>>> GetMappingEN() =>
+    [
+            new(nameof(En.FirstName),      ContactProp.FirstName,                   new string[]{En.FirstName}),
+            new(nameof(En.LastName),       ContactProp.LastName,                    new string[]{En.LastName}),
+            new(nameof(En.DisplayName),    ContactProp.DisplayName,                 new string[]{En.DisplayName}),
+            new(nameof(En.Nickname),       ContactProp.NickName,                    new string[]{En.Nickname}),
+            new(nameof(En.PrimaryEmail),   ContactProp.Email1,                      new string[]{En.PrimaryEmail}),
+            new(nameof(En.SecondaryEmail), ContactProp.Email2,                      new string[]{En.SecondaryEmail}),
+            new(nameof(En.ScreenName),     ContactProp.InstantMessenger1,           new string[]{En.ScreenName}),
+            new(nameof(En.WorkPhone),      ContactProp.PhoneWork,                   new string[]{En.WorkPhone}),
+            new(nameof(En.HomePhone),      ContactProp.PhoneHome,                   new string[]{En.HomePhone}),
+            new(nameof(En.FaxNumber),      ContactProp.FaxHome,                     new string[]{En.FaxNumber}),
+            new(nameof(En.PagerNumber),    ContactProp.PhoneOther1,                 new string[]{En.PagerNumber}),
+            new(nameof(En.MobileNumber),   ContactProp.Cell,                        new string[]{En.MobileNumber}),
+            new(nameof(En.HomeAddress),    ContactProp.AddressHomeStreet,           new string[]{En.HomeAddress}),
+            new(nameof(En.HomeAddress2),   null,                                    new string[]{En.HomeAddress2}),
+            new(nameof(En.HomeCity),       ContactProp.AddressHomeCity,             new string[]{En.HomeCity}),
+            new(nameof(En.HomeState),      ContactProp.AddressHomeState,            new string[]{En.HomeState}),
+            new(nameof(En.HomeZipcode),    ContactProp.AddressHomePostalCode,       new string[]{En.HomeZipcode}),
+            new(nameof(En.HomeCountry),    ContactProp.AddressHomeCountry,          new string[]{En.HomeCountry}),
+            new(nameof(En.WorkAddress),    ContactProp.AddressWorkStreet,           new string[]{En.WorkAddress}),
+            new(nameof(En.WorkAddress2),   null,                                    new string[]{En.WorkAddress2}),
+            new(nameof(En.WorkCity),       ContactProp.AddressWorkCity,             new string[]{En.WorkCity}),
+            new(nameof(En.WorkState),      ContactProp.AddressWorkState,            new string[]{En.WorkState}),
+            new(nameof(En.WorkZip),        ContactProp.AddressWorkPostalCode,       new string[]{En.WorkZip}),
+            new(nameof(En.WorkCountry),    ContactProp.AddressWorkCountry ,         new string[]{En.WorkCountry}),
+            new(nameof(En.JobTitle),       ContactProp.WorkPosition  ,              new string[]{En.JobTitle}),
+            new(nameof(En.Department),     ContactProp.WorkDepartment  ,            new string[]{En.Department}),
+            new(nameof(En.Organization),   ContactProp.WorkCompany  ,               new string[]{En.Organization}),
+            new(nameof(En.WebPage1),       ContactProp.HomePagePersonal  ,          new string[]{En.WebPage1}),
+            new(nameof(En.WebPage2),       ContactProp.HomePageWork  ,              new string[]{En.WebPage2}),
+            new(nameof(En.BirthYear),      (ContactProp)AdditionalProp.BirthYear,   new string[]{En.BirthYear}),
+            new(nameof(En.BirthMonth),     (ContactProp)AdditionalProp.BirthMonth,  new string[]{En.BirthMonth}),
+            new(nameof(En.BirthDay),       (ContactProp)AdditionalProp.BirthDay,    new string[]{En.BirthDay}),
+            new(nameof(En.Custom1),        null,                                    new string[]{En.Custom1}),
+            new(nameof(En.Custom2),        null,                                    new string[]{En.Custom2}),
+            new(nameof(En.Custom3),        null,                                    new string[]{En.Custom3}),
+            new(nameof(En.Custom4),        null,                                    new string[]{En.Custom4}),
+            new(nameof(En.Notes ),         ContactProp.Comment,                     new string[]{En.Notes})
+    ];
 
 
-    internal static string[] GetColumnNamesEn() => new string[]
-    {
+    internal static string[] GetColumnNamesEn() =>
+    [
             En.FirstName,
             En.LastName,
             En.DisplayName,
@@ -124,10 +125,10 @@ internal static class HeaderRow
             En.Custom3,
             En.Custom4,
             En.Notes
-    };
+    ];
 
-    internal static string[] GetColumnNamesDe() => new string[]
-    {
+    internal static string[] GetColumnNamesDe() =>
+    [
             "Vorname",
             "Nachname",
             "Anzeigename",
@@ -165,5 +166,5 @@ internal static class HeaderRow
             "Benutzerdef. 3",
             "Benutzerdef. 4",
             "Notizen"
-    };
+    ];
 }

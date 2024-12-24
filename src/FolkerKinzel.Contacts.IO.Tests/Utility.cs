@@ -50,11 +50,12 @@ namespace FolkerKinzel.Contacts.IO.Tests
                 WebPagePersonal = "www.folker.de",
                 WebPageWork = "work.de",
                 DisplayName = "Folker",
-                EmailAddresses = new string?[] { "folker@freenet.de", "info@folker.de", null },
+                EmailAddresses = ["folker@freenet.de", "info@folker.de", null],
                 Person = pers,
                 AddressHome = addr,
-                InstantMessengerHandles = new string?[] { "aim:address.com", "gtalk:googletalk.com", "icq:address.com", "xmpp:jabber.com", "msnim:msn.com", "skype:address.com", "ymsgr:yahoo.com", "address.qq", "Maxl@twitter.com", "Maxl@skype.com" },
-                PhoneNumbers = new PhoneNumber[] {
+                InstantMessengerHandles = ["aim:address.com", "gtalk:googletalk.com", "icq:address.com", "xmpp:jabber.com", "msnim:msn.com", "skype:address.com", "ymsgr:yahoo.com", "address.qq", "Maxl@twitter.com", "Maxl@skype.com"],
+                PhoneNumbers = 
+                [
                     new PhoneNumber("1"),
                     new PhoneNumber("2", isWork: true),
                     new PhoneNumber("3", isMobile: true),
@@ -62,7 +63,7 @@ namespace FolkerKinzel.Contacts.IO.Tests
                     new PhoneNumber("5", isFax: true),
                     new PhoneNumber("6", isWork: true, isFax: true),
                     new PhoneNumber("7")
-                }
+                ]
             };
 
         }

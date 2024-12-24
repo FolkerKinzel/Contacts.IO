@@ -59,6 +59,7 @@ internal class GoogleCsvReader : CsvReader
 
 
 
+    [SuppressMessage("Style", "IDE0028:Simplify collection initialization", Justification = "Must be a List")]
     protected override void InitContactNonStandardProp(Contact contact, ContactProp prop, CsvRecordWrapper wrapper, int index)
     {
         Debug.Assert(wrapper[index] != null);
@@ -81,13 +82,8 @@ internal class GoogleCsvReader : CsvReader
             case AdditionalProp.Phone8Type:
             case AdditionalProp.Phone9Type:
                 {
-                    if (contact.PhoneNumbers is null)
-                    {
-                        contact.PhoneNumbers = new PhoneNumber();
-                    }
-
+                    contact.PhoneNumbers ??= new PhoneNumber();
                     PhoneNumber lastNumber = contact.PhoneNumbers.Last()!;
-
 
                     if (lastNumber.IsEmpty)
                     {
@@ -112,11 +108,7 @@ internal class GoogleCsvReader : CsvReader
             case AdditionalProp.Phone8Value:
             case AdditionalProp.Phone9Value:
                 {
-                    if (contact.PhoneNumbers is null)
-                    {
-                        contact.PhoneNumbers = new PhoneNumber();
-                    }
-
+                    contact.PhoneNumbers ??= new PhoneNumber();
                     PhoneNumber lastNumber = contact.PhoneNumbers.Last()!;
 
                     lastNumber.Value = (string?)wrapper[index];

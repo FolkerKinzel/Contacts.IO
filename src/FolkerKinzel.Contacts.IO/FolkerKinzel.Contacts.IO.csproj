@@ -9,7 +9,7 @@
     <PackageId>FolkerKinzel.Contacts.IO</PackageId>
     <Product>FolkerKinzel.Contacts.IO</Product>
     <Version>2.0.0-alpha.1</Version>
-    <FileVersion>2.0.0.7</FileVersion>
+    <FileVersion>2.0.0.10</FileVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>https://github.com/FolkerKinzel/Contacts.IO/releases/tag/v2.0.0-alpha.1</PackageReleaseNotes>
     <PackageTags>.net vcf csv vcard contact c#</PackageTags>
@@ -42,9 +42,6 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net462' or '$(TargetFramework)' == 'netstandard2.0'">
     <NoWarn>$(NoWarn);8600;8601;8602;8603;8604</NoWarn>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Translations\FolkerKinzel.Contacts.IO.en.tsltn" />
-  </ItemGroup>
   <ItemGroup>
     <Using Remove="System.Net.Http" />
     <Using Include="System.Diagnostics" />

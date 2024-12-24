@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples", "Examples\Examples.csproj", "{0FFF2EE7-982A-4C84-9375-AEFC0898A2AC}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "FolkerKinzel.Contacts.IO.Doku.de", "FolkerKinzel.Contacts.IO.Doku.de\FolkerKinzel.Contacts.IO.Doku.de.shfbproj", "{440657BD-3C89-4063-81E2-834CFF918AED}"
-EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "FolkerKinzel.Contacts.IO.Reference.en", "FolkerKinzel.Contacts.IO.Reference.en\FolkerKinzel.Contacts.IO.Reference.en.shfbproj", "{7C3489B0-06E6-4198-9ED4-CC92A531F36B}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "FolkerKinzel.Contacts.IO.Reference.Website", "FolkerKinzel.Contacts.IO.Reference.Website\FolkerKinzel.Contacts.IO.Reference.Website.shfbproj", "{898EED83-DDD6-4E7B-86FB-62B9C4663044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,11 @@ Global
 		{0FFF2EE7-982A-4C84-9375-AEFC0898A2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FFF2EE7-982A-4C84-9375-AEFC0898A2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FFF2EE7-982A-4C84-9375-AEFC0898A2AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{440657BD-3C89-4063-81E2-834CFF918AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{440657BD-3C89-4063-81E2-834CFF918AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C3489B0-06E6-4198-9ED4-CC92A531F36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C3489B0-06E6-4198-9ED4-CC92A531F36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898EED83-DDD6-4E7B-86FB-62B9C4663044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898EED83-DDD6-4E7B-86FB-62B9C4663044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898EED83-DDD6-4E7B-86FB-62B9C4663044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using Csv = FolkerKinzel.CsvTools;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv;
 
-internal abstract class CsvWriter : CsvIOBase
+internal abstract class CsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : CsvIOBase(formatProvider, textEncoding)
 {
     internal static CsvWriter GetInstance(CsvCompatibility platform, IFormatProvider? formatProvider, Encoding? textEncoding) => platform switch
     {
@@ -16,15 +16,9 @@ internal abstract class CsvWriter : CsvIOBase
         _ => throw new ArgumentException(Res.UndefinedEnumValue, nameof(platform)),
     };
 
-    protected CsvWriter(IFormatProvider? formatProvider, Encoding? textEncoding) : base(formatProvider, textEncoding) { }
-
     internal void Write(string fileName, IEnumerable<Contact?> data)
     {
-
-        if (data is null)
-        {
-            throw new ArgumentNullException(nameof(data));
-        }
+        _ArgumentNullException.ThrowIfNull(data, nameof(data));
 
         string[] columnNames = CreateColumnNames();
 

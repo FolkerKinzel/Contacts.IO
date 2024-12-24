@@ -22,15 +22,8 @@ internal static class VcfWriter
     /// <exception cref="IOException">The file could not be written.</exception>
     internal static void Write(Contact contact, string fileName, VCardVersion version)
     {
-        if (contact is null)
-        {
-            throw new ArgumentNullException(nameof(contact));
-        }
-
-        if (fileName is null)
-        {
-            throw new ArgumentNullException(nameof(fileName));
-        }
+        _ArgumentNullException.ThrowIfNull(contact, nameof(contact));
+        _ArgumentNullException.ThrowIfNull(fileName, nameof(fileName));
 
         ToVCard(contact)?.SaveVcf(fileName, (VC::Enums.VCdVersion)version);
     }
@@ -54,11 +47,7 @@ internal static class VcfWriter
     /// enthalten.</remarks>
     internal static void Write(IEnumerable<Contact?> contacts, string fileName, VCardVersion version)
     {
-        if (contacts is null)
-        {
-            throw new ArgumentNullException(nameof(contacts));
-        }
-
+        _ArgumentNullException.ThrowIfNull(contacts, nameof(contacts));
         VCard.SaveVcf(fileName, contacts.Select(x => ToVCard(x)), (VC::Enums.VCdVersion)version);
     }
     
@@ -127,7 +116,7 @@ internal static class VcfWriter
                 }
                 else if (addresses is VC::AddressProperty homeAdr)
                 {
-                    vcard.Addresses = new VC::AddressProperty[] { homeAdr, workAdr };
+                    vcard.Addresses = [homeAdr, workAdr];
                 }
 
                 workAdr.Parameters.AddressType = VC::Enums.AddressTypes.Dom | VC::Enums.AddressTypes.Intl | VC::Enums.AddressTypes.Parcel | VC::Enums.AddressTypes.Postal;
@@ -139,8 +128,7 @@ internal static class VcfWriter
             if (work.Company != null || work.Department != null || work.Office != null)
             {
                 vcard.Organizations =
-                    new VC::OrganizationProperty(work.Company,
-                                                 new string?[] { work.Department, work.Office });
+                    new VC::OrganizationProperty(work.Company, [work.Department, work.Office]);
             }
 
             if (work.JobTitle != null)
@@ -214,11 +202,12 @@ internal static class VcfWriter
             }
             else if (urls is VC::TextProperty urlHome)
             {
-                vcard.URLs = new VC::TextProperty[] { urlHome, urlWork };
+                vcard.URLs = [urlHome, urlWork];
             }
         }
 
         IEnumerable<string?>? impps = contact.InstantMessengerHandles;
+
         if (impps != null)
         {
             var imppProps = new List<VC::TextProperty>();

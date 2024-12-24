@@ -4,9 +4,9 @@ namespace Examples;
 
 public static class ContactExample
 {
-    public static Contact[] InitializeContacts() => new Contact[]
-        {
-                new Contact
+    public static Contact[] InitializeContacts() =>
+        [
+                new Contact()
                 {
                     DisplayName = "John Doe",
                     Person = new Person
@@ -30,8 +30,8 @@ public static class ContactExample
                         Company = "Does Company"
                     },
 
-                    PhoneNumbers = new PhoneNumber[]
-                    {
+                    PhoneNumbers =
+                    [
                         new PhoneNumber
                         {
                             Value = "876-54321",
@@ -42,17 +42,12 @@ public static class ContactExample
                             Value = "123-45678",
                             IsWork = true,
                         }
-                    },
+                    ],
 
-                    EmailAddresses = new string[]
-                    {
-                        "john.doe@internet.com"
-                    }
-                },//new Contact()
+                    EmailAddresses = [ "john.doe@internet.com" ]
+                },
 
-                ///////////
-
-                new Contact
+                new Contact() 
                 {
                     DisplayName = "Jane Doe",
                     Person = new Person
@@ -81,6 +76,6 @@ public static class ContactExample
                         Value = "123-45678",
                         IsWork = true,
                     }
-                }//new Contact()
-        };//new Contact[]
+                }
+        ];//new Contact[]
 }

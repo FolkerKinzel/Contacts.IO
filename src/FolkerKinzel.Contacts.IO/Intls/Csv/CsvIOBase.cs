@@ -7,7 +7,7 @@ using Csv = FolkerKinzel.CsvTools;
 
 namespace FolkerKinzel.Contacts.IO.Intls.Csv;
 
-internal abstract class CsvIOBase
+internal abstract class CsvIOBase(IFormatProvider? formatProvider, Encoding? textEncoding)
 {
 #pragma warning disable IDE1006 // Benennungsstile
     protected const int TWO_CELL_PROPERTIES = 0;
@@ -16,27 +16,13 @@ internal abstract class CsvIOBase
 
     private const int PROPINFO_LENGTH = 2;
 
-    protected CsvIOBase(IFormatProvider? formatProvider, Encoding? textEncoding)
-    {
-        FormatProvider = formatProvider ?? CultureInfo.InvariantCulture;
-        TextEncoding = textEncoding;
+    protected string[] EmptyStringArray { get; } = [];
 
-#if NET40
-            EmptyStringArray = new string[0];
-            EmptyPhonesArray = new PhoneNumber[0];
-#else
-        EmptyStringArray = Array.Empty<string>();
-        EmptyPhonesArray = Array.Empty<PhoneNumber>();
-#endif
-    }
+    protected PhoneNumber[] EmptyPhonesArray { get; } = [];
 
-    protected string[] EmptyStringArray { get; }
+    protected Encoding? TextEncoding { get; } = textEncoding;
 
-    protected PhoneNumber[] EmptyPhonesArray { get; }
-
-    protected Encoding? TextEncoding { get; }
-
-    protected IFormatProvider FormatProvider { get; }
+    protected IFormatProvider FormatProvider { get; } = formatProvider ?? CultureInfo.InvariantCulture;
 
     private Conv::ICsvTypeConverter? _nullableDateTimeConverter;
 
