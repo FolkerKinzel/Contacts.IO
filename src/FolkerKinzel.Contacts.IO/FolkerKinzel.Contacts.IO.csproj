@@ -61,10 +61,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Res.de.resx">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
