@@ -20,7 +20,6 @@ namespace FolkerKinzel.Contacts.IO.Tests
             return Directory.GetFiles(_testFileDirectory);
         }
 
-
         internal static string ProjectDirectory { get; }
 
         internal static string GoogleCsv => Path.Combine(_testFileDirectory, "Google.csv");
