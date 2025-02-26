@@ -53,9 +53,5 @@ namespace FolkerKinzel.Contacts.IO.Tests
         internal static string V3vcf => Path.Combine(_testFileDirectory, "v3.vcf");
 
         internal static string V4vcf => Path.Combine(_testFileDirectory, "v4.vcf");
-
-
-        
-        
     }
 }
